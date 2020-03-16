@@ -60,6 +60,7 @@
   </div>
 
   <div class="container p-3">
+    <!-- Contenido -->
     <div class="row">
       <div class="col-8 ">
         <!-- Mapa-->
@@ -69,14 +70,17 @@
           <a href="https://www.openstreetmap.org/#map=13/41.6460/-4.7394">Ver mapa más grande</a></small>
       </div>
       <div class="col-4">
+        <!--Formulario de fecha -->
         <form>
-          <div class="form-row">
-            
+          <div class="form-group mb-2">
+            <label for="desde">Desde: </label>
+            <input id="desde" type="datetime-local"> </input>
           </div>
-          <div class="form-row">
-
+          <div class="form-group mb-2">
+            <label for="hasta">Hasta: </label>
+            <input id="hasta" type="datetime-local"> </input>
           </div>
-          <button class="btn btn-success" type="submit">Siguiente</button>
+          <button class="btn btn-outline-success" type="submit">Siguiente</button>
         </form>
       </div>
 
