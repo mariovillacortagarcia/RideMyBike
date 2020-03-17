@@ -25,8 +25,8 @@
       </div>
       <div class="col-4">
         <div>
-          <button type="button" onclick="location.href='registrarse.html'" class="btn btn-light">Registrarse</button>
-          <button type="button" onclick="location.href='iniciar_sesion.html'" class="btn btn-success">Iniciar sesión</button>
+          <button type="button" class="btn btn-light">Registrarse</button>
+          <button type="button" class="btn btn-success">Iniciar sesión</button>
         </div>
 
       </div>
@@ -62,7 +62,164 @@
   </div>
 
   <!-- Contenido -->
-  <div class="container pt-4">
+  <div class="container pt-4 ">
+      <div class="row">
+        <div class="col-6">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Bicicletas actuales
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="selector1">
+              <a class="dropdown-item" href="#">Bicicletas Activas</a>
+              <a class="dropdown-item" href="#">Bicicletas Desactivadas</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 text-right">
+          <a href="registrar_bicicleta.html"><button type="button" class="btn btn-secondary " >Registrar nueva bicicleta</button> </a>
+        </div>
+      </div>
+      <div class="row pt-4">
+        <div class="col-12">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner" style="height: 450px">
+              <div class="carousel-item active">
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col-5">
+                    <img src="img/bicicleta1.jpg" class="img-thumbnail" alt="..." style="width:  350px;">
+                  </div>
+                    <div class="col-5">
+                      <div class="row">
+                        <div class="col-12"><b>Estado:</b> <a class="text-danger">Desactivada</a></div>
+                        <div class="col-12"><b>Marca:</b> CANNONDALE</div>
+                        <div class="col-12"><b>Modelo:</b> CAAD Optimo</div>
+                        <div class="col-12"><b>Tamaño de Cuadro:</b> 51 cm</div>
+                        <div class="col-12"><b>Tipo de Freno:</b> Zapatas</div>
+                        <div class="col-12"><b>Descripción:</b> Esta es una bicicleta de carretera perfecta para rutas de caminos largos, además incluye unas ruedas de 28 pulgadas y esta en perfecto estado, comprada en 2016 tiene 4 años, las camaras de las ruedas están recien cambiadas.</div>
+                        <div class="col-12 text-center pt-4">
+                          <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Opciones
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Opiniones</a>
+                              <a class="dropdown-item" href="#">Activar/Desactivar Bicicleta</a>
+                              <a class="dropdown-item" href="#">Historial de Alquileres</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col-5">
+                    <img src="img/bicicleta2.jpg" class="img-thumbnail" alt="..." style="width: 350px;">
+                  </div>
+                    <div class="col-5">
+                      <div class="row">
+                        <div class="col-12"><b>Estado:</b> <a class="text-success">Activada</a></div>
+                        <div class="col-12"><b>Marca:</b> Rockville</div>
+                        <div class="col-12"><b>Modelo:</b> Rockville 27.5</div>
+                        <div class="col-12"><b>Tamaño de Cuadro:</b> 46 cm</div>
+                        <div class="col-12"><b>Tipo de Freno:</b> Disco</div>
+                        <div class="col-12"><b>Descripción:</b> Esta bicicleta es perfecta para los nuevos riders, que quieran atreverse a hacer una ruta de montaña, esta mountain bike cuenta con un cuadro muy ligero de solo 10 KG de peso, perfecta para iniciarte en el descenso de montañas.</div>
+                        <div class="col-12 text-center pt-4">
+                          <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Opciones
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Opiniones</a>
+                              <a class="dropdown-item" href="#">Activar/Desactivar Bicicleta</a>
+                              <a class="dropdown-item" href="#">Historial de Alquileres</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col-5">
+                    <img src="img/bicicleta3.jpg" class="img-thumbnail" alt="..." style="width:  350px;">
+                  </div>
+                    <div class="col-5">
+                      <div class="row">
+                        <div class="col-12"><b>Estado:</b> <a class="text-success">Activada</a></div>
+                        <div class="col-12"><b>Marca:</b> Ortler</div>
+                        <div class="col-12"><b>Modelo:</b> Monet</div>
+                        <div class="col-12"><b>Tamaño de Cuadro:</b> 60 cm</div>
+                        <div class="col-12"><b>Tipo de Freno:</b> Zapatas</div>
+                        <div class="col-12"><b>Descripción:</b> Perfecta bicicleta para el uso diario por la ciudad, cuenta con 2 cubre ruedas, por si llueve para que no te salqpique agua del suelo mientras estas conduciendo la bici, ademas tiene luces, delantera y trasera que funcionan según das pedasles. Su sillín es uno de los más comodos del mercado.</div>
+                        <div class="col-12 text-center pt-4">
+                          <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Opciones
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Opiniones</a>
+                              <a class="dropdown-item" href="#">Activar/Desactivar Bicicleta</a>
+                              <a class="dropdown-item" href="#">Historial de Alquileres</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5">
+                  <img src="img/bicicleta4.jpg" class="img-thumbnail" alt="..." style="width:  350px;">
+                </div>
+                  <div class="col-5">
+                    <div class="row">
+                      <div class="col-12"><b>Estado:</b> <a class="text-warning">Pendiente</a></div>
+                      <div class="col-12"><b>Marca:</b> FROG BIKES</div>
+                      <div class="col-12"><b>Modelo:</b> Track 58 </div>
+                      <div class="col-12"><b>Tamaño de Cuadro:</b> 50 cm</div>
+                      <div class="col-12"><b>Tipo de Freno:</b> Zapatas</div>
+                      <div class="col-12"><b>Descripción:</b> Bicicleta perfecta para andar por ciudad, es una bici que cuenta con 24 marchas y además su peso es perfecto, solo 5 KG, permite unos desplazamientos rápidos y con poco coste energético.</div>
+                      <div class="col-12 text-center pt-4">
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Opciones
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Opiniones</a>
+                            <a class="dropdown-item" href="#">Activar/Desactivar Bicicleta</a>
+                            <a class="dropdown-item" href="#">Historial de Alquileres</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
   </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
