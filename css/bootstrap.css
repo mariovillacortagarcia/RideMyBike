@@ -634,7 +634,17 @@ pre code {
   position: relative;
   width: 100%;
   padding-right: 15px;
-  padding-left: 15px;
+  padding-left: 8rem;
+  margin-top: -2rem;
+}
+
+.col-4 > div {
+  margin-left: 10rem;
+  margin-top: -3rem;
+}
+
+.col-4 div > button {
+  margin-right: 1rem;
 }
 
 .col {
@@ -4319,6 +4329,42 @@ input[type="button"].btn-block {
   display: block;
 }
 
+.contenido-ajustado {
+  padding-left: 10rem;
+  padding-top: 5rem;
+  padding-bottom: 2.8rem;
+}
+
+.formulario-ajustado {
+  padding-top: 5rem;
+  padding-left: 5rem;
+}
+
+.mapa-ajustado {
+  margin-left: 5rem;
+}
+
+.boton-buscar-ajustado {
+  padding-top: 0.5rem;
+  padding-left: 6.5rem;
+}
+
+.titulo-busca-bici {
+  padding-bottom: 2rem;
+  margin-left: -2rem;
+}
+
+.logo-ajustado {
+  margin-left: -10rem;
+  margin-top: -5rem;
+  margin-bottom: -2.5rem;
+  margin-right: 10rem;
+}
+
+.descripcion-ajustada {
+  margin-top: 0.5rem;
+}
+
 .navbar {
   position: relative;
   display: -ms-flexbox;
@@ -4329,8 +4375,16 @@ input[type="button"].btn-block {
   align-items: center;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 12rem;
+  margin-left: -5rem;
+  margin-right: -5rem;
 }
+
+.navbar-nav > li{
+  padding-left:5rem;
+  padding-right:5rem;
+}
+
 
 .navbar .container,
 .navbar .container-fluid, .navbar .container-sm, .navbar .container-md, .navbar .container-lg, .navbar .container-xl {
@@ -6706,6 +6760,10 @@ button.bg-primary:focus {
   background-color: #6c757d !important;
 }
 
+.boton-buscar {
+  border-radius: 200px 200px 200px 200px;
+  width: 10rem;
+}
 a.bg-secondary:hover, a.bg-secondary:focus,
 button.bg-secondary:hover,
 button.bg-secondary:focus {
