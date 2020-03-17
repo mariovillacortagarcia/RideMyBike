@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-  <title> Registrarse - RideMyBike </title>
+  <title> Perfil de Usuario - RideMyBike </title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,8 +26,8 @@
       </div>
       <div class="col-4">
         <div>
-          <button type="button" onclick="location.href='registrarse.html'" class="btn btn-light">Registrarse</button>
-          <button type="button" onclick="location.href='iniciar_sesion.html'" class="btn btn-success">Iniciar sesión</button>
+
+          <button type="button" onclick="location.href='perfil.html'" class="btn btn-success">JuanPPerez</button>
         </div>
 
       </div>
@@ -54,7 +54,6 @@
           <li class="nav-item">
             <a class="nav-link" href="sobre_nosotros.html">Sobre nosotros 💬</a>
           </li>
-        </li>
           <li class="nav-item">
             <a class="nav-link" href="ayuda.html">Ayuda ❓</a>
           </li>
@@ -68,47 +67,50 @@
     <form class="form-signin w-25">
       <div class="text-center mb-4">
 
-        <h1 class="h3 mb-3 font-weight-normal"><b>Regístrate</b></h1>
-      </div>
-      <div class="form-label-group pb-3">
-        <input type="text" id="inputName" class="form-control" placeholder="Nombre y apellidos" required autofocus>
+        <h1 class="h3 mb-3 font-weight-normal"><b>Perfil de usuario</b></h1>
       </div>
 
       <div class="form-label-group pb-3">
-        <input type="text" id="inputDNI" class="form-control" placeholder="DNI, NIF, CIF y/o NIE" required autofocus>
+        <label for="fname">Foto:</label><br>
+        <img src="img/foto.jpg">
       </div>
 
       <div class="form-label-group pb-3">
-        <input type="text" id="inputTlf" class="form-control" placeholder="Teléfono móvil o fijo" required autofocus>
+        <label for="fname">Nombre y Apellidos:</label><br>
+        <input type="text" id="inputName" class="form-control" placeholder="Juan Pedro Pérez Sánchez" >
       </div>
 
       <div class="form-label-group pb-3">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <label for="fname">DNI, NIF, CIF y/o NIE:</label><br>
+        <input type="text" id="inputDNI" class="form-control" placeholder="99999555F" >
       </div>
 
       <div class="form-label-group pb-3">
-        <input type="text" id="inputUser" class="form-control" placeholder="Nombre de usuario" required autofocus>
+        <label for="fname">Teléfono móvil o fijo:</label><br>
+        <input type="text" id="inputTlf" class="form-control" placeholder="6775555555" >
       </div>
 
       <div class="form-label-group pb-3">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Repetir contraseña" required>
+        <label for="fname">Email:</label><br>
+        <input type="email" id="inputEmail" class="form-control" placeholder="JuanPPerez@gmail.com" >
       </div>
 
       <div class="form-label-group pb-3">
-        <input type="text" id="inputDireccion" class="form-control" placeholder="Dirección de residencia" required autofocus>
+        <label for="fname">Nombre de Usuario:</label><br>
+        <input type="text" id="inputUser" class="form-control" placeholder="JuanPPerez" >
       </div>
 
-      <div class="form-label-group">
-        <input type="text" id="inputTarjeta" class="form-control" placeholder="Número de tarjeta" required autofocus>
-      </div>
-      <div class="pb-2">
-        <small id="condiciones" class="form-text text-muted">Al registrarte aceptas <a href="garantias.html">los Términos, la Política de Privacidad y la política de Uso de Cookies</a>.</small>
+      <div class="form-label-group pb-3">
+        <label for="fname">Dirección:</label><br>
+        <input type="text" id="inputDireccion" class="form-control" placeholder="Calle Molina 15" >
       </div>
 
-      <div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
+      <div class="form-label-group pb-3">
+        <label for="fname">Número de tarjeta:</label><br>
+        <input type="text" id="inputTarjeta" class="form-control" placeholder="76867687867" >
       </div>
+
+
     </form>
 
   </div>

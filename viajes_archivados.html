@@ -2,15 +2,22 @@
 <html lang="es">
 
 <head>
-  <title> Registrarse - RideMyBike </title>
+  <title> Viajes - RideMyBike </title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="icon" type="image/png" href="img/RideMyBike_icon_green.png">
-  <link rel="stylesheet" href="css/style.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.css">
+
+  <!-- Star rating -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .checked {
+      color: orange;
+    }
+  </style>
 </head>
 
 <body>
@@ -45,8 +52,8 @@
           <li class="nav-item">
             <a class="nav-link" href="mis_bicis.html">Mis Bicis 🚴‍</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="viajes.html">Viajes 🚵‍</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="viajes.html">Viajes 🚵‍<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="garantias.html">Garantías 🛡️</a>
@@ -54,7 +61,6 @@
           <li class="nav-item">
             <a class="nav-link" href="sobre_nosotros.html">Sobre nosotros 💬</a>
           </li>
-        </li>
           <li class="nav-item">
             <a class="nav-link" href="ayuda.html">Ayuda ❓</a>
           </li>
@@ -64,52 +70,32 @@
   </div>
 
   <!-- Contenido -->
-  <div class="row justify-content-center w-100 my-auto p-4">
-    <form class="form-signin w-25">
-      <div class="text-center mb-4">
+  <div class="container pt-4">
+    <!-- Navegacion por los viajes -->
+    <div class="card text-center">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="viajes.html">Realizados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="viajes_archivados.html">Archivados</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <!-- Lista de viajes -->
+        <ul class="list-group overflow-auto">
 
-        <h1 class="h3 mb-3 font-weight-normal"><b>Regístrate</b></h1>
+          <li class="list-group-item">
+            <!--Viaje 1-->
+            <div class="alert alert-light" role="alert">
+              No hay ningún viaje archivado
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="form-label-group pb-3">
-        <input type="text" id="inputName" class="form-control" placeholder="Nombre y apellidos" required autofocus>
-      </div>
-
-      <div class="form-label-group pb-3">
-        <input type="text" id="inputDNI" class="form-control" placeholder="DNI, NIF, CIF y/o NIE" required autofocus>
-      </div>
-
-      <div class="form-label-group pb-3">
-        <input type="text" id="inputTlf" class="form-control" placeholder="Teléfono móvil o fijo" required autofocus>
-      </div>
-
-      <div class="form-label-group pb-3">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-      </div>
-
-      <div class="form-label-group pb-3">
-        <input type="text" id="inputUser" class="form-control" placeholder="Nombre de usuario" required autofocus>
-      </div>
-
-      <div class="form-label-group pb-3">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Repetir contraseña" required>
-      </div>
-
-      <div class="form-label-group pb-3">
-        <input type="text" id="inputDireccion" class="form-control" placeholder="Dirección de residencia" required autofocus>
-      </div>
-
-      <div class="form-label-group">
-        <input type="text" id="inputTarjeta" class="form-control" placeholder="Número de tarjeta" required autofocus>
-      </div>
-      <div class="pb-2">
-        <small id="condiciones" class="form-text text-muted">Al registrarte aceptas <a href="garantias.html">los Términos, la Política de Privacidad y la política de Uso de Cookies</a>.</small>
-      </div>
-
-      <div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
-      </div>
-    </form>
+    </div>
 
   </div>
   <!-- Optional JavaScript -->

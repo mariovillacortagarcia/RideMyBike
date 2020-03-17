@@ -10,6 +10,14 @@
   <link rel="icon" type="image/png" href="img/RideMyBike_icon_green.png">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.css">
+
+  <!-- Star rating -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .checked {
+      color: orange;
+    }
+  </style>
 </head>
 
 <body>
@@ -25,8 +33,8 @@
       </div>
       <div class="col-4">
         <div>
-          <button type="button" class="btn btn-light">Registrarse</button>
-          <button type="button" class="btn btn-success">Iniciar sesión</button>
+          <button type="button" onclick="location.href='registrarse.html'" class="btn btn-light">Registrarse</button>
+          <button type="button" onclick="location.href='iniciar_sesion.html'" class="btn btn-success">Iniciar sesión</button>
         </div>
 
       </div>
@@ -68,17 +76,19 @@
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Realizados</a>
+            <a class="nav-link active" href="viajes.html">Realizados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Archivados</a>
+            <a class="nav-link" href="viajes_archivados.html">Archivados</a>
           </li>
         </ul>
       </div>
       <div class="card-body">
         <!-- Lista de viajes -->
         <ul class="list-group overflow-auto">
+
           <li class="list-group-item">
+            <!--Viaje 1-->
             <div class="alert alert-secondary bg-white" role="alert">
               <div class="row">
                 <div class="col-3">
@@ -98,6 +108,13 @@
                 </div>
                 <div class="col-3">
                   <!--Precio y valoracion-->
+                  <div class="container pb-2">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked "></span>
+                  </div>
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Opciones
@@ -113,40 +130,7 @@
           </li>
 
           <li class="list-group-item">
-            <div class="alert alert-secondary bg-white" role="alert">
-              <div class="row">
-                <div class="col-3">
-                  <!--Mapa con ruta realizada-->
-                  <img class="img-thumbnail" src="img/test/viaje1.png">
-                </div>
-                <div class="col-6">
-                  <!--Informacion del viaje-->
-                  <h6 class=""><b>Plaza Mayor - Campus Miguel Delibes</b></h6>
-                  <p>
-                    Desde el 17 de marzo de 2020 a las 10:00 <br>
-                    Hasta el 17 de marzo de 2020 a las 10:23
-                  </p>
-                  <p>
-                    <b>2,05 €</b>
-                  </p>
-                </div>
-                <div class="col-3">
-                  <!--Precio y valoracion-->
-                  <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Opciones
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Archivar viaje</a>
-                      <a class="dropdown-item" href="#">Eliminar viaje</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li class="list-group-item">
+            <!--Viaje 2-->
             <div class="alert alert-secondary " role="alert">
               <div class="row">
                 <div class="col-3">
@@ -157,7 +141,7 @@
                   <!--Informacion del viaje-->
                   <h6 class=""><b>Plaza de San Miguel, Valladolid - La Flecha, Arroyo de la Encomienda</b></h6>
                   <p>
-                    Cancelado el 20 de marzo de 2020 a las 15:02 <br>
+                    <b class="text-danger">Cancelado</b> el 20 de marzo de 2020 a las 15:02 <br>
                   </p>
                   <p>
                     <b>0,00 €</b>
@@ -165,6 +149,13 @@
                 </div>
                 <div class="col-3">
                   <!--Precio y valoracion-->
+                  <div class="container pb-2">
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                  </div>
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Opciones
@@ -180,25 +171,33 @@
           </li>
 
           <li class="list-group-item">
+            <!--Viaje 3-->
             <div class="alert alert-secondary bg-white" role="alert">
               <div class="row">
                 <div class="col-3">
                   <!--Mapa con ruta realizada-->
-                  <img class="img-thumbnail" src="img/test/viaje1.png">
+                  <img class="img-thumbnail" src="img/test/viaje3.png">
                 </div>
                 <div class="col-6">
                   <!--Informacion del viaje-->
-                  <h6 class=""><b>Plaza Mayor - Campus Miguel Delibes</b></h6>
+                  <h6 class=""><b>Zaratán - Parquesol</b></h6>
                   <p>
-                    Desde el 17 de marzo de 2020 a las 10:00 <br>
-                    Hasta el 17 de marzo de 2020 a las 10:23
+                    Desde el 21 de marzo de 2020 a las 20:00 <br>
+                    Hasta el 21 de marzo de 2020 a las 20:30
                   </p>
                   <p>
-                    <b>2,05 €</b>
+                    <b>3,12 €</b>
                   </p>
                 </div>
                 <div class="col-3">
                   <!--Precio y valoracion-->
+                  <div class="container pb-2">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                  </div>
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Opciones
@@ -213,39 +212,6 @@
             </div>
           </li>
 
-          <li class="list-group-item">
-            <div class="alert alert-secondary bg-white" role="alert">
-              <div class="row">
-                <div class="col-3">
-                  <!--Mapa con ruta realizada-->
-                  <img class="img-thumbnail" src="img/test/viaje1.png">
-                </div>
-                <div class="col-6">
-                  <!--Informacion del viaje-->
-                  <h6 class=""><b>Plaza Mayor - Campus Miguel Delibes</b></h6>
-                  <p>
-                    Desde el 17 de marzo de 2020 a las 10:00 <br>
-                    Hasta el 17 de marzo de 2020 a las 10:23
-                  </p>
-                  <p>
-                    <b>2,05 €</b>
-                  </p>
-                </div>
-                <div class="col-3">
-                  <!--Precio y valoracion-->
-                  <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Opciones
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Archivar viaje</a>
-                      <a class="dropdown-item" href="#">Eliminar viaje</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
         </ul>
       </div>
     </div>
