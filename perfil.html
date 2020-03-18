@@ -15,25 +15,13 @@
 
 <body>
   <div class="container-fluid" style="background-color:#85c1e9">
-    <!---Cabecera -->
-    <div class="row p-3 align-items-center">
-      <div class="col-2">
-        <img style="height:auto;max-width:125%" src="img/RideMyBike_icon_green.png" />
-      </div>
-      <div class="col-6">
-        <h5 class="text-white"><b>RideMyBike</b>, la página de préstamo de bicicletas que lucha por un aire
-          más puro en nuestras ciudades</h5>
-      </div>
-      <div class="col-4">
-        <div>
-
-          <button type="button" onclick="location.href='perfil.html'" class="btn btn-success">JuanPPerez</button>
-        </div>
-
-      </div>
-    </div>
+    <!---Sin cabecera cuando se ha iniciado sesion -->
     <nav class="navbar navbar-expand-lg navbar-dark">
       <!-- Menu de navegacion -->
+      <a class="navbar-brand" href="index.html">RideMyBike</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle	navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -57,6 +45,9 @@
           <li class="nav-item">
             <a class="nav-link" href="ayuda.html">Ayuda ❓</a>
           </li>
+          <li class="nav-item">
+            <button type="button" onclick="location.href='perfil.html'" class="btn btn-success">JuanPPerez</button>
+          </li>
         </ul>
       </div>
     </nav>
@@ -77,37 +68,37 @@
 
       <div class="form-label-group pb-3">
         <label for="fname">Nombre y Apellidos:</label><br>
-        <input type="text" id="inputName" class="form-control" placeholder="Juan Pedro Pérez Sánchez" >
+        <input type="text" id="inputName" class="form-control" placeholder="Juan Pedro Pérez Sánchez">
       </div>
 
       <div class="form-label-group pb-3">
         <label for="fname">DNI, NIF, CIF y/o NIE:</label><br>
-        <input type="text" id="inputDNI" class="form-control" placeholder="99999555F" >
+        <input type="text" id="inputDNI" class="form-control" placeholder="99999555F">
       </div>
 
       <div class="form-label-group pb-3">
         <label for="fname">Teléfono móvil o fijo:</label><br>
-        <input type="text" id="inputTlf" class="form-control" placeholder="6775555555" >
+        <input type="text" id="inputTlf" class="form-control" placeholder="6775555555">
       </div>
 
       <div class="form-label-group pb-3">
         <label for="fname">Email:</label><br>
-        <input type="email" id="inputEmail" class="form-control" placeholder="JuanPPerez@gmail.com" >
+        <input type="email" id="inputEmail" class="form-control" placeholder="JuanPPerez@gmail.com">
       </div>
 
       <div class="form-label-group pb-3">
         <label for="fname">Nombre de Usuario:</label><br>
-        <input type="text" id="inputUser" class="form-control" placeholder="JuanPPerez" >
+        <input type="text" id="inputUser" class="form-control" placeholder="JuanPPerez">
       </div>
 
       <div class="form-label-group pb-3">
         <label for="fname">Dirección:</label><br>
-        <input type="text" id="inputDireccion" class="form-control" placeholder="Calle Molina 15" >
+        <input type="text" id="inputDireccion" class="form-control" placeholder="Calle Molina 15">
       </div>
 
       <div class="form-label-group pb-3">
         <label for="fname">Número de tarjeta:</label><br>
-        <input type="text" id="inputTarjeta" class="form-control" placeholder="76867687867" >
+        <input type="text" id="inputTarjeta" class="form-control" placeholder="76867687867">
       </div>
 
 
