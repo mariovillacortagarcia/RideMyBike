@@ -65,7 +65,13 @@
     <!--Formulario de Registro de una Nueva Bicicleta-->
 
     <form class="form-group mb-2">
-        <h5><b>Anota la información de la bicicleta que quieras añadir</b>🚴</h5>
+      <h5><b>Anota la información de la bicicleta que quieras añadir</b>🚴</h5>
+      <form action="upload.php" method="post" enctype="multipart/form-data"><br>
+        Selecciona una imagen para subir:
+        <div class="form-label-group pb-3">
+          <input type="file" name="fileToUpload" id="fileToUpload">
+        </div>
+      </form>
       <div class="form-group mb-2">
         <label for="marcaBiciRegistro">Marca</label>
         <input type="String" class="form-control" id="marcaNuevaBici">
