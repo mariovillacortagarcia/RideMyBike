@@ -79,10 +79,10 @@
             <a class="nav-link" href="viajes.html">Realizados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="viajes_en_proceso.html">En proceso</a>
+            <a class="nav-link active" href="viajes_en_proceso.html">En proceso</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="viajes_archivados.html">Archivados</a>
+            <a class="nav-link" href="viajes_archivados.html">Archivados</a>
           </li>
         </ul>
       </div>
@@ -92,10 +92,43 @@
 
           <li class="list-group-item">
             <!--Viaje 1-->
-            <div class="alert alert-light" role="alert">
-              No hay ningún viaje archivado
+            <div class="alert alert-secondary bg-white" role="alert">
+              <div class="row">
+                <div class="col-3">
+                  <!--Mapa con ruta realizada-->
+                  <img class="img-thumbnail" src="img/test/viaje1.png">
+                </div>
+                <div class="col-6">
+                  <!--Informacion del viaje-->
+                  <h6 class=""><b>VLL - Ciguñuela</b></h6>
+                  <p>
+                    Desde el 25 de julio de 2020 a las 10:00 <br>
+                  </p>
+                  <p>
+                    <a class="text-secondary">Estimado: </a><b>3,50 €</b>
+                  </p>
+                </div>
+                <div class="col-3">
+                  <!--Precio y valoracion-->
+                  <div class="container pb-2">
+                    <p class="text-secondary">No se puede puntuar todavía </p>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Opciones
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Cancelar viaje</a>
+                      <a class="dropdown-item" href="#">Finalizar viaje</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </li>
+
+
+
         </ul>
       </div>
     </div>
