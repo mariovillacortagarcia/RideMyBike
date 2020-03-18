@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.css">
+
 </head>
 
 <body>
@@ -46,7 +47,17 @@
             <a class="nav-link" href="ayuda.html">Ayuda ❓</a>
           </li>
           <li class="nav-item">
-            <button type="button" onclick="location.href='perfil.html'" class="btn btn-success">JuanPPerez</button>
+
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"  data-hover="dropdown">
+                JuanPPerez<span class="caret"></span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item " href="perfil.html">Perfil de Usuario</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item " href="#">Cerrar sesión</a>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -61,44 +72,53 @@
         <h1 class="h3 mb-3 font-weight-normal"><b>Perfil de usuario</b></h1>
       </div>
 
-      <div class="form-label-group pb-3">
+      <div class="container pt-4 ">
         <label for="fname">Foto:</label><br>
         <img src="img/foto.jpg">
-      </div>
 
-      <div class="form-label-group pb-3">
+
+      <form action="upload.php" method="post" enctype="multipart/form-data"><br>
+        Selecciona una imagen para subir:
+        <div class="form-label-group pb-3">
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        </div>
+        <input type="submit" value="Subir Imagen" name="submit"><br><br>
+      </form>
+
+
+
         <label for="fname">Nombre y Apellidos:</label><br>
-        <input type="text" id="inputName" class="form-control" placeholder="Juan Pedro Pérez Sánchez">
-      </div>
+        <input type="text" disabled="disabled" id="inputName" class="form-control" placeholder="Juan Pedro Pérez Sánchez">
 
-      <div class="form-label-group pb-3">
+
+
         <label for="fname">DNI, NIF, CIF y/o NIE:</label><br>
-        <input type="text" id="inputDNI" class="form-control" placeholder="99999555F">
-      </div>
+        <input type="text" disabled="disabled" id="inputDNI" class="form-control" placeholder="99999555F">
 
-      <div class="form-label-group pb-3">
+
+
         <label for="fname">Teléfono móvil o fijo:</label><br>
-        <input type="text" id="inputTlf" class="form-control" placeholder="6775555555">
-      </div>
+        <input type="text" disabled="disabled" id="inputTlf" class="form-control" placeholder="6775555555">
 
-      <div class="form-label-group pb-3">
+
+
         <label for="fname">Email:</label><br>
-        <input type="email" id="inputEmail" class="form-control" placeholder="JuanPPerez@gmail.com">
-      </div>
+        <input type="email"  disabled="disabled" id="inputEmail" class="form-control" placeholder="JuanPPerez@gmail.com">
 
-      <div class="form-label-group pb-3">
+
+
         <label for="fname">Nombre de Usuario:</label><br>
-        <input type="text" id="inputUser" class="form-control" placeholder="JuanPPerez">
-      </div>
+        <input type="text" disabled="disabled" id="inputUser" class="form-control" placeholder="JuanPPerez">
 
-      <div class="form-label-group pb-3">
+
+
         <label for="fname">Dirección:</label><br>
-        <input type="text" id="inputDireccion" class="form-control" placeholder="Calle Molina 15">
-      </div>
+        <input type="text" disabled="disabled" id="inputDireccion" class="form-control" placeholder="Calle Molina 15">
 
-      <div class="form-label-group pb-3">
+
+
         <label for="fname">Número de tarjeta:</label><br>
-        <input type="text" id="inputTarjeta" class="form-control" placeholder="76867687867">
+        <input type="text" disabled="disabled" id="inputTarjeta" class="form-control" placeholder="76867687867">
       </div>
 
 
