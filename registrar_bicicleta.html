@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-  <title> Mis bicis - RideMyBike </title>
+  <title> Registrar bicicleta - RideMyBike </title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -62,7 +62,7 @@
   </div>
   <!-- Contenido -->
   <div class="container pt-4">
-    <!--Formulario-->
+    <!--Formulario de Registro de una Nueva Bicicleta-->
 
     <form class="form-group mb-2">
         <h5><b>Anota la información de la bicicleta que quieras añadir</b>🚴</h5>
@@ -92,19 +92,40 @@
         <label for="descripcionBiciRegistro">Descripción</label>
         <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4"> </textarea>
       </div>
+      <label for="informacionRevisionBici" class="pt-4">Para poder dar de alta la nueva bicicleta, necesitamos revisarla en un taller cercano a la ciudad que nos indiques</label>
 
-      <div class="">
-
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle " role="button" id="talleresCiudades" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ciudades:</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="#">Valladolid, C/Falsa 123</a>
+          <a class="dropdown-item" href="#">Barcelona, C/Falsa 123</a>
+          <a class="dropdown-item" href="#">Madrid, C/Falsa 123</a>
+          <a class="dropdown-item" href="#">Zamora, C/Falsa 123</a>
+        </div>
       </div>
+
+      <div class="row pt-4">
+        <div class="col-6">
+          <div class="form-group mb-2">
+            <input type="date" class="form-control" id="exampleInputFechaRevision" aria-describedby="emailHelp" placeholder="dd/mm/aa">
+            <small id="emailHelp" class="form-text text-muted">La fecha de revisión de la bicicleta (dd/mm/aaaa)</small>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form group mb-2">
+            <input type="time" class="form-control" id="exampleInputHoraRevision" aria-describedby="emailHelp" placeholder="hh:mm">
+            <small id="emailHelp" class="form-text text-muted">Añade tu hora, solo se atiende por cita previa y el horario es de 10:00 a 13:00 y de 16:00 a 20:00 (hh:mm)**</small>
+          </div>
+        </div>
+      </div>
+      <div class="row pt-8">
+        <small id="emailHelp" class="form-text text-muted">**En caso de que haya algún problema en el horario seleccionado, se enviará un correo electrónico al usuario para poder acordar otra fecha adecuada a ambas partes</small>
+      </div>
+      <div class="pt-4">
         <button class="btn btn-outline-success" type="submit">Registrar bici</button>
+      </div>
     </form>
-
-
   </div>
-
-
-
-
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
