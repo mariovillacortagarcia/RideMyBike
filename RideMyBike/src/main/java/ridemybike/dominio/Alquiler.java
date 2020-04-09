@@ -18,8 +18,8 @@ public class Alquiler implements Serializable{
     private Date horaInicial;
     private Date horaFinal;
     private String codigoAlquiler;
-    private boolean enMano;
     private Peticion peticion;
+    private Valoracion valoracion;
     /**
      * Inicializador de un alquiler vacio.
      */
@@ -28,8 +28,8 @@ public class Alquiler implements Serializable{
         horaInicial = null;
         horaFinal = null;
         codigoAlquiler = null;
-        enMano = false;
         peticion = null;
+        valoracion = null;
         
     }
 
@@ -98,20 +98,6 @@ public class Alquiler implements Serializable{
         return horaFinal;
     }
     /**
-     * Establece si se trata de un alquiler en mano o no.
-     * @param enMano: true si el alquiler es en mano, false si es un alquiler estandar
-     */
-    public void setenMano(boolean enMano){
-        this.enMano = enMano;
-    }
-    /**
-     * Comprueba si el alquiler es en mano o no.
-     * @return true si el alquiler es en mano, false si es un alquiler estandar
-     */
-    public boolean getenMano(){
-        return enMano;
-    }
-    /**
      * Establece la peticion de la que surge el alquiler.
      * @param peticion: peticion del alquiler.
      */
@@ -132,7 +118,9 @@ public class Alquiler implements Serializable{
         return peticion;
     }
     
-    public void setCodigoAlquiler(String codigo){}
+    public void setCodigoAlquiler(String codigo){
+        codigoAlquiler = codigo;
+    }
     
     public String getCodigoAlquiler(){
         return codigoAlquiler;
@@ -149,6 +137,14 @@ public class Alquiler implements Serializable{
         return true;
     }
 
+    private void setValoracion(Valoracion v){
+        valoracion = v;
+    
+    }
+    
+    private Valoracion getValoracion(){
+        return valoracion;
+    }
     /**
      * Comprueba si el viaje se ha finalizado
      *
