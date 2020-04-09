@@ -57,10 +57,8 @@ CREATE TABLE Alquiler(
   horaInicial smalldatetime not null,
   codigoAlquiler char(100) not null,
   codigoPeticion char(100) not null,
-  nombreUsuario char(100) not null,
   PRIMARY KEY (codigoAlquiler),
-  FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion),
-  FOREIGN KEY (nombreUsuario) REFERENCES Usuario(nombreUsuario)
+  FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion)
 );
 
 -- Puntuacion es un int de 0 a 5
