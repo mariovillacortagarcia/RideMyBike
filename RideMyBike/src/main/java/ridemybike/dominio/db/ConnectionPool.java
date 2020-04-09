@@ -28,7 +28,7 @@ public class ConnectionPool{
         try {
             return dataSource.getConnection();
         }catch (SQLException sqle) {
-        sqle.printStackTrace();
+            sqle.printStackTrace();
         return null;
         }
     }
