@@ -1,9 +1,10 @@
+package ridemybike.dominio.db;
+
 import java.sql.*;
-import org.apache.tomcat.jdbc.pool.ConnectionPool;
 import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.Freno;
 
-package ridemybike.dominio.db;
+
 
 public class BicicletaDB{
 
