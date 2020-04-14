@@ -1,0 +1,94 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ridemybike.dominio.db;
+
+import java.sql.*;
+import ridemybike.dominio.Peticion;
+import ridemybike.dominio.TipoAlquiler;
+
+/**
+ * Implementación del gestor de peticiones de la base de datos
+ */
+public class PeticionDB {
+        /**
+     * Inserta una nueva petición en la base de datos
+     * 
+     * @param peticion la petición a insertar
+     * @return un entero positivo si la insercion ha tenido exito; 0 si ha habido algun fallo
+     * @throws IllegalArgumentException si la petición dada es igual a null
+     */
+    public static int insertarIncidencia(Peticion peticion){
+        if(peticion == null){
+            throw new IllegalArgumentException("Peticion igual a null");
+        }
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        String query = "INSERT INTO Peticion(hora, tiempoLimite, codigoBici, nombreArrendatario, tipo) VALUES (?, ?, ?, ?, ?)";
+        try {
+            ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, peticion.getHora()+"");
+            ps.setString(2, peticion.getTiempoLimite()+"");
+            ps.setString(3, peticion.getCodigoBici()+"");
+            ps.setString(4, peticion.getNombreArrendatario());
+            ps.setString(5, peticion.getTipo()+"");
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            int res = 0;
+            if (rs.next()) {
+                res = rs.getInt(1);
+            } 
+            peticion.setCodigoPeticion(res);
+            ps.close();
+            pool.freeConnection(connection);
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    /**
+     * Devuelve la petición con el código de la petición especificado
+     * 
+     * @param codigoPeticion  el código de la petición
+     * @return una Petición con los datos de la petición; null si no existe ninguna petición con 
+     * el código especificado
+     * @throws IllegalArgumentException si el código dado es negativo
+     */
+    public static Peticion selectIncidencia(int codigoPeticion) {
+        if(codigoPeticion < 0){
+            throw new IllegalArgumentException("El código de petición es negativo.");
+        }
+    
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        ResultSet rs = null;
+        String query= "SELECT * FROM Peticion WHERE codigoPetición = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoPeticion+"");
+            rs = ps.executeQuery();
+            Peticion peticion = null;
+            if  (rs.next()) {
+                peticion = new Peticion();
+                peticion.setHora(Time.valueOf(rs.getString("hora")));
+                peticion.setTiempoLimite(Time.valueOf(rs.getString("tiempoLimite")));
+                peticion.setCodigoBici(Integer.parseInt(rs.getString("codigoBici")));
+                peticion.setNombreArrendatario(rs.getString("nombreArrendatario"));
+                peticion.setTipo(TipoAlquiler.valueOf(rs.getString("tipo")));
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return peticion;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
