@@ -7,7 +7,10 @@ DROP TABLE IF EXISTS valoracionBicicleta;
 DROP TABLE IF EXISTS Incidencia;
 
 CREATE TYPE tipoFreno AS
-ENUM('disco','hidraulicos','zapatas','holandeses');
+ENUM('Disco','Hidraulicos','Zapatas','Holandeses');
+
+CREATE TYPE gradoIncidencia AS
+ENUM('Leve','Moderado','Grave');
 
 CREATE TYPE tipoAlquiler AS
 ENUM('enMano','estandar');
@@ -25,7 +28,7 @@ CREATE TABLE Usuario(
 );
 
 CREATE TABLE Bicicleta(
-  codigoBici char(100) not null,
+  codigoBici INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   descripcion char(500) not null,
   tamCuadro float not null,
   imagen char(500) not null,
@@ -40,10 +43,10 @@ CREATE TABLE Bicicleta(
 );
 
 CREATE TABLE Peticion(
-  codigoPeticion char(100) not null,
+  codigoPeticion INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   hora smalldatetime not null,
   tiempoLimite smalldatetime not null,
-  codigoBici char(100) not null,
+  codigoBici int not null,
   nombreArrendatario char(100) not null,
   tipo tipoAlquiler not null,
   PRIMARY KEY (codigoPeticion),
@@ -55,17 +58,19 @@ CREATE TABLE Alquiler(
   precio real not null,
   horaFinal smalldatetime not null,
   horaInicial smalldatetime not null,
-  codigoAlquiler char(100) not null,
-  codigoPeticion char(100) not null,
+  codigoAlquiler INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+  codigoPeticion int not null,
+  nombreUsuario char(100) not null,
   PRIMARY KEY (codigoAlquiler),
-  FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion)
+  FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion),
+  FOREIGN KEY (nombreUsuario) REFERENCES Usuario(nombreUsuario)
 );
 
 -- Puntuacion es un int de 0 a 5
-CREATE TABLE valoracionUsuario(
+CREATE TABLE ValoracionUsuario(
   descripcion char(500),
   puntuacion int not null,
-  codigoAlquiler char(100) not null,
+  codigoAlquiler int not null,
   usuarioValorado char(100) not null,
   CHECK (puntuacion IN (0,1,2,3,4,5)),
   PRIMARY KEY (codigoAlquiler, usuarioValorado),
@@ -73,22 +78,20 @@ CREATE TABLE valoracionUsuario(
   FOREIGN KEY (usuarioValorado) REFERENCES Usuario(nombreUsuario)
 );
 
-CREATE TABLE valoracionBicicleta(
+CREATE TABLE ValoracionBicicleta(
   descripcion char(500),
   puntuacion int not null,
-  codigoAlquiler char(100) not null,
+  codigoAlquiler int not null,
   CHECK (puntuacion IN (0,1,2,3,4,5)),
   PRIMARY KEY (codigoAlquiler),
   FOREIGN KEY (codigoAlquiler) REFERENCES Alquiler(codigoAlquiler)
 );
 
--- grado 1 al 3 reestriccion
 CREATE TABLE Incidencia(
-  codigoIncidencia char(100) not null,
-  codigoPeticion char(100) not null,
+  codigoIncidencia INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+  codigoPeticion int not null,
   descripcion char(500) not null,
-  grado int not null,
-  CHECK (grado IN (1,2,3)),
+  grado gradoIncidencia not null,
   PRIMARY KEY (codigoIncidencia),
   FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion)
 );
