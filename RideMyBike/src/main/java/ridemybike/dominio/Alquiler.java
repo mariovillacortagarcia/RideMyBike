@@ -19,7 +19,7 @@ public class Alquiler implements Serializable{
     private Date horaFinal;
     private String codigoAlquiler;
     private Peticion peticion;
-    private Valoracion valoracion;
+    private Usuario nombreUsuario;
     /**
      * Inicializador de un alquiler vacio.
      */
@@ -29,7 +29,7 @@ public class Alquiler implements Serializable{
         horaFinal = null;
         codigoAlquiler = null;
         peticion = null;
-        valoracion = null;
+        nombreUsuario = null;
         
     }
 
@@ -118,6 +118,20 @@ public class Alquiler implements Serializable{
         return peticion;
     }
     
+    public Usuario getNombreUsuario(){
+        return nombreUsuario;
+    }
+    
+    public void setNombreUsuario(Usuario nombre){
+        if(nombreUsuario == null){
+            throw new IllegalArgumentException("El nombre de usuario no puede ser nulo");
+        }
+        if(this.nombreUsuario != null){
+            throw new IllegalArgumentException("Ya se ha establecido un nombre de usuario");
+        }
+        this.nombreUsuario = nombre;
+    }
+    
     public void setCodigoAlquiler(String codigo){
         codigoAlquiler = codigo;
     }
@@ -137,7 +151,7 @@ public class Alquiler implements Serializable{
         return true;
     }
 
-    private void setValoracion(Valoracion v){
+    /**private void setValoracion(Valoracion v){
         valoracion = v;
     
     }
@@ -145,6 +159,7 @@ public class Alquiler implements Serializable{
     private Valoracion getValoracion(){
         return valoracion;
     }
+    
     /**
      * Comprueba si el viaje se ha finalizado
      *
