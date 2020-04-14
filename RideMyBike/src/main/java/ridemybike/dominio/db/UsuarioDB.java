@@ -118,4 +118,42 @@ public class UsuarioDB {
         }
         return existe;
     }
+    
+    /**
+     * Actualiza la informacion de un usuario existente, en concreto:
+     * nombre y apellidos, email, telefono, numero de tarjeta y hash de contraseña.
+     * El nombre de usuario y el DNI no se veran modificados. Si el usuario no 
+     * existe en la base de datos no se producira ningun cambio ni insercion en la misma
+     * 
+     * @param user el usuario actualizado
+     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
+     * @throws IllegalArgumentException si el usuario dado es igual a null
+     */
+    public static int actualizarUsuario(Usuario user){
+        if(user == null){
+            throw new IllegalArgumentException("Usuario igual a null");
+        }
+    
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        String query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ? WHERE nombreUsuario = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, user.getNombre());
+            ps.setString(2, user.getApellidos());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getTlf()+"");
+            ps.setString(5, user.getTarjetaCredito());
+            ps.setString(6, user.getHashPasswd());
+            ps.setString(7, user.getNickName());
+            int res = ps.executeUpdate();
+            ps.close();
+            pool.freeConnection(connection);
+            return res;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
