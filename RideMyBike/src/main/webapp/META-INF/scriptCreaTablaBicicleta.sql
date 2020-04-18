@@ -8,7 +8,7 @@ DROP TABLE Incidencia;
 DROP TYPE tipoFreno;
 DROP TYPE gradoIncidencia;
 DROP TYPE tipoAlquiler;
-DROP TYPE rolUsuario;
+DROP TYPE estadoBici;
 
 CREATE TYPE tipoFreno AS
 ENUM('Disco','Hidraulicos','Zapatas','Holandeses');
@@ -16,11 +16,11 @@ ENUM('Disco','Hidraulicos','Zapatas','Holandeses');
 CREATE TYPE gradoIncidencia AS
 ENUM('Leve','Moderado','Grave');
 
+CREATE TYPE estadoBici AS
+ENUM('Pendiente','Activada','Desactivada');
+
 CREATE TYPE tipoAlquiler AS
 ENUM('enMano','estandar');
-
-CREATE TYPE rolUsuario AS
-ENUM('cliente','propietario');
 
 CREATE TABLE Usuario(
   nombreUsuario char(100) not null,
@@ -31,7 +31,6 @@ CREATE TABLE Usuario(
   telefono bigint not null,
   numeroTarjeta char(100) not null,
   hashPassword char(128) not null,
-  rol rolUsuario not null,
   PRIMARY KEY (nombreUsuario)
 );
 
@@ -46,6 +45,7 @@ CREATE TABLE Bicicleta(
   latitud FLOAT not null,
   longitud FLOAT not null,
   usuarioPropietario char(100),
+  estado estadoBici not null,
   PRIMARY KEY (codigoBici),
   FOREIGN KEY usuarioPropietario REFERENCES Usuario(nombreUsuario)
 );
@@ -68,7 +68,7 @@ CREATE TABLE Alquiler(
   horaInicial smalldatetime not null,
   codigoAlquiler INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   codigoPeticion int not null,
-  nombreUsuario char(100) not null,
+  archivado int not null,
   PRIMARY KEY (codigoAlquiler),
   FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion),
   FOREIGN KEY (nombreUsuario) REFERENCES Usuario(nombreUsuario)
