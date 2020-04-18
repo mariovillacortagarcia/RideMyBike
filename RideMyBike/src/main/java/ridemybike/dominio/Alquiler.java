@@ -19,6 +19,7 @@ public class Alquiler implements Serializable{
     private Date horaFinal;
     private String codigoAlquiler;
     private String peticion;
+    private boolean archivado;
     /**
      * Inicializador de un alquiler vacio.
      */
@@ -28,9 +29,25 @@ public class Alquiler implements Serializable{
         horaFinal = null;
         codigoAlquiler = null;
         peticion = null;
+        archivado = false;
         
     }
-
+    /**
+     * Obtiene el estado de archivo del alquiler.
+     *
+     * @return true si esta archivado, false si no.
+     */
+    public boolean getArchivado(){
+        return archivado;
+    }
+    /**
+     * Establece el estado de archivo del alquiler.
+     *
+     * @param archivado : true si esta archivado, false si no.
+     */
+    public void setArchivado(boolean archivado){
+        this.archivado = archivado;
+    }
     /**
      * Establece el precio del alquiler.
      *
