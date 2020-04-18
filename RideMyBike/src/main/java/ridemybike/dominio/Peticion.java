@@ -20,7 +20,7 @@ public class Peticion {
     private TipoAlquiler tipo;
 
     /**
-     *
+     * Constructor de una petición por defecto.
      */
     public Peticion() {
         codigoPeticion = -1;
@@ -32,16 +32,16 @@ public class Peticion {
     }
 
     /**
-     *
-     * @return
+     * Devuelve el código de identificación de una petición.
+     * @return código numerico identificativo de la petición.
      */
     public int getCodigoPeticion() {
         return codigoPeticion;
     }
 
     /**
-     *
-     * @param codigoPeticion
+     * Fija el código identificativo y único de una petición.
+     * @param codigoPeticion: código numerico identificativo de la petición.
      */
     public void setCodigoPeticion(int codigoPeticion) {
         if (codigoPeticion < 0) {
@@ -51,16 +51,16 @@ public class Peticion {
     }
 
     /**
-     *
-     * @return
+     * Devuelve el momento temporal para el que se ha realizado una petición.
+     * @return fecha y hora para la que se realiza la petición.
      */
     public Time getHora() {
         return hora;
     }
 
     /**
-     *
-     * @param hora
+     * Fija la fecha y hora para la que se realiza una petición.
+     * @param hora: fecha y hora para la que se realiza la petición.
      */
     public void setHora(Time hora) {
         if (hora == null) {
@@ -70,16 +70,16 @@ public class Peticion {
     }
 
     /**
-     *
-     * @return
+     * Devuelve el momento temporal límite para la caducidad de una petición.
+     * @return fecha y hora en la que caduca la petición.
      */
     public Time getTiempoLimite() {
         return tiempoLimite;
     }
 
     /**
-     *
-     * @param tiempoLimite
+     * Fija la fecha y hora para la que caduca una petición.
+     * @param tiempoLimite: fecha y hora en la que caduca la petición.
      */
     public void setTiempoLimite(Time tiempoLimite) {
         if (tiempoLimite == null) {
@@ -89,16 +89,16 @@ public class Peticion {
     }
 
     /**
-     *
-     * @return
+     * Devuelve el código de identificación de una bicicleta.
+     * @return código numerico identificativo de una bicicleta.
      */
     public int getCodigoBici() {
         return codigoBici;
     }
 
     /**
-     *
-     * @param codigoBici
+     * Fija el código de identificación de una bicicleta.
+     * @param codigoBici: código numerico identificativo de una bicicleta.
      */
     public void setCodigoBici(int codigoBici) {
         if (codigoBici < 0) {
@@ -108,16 +108,16 @@ public class Peticion {
     }
 
     /**
-     *
-     * @return
+     * Devuelve el nombre del arrendatario propietario de la bicicleta solicitada.
+     * @return nombre identificativo del propietario de la bicicleta solicitada.
      */
     public String getNombreArrendatario() {
         return nombreArrendatario;
     }
 
     /**
-     *
-     * @param nombreArrendatario
+     * Fija el nombre del arrendatario propietario de la bicicleta solicitada.
+     * @param nombreArrendatario: nombre identificativo del propietario de la bicicleta solicitada.
      */
     public void setNombreArrendatario(String nombreArrendatario) {
         if (nombreArrendatario.equals("")) {
@@ -127,16 +127,16 @@ public class Peticion {
     }
 
     /**
-     *
-     * @return
+     * Devuelve el tipo de alquiler solicitado en la petición.
+     * @return tipo de alquiler solicitado.
      */
     public TipoAlquiler getTipo() {
         return tipo;
     }
 
     /**
-     *
-     * @param tipo
+     * Fija el tipo de alquiler que se solicita en la petición.
+     * @param tipo tipo de alquiler solicitado.
      */
     public void setTipo(TipoAlquiler tipo) {
         if (tipo == null) {
