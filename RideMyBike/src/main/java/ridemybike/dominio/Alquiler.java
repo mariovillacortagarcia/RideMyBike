@@ -18,8 +18,7 @@ public class Alquiler implements Serializable{
     private Date horaInicial;
     private Date horaFinal;
     private String codigoAlquiler;
-    private Peticion peticion;
-    private Usuario nombreUsuario;
+    private String peticion;
     /**
      * Inicializador de un alquiler vacio.
      */
@@ -29,7 +28,6 @@ public class Alquiler implements Serializable{
         horaFinal = null;
         codigoAlquiler = null;
         peticion = null;
-        nombreUsuario = null;
         
     }
 
@@ -99,9 +97,9 @@ public class Alquiler implements Serializable{
     }
     /**
      * Establece la peticion de la que surge el alquiler.
-     * @param peticion: peticion del alquiler.
+     * @param peticion: id de la peticion del alquiler.
      */
-    public void setPeticion(Peticion peticion){
+    public void setPeticion(String peticion){
         if(peticion == null){
             throw new IllegalArgumentException("La peticion no puede ser nula");
         }
@@ -114,24 +112,10 @@ public class Alquiler implements Serializable{
      * Obtiene la peticion de la que surge el alquiler.
      * @return peticion del alquiler, null si no esta establecida.
      */
-    public Peticion getPeticion(){
+    public String getPeticion(){
         return peticion;
     }
-    
-    public Usuario getNombreUsuario(){
-        return nombreUsuario;
-    }
-    
-    public void setNombreUsuario(Usuario nombre){
-        if(nombreUsuario == null){
-            throw new IllegalArgumentException("El nombre de usuario no puede ser nulo");
-        }
-        if(this.nombreUsuario != null){
-            throw new IllegalArgumentException("Ya se ha establecido un nombre de usuario");
-        }
-        this.nombreUsuario = nombre;
-    }
-    
+      
     public void setCodigoAlquiler(String codigo){
         codigoAlquiler = codigo;
     }
