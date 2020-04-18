@@ -7,8 +7,6 @@ package ridemybike.dominio.db;
 
 import java.sql.*;
 import ridemybike.dominio.Alquiler;
-import ridemybike.dominio.Peticion;
-import ridemybike.dominio.Usuario;
 
  /**
  * @author Mario Villacorta Garcia
