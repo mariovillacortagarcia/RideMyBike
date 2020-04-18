@@ -28,7 +28,7 @@ public class AlquilerDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        String query = "INSERT INTO Alquiler(precio, horaInicial, horaFinal, codigoAlquiler, peticion, nombreUsuario) VALUES (?,?,?,?,?,?)"; 
+        String query = "INSERT INTO Alquiler(precio, horaInicial, horaFinal, codigoAlquiler, peticion) VALUES (?,?,?,?,?,?)"; 
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, alquiler.getPrecio()+"");
@@ -36,7 +36,6 @@ public class AlquilerDB {
             ps.setString(3, alquiler.getHoraFinal().toString());
             ps.setString(4, alquiler.getCodigoAlquiler());
             ps.setString(5, alquiler.getPeticion()+"");
-            ps.setString(6, alquiler.getNombreUsuario().toString());
             int res = ps.executeUpdate();
             ps.close();
             pool.freeConnection(connection);
@@ -74,8 +73,8 @@ public class AlquilerDB {
                 alquiler.setHoraInicial(Time.valueOf(rs.getString("horaInicial")));
                 alquiler.setHoraFinal(Time.valueOf(rs.getString("horaFinal")));
                 alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
-                //alquiler.setPeticion(rs.getString("peticion"));
-                //alquiler.setNombreUsuario(rs.getString("nombreUsuario"));
+                alquiler.setPeticion(rs.getString("peticion"));
+               
             }
             rs.close();
             ps.close();
