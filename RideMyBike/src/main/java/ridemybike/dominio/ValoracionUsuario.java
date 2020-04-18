@@ -11,7 +11,7 @@ package ridemybike.dominio;
  */
 public class ValoracionUsuario extends Valoracion{
     
-    private String codigoUsuario;
+    private String usuarioValorado;
     
     public ValoracionUsuario(){
         super();
@@ -20,11 +20,11 @@ public class ValoracionUsuario extends Valoracion{
     
     /**
      * Funcion para dar valor al codigo del usuario que se esta valorando
-     * @param codigoUsuario Es el codigo del usuario sobre el que se valora
+     * @param usuarioValorado Es el codigo del usuario sobre el que se valora
      */
-    public void setCodigoUsuario(String codigoUsuario){
-        if (codigoUsuario == null || codigoUsuario.equals("")){throw new IllegalArgumentException("El codigo del usuario no puede ser no valido");}
-        this.codigoUsuario = codigoUsuario;
+    public void setUsuarioValorado(String usuarioValorado){
+        if (usuarioValorado == null || usuarioValorado.equals("")){throw new IllegalArgumentException("El usuario no puede ser no valido");}
+        this.usuarioValorado = usuarioValorado;
     }
     
     /**
@@ -32,7 +32,7 @@ public class ValoracionUsuario extends Valoracion{
      * @return El codigo del usuario que se esta valorando
      */
     public String getCodigoUsuario(){
-        return codigoUsuario;
+        return usuarioValorado;
     }
     
     
