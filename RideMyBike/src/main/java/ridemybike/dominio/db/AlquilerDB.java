@@ -7,29 +7,33 @@ package ridemybike.dominio.db;
 
 import java.sql.*;
 import ridemybike.dominio.Alquiler;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
-/**
- *
+ /**
  * @author Mario Villacorta Garcia
  */
 public class AlquilerDB {
-
+ /**
+     * Inserta un nuevo alquiler en la base de datos
+     * 
+     * @param alquiler el alquiler a insertar
+     * @return un entero positivo si la insercion ha tenido exito; 0 si ha habido algun fallo
+     * @throws IllegalArgumentException si la petición dada es igual a null
+     */
     public static int insert(Alquiler alquiler) {
+        if(alquiler == null){
+            throw new IllegalArgumentException("Alquiler igual a null");
+        }
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        //TODO valoracion
-        String query = "INSERT INTO Alquiler(horaInicial, horaFinal, precio"
-                + "codigoAlquiler, codigoPeticion) VALUES (?,?,?,?,?)"; 
+        String query = "INSERT INTO Alquiler(precio, horaInicial, horaFinal, codigoAlquiler, peticion) VALUES (?,?,?,?,?,?)"; 
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, alquiler.getHoraInicial().toString());
-            ps.setString(2, alquiler.getHoraFinal().toString());
-            ps.setString(3, Double.toString(alquiler.getPrecio()));
+            ps.setString(1, alquiler.getPrecio()+"");
+            ps.setString(2, alquiler.getHoraInicial().toString());
+            ps.setString(3, alquiler.getHoraFinal().toString());
             ps.setString(4, alquiler.getCodigoAlquiler());
-            ps.setString(5, Integer.toString(alquiler.getPeticion().getCodigoPeticion()));
+            ps.setString(5, alquiler.getPeticion()+"");
             int res = ps.executeUpdate();
             ps.close();
             pool.freeConnection(connection);
@@ -39,26 +43,36 @@ public class AlquilerDB {
             return 0;
         }
     }
-
-    public static Alquiler selectAlquiler(String codigo) {
+/**
+     * Devuelve un alquiler con el código del alquiler especificado
+     * 
+     * @param codigoAlquiler  el código del alquiler 
+     * @return un Alquiler con los datos del alquiler; null si no existe ningun alquiler con 
+     * el código especificado
+     * @throws IllegalArgumentException si el código dado es negativo
+     */
+    public static Alquiler selectAlquiler(String codigoAlquiler) {
+        if(codigoAlquiler == null){
+            throw new IllegalArgumentException("El codigo del alquiler es igual a null");
+        }
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
         String query = "SELECT * FROM Alquiler WHERE codigoAlquiler = ?";
-        Alquiler alquiler = null;
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, codigo);
+            ps.setString(1, codigoAlquiler);
             rs = ps.executeQuery();
+            Alquiler alquiler = null;
             if (rs.next()) {
                 alquiler = new Alquiler();
-                alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
-                alquiler.setHoraInicial(ParseFecha(rs.getString("horaInicial")));
-                alquiler.setHoraFinal(ParseFecha(rs.getString("horaFinal")));
                 alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
-                alquiler.setPeticion(PeticionDB.selectPeticion(rs.getString("codigoPeticion")));
-                //TODO Valoracion
+                alquiler.setHoraInicial(Time.valueOf(rs.getString("horaInicial")));
+                alquiler.setHoraFinal(Time.valueOf(rs.getString("horaFinal")));
+                alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
+                alquiler.setPeticion(rs.getString("peticion"));
+               
             }
             rs.close();
             ps.close();
@@ -68,25 +82,5 @@ public class AlquilerDB {
             e.printStackTrace();
             return null;
         }
-    }
-    
-    
-      /**
-     * Permite convertir un String en fecha (Date).
-     * @param fecha Cadena de fecha dd/MM/yyyy
-     * @return Objeto Date
-     */
-    public static Date ParseFecha(String fecha)
-    {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaDate = null;
-        try {
-            fechaDate = (Date) formato.parse(fecha);
-        } 
-        catch (ParseException ex) 
-        {
-            System.out.println(ex);
-        }
-        return fechaDate;
     }
 }

@@ -20,7 +20,7 @@ public class PeticionDB {
      * @return un entero positivo si la insercion ha tenido exito; 0 si ha habido algun fallo
      * @throws IllegalArgumentException si la petición dada es igual a null
      */
-    public static int insertarIncidencia(Peticion peticion){
+    public static int insertarPeticion(Peticion peticion){
         if(peticion == null){
             throw new IllegalArgumentException("Peticion igual a null");
         }
@@ -59,7 +59,7 @@ public class PeticionDB {
      * el código especificado
      * @throws IllegalArgumentException si el código dado es negativo
      */
-    public static Peticion selectIncidencia(int codigoPeticion) {
+    public static Peticion selectPeticion(int codigoPeticion) {
         if(codigoPeticion < 0){
             throw new IllegalArgumentException("El código de petición es negativo.");
         }
