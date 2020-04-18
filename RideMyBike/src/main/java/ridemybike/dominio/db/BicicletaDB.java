@@ -2,6 +2,7 @@ package ridemybike.dominio.db;
 
 import java.sql.*;
 import ridemybike.dominio.Bicicleta;
+import ridemybike.dominio.EstadoBicicleta;
 import ridemybike.dominio.Freno;
 
 
@@ -15,7 +16,7 @@ public class BicicletaDB{
           ConnectionPool pool = ConnectionPool.getInstance();
           Connection connection = pool.getConnection();
           PreparedStatement ps;
-          String query = "INSERT INTO Bicicleta(codigoBici, descripcion, tamCuadro, imagen, marca, freno, latitud, longitud, usuarioPropietario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          String query = "INSERT INTO Bicicleta(codigoBici, descripcion, tamCuadro, imagen, marca, freno, latitud, longitud, usuarioPropietario, estado, codigoActivacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
           try {
               ps = connection.prepareStatement(query);
               ps.setString(1, bicicleta.getcodigoBici());
@@ -27,6 +28,8 @@ public class BicicletaDB{
               ps.setString(7, bicicleta.getLatitud()+"");
               ps.setString(8, bicicleta.getLongitud()+"");
               ps.setString(9, bicicleta.getUsuarioPropietario());
+              ps.setString(10, bicicleta.getEstado()+"");
+              ps.setString(11, bicicleta.getCodigoActivacion());
               int res = ps.executeUpdate();
               ps.close();
               pool.freeConnection(connection);
@@ -62,6 +65,8 @@ public class BicicletaDB{
                   bicicleta.setLatitud(Double.parseDouble(rs.getString("latitud")));
                   bicicleta.setLongitud(Double.parseDouble(rs.getString("longitud")));
                   bicicleta.setUsuarioPropietario(rs.getString("usuarioPropietario"));
+                  bicicleta.setEstado(EstadoBicicleta.valueOf(rs.getString("estado")));
+                  bicicleta.setCodigoActivacion(rs.getString("codigoAcivacion"));
               }
               rs.close();
               ps.close();
