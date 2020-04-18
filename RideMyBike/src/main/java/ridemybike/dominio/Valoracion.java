@@ -9,9 +9,9 @@ package ridemybike.dominio;
  *
  * @author davidmd
  */
-public class Valoracion {
+public abstract class Valoracion {
     
-    private int codigo;
+    private int codigoAlquiler;
     private String descripcion;
     private int puntuacion;
     
@@ -20,11 +20,11 @@ public class Valoracion {
     }
     
     /**
-     * Funcion dar valor al codigo de la valoracion
-     * @param codigo Es el codigo numerico identificador de la valoracion
+     * Funcion dar valor al codigoAlquiler de la valoracion
+     * @param codigoAlquiler Es el codigoAlquiler numerico identificador de la valoracion
      */
-    public void setCodigo(int codigo){
-        this.codigo = codigo;
+    public void setCodigo(int codigoAlquiler){
+        this.codigoAlquiler = codigoAlquiler;
     }
     
     /**
@@ -46,11 +46,11 @@ public class Valoracion {
     }
     
     /**
-     * Metodo que returna el codigo identificador del alquiler
-     * @return El codigo identificador del alquiler
+     * Metodo que returna el codigoAlquiler identificador del alquiler
+     * @return El codigoAlquiler identificador del alquiler
      */
     public int getCodigo(){
-        return codigo;
+        return codigoAlquiler;
     }
     
     /**

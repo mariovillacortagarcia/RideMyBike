@@ -6,7 +6,9 @@
 package ridemybike.dominio.db;
 
 import java.sql.*;
-import dominio.Alquiler;
+import ridemybike.dominio.Alquiler;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 /**
  *
@@ -25,9 +27,9 @@ public class AlquilerDB {
             ps = connection.prepareStatement(query);
             ps.setString(1, alquiler.getHoraInicial().toString());
             ps.setString(2, alquiler.getHoraFinal().toString());
-            ps.setString(3, alquiler.getPrecio().toString());
+            ps.setString(3, Double.toString(alquiler.getPrecio()));
             ps.setString(4, alquiler.getCodigoAlquiler());
-            ps.setString(5, alquiler.getPeticion().getCodigoPeticion());
+            ps.setString(5, Integer.toString(alquiler.getPeticion().getCodigoPeticion()));
             int res = ps.executeUpdate();
             ps.close();
             pool.freeConnection(connection);
@@ -52,9 +54,9 @@ public class AlquilerDB {
             if (rs.next()) {
                 alquiler = new Alquiler();
                 alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
-                alquiler.setHoraInicial(rs.getString("horaInicial"));
-                alquiler.setHoraFinal(rs.getString("horaFinal"));
-                alquiler.setPrecio(rs.getString("precio"));
+                alquiler.setHoraInicial(ParseFecha(rs.getString("horaInicial")));
+                alquiler.setHoraFinal(ParseFecha(rs.getString("horaFinal")));
+                alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
                 alquiler.setPeticion(PeticionDB.selectPeticion(rs.getString("codigoPeticion")));
                 //TODO Valoracion
             }
@@ -66,5 +68,25 @@ public class AlquilerDB {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    
+      /**
+     * Permite convertir un String en fecha (Date).
+     * @param fecha Cadena de fecha dd/MM/yyyy
+     * @return Objeto Date
+     */
+    public static Date ParseFecha(String fecha)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate = (Date) formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
     }
 }
