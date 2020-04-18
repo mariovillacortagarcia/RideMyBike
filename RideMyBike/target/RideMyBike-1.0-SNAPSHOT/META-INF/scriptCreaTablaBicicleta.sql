@@ -1,10 +1,14 @@
-DROP TABLE IF EXISTS Usuario;
-DROP TABLE IF EXISTS Alquiler;
-DROP TABLE IF EXISTS Peticion;
-DROP TABLE IF EXISTS Bicicleta;
-DROP TABLE IF EXISTS valoracionUsuario;
-DROP TABLE IF EXISTS valoracionBicicleta;
-DROP TABLE IF EXISTS Incidencia;
+DROP TABLE Usuario;
+DROP TABLE Alquiler;
+DROP TABLE Peticion;
+DROP TABLE Bicicleta;
+DROP TABLE valoracionUsuario;
+DROP TABLE valoracionBicicleta;
+DROP TABLE Incidencia;
+DROP TYPE tipoFreno;
+DROP TYPE gradoIncidencia;
+DROP TYPE tipoAlquiler;
+DROP TYPE rolUsuario;
 
 CREATE TYPE tipoFreno AS
 ENUM('Disco','Hidraulicos','Zapatas','Holandeses');
@@ -14,6 +18,9 @@ ENUM('Leve','Moderado','Grave');
 
 CREATE TYPE tipoAlquiler AS
 ENUM('enMano','estandar');
+
+CREATE TYPE rolUsuario AS
+ENUM('cliente','propietario');
 
 CREATE TABLE Usuario(
   nombreUsuario char(100) not null,
@@ -31,7 +38,7 @@ CREATE TABLE Bicicleta(
   codigoBici INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   descripcion char(500) not null,
   tamCuadro float not null,
-  imagen char(500) not null,
+  imagen blob not null,
   marca char(100) not null,
   modelo char(100) not null,
   freno tipoFreno not null,
@@ -47,7 +54,7 @@ CREATE TABLE Peticion(
   hora smalldatetime not null,
   tiempoLimite smalldatetime not null,
   codigoBici int not null,
-  nombreArrendatario char(100) not null,
+  usuarioArrendatario char(100) not null,
   tipo tipoAlquiler not null,
   PRIMARY KEY (codigoPeticion),
   FOREIGN KEY (codigoBici) REFERENCES Bicicleta(codigoBici),
@@ -60,7 +67,6 @@ CREATE TABLE Alquiler(
   horaInicial smalldatetime not null,
   codigoAlquiler INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   codigoPeticion int not null,
-  nombreUsuario char(100) not null,
   PRIMARY KEY (codigoAlquiler),
   FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion),
   FOREIGN KEY (nombreUsuario) REFERENCES Usuario(nombreUsuario)

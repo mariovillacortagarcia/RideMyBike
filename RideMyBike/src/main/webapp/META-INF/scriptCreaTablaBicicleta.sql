@@ -31,7 +31,6 @@ CREATE TABLE Usuario(
   telefono bigint not null,
   numeroTarjeta char(100) not null,
   hashPassword char(128) not null,
-  rol rolUsuario not null,
   PRIMARY KEY (nombreUsuario)
 );
 
@@ -68,7 +67,6 @@ CREATE TABLE Alquiler(
   horaInicial smalldatetime not null,
   codigoAlquiler INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   codigoPeticion int not null,
-  nombreUsuario char(100) not null,
   PRIMARY KEY (codigoAlquiler),
   FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion),
   FOREIGN KEY (nombreUsuario) REFERENCES Usuario(nombreUsuario)
