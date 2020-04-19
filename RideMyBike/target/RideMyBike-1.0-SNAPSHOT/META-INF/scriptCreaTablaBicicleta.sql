@@ -31,6 +31,7 @@ CREATE TABLE Usuario(
   telefono bigint not null,
   numeroTarjeta char(100) not null,
   hashPassword char(128) not null,
+  fotoPerfil Blob,
   PRIMARY KEY (nombreUsuario)
 );
 

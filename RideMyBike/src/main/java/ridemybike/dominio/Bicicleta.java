@@ -19,6 +19,8 @@ public class Bicicleta {
   private double latitud;
   private double longitud;
   private String usuarioPropietario;
+  private EstadoBicicleta estado;
+  private String codigoActivacion;
 
   /**
   * Funcion constructor, vacio ya que se isntaciaran los atributos posteriormente
@@ -113,6 +115,27 @@ public class Bicicleta {
     this.usuarioPropietario = usuarioPropietario;
   }
   /**
+   * Funcion para dar un valor al estado de la bicicleta
+   * @param estado es el estado de la situacion de la bicicleta
+   */
+  public void setEstado(EstadoBicicleta estado){
+      if(estado == null){
+          throw new IllegalArgumentException("El estado de la bicicleta no puede ser null");
+      }
+      this.estado=estado;
+  }
+  /**
+   * Funcion para dar valor al codigo de activacion que tiene la bicicleta para introducirla en el sistema
+   * @param codigoActivacion es el codigo para darle de alta en el sistema
+   */
+  public void setCodigoActivacion(String codigoActivacion){
+      if(codigoActivacion == null || codigoActivacion.equals("")){
+      throw new IllegalArgumentException("El codigo de activacion de la bicicleta no puede ser vacio o nulo");
+      }
+      this.codigoActivacion=codigoActivacion;
+  }
+  
+  /**
   * Metodo que devuelve el valor del codigo de la bicileta
   * @return El codigo identificador de la bicicleta
   */
@@ -175,4 +198,19 @@ public class Bicicleta {
   public Freno getFreno(){
     return freno;
   }
+  /**
+   * Metodo que devuelve el estado actual de la bicicleta
+   * @return El estado actual de la bicicleta
+   */
+  public EstadoBicicleta getEstado(){
+      return estado;
+  }
+  /**
+   * Metodo que devuelve el codigo de activacion de la bicicleta
+   * @return El codigo de activacion de la bicicleta
+   */
+  public String getCodigoActivacion(){
+      return codigoActivacion;
+  }
+  
 }

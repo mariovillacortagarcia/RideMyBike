@@ -1,5 +1,8 @@
 package ridemybike.dominio.db;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.*;
 import ridemybike.dominio.Usuario;
 
@@ -15,14 +18,20 @@ public class UsuarioDB {
      * @return un entero positivo si la insercion ha tenido exito; 0 si ha habido algun fallo
      * @throws IllegalArgumentException si el usuario dado es igual a null
      */
-    public static int insertarUsuario(Usuario usuario){
+    public static int insertarUsuario(Usuario usuario) throws IOException {
         if(usuario == null){
             throw new IllegalArgumentException("Usuario igual a null");
         }
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps;
-        String query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query;
+        if(usuario.getFotoPerfil() != null){
+            query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword, fotoPerfil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        } else{
+            query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        }
+        
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, usuario.getNickName());
@@ -33,6 +42,10 @@ public class UsuarioDB {
             ps.setString(6, usuario.getTlf()+"");
             ps.setString(7, usuario.getTarjetaCredito());
             ps.setString(8, usuario.getHashPasswd());
+            if(usuario.getFotoPerfil() != null){
+                ps.setBlob(9, usuario.getFotoPerfil().getInputStream());
+            }
+            
             int res = ps.executeUpdate();
             ps.close();
             pool.freeConnection(connection);
@@ -129,7 +142,7 @@ public class UsuarioDB {
      * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
      * @throws IllegalArgumentException si el usuario dado es igual a null
      */
-    public static int actualizarUsuario(Usuario user){
+    public static int actualizarUsuario(Usuario user) throws IOException{
         if(user == null){
             throw new IllegalArgumentException("Usuario igual a null");
         }
@@ -137,7 +150,13 @@ public class UsuarioDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection= pool.getConnection();
         PreparedStatement ps= null;
-        String query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ? WHERE nombreUsuario = ?";
+        String query;
+        if(user.getFotoPerfil() != null){
+            query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ?, fotoPerfil = ? WHERE nombreUsuario = ?";
+        } else{
+            query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ? WHERE nombreUsuario = ?";
+
+        }
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, user.getNombre());
@@ -147,6 +166,10 @@ public class UsuarioDB {
             ps.setString(5, user.getTarjetaCredito());
             ps.setString(6, user.getHashPasswd());
             ps.setString(7, user.getNickName());
+            if(user.getFotoPerfil() != null){
+                ps.setBlob(8, user.getFotoPerfil().getInputStream());
+            }
+            
             int res = ps.executeUpdate();
             ps.close();
             pool.freeConnection(connection);
@@ -155,5 +178,52 @@ public class UsuarioDB {
             e.printStackTrace();
         }
         return 0;
+    }
+    
+    /**
+     * Devuelve la imagen de perfil del usuario especificado
+     * 
+     * @param nombreUsuario el nombre de usuario del usuario
+     * @param respuesta el stream donde se recibira la imagen
+     * @throws IllegalArgumentException si algun argumento es igual a null
+     */
+    public static void getImagen(String nombreUsuario, OutputStream respuesta){
+        if(nombreUsuario == null){
+            throw new IllegalArgumentException("Nombre de usuario igual a null");
+        }
+        if(respuesta == null){
+            throw new IllegalArgumentException("Stream de respuesta para la foto de perfil igual a null");
+        }
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query= "SELECT fotoPerfil FROM Usuario WHERE nombreUsuario = ?";
+        
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, nombreUsuario);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Blob blob = rs.getBlob("fotoPerfil");
+                if (!rs.wasNull() && blob.length() > 1) {
+                    InputStream imagen = blob.getBinaryStream();
+                    byte[] buffer = new byte[1000];
+                    int len = imagen.read(buffer);
+                    while (len != -1) {
+                        respuesta.write(buffer, 0, len);
+                        len = imagen.read(buffer);
+                    }
+                    imagen.close();
+                } 
+            }
+            
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,5 +1,7 @@
 package ridemybike.dominio;
 
+import javax.servlet.http.Part;
+
 /**
  * Implementacion de un usuario
  */
@@ -12,6 +14,7 @@ public class Usuario {
     private String nombreUsuario;
     private String tarjetaCredito;
     private String hashPasswd;
+    private Part fotoPerfil;
     
     /**
      * Inicializador
@@ -25,6 +28,7 @@ public class Usuario {
         nombreUsuario = null;
         tarjetaCredito = null;
         hashPasswd = null;  
+        fotoPerfil = null;
     }
     
     /**
@@ -201,5 +205,27 @@ public class Usuario {
      */
     public String getHashPasswd(){
         return hashPasswd;
+    }
+    
+    /**
+     * Establece la foto de perfil del usuario
+     * 
+     * @param foto la foto de perfil
+     * @throws IllegalArgumentException si la foto es igual a null
+     */
+    public void setFotoPerfil(Part foto){
+        if(foto == null){
+            throw new IllegalArgumentException("Foto de perfil de usuario igual a null");
+        }
+        fotoPerfil = foto;
+    }
+    
+    /**
+     * Devuelve la foto de perfil del usuario
+     * 
+     * @return un Part con la foto
+     */
+    public Part getFotoPerfil(){
+        return fotoPerfil;
     }
 }
