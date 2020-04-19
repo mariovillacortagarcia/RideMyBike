@@ -26,7 +26,7 @@ public class GuardarImagenPerfil extends HttpServlet {
         user.setFotoPerfil(foto);
         UsuarioDB.actualizarUsuario(user);
         
-        String url = "/result.jsp";
+        String url = "/perfil.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }

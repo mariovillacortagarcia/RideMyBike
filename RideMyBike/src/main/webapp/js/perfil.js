@@ -1,18 +1,14 @@
 var fotoElegida = $("#fotoElegida");
 
 function fotoPerfilModificada() {
-    alert(document.getElementById("fotoElegida").files[0].name);
+    var fotoElegida = document.getElementById("fotoElegida");
+    var fotoPerfil = document.getElementById("fotoPerfil");
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      fotoPerfil.setAttribute('src', e.target.result);
+    }
     
-    let photo = document.getElementById("fotoElegida").files[0];  // file from input
-    
-    let formData = new FormData();
-    formData.append('photo', photo);                                
-    fetch('img', {
-    method: 'POST',
-    body: formData
-    })
-    
-    document.getElementById("fotoPerfil").setAttribute("src", 'img/photo');
+    reader.readAsDataURL(fotoElegida.files[0]);
 }
 
 fotoElegida.change(fotoPerfilModificada);
