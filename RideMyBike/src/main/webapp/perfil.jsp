@@ -113,11 +113,13 @@
                         %>
                     </div>
                     <div class="mt-4 pt-1">
-                        <input type="file" accept=".png, .jpeg, .jpg" name="fotoElegida" id="fotoElegida" class="inputfile"/>
+                        <form id="form-foto" method="post" action="GuardarImagenPerfil?usuario=<%= user.getNickName() %>">
+                            <input type="file" accept=".png, .jpeg, .jpg" name="fotoElegida" id="fotoElegida" class="inputfile"/>
                         <label for="fotoElegida">
                             <i class="fa fa-fw fa-camera"></i>
                             <span>Cambiar foto</span>
                         </label>
+                        </form>
                     </div>
                   </div>
                 </div>
@@ -127,7 +129,7 @@
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
-                  <form class="form" novalidate="">
+                  <form class="form" novalidate="" id="form-datos-usuario" action="ActualizarPerfil" method="post">
                     <div class="row">
                       <div class="col">
                         <div class="row">
@@ -228,7 +230,7 @@
                     </div>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                        <button class="btn btn-primary" onclick="guardarCambiosPerfil()">Guardar cambios</button>
                       </div>
                     </div>
                   </form>

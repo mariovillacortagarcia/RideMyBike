@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
 
@@ -18,9 +17,11 @@ import ridemybike.dominio.db.UsuarioDB;
 @WebServlet(name = "ActualizarPerfil", urlPatterns = {"/ActualizarPerfil"})
 @MultipartConfig
 public class ActualizarPerfil extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         Usuario user = new Usuario();
-        Part foto = request.getPart("fotoElegida");
+        String usuario = request.getParameter("usuario");
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellidos");
         String email = request.getParameter("email");
@@ -32,7 +33,7 @@ public class ActualizarPerfil extends HttpServlet {
         String passwordNueva = request.getParameter("passwordNueva");
         String passwordNuevaConfirmacion = request.getParameter("passwordNuevaConfirmacion");
         
-        user.setFotoPerfil(foto);
+        user.setNombreUsuario(usuario);
         user.setNombre(nombre);
         user.setApellidos(apellidos);
         user.setEmail(email); //si queremos validar el email, hacerlo antes de esta linea

@@ -131,9 +131,9 @@ public class UsuarioDB {
     
     /**
      * Actualiza la informacion de un usuario existente, en concreto:
-     * nombre y apellidos, email, telefono, numero de tarjeta y hash de contraseña.
-     * El nombre de usuario y el DNI no se veran modificados. Si el usuario dado no 
-     * existe en la base de datos no se producira ningun cambio ni insercion en la misma
+     * nombre y apellidos, email, telefono, numero de tarjeta, hash de contraseña y direccion.
+     * El nombre de usuario, el DNI y la foto de perfil no se veran modificados. 
+     * Si el usuario dado no existe en la base de datos no se producira ningun cambio ni insercion en la misma
      * 
      * @param user el usuario actualizado
      * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
@@ -148,7 +148,7 @@ public class UsuarioDB {
         Connection connection= pool.getConnection();
         PreparedStatement ps= null;
         String query;
-        query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ?, fotoPerfil = ?, direccion = ? WHERE nombreUsuario = ?";
+        query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ? direccion = ? WHERE nombreUsuario = ?";
 
         try {
             ps = connection.prepareStatement(query);
@@ -158,9 +158,41 @@ public class UsuarioDB {
             ps.setString(4, user.getTlf()+"");
             ps.setString(5, user.getTarjetaCredito());
             ps.setString(6, user.getHashPasswd());
-            ps.setString(7, user.getNickName());
-            ps.setBlob(8, user.getFotoPerfil().getInputStream());
-            ps.setString(9, user.getDireccion());
+            ps.setString(7, user.getDireccion());
+            ps.setString(8, user.getNickName());
+            
+            int res = ps.executeUpdate();
+            ps.close();
+            pool.freeConnection(connection);
+            return res;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    /**
+     * Actualiza la imagen de perfil del usuario dado
+     * 
+     * @param user el usuario especificado
+     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
+     * @throws IllegalArgumentException si el usuario dado es igual a null
+     */
+    public static int setImagen(Usuario user) throws IOException{
+        if(user == null){
+            throw new IllegalArgumentException("Usuario igual a null");
+        }
+    
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        String query;
+        query = "UPDATE Usuario SET fotoPerfil = ? WHERE nombreUsuario = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setBlob(1, user.getFotoPerfil().getInputStream());
+            ps.setString(2, user.getNickName());
             
             int res = ps.executeUpdate();
             ps.close();

@@ -5,10 +5,6 @@ DROP TABLE Bicicleta;
 DROP TABLE valoracionUsuario;
 DROP TABLE valoracionBicicleta;
 DROP TABLE Incidencia;
-DROP TYPE tipoFreno;
-DROP TYPE gradoIncidencia;
-DROP TYPE tipoAlquiler;
-DROP TYPE estadoBici;
 
 CREATE TABLE Usuario(
   nombreUsuario varchar(30) not null,
