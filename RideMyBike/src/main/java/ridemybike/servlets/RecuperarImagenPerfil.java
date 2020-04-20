@@ -12,12 +12,10 @@ import ridemybike.dominio.db.UsuarioDB;
 /**
  * Implementacion del servlet para recuperar la foto de perfil de un usuario
  * a partir de su nombre de usuario
- * 
- * @author davidmd
  */
 @WebServlet(name = "RecuperarImagenPerfil", urlPatterns = {"/RecuperarImagenPerfil"})
 public class RecuperarImagenPerfil extends HttpServlet {
-    public void doPost(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {response.setContentType("image/jpg");
+    public void processRequest(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {response.setContentType("image/jpg");
         OutputStream respuesta = response.getOutputStream();
         String nombreUsuario = request.getParameter("nombreUsuario");
         UsuarioDB.getImagen(nombreUsuario, respuesta);

@@ -26,11 +26,8 @@ public class UsuarioDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps;
         String query;
-        if(usuario.getFotoPerfil() != null){
-            query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword, fotoPerfil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        } else{
-            query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        }
+        query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword, fotoPerfil, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
         
         try {
             ps = connection.prepareStatement(query);
@@ -42,9 +39,8 @@ public class UsuarioDB {
             ps.setString(6, usuario.getTlf()+"");
             ps.setString(7, usuario.getTarjetaCredito());
             ps.setString(8, usuario.getHashPasswd());
-            if(usuario.getFotoPerfil() != null){
-                ps.setBlob(9, usuario.getFotoPerfil().getInputStream());
-            }
+            ps.setBlob(9, usuario.getFotoPerfil().getInputStream());
+            ps.setString(10, usuario.getDireccion());
             
             int res = ps.executeUpdate();
             ps.close();
@@ -88,6 +84,7 @@ public class UsuarioDB {
                 usuario.setTlf(Long.parseLong(rs.getString("telefono")));
                 usuario.setTarjetaCredito(rs.getString("numeroTarjeta"));
                 usuario.setNombreUsuario(rs.getString("nombreUsuario"));
+                usuario.setDireccion(rs.getString("direccion"));
             }
             rs.close();
             ps.close();
@@ -135,7 +132,7 @@ public class UsuarioDB {
     /**
      * Actualiza la informacion de un usuario existente, en concreto:
      * nombre y apellidos, email, telefono, numero de tarjeta y hash de contraseña.
-     * El nombre de usuario y el DNI no se veran modificados. Si el usuario no 
+     * El nombre de usuario y el DNI no se veran modificados. Si el usuario dado no 
      * existe en la base de datos no se producira ningun cambio ni insercion en la misma
      * 
      * @param user el usuario actualizado
@@ -151,12 +148,8 @@ public class UsuarioDB {
         Connection connection= pool.getConnection();
         PreparedStatement ps= null;
         String query;
-        if(user.getFotoPerfil() != null){
-            query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ?, fotoPerfil = ? WHERE nombreUsuario = ?";
-        } else{
-            query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ? WHERE nombreUsuario = ?";
+        query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ?, fotoPerfil = ?, direccion = ? WHERE nombreUsuario = ?";
 
-        }
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, user.getNombre());
@@ -166,9 +159,8 @@ public class UsuarioDB {
             ps.setString(5, user.getTarjetaCredito());
             ps.setString(6, user.getHashPasswd());
             ps.setString(7, user.getNickName());
-            if(user.getFotoPerfil() != null){
-                ps.setBlob(8, user.getFotoPerfil().getInputStream());
-            }
+            ps.setBlob(8, user.getFotoPerfil().getInputStream());
+            ps.setString(9, user.getDireccion());
             
             int res = ps.executeUpdate();
             ps.close();

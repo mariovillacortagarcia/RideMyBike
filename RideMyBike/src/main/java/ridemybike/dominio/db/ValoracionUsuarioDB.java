@@ -1,7 +1,6 @@
 package ridemybike.dominio.db;
 
 import java.sql.*;
-import ridemybike.dominio.Valoracion;
 import ridemybike.dominio.ValoracionUsuario;
 
 
@@ -62,4 +61,37 @@ public class ValoracionUsuarioDB{
               return null;
           }
       }
+  
+  /**
+   * Devuelve la valoracion media del usuario especificado
+   * 
+   * @param nombreUsuario el numbre de usuario
+   * @return un int en el intervalo [0,5] con la valoracion; -1 si ha habido algun error
+   * @throws IllegalArgumentException si el nombre de usuario es igual a null
+   */
+  public static int selectValoracionMedia(String nombreUsuario){
+      if(nombreUsuario == null){
+              throw new IllegalArgumentException("Nombre de usuario igual a null");
+          }
+
+          ConnectionPool pool = ConnectionPool.getInstance();
+          Connection connection= pool.getConnection();
+          PreparedStatement ps= null;
+          ResultSet rs = null;
+          String query= "SELECT AVG(puntuacion) as media FROM ValoracionUsuario WHERE usuarioValorado = ?";
+          try {
+              ps = connection.prepareStatement(query);
+              ps.setString(1, nombreUsuario);
+              rs = ps.executeQuery();
+              int valoracionMedia = Integer.parseInt(rs.getString("media"));
+              
+              rs.close();
+              ps.close();
+              pool.freeConnection(connection);
+              return valoracionMedia;
+          }catch (SQLException e) {
+              e.printStackTrace();
+              return -1;
+          }
+  }
 }

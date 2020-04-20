@@ -15,6 +15,7 @@ public class Usuario {
     private String tarjetaCredito;
     private String hashPasswd;
     private Part fotoPerfil;
+    private String direccion;
     
     /**
      * Inicializador
@@ -29,6 +30,29 @@ public class Usuario {
         tarjetaCredito = null;
         hashPasswd = null;  
         fotoPerfil = null;
+        direccion = null;
+    }
+    
+    /**
+     * Establece una direccion de domicilio para el usuario
+     * 
+     * @param direccion la direccion de residencia
+     * @throws IllegalArgumentException si la direccion es igual a null
+     */
+    public void setDireccion(String direccion){
+        if(direccion == null){
+            throw new IllegalArgumentException("Direccion de domicilio igual a null");
+        }
+        this.direccion = direccion;
+    }
+    
+    /**
+     * Devuelve la direccion de residencia del usuario
+     * 
+     * @return un String con la direccion
+     */
+    public String getDireccion(){
+        return direccion;
     }
     
     /**
