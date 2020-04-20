@@ -1,7 +1,6 @@
 package ridemybike.dominio.db;
 
 import java.sql.*;
-import ridemybike.dominio.Valoracion;
 import ridemybike.dominio.ValoracionBicicleta;
 
 
