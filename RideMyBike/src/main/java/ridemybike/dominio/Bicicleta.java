@@ -5,6 +5,8 @@
  */
 package ridemybike.dominio;
 
+import javax.servlet.http.Part;
+
 /**
  *
  * @author davidmd
@@ -13,7 +15,7 @@ public class Bicicleta {
   private String codigoBici;
   private String descripcion;
   private double tamCuadro;
-  private String imagen;
+  private Part imagen;
   private String marca;
   private Freno freno;
   private double latitud;
@@ -59,12 +61,12 @@ public class Bicicleta {
     this.tamCuadro = tamCuadro;
   }
   /**
-  * Funcion para dar un valor a la cadena que da el valor a la imagen de la bicicleta
+  * Funcion para dar un valor a la imagen de la bicicleta
   * @param imagen es una cadena de texto que contiene el valor que se le da al link donde se situa la imagen de la bicicleta
   */
-  public void setImagen(String imagen){
-    if(imagen == null || imagen.equals("")){
-      throw new IllegalArgumentException("El link a la imagen de la bicicleta no puede ser vacia o nula");
+  public void setImagen(Part imagen){
+    if(imagen == null){
+      throw new IllegalArgumentException("La imagen de la bicicleta no puede ser nula");
     }
     this.imagen = imagen;
   }
@@ -150,10 +152,10 @@ public class Bicicleta {
     return descripcion;
   }
   /**
-  * Metodo que devuelve el valor del link de la imagne almacenada de la bicicleta
+  * Metodo que devuelve la imagen almacenada de la bicicleta
   * @return El link usado para localizar la imagen de la bicicleta
   */
-  public String getImagen(){
+  public Part getImagen(){
     return imagen;
   }
   /**
