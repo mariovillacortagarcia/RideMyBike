@@ -1,11 +1,12 @@
 package ridemybike.dominio;
 
+import java.io.Serializable;
 import javax.servlet.http.Part;
 
 /**
  * Implementacion de un usuario
  */
-public class Usuario {
+public class Usuario implements Serializable {
     private String nombre;
     private String apellidos;
     private String dni;

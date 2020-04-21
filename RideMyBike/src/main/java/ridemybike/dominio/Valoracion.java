@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ridemybike.dominio;
 
-/**
- *
- * @author davidmd
- */
-public abstract class Valoracion {
+import java.io.Serializable;
+
+
+public abstract class Valoracion implements Serializable{
     
     private int codigoAlquiler;
     private String descripcion;

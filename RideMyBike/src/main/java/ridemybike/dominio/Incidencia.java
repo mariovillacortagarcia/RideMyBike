@@ -1,9 +1,11 @@
 package ridemybike.dominio;
 
+import java.io.Serializable;
+
 /**
  * Implementacion de una incidencia
  */
-public class Incidencia {
+public class Incidencia implements Serializable {
     private String descripcion;
     private int codigoIncidencia;
     private int codigoPeticion;
