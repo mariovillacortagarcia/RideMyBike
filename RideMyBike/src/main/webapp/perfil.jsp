@@ -1,4 +1,4 @@
-<%@page import="ridemybike.dominio.db.ValoracionUsuarioDB"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
 
@@ -23,8 +23,6 @@
   
   <!-- Inputfile style -->
   <link rel="stylesheet" href="css/inputfile.css">
-  
-
 </head>
 
 <body>
@@ -42,26 +40,24 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Home ?</a>
+            <a class="nav-link" href="index.jsp">Home ?</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="mis_bicis.html">Mis Bicis ??</a>
+            <a class="nav-link" href="mis_bicis.jsp">Mis Bicis ??</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="viajes.html">Viajes ??</a>
+            <a class="nav-link" href="viajes.jsp">Viajes ??</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="garantias.html">Garant韆s ??</a>
+            <a class="nav-link" href="garantias.jsp">Garant铆as ??</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="sobre_nosotros.html">Sobre nosotros ?</a>
+            <a class="nav-link" href="sobre_nosotros.jsp">Sobre nosotros ?</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ayuda.html">Ayuda ?</a>
+            <a class="nav-link" href="ayuda.jsp">Ayuda ?</a>
           </li>
           <li class="nav-item">
-
-            
           </li>
         </ul>
       </div>
@@ -125,7 +121,7 @@
                 </div>
               </div>
               <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="" class="active nav-link"><b>Informaci髇 de usuario</b></a></li>
+                  <li class="nav-item"><a href="" class="active nav-link"><b>Informaci贸n de usuario</b></a></li>
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
@@ -163,7 +159,7 @@
                       </div>
                     </div>
                      <ul class="nav nav-tabs mb-3 mt-4">
-                        <li class="nav-item"><a href="" class="active nav-link"><b>Informaci髇 privada</b></a></li>
+                        <li class="nav-item"><a href="" class="active nav-link"><b>Informaci贸n privada</b></a></li>
                     </ul>
                     <div class="row">
                       <div class="col">
@@ -176,7 +172,7 @@
                           </div>
                           <div class="col">
                             <div class="form-group">
-                              <label>Tel閒ono m髒il o fijo</label>
+                              <label>Tel茅fono m贸vil o fijo</label>
                               <input class="form-control" type="text" name="telefono" value="<%= user.getTlf() %>">
                             </div>
                           </div>
@@ -184,13 +180,13 @@
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
-                              <label>Direcci髇</label>
+                              <label>Direcci贸n</label>
                               <input class="form-control" type="text" name="direccion" value="<%= user.getDireccion() %>">
                             </div>
                           </div>
                             <div class="col">
                             <div class="form-group">
-                              <label>N鷐ero de tarjeta</label>
+                              <label>N煤mero de tarjeta</label>
                               <input class="form-control" type="text" name="tarjeta" value="<%= user.getTarjetaCredito() %>">
                             </div>
                           </div>
@@ -198,7 +194,7 @@
                       </div>
                     </div>
                     <ul class="nav nav-tabs mb-3 mt-4">
-                        <li class="nav-item"><a href="" class="active nav-link"><b>Cambiar contrase馻</b></a></li>
+                        <li class="nav-item"><a href="" class="active nav-link"><b>Cambiar contrase帽a</b></a></li>
                     </ul>
                     <div class="row">
                       <div class="col-12 col-sm-6 mb-3">
@@ -206,7 +202,7 @@
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
-                              <label>Contrase馻 actual</label>
+                              <label>Contrase帽a actual</label>
                               <input class="form-control" type="password" name="passwordActual" placeholder="??????">
                             </div>
                           </div>
@@ -214,7 +210,7 @@
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
-                              <label>Nueva contrase馻</label>
+                              <label>Nueva contrase帽a</label>
                               <input class="form-control" type="password" name="passwordNueva" placeholder="??????">
                             </div>
                           </div>
@@ -222,7 +218,7 @@
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
-                              <label><span class="d-none d-xl-inline">Confirmar contrase馻</span></label>
+                              <label><span class="d-none d-xl-inline">Confirmar contrase帽a</span></label>
                               <input class="form-control" type="password" name="passwordNuevaConfirmacion" placeholder="??????"></div>
                           </div>
                         </div>
@@ -248,7 +244,7 @@
             <div class="px-xl-3">
               <button class="btn btn-block btn-secondary">
                 <i class="fa fa-sign-out"></i>
-                <span>Cerrar sesi髇</span>
+                <span>Cerrar sesi贸n</span>
               </button>
             </div>
           </div>
@@ -257,7 +253,7 @@
           <div class="card-body">
             <h6 class="card-title font-weight-bold">Soporte</h6>
             <p class="card-text">Si necesitas ayuda con algo, no dudes en contactarnos.</p>
-            <button type="button" class="btn btn-primary">Cont醕tanos</button>
+            <button type="button" class="btn btn-primary">Cont谩ctanos</button>
           </div>
         </div>
       </div>
