@@ -43,9 +43,9 @@
         <label>
           <input type="checkbox" value="remember-me"> Recuérdame
         </label>
-        <p>Si todavía no tienes una cuenta puedes <a href="registrarse.jsp">registrarte aquí</a></p>
+        <p>Si todavía no tienes una cuenta puedes <a href="registrarse.jsp">registrarte aquí.</a></p>
       </div>
-      <button type="button" class="btn btn-link">He olvidado mi contraseña.</button>
+      <p><a href="recuperar_password.jsp">He olvidado mi contraseña.</a></p>
       <button class="btn btn-lg btn-primary btn-block mt-1" type="submit">Iniciar sesión</button>
     </form>
   </div>
