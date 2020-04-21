@@ -32,7 +32,7 @@
           <p class="lead">Queremos un mundo más limpio y sano, concienciados con el medio ambiente y haciendo frente al cambio clímatico, luchamos por un aire más limpio en nuestras ciudades.</p>
         </div>
         <div class="col-md-5">
-
+            
         </div>
       </div>
 
@@ -44,7 +44,7 @@
           <p class="lead">Porque el paso que no das seguro es el que sale mal. Queremos que todo el mundo tenga la oportunidad de hacer deporte un rato al día. Una rutina sana es una vida sana.</p>
         </div>
         <div class="col-md-5 order-md-1">
-
+            
         </div>
       </div>
 
