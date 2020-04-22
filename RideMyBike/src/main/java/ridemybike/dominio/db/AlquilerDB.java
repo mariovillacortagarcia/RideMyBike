@@ -28,10 +28,12 @@ public class AlquilerDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        String query = "INSERT INTO Alquiler(precio, horaInicial, horaFinal, codigoAlquiler, peticion, archivado) VALUES (?,?,?,?,?,?,?)"; 
+        String query = "INSERT INTO Alquiler(precio,inicio,fin ,horaInicial, horaFinal, codigoAlquiler, peticion, archivado) VALUES (?,?,?,?,?,?,?,?,?)"; 
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, alquiler.getPrecio()+"");
+            ps.setString(1, alquiler.getInicio()+"");
+            ps.setString(1, alquiler.getFin()+"");
             ps.setString(2, alquiler.getHoraInicial().toString());
             ps.setString(3, alquiler.getHoraFinal().toString());
             ps.setString(4, alquiler.getCodigoAlquiler());
@@ -76,6 +78,8 @@ public class AlquilerDB {
             if (rs.next()) {
                 alquiler = new Alquiler();
                 alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
+                alquiler.setInicio(rs.getString("inicio"));
+                alquiler.setFin(rs.getString("fin"));
                 alquiler.setHoraInicial(LocalDateTime.parse(rs.getString("horaInicial")));
                 alquiler.setHoraFinal(LocalDateTime.parse(rs.getString("horaFinal")));
                 alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
@@ -117,6 +121,8 @@ public class AlquilerDB {
             while (rs.next()) {
                 alquiler = new Alquiler();
                 alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
+                alquiler.setInicio(rs.getString("inicio"));
+                alquiler.setFin(rs.getString("fin"));
                 alquiler.setHoraInicial(LocalDateTime.parse(rs.getString("horaInicial")));
                 alquiler.setHoraFinal(LocalDateTime.parse(rs.getString("horaFinal")));
                 alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
