@@ -54,23 +54,26 @@
                         <ul class="list-group overflow-auto">
                             <%
                                 Alquiler alquileres[] = (Alquiler[]) request.getAttribute("alquileres");
-                                if(alquileres != null){
-                                for (Alquiler alquiler : alquileres) {
-                                    String precio = Double.toString(alquiler.getPrecio());
-                                    String inicio = alquiler.getInicio();
-                                    String fin = alquiler.getFin();
-                                    if(inicio == null || fin == null || alquiler.getArchivado())
-                                        continue;
-                                    LocalDateTime fechaInicio = alquiler.getHoraInicial();
-                                    LocalDateTime fechaFin = alquiler.getHoraFinal();
-                                    String diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
-                                    String mesInicio = Integer.toString(fechaInicio.getMonthValue());
-                                    String anoInicio = Integer.toString(fechaInicio.getYear());
-                                    String horaInicio = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());
-                                    String diaFin = Integer.toString(fechaFin.getDayOfMonth());
-                                    String mesFin = Integer.toString(fechaFin.getMonthValue());
-                                    String anoFin = Integer.toString(fechaFin.getYear());
-                                    String horaFin = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());;
+                                boolean sinViajes = true;
+                                if (alquileres != null) {
+                                    for (Alquiler alquiler : alquileres) {
+                                        String precio = Double.toString(alquiler.getPrecio());
+                                        String inicio = alquiler.getInicio();
+                                        String fin = alquiler.getFin();
+                                        if (inicio == null || fin == null || alquiler.getArchivado()) {
+                                            continue;
+                                        }
+                                        sinViajes = false;
+                                        LocalDateTime fechaInicio = alquiler.getHoraInicial();
+                                        LocalDateTime fechaFin = alquiler.getHoraFinal();
+                                        String diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
+                                        String mesInicio = Integer.toString(fechaInicio.getMonthValue());
+                                        String anoInicio = Integer.toString(fechaInicio.getYear());
+                                        String horaInicio = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());
+                                        String diaFin = Integer.toString(fechaFin.getDayOfMonth());
+                                        String mesFin = Integer.toString(fechaFin.getMonthValue());
+                                        String anoFin = Integer.toString(fechaFin.getYear());
+                                        String horaFin = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());;
                             %>
                             <li class="list-group-item">
                                 <!--Viaje 1-->
@@ -113,15 +116,17 @@
                                     </div>
                                 </div>
                             </li>
-                            <% }}else{%>
+                            <% }
+                                }
+                                if (sinViajes) {%>
                             <li class="list-group-item">
                                 <!--Viaje 1-->
                                 <div class="alert alert-light" role="alert">
                                     No hay ningún viaje realizado
                                 </div>
                             </li>
-                            <% } %>
-                            
+                            <% }%>
+
 
                         </ul>
                     </div>
