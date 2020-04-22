@@ -52,6 +52,7 @@
                         <ul class="list-group overflow-auto">
                             <%
                                 Alquiler alquileres[] = (Alquiler[]) request.getAttribute("alquileres");
+                                boolean sinViajes = true;
                                 if (alquileres != null) {
                                     for (Alquiler alquiler : alquileres) {
                                         String precio = Double.toString(alquiler.getPrecio());
@@ -60,6 +61,7 @@
                                         if (!alquiler.getArchivado()) {
                                             continue;
                                         }
+                                        sinViajes = false;
                                         LocalDateTime fechaInicio = alquiler.getHoraInicial();
                                         LocalDateTime fechaFin = alquiler.getHoraFinal();
                                         String diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
@@ -113,7 +115,8 @@
                                 </div>
                             </li>
                             <% }
-                            } else {%>
+                                }
+                                if (sinViajes) {%>
                             <li class="list-group-item">
                                 <!--Viaje 1-->
                                 <div class="alert alert-light" role="alert">
