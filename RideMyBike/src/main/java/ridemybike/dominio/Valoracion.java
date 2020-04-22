@@ -9,12 +9,17 @@ public abstract class Valoracion implements Serializable{
     private String descripcion;
     private int puntuacion;
     
+    /**
+     * Metodo constructor, se inicializa todo a valores vacios, ya que se sigue el protocolo JavaBeans
+     */
     public Valoracion(){
-        
+        codigoAlquiler = 0;
+        descripcion = "";
+        puntuacion = 0;
     }
     
     /**
-     * Funcion dar valor al codigoAlquiler de la valoracion
+     * Metodo dar valor al codigoAlquiler de la valoracion
      * @param codigoAlquiler Es el codigoAlquiler numerico identificador de la valoracion
      */
     public void setCodigo(int codigoAlquiler){
@@ -22,7 +27,7 @@ public abstract class Valoracion implements Serializable{
     }
     
     /**
-     * Funcion para hacer una descripcion de la puntuacion del viaje
+     * Metodo para hacer una descripcion de la puntuacion del viaje
      * @param descripcion Es una cadena de texto que sirve para dar la opinion sobre el alquiler
      */
     public void setDescripcion(String descripcion){
@@ -31,7 +36,7 @@ public abstract class Valoracion implements Serializable{
     }
     
     /**
-     * Funcion para puntuar del 0 al 5 la experiencia del alquiler
+     * Metodo para puntuar del 0 al 5 la experiencia del alquiler
      * @param puntuacion Es el puntuacion dado al alquiler
      */
     public void setPuntuacion(int puntuacion){
@@ -40,7 +45,7 @@ public abstract class Valoracion implements Serializable{
     }
     
     /**
-     * Metodo que returna el codigoAlquiler identificador del alquiler
+     * Funcion que returna el codigoAlquiler identificador del alquiler
      * @return El codigoAlquiler identificador del alquiler
      */
     public int getCodigo(){
@@ -48,7 +53,7 @@ public abstract class Valoracion implements Serializable{
     }
     
     /**
-     * Metodo que returna la descripcion de la puntuacion del alquiler
+     * Funcion que returna la descripcion de la puntuacion del alquiler
      * @return La descripcion de la opinion del alquiler
      */
     public String getDescripcion(){
@@ -56,7 +61,7 @@ public abstract class Valoracion implements Serializable{
     }
     
     /**
-     * Metodo que returna la puntuacion dada a la puntuacion del alquiler
+     * Funcion que returna la puntuacion dada a la puntuacion del alquiler
      * @return El puntuacion dada al alquiler
      */
     public int getPuntuacion(){

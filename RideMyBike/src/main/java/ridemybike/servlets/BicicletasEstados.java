@@ -17,13 +17,14 @@ import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.db.UsuarioDB;
 import ridemybike.dominio.EstadoBicicleta;
 import ridemybike.dominio.db.BicicletaDB;
+import static ridemybike.dominio.db.BicicletaDB.*;
 
 /**
  *
  * @author Alberto
  */
 @WebServlet(name = "MisBicisServlet", urlPatterns = {"/MisBicisServlet"})
-public class MisBicisServlet extends HttpServlet {
+public class BicicletasEstados extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,13 +38,28 @@ public class MisBicisServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String botonSelector = request.getParameter("selector1");
+        ArrayList<Bicicleta> v1 = new ArrayList<Bicicleta>();
         String nomUsuario = request.getParameter("nombreUsuario");
-        String estado = request.getParameter("estadoBiciclcetas");
+        switch(botonSelector){
+            case("Bicicletas actuales"):
+                v1 = getBicicletasRegistradas(nomUsuario);
+                break;
+            case("Bicicletas Activas"):
+                EstadoBicicleta e1 = EstadoBicicleta.Activado;
+                v1 = getBicicletasEstado(nomUsuario, e1);
+                break;
+            case("Bicicletas Desactivadas"):
+                EstadoBicicleta e2 = EstadoBicicleta.Desactivado;
+                v1 = getBicicletasEstado(nomUsuario, e2);
+                break;
+        }
         
-        EstadoBicicleta estadoBusqueda = EstadoBicicleta.valueOf(estado);
+        
+        
         Bicicleta b1 = new Bicicleta();
         b1.setEstado(estadoBusqueda);
-        ArrayList<Bicicleta> v1 = new ArrayList<Bicicleta>();
+        
         v1 = BicicletaDB.getBicicletaEstado(nomUsuario,estadoBusqueda);
         
         try ( PrintWriter out = response.getWriter()) {
