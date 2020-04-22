@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="col-6">
                                             <!--Informacion del viaje-->
-                                            <h6 class=""><b>VLL - Ciguñuela</b></h6>
+                                            <h6 class=""><b><%=inicio%> - <%=fin%></b></h6>
                                             <p>
                                                 Desde el <%=diaInicio%> de <%=mesInicio%> de <%=anoInicio%> a las <%=horaInicio%> <br>
                                             </p>
