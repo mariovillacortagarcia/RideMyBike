@@ -98,8 +98,9 @@ public class Alquiler implements Serializable {
      * @throws IllegalArgumentExeption si {@code getHoraFinal() == null}
      */
     public void setArchivado(boolean archivado) {
-        if(getHoraFinal() == null)
+        if (getHoraFinal() == null) {
             throw new IllegalArgumentException("No se puede archivar un viaje no finalizado");
+        }
         this.archivado = archivado;
     }
 
