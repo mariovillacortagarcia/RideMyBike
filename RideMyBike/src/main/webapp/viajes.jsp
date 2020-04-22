@@ -58,6 +58,8 @@
                                     String precio = Double.toString(alquiler.getPrecio());
                                     String inicio = alquiler.getInicio();
                                     String fin = alquiler.getFin();
+                                    if(inicio == null || fin == null)
+                                        continue;
                                     LocalDateTime fechaInicio = alquiler.getHoraInicial();
                                     LocalDateTime fechaFin = alquiler.getHoraFinal();
                                     String diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
