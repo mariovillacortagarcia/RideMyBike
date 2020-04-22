@@ -83,7 +83,8 @@ public class ValoracionUsuarioDB{
               ps = connection.prepareStatement(query);
               ps.setString(1, nombreUsuario);
               rs = ps.executeQuery();
-              int valoracionMedia = Integer.parseInt(rs.getString("media"));
+              rs.next();
+              int valoracionMedia = rs.getInt("media");
               
               rs.close();
               ps.close();

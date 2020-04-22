@@ -8,7 +8,7 @@
         removeAbandonedTimeout="60" removeAbandoned="true" logAbandoned="true"
         minEvictableIdleTimeMillis="30000" jmxEnabled="true"       
         jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer" 
-        username="bdadmin" password="admin" driverClassName="org.apache.derby.jdbc.ClientDriver" 
+        username="dbadmin" password="admin" driverClassName="org.apache.derby.jdbc.ClientDriver" 
         url="jdbc:derby://localhost:1527/RideMyBike"/>
     
 </Context>

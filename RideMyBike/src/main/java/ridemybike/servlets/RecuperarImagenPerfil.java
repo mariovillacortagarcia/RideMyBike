@@ -15,9 +15,10 @@ import ridemybike.dominio.db.UsuarioDB;
  */
 @WebServlet(name = "RecuperarImagenPerfil", urlPatterns = {"/RecuperarImagenPerfil"})
 public class RecuperarImagenPerfil extends HttpServlet {
-    public void processRequest(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {response.setContentType("image/jpg");
+    public void processRequest(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {
+        response.setContentType("image/jpg");
         OutputStream respuesta = response.getOutputStream();
-        String nombreUsuario = request.getParameter("nombreUsuario");
+        String nombreUsuario = request.getParameter("usuario");
         UsuarioDB.getImagen(nombreUsuario, respuesta);
         respuesta.close();
         response.flushBuffer();

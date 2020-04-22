@@ -40,22 +40,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.jsp">Home ?</a>
+            <a class="nav-link" href="index.jsp">Home 🏠</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="mis_bicis.jsp">Mis Bicis ??</a>
+            <a class="nav-link" href="mis_bicis.jsp">Mis Bicis 🚴</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="viajes.jsp">Viajes ??</a>
+            <a class="nav-link" href="viajes.jsp">Viajes 🚵</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="garantias.jsp">Garantías ??</a>
+            <a class="nav-link" href="garantias.jsp">Garantías 🛡</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="sobre_nosotros.jsp">Sobre nosotros ?</a>
+            <a class="nav-link" href="sobre_nosotros.jsp">Sobre nosotros 💬</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ayuda.jsp">Ayuda ?</a>
+            <a class="nav-link" href="ayuda.jsp">Ayuda ❓</a>
           </li>
           <li class="nav-item">
           </li>
@@ -84,7 +84,7 @@
                 <div class="col-12 col-sm-auto mb-3">
                   <div class="mx-auto" style="width: 160px;">
                     <div class="d-flex justify-content-center align-items-center rounded" style="height: 160px; background-color: rgb(233, 236, 239);">
-                      <img src="RecuperarImagenPerfil?nombreUsuario=<%= user.getNickName() %>" id="fotoPerfil" class="img-thumbnail" alt="..." style="width:  160px;height:  160px">
+                      <img src="RecuperarImagenPerfil?usuario= <%= user.getNickName() %> " id="fotoPerfil" class="img-thumbnail" alt="..." style="width:  160px;height:  160px">
                     </div>
                   </div>
                 </div>
@@ -109,7 +109,7 @@
                         %>
                     </div>
                     <div class="mt-4 pt-1">
-                        <form id="form-foto" method="post" action="GuardarImagenPerfil?usuario=<%= user.getNickName() %>">
+                        <form id="form-foto" name="form-foto" method="post" action="GuardarImagenPerfil?usuario=<%= user.getNickName() %>" enctype='multipart/form-data'>
                             <input type="file" accept=".png, .jpeg, .jpg" name="fotoElegida" id="fotoElegida" class="inputfile"/>
                         <label for="fotoElegida">
                             <i class="fa fa-fw fa-camera"></i>
@@ -125,7 +125,7 @@
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
-                  <form class="form" novalidate="" id="form-datos-usuario" action="ActualizarPerfil" method="post">
+                  <form class="form" novalidate="" id="form-datos-usuario" name="form-datos-usuario" action="ActualizarPerfil" method="post">
                     <div class="row">
                       <div class="col">
                         <div class="row">
@@ -203,7 +203,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Contraseña actual</label>
-                              <input class="form-control" type="password" name="passwordActual" placeholder="??????">
+                              <input class="form-control" type="password" name="passwordActual" placeholder="••••••">
                             </div>
                           </div>
                         </div>
@@ -211,7 +211,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Nueva contraseña</label>
-                              <input class="form-control" type="password" name="passwordNueva" placeholder="??????">
+                              <input class="form-control" type="password" name="passwordNueva" placeholder="••••••">
                             </div>
                           </div>
                         </div>
@@ -219,18 +219,17 @@
                           <div class="col">
                             <div class="form-group">
                               <label><span class="d-none d-xl-inline">Confirmar contraseña</span></label>
-                              <input class="form-control" type="password" name="passwordNuevaConfirmacion" placeholder="??????"></div>
+                              <input class="form-control" type="password" name="passwordNuevaConfirmacion" placeholder="••••••"></div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </form>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
                         <button class="btn btn-primary" onclick="guardarCambiosPerfil()">Guardar cambios</button>
                       </div>
                     </div>
-                  </form>
-
                 </div>
               </div>
             </div>

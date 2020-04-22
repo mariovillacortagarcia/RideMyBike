@@ -27,8 +27,7 @@ public class UsuarioDB {
         PreparedStatement ps;
         String query;
         query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword, fotoPerfil, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        
+
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, usuario.getNickName());
@@ -148,7 +147,7 @@ public class UsuarioDB {
         Connection connection= pool.getConnection();
         PreparedStatement ps= null;
         String query;
-        query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ? direccion = ? WHERE nombreUsuario = ?";
+        query = "UPDATE Usuario SET nombre = ?, apellidos = ?, email = ?, telefono = ?, numeroTarjeta = ?, hashPassword = ?, direccion = ? WHERE nombreUsuario = ?";
 
         try {
             ps = connection.prepareStatement(query);
