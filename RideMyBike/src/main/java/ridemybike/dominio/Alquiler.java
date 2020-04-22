@@ -1,7 +1,7 @@
 package ridemybike.dominio;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Representa un alquiler de una bicicleta realizado en el sistema.
@@ -10,11 +10,13 @@ import java.util.Date;
 public class Alquiler implements Serializable{
 
     private double precio;
-    private Date horaInicial;
-    private Date horaFinal;
+    private LocalDateTime horaInicial;
+    private LocalDateTime horaFinal;
     private String codigoAlquiler;
     private String peticion;
     private boolean archivado;
+    private String inicio;
+    private String fin;
     /**
      * Inicializador de un alquiler vacio.
      */
@@ -25,7 +27,22 @@ public class Alquiler implements Serializable{
         codigoAlquiler = null;
         peticion = null;
         archivado = false;
+        inicio = null;
+        fin = null;
         
+    }
+    public void setInicio(String inicio){
+        this.inicio = inicio;
+    }
+    public String getInicio(){
+        return inicio;
+    }
+    
+    public void setFin(String fin){
+        this.fin = fin;
+    }
+    public String getFin(){
+        return fin;
     }
     /**
      * Obtiene el estado de archivo del alquiler.
@@ -72,7 +89,7 @@ public class Alquiler implements Serializable{
      * @param horaInicial: hora a la que se inicia el prestamo, distinta de null
      * @throws IllegalArgumentException si {@code horaInicial == null}
      */
-    public void setHoraInicial(Date horaInicial) {
+    public void setHoraInicial(LocalDateTime horaInicial) {
         if (horaInicial == null) {
             throw new IllegalArgumentException("La hora inicial no puede estar vacia");
         }
@@ -85,7 +102,7 @@ public class Alquiler implements Serializable{
      * @return Hora de inicio del prestamo o null si
      * {@code viajeIniciado() == false}
      */
-    public Date getHoraInicial() {
+    public LocalDateTime getHoraInicial() {
         return horaInicial;
     }
 
@@ -94,7 +111,7 @@ public class Alquiler implements Serializable{
      *
      * @param horaFinal: hora a la que se finaliza el prestamo.
      */
-    public void setHoraFinal(Date horaFinal) {
+    public void setHoraFinal(LocalDateTime horaFinal) {
         this.horaFinal = horaFinal;
     }
 
@@ -104,7 +121,7 @@ public class Alquiler implements Serializable{
      * @return Hora de finalizacion del prestamo o null si
      * {@code viajeFinalizado() == false}
      */
-    public Date getHoraFinal() {
+    public LocalDateTime getHoraFinal() {
         return horaFinal;
     }
     /**
