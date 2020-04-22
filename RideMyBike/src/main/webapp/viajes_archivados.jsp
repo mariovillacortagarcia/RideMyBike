@@ -94,13 +94,13 @@
                                         </div>
                                         <div class="col-3">
                                             <!--Precio y valoracion-->
-                                            <div class="container pb-2">
+                                            <!--<div class="container pb-2">
                                                 <span class="fa fa-star checked"></span>
                                                 <span class="fa fa-star checked"></span>
                                                 <span class="fa fa-star checked"></span>
                                                 <span class="fa fa-star checked"></span>
                                                 <span class="fa fa-star checked "></span>
-                                            </div>
+                                            </div>-->
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Opciones
