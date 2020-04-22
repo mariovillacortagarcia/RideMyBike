@@ -54,6 +54,7 @@
                         <ul class="list-group overflow-auto">
                             <%
                                 Alquiler alquileres[] = (Alquiler[]) request.getAttribute("alquileres");
+                                if(alquileres != null){
                                 for (Alquiler alquiler : alquileres) {
                                     String precio = Double.toString(alquiler.getPrecio());
                                     String inicio = alquiler.getInicio();
@@ -112,90 +113,15 @@
                                     </div>
                                 </div>
                             </li>
-                            <% }
-                            %>
+                            <% }}else{%>
                             <li class="list-group-item">
-                                <!--Viaje 2-->
-                                <div class="alert alert-secondary " role="alert">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <!--Mapa con ruta realizada-->
-                                            <img class="img-thumbnail" src="img/test/viaje2.png">
-                                        </div>
-                                        <div class="col-6">
-                                            <!--Informacion del viaje-->
-                                            <h6 class=""><b>Plaza de San Miguel, Valladolid - La Flecha, Arroyo de la Encomienda</b></h6>
-                                            <p>
-                                                <b class="text-danger">Cancelado</b> el 20 de marzo de 2020 a las 15:02 <br>
-                                            </p>
-                                            <p>
-                                                <b>0,00 €</b>
-                                            </p>
-                                        </div>
-                                        <div class="col-3">
-                                            <!--Precio y valoracion-->
-                                            <div class="container pb-2">
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            </div>
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Opciones
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Archivar viaje</a>
-                                                    <a class="dropdown-item" href="#">Eliminar viaje</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <!--Viaje 1-->
+                                <div class="alert alert-light" role="alert">
+                                    No hay ningún viaje realizado
                                 </div>
                             </li>
-
-                            <li class="list-group-item">
-                                <!--Viaje 3-->
-                                <div class="alert alert-secondary bg-white" role="alert">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <!--Mapa con ruta realizada-->
-                                            <img class="img-thumbnail" src="img/test/viaje3.png">
-                                        </div>
-                                        <div class="col-6">
-                                            <!--Informacion del viaje-->
-                                            <h6 class=""><b>ZaratÃ¡n - Parquesol</b></h6>
-                                            <p>
-                                                Desde el 21 de marzo de 2020 a las 20:00 <br>
-                                                Hasta el 21 de marzo de 2020 a las 20:30
-                                            </p>
-                                            <p>
-                                                <b>3,12 €</b>
-                                            </p>
-                                        </div>
-                                        <div class="col-3">
-                                            <!--Precio y valoracion-->
-                                            <div class="container pb-2">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                            </div>
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Opciones
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Archivar viaje</a>
-                                                    <a class="dropdown-item" href="#">Eliminar viaje</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            <% } %>
+                            
 
                         </ul>
                     </div>
