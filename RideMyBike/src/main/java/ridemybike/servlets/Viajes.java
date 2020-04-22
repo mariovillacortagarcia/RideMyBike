@@ -41,6 +41,13 @@ public class Viajes extends HttpServlet {
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
         
+        url = "/viajes_en_proceso.jsp";
+        dispatcher = getServletContext().getRequestDispatcher(url);
+        dispatcher.forward(request, response);
+        
+        url = "/viajes_archivados.jsp";
+        dispatcher = getServletContext().getRequestDispatcher(url);
+        dispatcher.forward(request, response);
         
     }
 
