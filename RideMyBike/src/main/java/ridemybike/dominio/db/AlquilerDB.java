@@ -6,6 +6,7 @@
 package ridemybike.dominio.db;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import ridemybike.dominio.Alquiler;
 
@@ -75,8 +76,8 @@ public class AlquilerDB {
             if (rs.next()) {
                 alquiler = new Alquiler();
                 alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
-                alquiler.setHoraInicial(Time.valueOf(rs.getString("horaInicial")));
-                alquiler.setHoraFinal(Time.valueOf(rs.getString("horaFinal")));
+                alquiler.setHoraInicial(LocalDateTime.parse(rs.getString("horaInicial")));
+                alquiler.setHoraFinal(LocalDateTime.parse(rs.getString("horaFinal")));
                 alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
                 alquiler.setPeticion(rs.getString("peticion"));
                 String archivado = rs.getString("archivado");
@@ -116,8 +117,8 @@ public class AlquilerDB {
             while (rs.next()) {
                 alquiler = new Alquiler();
                 alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
-                alquiler.setHoraInicial(Time.valueOf(rs.getString("horaInicial")));
-                alquiler.setHoraFinal(Time.valueOf(rs.getString("horaFinal")));
+                alquiler.setHoraInicial(LocalDateTime.parse(rs.getString("horaInicial")));
+                alquiler.setHoraFinal(LocalDateTime.parse(rs.getString("horaFinal")));
                 alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
                 alquiler.setPeticion(rs.getString("peticion"));
                 String archivado = rs.getString("archivado");
