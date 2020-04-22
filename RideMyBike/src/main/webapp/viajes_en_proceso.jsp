@@ -98,7 +98,7 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="registrar_incidencia.html">Registrar incidencia</a>
-                                                    <a class="dropdown-item" href="#">Finalizar viaje</a>
+                                                    <a action="FinalizarViaje" class="dropdown-item" href="#">Finalizar viaje</a>
                                                 </div>
                                             </div>
                                         </div>
