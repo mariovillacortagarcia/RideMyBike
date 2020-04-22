@@ -95,8 +95,11 @@ public class Alquiler implements Serializable {
      * Establece el estado de archivo del alquiler.
      *
      * @param archivado : true si esta archivado, false si no.
+     * @throws IllegalArgumentExeption si {@code getHoraFinal() == null}
      */
     public void setArchivado(boolean archivado) {
+        if(getHoraFinal() == null)
+            throw new IllegalArgumentException("No se puede archivar un viaje no finalizado");
         this.archivado = archivado;
     }
 
