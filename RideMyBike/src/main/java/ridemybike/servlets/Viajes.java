@@ -34,7 +34,7 @@ public class Viajes extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Alquiler alquileres[] = (Alquiler [])AlquilerDB.selectAllAlquiler().toArray();
+        Alquiler alquileres[] = (Alquiler [])AlquilerDB.selectAllAlquiler().toArray();        
         request.setAttribute("alquileres", alquileres);
         
         String url = "/viajes.jsp";
