@@ -7,6 +7,7 @@ import javax.servlet.http.Part;
 public class Bicicleta implements Serializable{
   private String codigoBici;
   private String descripcion;
+  private String modelo;
   private double tamCuadro;
   private Part imagen;
   private String marca;
@@ -23,6 +24,7 @@ public class Bicicleta implements Serializable{
   public Bicicleta(){
       codigoBici = "";
       descripcion = "";
+      modelo = "";
       tamCuadro = 0;
       imagen = null;
       marca = "";
@@ -52,6 +54,16 @@ public class Bicicleta implements Serializable{
       throw new IllegalArgumentException("La descripcion de la bicicleta no puede ser vacia o nula");
     }
     this.descripcion = descripcion;
+  }
+  /**
+  * Metodo para dar un valor al modelo de la bicicleta
+  * @param modelo es una cadena de texto que contiene el valor que se le da como modelo a la bicicleta
+  */
+  public void setModelo(String modelo){
+    if(modelo == null || modelo.equals("")){
+      throw new IllegalArgumentException("El modelo de la bicicleta no puede ser vacia o nula");
+    }
+    this.modelo = modelo;
   }
   /**
   * Metodo para dar un valor al tamano de cudro de la bicicleta
@@ -153,6 +165,13 @@ public class Bicicleta implements Serializable{
   */
   public String getDescripcion(){
     return descripcion;
+  }
+  /**
+   * Funcion que devuelve el modelo de la bicicleta
+   * @return La cadena que representa la informacion sobre el modelo de la bicicleta
+   */
+  public String getModelo(){
+      return modelo;
   }
   /**
   * Funcion que devuelve la imagen almacenada de la bicicleta

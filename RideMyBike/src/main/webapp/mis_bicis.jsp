@@ -1,3 +1,11 @@
+<%-- 
+    Document   : mis_bicis
+    Created on : 22 abr. 2020, 18:12:10
+    Author     : Alberto
+--%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
 
@@ -13,6 +21,12 @@
 </head>
 
 <body>
+    <jsp:include page="header.jsp" >
+        <jsp:param name="paginaMostrada" value="MisBicis" />
+        <jsp:param name="sesionIniciada" value="true" />
+    </jsp:include>    
+    
+    
   <div class="container-fluid" style="background-color:#85c1e9">
     <!---Cabecera -->
     <div class="row p-3 align-items-center">
@@ -62,6 +76,15 @@
   </div>
 
   <!-- TBicicletas que el usuario tiene en la aplicación registradas o en proceso -->
+  <%@page import="ridemybike.dominio.*"%>
+    <%@page import="ridemybike.dominio.db.*"%>
+
+    
+  <%
+      String nombreUsuarioEj = "juan.pperez";
+      ArrayList<Bicicleta> listaBicicletas = new ArrayList<Bicicleta>();
+      listaBicicletas = BicicletaDB.getBicicletasRegistradas(nombreUsuarioEj);
+  %>
   <div class="container pt-4 ">
       <div class="row">
         <div class="col-6">
@@ -83,26 +106,61 @@
         <div class="col-12">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                
+                <% 
+                    String botonSelector = request.getParameter("selector1");
+                    switch(botonSelector){
+                        case("Bicicletas actuales"):
+                            break;
+                        case("Bicicletas Activas"):
+                            EstadoBicicleta e1 = EstadoBicicleta.Activado;
+                            listaBicicletas = BicicletaDB.seleccionaBicicletas(listaBicicletas, e1);
+                            break;
+                        case("Bicicletas Desactivadas"):
+                            EstadoBicicleta e2 = EstadoBicicleta.Desactivado;
+                            listaBicicletas = BicicletaDB.seleccionaBicicletas(listaBicicletas, e2);
+                            break;
+                    } 
+                for (int i = 0; i < listaBicicletas.size(); i++){ 
+                %>
+                <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" class="active"></li>
+                <%
+                 }
+                %>
+            </ol>
+ <!---             
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-            </ol>
+ ----->
+            <% if(listaBicicletas.size() > 0){  %>  
             <div class="carousel-inner" style="height: 450px">
+                <%for(int i = 0; i < listaBicicletas.size(); i++){ 
+                    if(i == 0){ %>
               <div class="carousel-item active">
+                <% }else{ %>
+              <div class="carousel-item">
+                 <%}%>
                 <div class="row">
                   <div class="col-1"></div>
                   <div class="col-5">
-                    <img src="img/bicicleta1.jpg" class="img-thumbnail" alt="..." style="width:  350px;">
+                      <img src="BicicletasEstados?codigoBici=<%=listaBicicletas.get(i).getcodigoBici() %>" class="img-thumbnail" alt="..." style="width:  350px;">
                   </div>
                     <div class="col-5">
                       <div class="row">
-                        <div class="col-12"><b>Estado:</b> <a class="text-danger">Desactivada</a></div>
-                        <div class="col-12"><b>Marca:</b> CANNONDALE</div>
-                        <div class="col-12"><b>Modelo:</b> CAAD Optimo</div>
-                        <div class="col-12"><b>Tamaño de Cuadro:</b> 51 cm</div>
-                        <div class="col-12"><b>Tipo de Freno:</b> Zapatas</div>
-                        <div class="col-12"><b>Descripción:</b> Esta es una bicicleta de carretera perfecta para rutas de caminos largos, además incluye unas ruedas de 28 pulgadas y esta en perfecto estado, comprada en 2016 tiene 4 años, las camaras de las ruedas están recien cambiadas.</div>
+                          <div class="col-12"><b>Estado:</b> 
+                              <% if( listaBicicletas.get(i).getEstado() ==  EstadoBicicleta.Desactivado ){%>
+                              <a class="text-danger">Desactivada</a></div> 
+                              <%}else if( listaBicicletas.get(i).getEstado() ==  EstadoBicicleta.Activado ){%>
+                              <a class="text-success">Activada</a></div> 
+                              <% }else{ %>
+                              <a class="text-warning">Pendiente</a></div> 
+                               <% }%>
+                        <div class="col-12"><b>Marca:</b><%=listaBicicletas.get(i).getMarca() %></div>
+                        <div class="col-12"><b>Modelo:</b><%=listaBicicletas.get(i).getModelo()%></div>
+                        <div class="col-12"><b>Tamaño de Cuadro:</b><%=listaBicicletas.get(i).getTamCuadro()%>cm</div>
+                        <div class="col-12"><b>Tipo de Freno:</b><%=listaBicicletas.get(i).getFreno().toString()%></div>
+                        <div class="col-12"><b>Descripción:</b> <%=listaBicicletas.get(i).getDescripcion()%></div>
                         <div class="col-12 text-center pt-4">
                           <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -120,6 +178,11 @@
                     </div>
                 </div>
               </div>
+              <% } 
+               }%>          
+                        
+                        
+<!---                       
               <div class="carousel-item">
                 <div class="row">
                   <div class="col-1"></div>
@@ -210,6 +273,7 @@
                   </div>
               </div>
           </div>
+---->
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
@@ -218,7 +282,9 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
+               
           </div>
+           
         </div>
       </div>
   </div>

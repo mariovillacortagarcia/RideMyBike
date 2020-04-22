@@ -6,8 +6,10 @@
 package ridemybike.servlets;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +25,7 @@ import static ridemybike.dominio.db.BicicletaDB.*;
  *
  * @author Alberto
  */
-@WebServlet(name = "MisBicisServlet", urlPatterns = {"/MisBicisServlet"})
+@WebServlet(name = "BicicletasEstados", urlPatterns = {"/BicicletasEstados"})
 public class BicicletasEstados extends HttpServlet {
 
     /**
@@ -38,34 +40,18 @@ public class BicicletasEstados extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String botonSelector = request.getParameter("selector1");
-        ArrayList<Bicicleta> v1 = new ArrayList<Bicicleta>();
-        String nomUsuario = request.getParameter("nombreUsuario");
-        switch(botonSelector){
-            case("Bicicletas actuales"):
-                v1 = getBicicletasRegistradas(nomUsuario);
-                break;
-            case("Bicicletas Activas"):
-                EstadoBicicleta e1 = EstadoBicicleta.Activado;
-                v1 = getBicicletasEstado(nomUsuario, e1);
-                break;
-            case("Bicicletas Desactivadas"):
-                EstadoBicicleta e2 = EstadoBicicleta.Desactivado;
-                v1 = getBicicletasEstado(nomUsuario, e2);
-                break;
-        }
+        String url = "/mis_bicis.jsp";
+        RequestDispatcher dispacher = getServletContext().getRequestDispatcher(url);
+        dispacher.forward(request, response);
         
-        
-        
-        Bicicleta b1 = new Bicicleta();
-        b1.setEstado(estadoBusqueda);
-        
-        v1 = BicicletaDB.getBicicletaEstado(nomUsuario,estadoBusqueda);
-        
-        try ( PrintWriter out = response.getWriter()) {
-
-        }
+        response.setContentType("image/jpg");
+        OutputStream respuesta = response.getOutputStream();
+        String codigoBicicleta = request.getParameter("codigoBici");
+        BicicletaDB.getImagen(codigoBicicleta, respuesta);
+        respuesta.close();
+        response.flushBuffer();
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
