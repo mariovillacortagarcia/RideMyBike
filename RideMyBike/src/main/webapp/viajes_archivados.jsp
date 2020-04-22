@@ -106,8 +106,8 @@
                                                     Opciones
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Desarchivar viaje</a>
-                                                    <a class="dropdown-item" href="#">Eliminar viaje</a>
+                                                    <a action"ArchivarViaje" class="dropdown-item" href="#">Desarchivar viaje</a>
+                                                    <a action="EliminarViaje" class="dropdown-item" href="#">Eliminar viaje</a>
                                                 </div>
                                             </div>
                                         </div>
