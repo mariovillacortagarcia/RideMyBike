@@ -13,6 +13,12 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
               crossorigin=""/>
+        <style>
+            #mapaglobal{
+                width:40rem; 
+                height:25rem;
+            }
+        </style>
     </head>
 
     <body>
@@ -71,12 +77,12 @@
                 <div class="carousel-item active">
                     <!-- Parte 1/2 del formulario-->
 
-                    <div class="container p-4">
+                    <div id="principal" class="container p-4">
                         <div class="row">
                             <div class="col-lg-8 col-sm-12">
                                 <!-- Mapa-->
                                 <h5><b>1. Elige una bici libre </b>🚴</h5>
-                                <div id="mapaglobal" width="700rem" height="500rem" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black">
+                                <div id="mapaglobal" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black">
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
