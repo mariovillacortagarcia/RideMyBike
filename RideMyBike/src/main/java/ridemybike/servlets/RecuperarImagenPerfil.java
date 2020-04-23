@@ -23,4 +23,17 @@ public class RecuperarImagenPerfil extends HttpServlet {
         respuesta.close();
         response.flushBuffer();
     }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+    
 }

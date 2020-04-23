@@ -19,7 +19,7 @@
   <!-- Cabecera -->
   <jsp:include page="header.jsp" >
     <jsp:param name="paginaMostrada" value="SobreNosotros" />
-    <jsp:param name="sesionIniciada" value="false" />
+    <jsp:param name="sesionIniciada" value="true" />
   </jsp:include>
     
   <!-- Contenido -->

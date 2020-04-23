@@ -46,7 +46,7 @@
             <a class="nav-link" href="mis_bicis.jsp">Mis Bicis 🚴</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="viajes.jsp">Viajes 🚵</a>
+            <a class="nav-link" href="Viajes">Viajes 🚵</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="garantias.jsp">Garantías 🛡</a>
@@ -69,32 +69,34 @@
   <%@page import="ridemybike.dominio.db.ValoracionUsuarioDB"%>
   <%@page import="ridemybike.dominio.Usuario"%>
   <% 
-    Usuario user = UsuarioDB.selectUser("juan.pperez");
+    Usuario user = (Usuario) request.getAttribute("user");
   %>
 <div class="container mt-5">
 <div class="row flex-lg-nowrap">
-
   <div class="col">
     <div class="row">
       <div class="col mb-3">
+       <form class="form" novalidate="" id="form-datos-usuario" name="form-datos-usuario" action="ActualizarPerfil" method="post" enctype="multipart/form-data">
         <div class="card">
           <div class="card-body">
             <div class="e-profile">
               <div class="row mb-4">
+                  
                 <div class="col-12 col-sm-auto mb-3">
                   <div class="mx-auto" style="width: 160px;">
                     <div class="d-flex justify-content-center align-items-center rounded" style="height: 160px; background-color: rgb(233, 236, 239);">
-                      <img src="RecuperarImagenPerfil?usuario= <%= user.getNickName() %> " id="fotoPerfil" class="img-thumbnail" alt="..." style="width:  160px;height:  160px">
+                      <img src="RecuperarImagenPerfil?usuario=<%= user.getNickName() %>" id="fotoPerfil" class="img-thumbnail" alt="..." style="width:  160px;height:  160px">
                     </div>
                   </div>
                 </div>
+                    
                 <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                   <div class="text-center text-sm-left mb-2 mb-sm-0">
                     <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= user.getNombre()+" "+user.getApellidos() %></h4>
                     <p class="mb-0">@<%= user.getNickName() %> </p>
                     <div class="pt-1">
                         <% 
-                            int valoracionMedia = ValoracionUsuarioDB.selectValoracionMedia(user.getNickName());
+                            int valoracionMedia = (int) request.getAttribute("valoracionMedia");
                             int numEstrellasNegro = 5-valoracionMedia;
                             for(int i = 0; i < valoracionMedia; i++){
                         %>
@@ -109,23 +111,21 @@
                         %>
                     </div>
                     <div class="mt-4 pt-1">
-                        <form id="form-foto" name="form-foto" method="post" action="GuardarImagenPerfil?usuario=<%= user.getNickName() %>" enctype='multipart/form-data'>
                             <input type="file" accept=".png, .jpeg, .jpg" name="fotoElegida" id="fotoElegida" class="inputfile"/>
-                        <label for="fotoElegida">
-                            <i class="fa fa-fw fa-camera"></i>
-                            <span>Cambiar foto</span>
-                        </label>
-                        </form>
+                            <label for="fotoElegida">
+                                <i class="fa fa-fw fa-camera"></i>
+                                <span>Cambiar foto</span>
+                            </label>
                     </div>
                   </div>
                 </div>
               </div>
+                    
               <ul class="nav nav-tabs">
                   <li class="nav-item"><a href="" class="active nav-link"><b>Información de usuario</b></a></li>
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
-                  <form class="form" novalidate="" id="form-datos-usuario" name="form-datos-usuario" action="ActualizarPerfil" method="post">
                     <div class="row">
                       <div class="col">
                         <div class="row">
@@ -224,10 +224,10 @@
                         </div>
                       </div>
                     </div>
-                  </form>
+                 
                     <div class="row">
                       <div class="col d-flex justify-content-end">
-                        <button class="btn btn-primary" onclick="guardarCambiosPerfil()">Guardar cambios</button>
+                        <button class="btn btn-primary" type="submit">Guardar cambios</button>
                       </div>
                     </div>
                 </div>
@@ -235,6 +235,7 @@
             </div>
           </div>
         </div>
+       </form>
       </div>
 
       <div class="col-12 col-md-3 mb-3">

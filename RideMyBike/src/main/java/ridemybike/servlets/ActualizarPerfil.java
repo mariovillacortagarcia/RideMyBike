@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
 
@@ -47,7 +48,14 @@ public class ActualizarPerfil extends HttpServlet {
         
         UsuarioDB.actualizarUsuario(user);
         
-        String url = "/perfil.jsp";
+        Part foto = request.getPart("fotoElegida");
+        if(foto.getSize() != 0){
+            user.setFotoPerfil(foto);
+        
+            UsuarioDB.setImagen(user);
+        }
+        
+        String url = "/RecuperarPerfil";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
