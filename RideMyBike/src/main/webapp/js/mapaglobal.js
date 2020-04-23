@@ -8,6 +8,6 @@ const VALLADOLID = [41.6520, -4.7286];
 const ZOOM = 13;
 
 var mapa =  L.map('mapaglobal').setView(VALLADOLID, ZOOM);
-L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+L.tileLayer(PROVEEDOR, {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(mapa);
