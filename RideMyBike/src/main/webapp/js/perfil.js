@@ -11,9 +11,4 @@ function fotoPerfilModificada() {
     reader.readAsDataURL(fotoElegida.files[0]);
 }
 
-function guardarCambiosPerfil() {
-    document.getElementById("form-foto").submit();
-    document.getElementById("form-datos-usuario").submit();
-}
-
 fotoElegida.change(fotoPerfilModificada);

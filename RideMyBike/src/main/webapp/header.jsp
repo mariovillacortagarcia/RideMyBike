@@ -29,7 +29,7 @@
         <div>
             <%
                 if(request.getParameter("sesionIniciada").equals("true")){ %>
-                    <button type="button" onclick="location.href='perfil.jsp'" class="btn btn-success">Mi perfil</button>
+                    <button type="button" onclick="location.href='RecuperarPerfil'" class="btn btn-success btn-lg">Mi perfil</button>
                 <% } else{ %>
                     <button type="button" onclick="location.href='registrarse.jsp'" class="btn btn-light">Registrarse</button>
                     <button type="button" onclick="location.href='iniciar_sesion.jsp'" class="btn btn-success">Iniciar sesión</button>
@@ -53,7 +53,7 @@
             <a class="nav-link" href="mis_bicis.jsp">Mis Bicis 🚴‍</a>
           </li>
           <li class="nav-item <% s = pagina.equals("Viajes") ? "active" : ""; %> <%= s %> ">
-            <a class="nav-link" href="viajes.jsp">Viajes 🚵‍</a>
+            <a class="nav-link" href="Viajes">Viajes 🚵‍</a>
           </li>
           <li class="nav-item <% s = pagina.equals("Garantias") ? "active" : ""; %> <%= s %>">
             <a class="nav-link " href="garantias.jsp">Garantías 🛡️</a>
