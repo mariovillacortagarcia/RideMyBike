@@ -6,6 +6,7 @@
 package ridemybike.dominio.db;
 
 import java.sql.*;
+import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.Peticion;
 import ridemybike.dominio.TipoAlquiler;
 
@@ -91,4 +92,22 @@ public class PeticionDB {
             return null;
         }
     }
+    
+    public static void eliminaUnaBicicleta(Bicicleta bici) throws SQLException{
+        if(bici == null){
+            throw new IllegalArgumentException("La bicicleta a eliminar es nula");
+        }
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        ResultSet rs = null;
+        String codigoBici = bici.getcodigoBici();
+        String query= "DELETE FROM Peticion“+“WHERE codigoBici= ‘”+codigoBici+ “’”;";
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(query);
+        rs.close();
+        ps.close();
+        pool.freeConnection(connection);
+    }
+    
 }

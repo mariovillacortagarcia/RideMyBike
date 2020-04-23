@@ -6,6 +6,8 @@
 
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="ridemybike.dominio.*"%>
+<%@page import="ridemybike.dominio.db.*"%>
 <!doctype html>
 <html lang="es">
 
@@ -76,14 +78,13 @@
   </div>
 
   <!-- TBicicletas que el usuario tiene en la aplicación registradas o en proceso -->
-  <%@page import="ridemybike.dominio.*"%>
-    <%@page import="ridemybike.dominio.db.*"%>
+
 
     
   <%
       String nombreUsuarioEj = "juan.pperez";
       ArrayList<Bicicleta> listaBicicletas = new ArrayList<Bicicleta>();
-      listaBicicletas = BicicletaDB.getBicicletasRegistradas(nombreUsuarioEj);
+      listaBicicletas = (ArrayList<Bicicleta>) request.getAttribute("lista");
   %>
   <div class="container pt-4 ">
       <div class="row">
@@ -109,19 +110,30 @@
                 
                 <% 
                     String botonSelector = request.getParameter("selector1");
+                    ArrayList<Bicicleta> listaSeleccionada = new ArrayList<Bicicleta>();
                     switch(botonSelector){
                         case("Bicicletas actuales"):
+                            listaSeleccionada = listaBicicletas;
                             break;
                         case("Bicicletas Activas"):
                             EstadoBicicleta e1 = EstadoBicicleta.Activado;
-                            listaBicicletas = BicicletaDB.seleccionaBicicletas(listaBicicletas, e1);
+                            for (int i = 0; i < listaBicicletas.size(); i++){
+                                if(listaBicicletas.get(i).getEstado().equals(e1)){
+                                    listaSeleccionada.add(listaBicicletas.get(i));
+                                }
+                            }
                             break;
                         case("Bicicletas Desactivadas"):
+                            EstadoBicicleta e3 = EstadoBicicleta.Pendiente;
                             EstadoBicicleta e2 = EstadoBicicleta.Desactivado;
-                            listaBicicletas = BicicletaDB.seleccionaBicicletas(listaBicicletas, e2);
+                            for (int i = 0; i < listaBicicletas.size(); i++){
+                                if(listaBicicletas.get(i).getEstado().equals(e2) || listaBicicletas.get(i).getEstado().equals(e3)){
+                                    listaSeleccionada.add(listaBicicletas.get(i));
+                                }
+                            }
                             break;
                     } 
-                for (int i = 0; i < listaBicicletas.size(); i++){ 
+                for (int i = 0; i < listaSeleccionada.size(); i++){ 
                 %>
                 <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" class="active"></li>
                 <%
@@ -133,45 +145,58 @@
               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
  ----->
-            <% if(listaBicicletas.size() > 0){  %>  
+            <% if(listaSeleccionada.size() > 0){  %>  
             <div class="carousel-inner" style="height: 450px">
-                <%for(int i = 0; i < listaBicicletas.size(); i++){ 
+                <%for(int i = 0; i < listaSeleccionada.size(); i++){ 
                     if(i == 0){ %>
               <div class="carousel-item active">
                 <% }else{ %>
-              <div class="carousel-item">
+              <div class="carousel-item" >
                  <%}%>
                 <div class="row">
                   <div class="col-1"></div>
                   <div class="col-5">
-                      <img src="BicicletasEstados?codigoBici=<%=listaBicicletas.get(i).getcodigoBici() %>" class="img-thumbnail" alt="..." style="width:  350px;">
+                      <img src="BicicletasEstados?codigoBici=<%=listaSeleccionada.get(i).getcodigoBici() %>" class="img-thumbnail" alt="..." style="width:  350px;">
                   </div>
                     <div class="col-5">
                       <div class="row">
                           <div class="col-12"><b>Estado:</b> 
-                              <% if( listaBicicletas.get(i).getEstado() ==  EstadoBicicleta.Desactivado ){%>
+                              <% if( listaSeleccionada.get(i).getEstado() ==  EstadoBicicleta.Desactivado ){%>
                               <a class="text-danger">Desactivada</a></div> 
-                              <%}else if( listaBicicletas.get(i).getEstado() ==  EstadoBicicleta.Activado ){%>
+                              <%}else if( listaSeleccionada.get(i).getEstado() ==  EstadoBicicleta.Activado ){%>
                               <a class="text-success">Activada</a></div> 
                               <% }else{ %>
                               <a class="text-warning">Pendiente</a></div> 
                                <% }%>
-                        <div class="col-12"><b>Marca:</b><%=listaBicicletas.get(i).getMarca() %></div>
-                        <div class="col-12"><b>Modelo:</b><%=listaBicicletas.get(i).getModelo()%></div>
-                        <div class="col-12"><b>Tamaño de Cuadro:</b><%=listaBicicletas.get(i).getTamCuadro()%>cm</div>
-                        <div class="col-12"><b>Tipo de Freno:</b><%=listaBicicletas.get(i).getFreno().toString()%></div>
-                        <div class="col-12"><b>Descripción:</b> <%=listaBicicletas.get(i).getDescripcion()%></div>
+                        <div class="col-12"><b>Marca:</b><%=listaSeleccionada.get(i).getMarca() %></div>
+                        <div class="col-12"><b>Modelo:</b><%=listaSeleccionada.get(i).getModelo()%></div>
+                        <div class="col-12"><b>Tamaño de Cuadro:</b><%=listaSeleccionada.get(i).getTamCuadro()%>cm</div>
+                        <div class="col-12"><b>Tipo de Freno:</b><%=listaSeleccionada.get(i).getFreno().toString()%></div>
+                        <div class="col-12"><b>Descripción:</b> <%=listaSeleccionada.get(i).getDescripcion()%></div>
                         <div class="col-12 text-center pt-4">
-                          <div class="dropdown">
+                          <div class="dropdown" name="selector2">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Opciones
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="#">Opiniones</a>
-                              <a class="dropdown-item" href="#">Activar/Desactivar Bicicleta</a>
+                              <a class="dropdown-item" href="ValoracionesBicicleta.html">Opiniones</a>
+                              <a class="dropdown-item" href="ActivacionBicicleta?bicicleta=<%=listaSeleccionada.get(i)%>">Activar/Desactivar Bicicleta</a>
                               <a class="dropdown-item" href="#">Historial de Alquileres</a>
-                              <a class="dropdown-item" href="#">Eliminar</a>
+                              <a class="dropdown-item" href="#EliminarBicicleta?bicicleta=<%=listaSeleccionada.get(i)%>">Eliminar</a>
                             </div>
+                            <% switch(request.getParameter("selector2")){
+                                case("Opciones"):
+                                    break;
+                                case("Activar/Desactivar Bicicleta"):
+                                    
+                                    break;
+                                case("Historial de Alquileres"):
+                                    break;
+                                case("Eliminar"):
+                                    break;
+                                 
+                            }
+                              %>
                           </div>
                         </div>
                       </div>

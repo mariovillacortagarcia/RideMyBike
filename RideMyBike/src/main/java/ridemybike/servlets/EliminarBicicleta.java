@@ -6,27 +6,27 @@
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Bicicleta;
-import ridemybike.dominio.db.UsuarioDB;
-import ridemybike.dominio.EstadoBicicleta;
+import ridemybike.dominio.ValoracionBicicleta;
 import ridemybike.dominio.db.BicicletaDB;
-import static ridemybike.dominio.db.BicicletaDB.*;
+import ridemybike.dominio.db.PeticionDB;
+import ridemybike.dominio.db.ValoracionBicicletaDB;
 
 /**
- * Servlet para obtener las imagenes de las bicicletas 
+ *
  * @author Alberto
  */
-@WebServlet(name = "BicicletasEstados", urlPatterns = {"/BicicletasEstados"})
-public class BicicletasEstados extends HttpServlet {
+@WebServlet(name = "EliminarBicicleta", urlPatterns = {"/EliminarBicicleta"})
+public class EliminarBicicleta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,23 +38,14 @@ public class BicicletasEstados extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        
-        response.setContentType("image/jpg");
-        OutputStream respuesta = response.getOutputStream();
-        String codigoBicicleta = request.getParameter("codigoBici");
-        BicicletaDB.getImagen(codigoBicicleta, respuesta);
-        respuesta.close();
-        response.flushBuffer();
-        
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "/mis_bicis.jsp";
-        RequestDispatcher dispacher = getServletContext().getRequestDispatcher(url);
-        dispacher.forward(request, response);
+        Bicicleta bici = (Bicicleta)request.getAttribute("bicicleta");
+        BicicletaDB.eliminaUnaBicicleta(bici.getcodigoBici());
+        PeticionDB.eliminaUnaBicicleta(bici);
+        ValoracionBicicletaDB.eliminaUnaBicicleta(bici);
+
     }
-    
-   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -68,7 +59,11 @@ public class BicicletasEstados extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EliminarBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -82,7 +77,11 @@ public class BicicletasEstados extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EliminarBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

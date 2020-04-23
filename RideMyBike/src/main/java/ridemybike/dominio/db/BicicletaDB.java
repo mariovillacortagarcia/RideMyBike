@@ -84,6 +84,22 @@ public class BicicletaDB{
           }
       }
   
+    public static void eliminaUnaBicicleta(String codigoBici) throws SQLException{
+        if(codigoBici == null){
+            throw new IllegalArgumentException("El codigo de la bicicleta es igual a null");
+        }
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        ResultSet rs = null;
+        String query= "DELETE FROM Bicicleta“+“WHERE codigoBici= ‘”+codigoBici+ “’”;";
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(query);
+        rs.close();
+        ps.close();
+        pool.freeConnection(connection);
+  }
+  
   /**
    * Funcion que devuelve las bicicletas de un usuario que tienen un estado determinado
    * @param nombreUsuario Es el identificador del usuario dueno de las bicis
@@ -177,13 +193,19 @@ public class BicicletaDB{
   } 
   
   
-  public static ArrayList<Bicicleta> seleccionaBicicletas(ArrayList<Bicicleta> lista, EstadoBicicleta estado){
-      for(int i = 0; i < lista.size(); i++){
-          if(lista.get(i).getEstado() != estado){
-              lista.remove(i);
-          }
-      }
-      return lista;
+    public static ArrayList<Bicicleta> seleccionaBicicletas(ArrayList<Bicicleta> lista, EstadoBicicleta estado){
+        for(int i = 0; i < lista.size(); i++){
+            if(lista.get(i).getEstado() != estado){
+                lista.remove(i);
+            }
+        }
+        return lista;
+    }
+  
+    public static void cambiaEstadoBicicleta(Bicicleta bici, EstadoBicicleta estadoNuevo) throws SQLException, IOException{
+        eliminaUnaBicicleta(bici.getcodigoBici());
+        bici.setEstado(estadoNuevo);
+        insertarBicicleta(bici);    
   }
   
 }

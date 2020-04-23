@@ -6,9 +6,10 @@
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,45 +17,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Bicicleta;
-import ridemybike.dominio.db.UsuarioDB;
 import ridemybike.dominio.EstadoBicicleta;
 import ridemybike.dominio.db.BicicletaDB;
-import static ridemybike.dominio.db.BicicletaDB.*;
 
 /**
- * Servlet para obtener las imagenes de las bicicletas 
+ *
  * @author Alberto
  */
-@WebServlet(name = "BicicletasEstados", urlPatterns = {"/BicicletasEstados"})
-public class BicicletasEstados extends HttpServlet {
+@WebServlet(name = "ActivacionBicicleta", urlPatterns = {"/ActivacionBicicleta"})
+public class ActivacionBicicleta extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+     * Metodo para cambiar el estado de la bicicleta. (Activado -> Desactivado)
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        
-        response.setContentType("image/jpg");
-        OutputStream respuesta = response.getOutputStream();
-        String codigoBicicleta = request.getParameter("codigoBici");
-        BicicletaDB.getImagen(codigoBicicleta, respuesta);
-        respuesta.close();
-        response.flushBuffer();
-        
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        Bicicleta bici = (Bicicleta)request.getAttribute("bicicleta");
+        EstadoBicicleta nuevoEstado = bici.getEstado();
+        if(bici.getEstado().equals(EstadoBicicleta.Activado)){
+            nuevoEstado = nuevoEstado.Desactivado;
+        }else{
+            nuevoEstado = nuevoEstado.Activado;
+        }
+        BicicletaDB.cambiaEstadoBicicleta(bici, nuevoEstado);       
         String url = "/mis_bicis.jsp";
         RequestDispatcher dispacher = getServletContext().getRequestDispatcher(url);
         dispacher.forward(request, response);
     }
-    
-   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -68,7 +62,11 @@ public class BicicletasEstados extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ActivacionBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -82,7 +80,11 @@ public class BicicletasEstados extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ActivacionBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
