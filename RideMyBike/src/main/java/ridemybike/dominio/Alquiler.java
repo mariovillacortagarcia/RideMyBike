@@ -13,7 +13,7 @@ public class Alquiler implements Serializable {
     private double precio;
     private LocalDateTime horaInicial;
     private LocalDateTime horaFinal;
-    private String codigoAlquiler;
+    private int codigoAlquiler;
     private String peticion;
     private boolean archivado;
     private String inicio;
@@ -26,7 +26,7 @@ public class Alquiler implements Serializable {
         precio = 0;
         horaInicial = null;
         horaFinal = null;
-        codigoAlquiler = null;
+        codigoAlquiler = 0;
         peticion = null;
         archivado = false;
         inicio = null;
@@ -193,11 +193,11 @@ public class Alquiler implements Serializable {
         return peticion;
     }
 
-    public void setCodigoAlquiler(String codigo) {
+    public void setCodigoAlquiler(int codigo) {
         codigoAlquiler = codigo;
     }
 
-    public String getCodigoAlquiler() {
+    public int getCodigoAlquiler() {
         return codigoAlquiler;
     }
 

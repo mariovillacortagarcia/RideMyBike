@@ -36,7 +36,7 @@ public class AlquilerDB {
             ps.setString(1, alquiler.getFin()+"");
             ps.setString(2, alquiler.getHoraInicial().toString());
             ps.setString(3, alquiler.getHoraFinal().toString());
-            ps.setString(4, alquiler.getCodigoAlquiler());
+            ps.setString(4, alquiler.getCodigoAlquiler()+"");
             ps.setString(5, alquiler.getPeticion()+"");
             boolean archivado = alquiler.getArchivado();
             if(archivado){
@@ -61,10 +61,8 @@ public class AlquilerDB {
      * el código especificado
      * @throws IllegalArgumentException si el código dado es negativo
      */
-    public static Alquiler selectAlquiler(String codigoAlquiler) {
-        if(codigoAlquiler == null){
-            throw new IllegalArgumentException("El codigo del alquiler es igual a null");
-        }
+    public static Alquiler selectAlquiler(int codigoAlquiler) {
+
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -72,7 +70,7 @@ public class AlquilerDB {
         String query = "SELECT * FROM Alquiler WHERE codigoAlquiler = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, codigoAlquiler);
+            ps.setString(1, codigoAlquiler+"");
             rs = ps.executeQuery();
             Alquiler alquiler = null;
             if (rs.next()) {
@@ -82,7 +80,7 @@ public class AlquilerDB {
                 alquiler.setFin(rs.getString("fin"));
                 alquiler.setHoraInicial(LocalDateTime.parse(rs.getString("horaInicial")));
                 alquiler.setHoraFinal(LocalDateTime.parse(rs.getString("horaFinal")));
-                alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
+                alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
                 alquiler.setPeticion(rs.getString("peticion"));
                 String archivado = rs.getString("archivado");
                 if(archivado.equals("1")){
@@ -125,7 +123,7 @@ public class AlquilerDB {
                 alquiler.setFin(rs.getString("fin"));
                 alquiler.setHoraInicial(LocalDateTime.parse(rs.getString("horaInicial")));
                 alquiler.setHoraFinal(LocalDateTime.parse(rs.getString("horaFinal")));
-                alquiler.setCodigoAlquiler(rs.getString("codigoAlquiler"));
+                alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
                 alquiler.setPeticion(rs.getString("peticion"));
                 String archivado = rs.getString("archivado");
                 if(archivado.equals("1")){

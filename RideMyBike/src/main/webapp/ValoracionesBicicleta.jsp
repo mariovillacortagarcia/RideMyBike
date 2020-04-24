@@ -78,6 +78,12 @@
     </nav>
   </div>
 <!----- --->
+<% 
+    String codigoBicicleta = request.getAttribute("codigoBicicleta").toString();
+    //se supone que codigoBicicleta es el parametro del anterior JSP y que usare para llamar al servlet extraeBicicleta para obtener la bicicleta
+    ArrayList<ValoracionBicicleta> listaOpiniones= new ArrayList<ValoracionBicicleta>();
+    listaOpiniones = (ArrayList<ValoracionBicicleta>) request.getAttribute("lista");
+%>
   <div class="container pt-4">
     <!-- Navegacion por los viajes -->
     <div class="card text-center">
@@ -85,24 +91,30 @@
       <div class="card-body">
         <!-- Lista de Opiniones -->
         <ul class="list-group overflow-auto">
+            <%
+               for(int i = 0; i < listaOpiniones.size(); i++){
+                    Alquiler alquiler = AlquilerDB.selectAlquiler(listaOpiniones.get(i).getCodigo());
+            %>
           <li class="list-group-item">
-            <!--Viaje 1-->
+            <!--Opinion 1-->
             <div class="alert alert-secondary bg-white" role="alert">
               <div class="row">
                 <div class="col-1"></div>
                 <div class="col-5">
-                  <!--Informacion del viaje-->
+                  <!--Informacion-->
                   <p align="left">
-                    Desde el 17 de marzo de 2020 a las 10:00 <br>
-                    Hasta el 17 de marzo de 2020 a las 10:23
+          
+                    Desde el <%=alquiler.getHoraInicial().getDayOfMonth() %> del <%=alquiler.getHoraInicial().getMonthValue() %> de <%=alquiler.getHoraInicial().getYear() %> a las <%=alquiler.getHoraInicial().getHour() %>:<%=alquiler.getHoraInicial().getMinute()%> <br>
+                    Hasta el <%=alquiler.getHoraFinal().getDayOfMonth() %> del <%=alquiler.getHoraFinal().getMonthValue() %> de <%=alquiler.getHoraFinal().getYear() %> a las <%=alquiler.getHoraFinal().getHour() %>:<%=alquiler.getHoraFinal().getMinute()%>
                   </p>
                   <p>
-                    <b>Descripcion:</b> Muy buena, la bici estaba en buen estado y se conducia bien ademas mientras la probaba una señora muy maja me regalo un cachorro.
+                      <b>Descripcion:</b><%=listaOpiniones.get(i).getDescripcion() %>
                   </p>
                 </div>
                 <div class="col-6" >
                   <!--Precio y valoracion-->
                   <div class="container pb-2"> <br> 
+                    <% // FALTAN LAS ESTRELLITAS DE LA PUNTUACION ASI QUE ESO FALTA%>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -113,7 +125,9 @@
               </div>
             </div>
           </li>
-
+            <%
+                } 
+             %>
                     <li class="list-group-item">
             <!--Viaje 1-->
             <div class="alert alert-secondary bg-white" role="alert">

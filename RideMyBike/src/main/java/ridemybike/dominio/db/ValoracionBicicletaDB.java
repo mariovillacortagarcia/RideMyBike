@@ -32,6 +32,7 @@ public class ValoracionBicicletaDB{
             return 0;
         }
     }
+    
     public static ValoracionBicicleta selectValoracionBicicleta(String codigoAlquiler) {
         if(codigoAlquiler == null){
             throw new IllegalArgumentException("El codigo de la valoracion es igual a null");
@@ -64,6 +65,8 @@ public class ValoracionBicicletaDB{
         }
     }
   
+    
+    
     public static ArrayList<ValoracionBicicleta> getValoraciones(String codigoBicicleta){
         if(codigoBicicleta == null || codigoBicicleta.equals("")){
             throw new IllegalArgumentException("El codigo de la bicicleta no puede ser no valida");
@@ -78,13 +81,14 @@ public class ValoracionBicicletaDB{
             ps = connection.prepareStatement(query);
             ps.setString(1, codigoBicicleta);
             rs = ps.executeQuery();
-            if  (rs.next()) {
-                ValoracionBicicleta valoracionBici = new ValoracionBicicleta();
-                valoracionBici.setCodigo(Integer.parseInt(rs.getString("codigoAlquiler")));
-                valoracionBici.setDescripcion(rs.getString("descripcion"));
-                valoracionBici.setPuntuacion(Integer.parseInt(rs.getString("puntuacion")));
-                valoracionBici.setCodigoBicicleta(rs.getString("codigoBicicleta"));
-                lista.add(valoracionBici);
+            ValoracionBicicleta valoracion = null;
+            while (rs.next()) {
+                valoracion = new ValoracionBicicleta();
+                valoracion.setCodigo(Integer.parseInt(rs.getString("codigoAlquiler")));
+                valoracion.setDescripcion(rs.getString("descripcion"));
+                valoracion.setPuntuacion(Integer.parseInt(rs.getString("puntuacion")));
+                valoracion.setCodigoBicicleta(rs.getString("codigoBicicleta"));
+                lista.add(valoracion);
             }
             rs.close();
             ps.close();
