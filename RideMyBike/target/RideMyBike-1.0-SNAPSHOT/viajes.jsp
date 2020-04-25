@@ -38,13 +38,13 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" href="viajes.html">Realizados</a>
+                                <a class="nav-link active" href="viajes.jsp">Realizados</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="viajes_en_proceso.html">En proceso</a>
+                                <a class="nav-link" href="viajes_en_proceso.jsp">En proceso</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="viajes_archivados.html">Archivados</a>
+                                <a class="nav-link" href="viajes_archivados.jsp">Archivados</a>
                             </li>
                         </ul>
                     </div>

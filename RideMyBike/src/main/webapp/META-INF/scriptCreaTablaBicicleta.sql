@@ -80,9 +80,11 @@ CREATE TABLE ValoracionBicicleta(
   descripcion varchar(1000),
   puntuacion int not null,
   codigoAlquiler int not null,
+  codigoBicicleta int not null,
   CHECK (puntuacion IN (0,1,2,3,4,5)),
   PRIMARY KEY (codigoAlquiler),
-  FOREIGN KEY (codigoAlquiler) REFERENCES Alquiler(codigoAlquiler)
+  FOREIGN KEY (codigoAlquiler) REFERENCES Alquiler(codigoAlquiler),
+  FOREIGN KEY (codigoBicicleta) REFERENCES Bicicleta(codigoBici)
 );
 
 CREATE TABLE Incidencia(
@@ -95,24 +97,53 @@ CREATE TABLE Incidencia(
   FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion)
 );
 
+-- Usuario
+INSERT INTO Usuario
+      VALUES ('juan.pperez', 'Juan Pedro', 'Perez Sanchez', '71245360y', 'juanpperez@gmail.com', 634772244, '1234567898765432', 'hashpassword', CAST (X'FFFF' AS BLOB) , 'Calle Molina nº 13');
 
 INSERT INTO Usuario
-      VALUES ('juan.pperez', 'Juan Pedro', 'Perez Sanchez', '71245360y', 'juanpperez@gmail.com', 634772244, '1234567898765432', 'hashpassword', CAST (X'FFFF' AS BLOB) , 'Calle Molina 13');
+      VALUES ('martaND9', 'Marta', 'Nadal Dalmau', '71941363h', 'martand89@gmail.com', 622114455, '98765432346789', 'hashpassword', CAST (X'FFFF' AS BLOB) , 'Calle Bierzo nº 7');
 
-INSERT INTO Usuario
-      VALUES ('martaND9', 'Marta', 'Nadal Dalmau', '71941363h', 'martand89@gmail.com', 622114455, '98765432346789', 'hashpassword', CAST (X'FFFF' AS BLOB) , 'Calle Bierzo 7');
-
+-- Bicicletas
 INSERT INTO Bicicleta
-      VALUES (default, 'Bicicleta perfecta para andar por ciudad, es una bici que cuenta con 24 marchas y además su peso es perfecto, solo 5 KG, permite unos desplazamientos rápidos y con poco coste energético.', 51, CAST (X'FFFF' AS BLOB) , 'FROG BIKES', 'Track 58', 'Zapatas', 12.3, 34.5, 'martaND9', 'Activada');
+      VALUES (default, 'Bicicleta perfecta para andar por ciudad, es una bici que cuenta con 24 marchas y además su peso es perfecto, solo 5 KG, permite unos desplazamientos rápidos y con poco coste energético.', 50, CAST (X'FFFF' AS BLOB) , 'FROG BIKES', 'Track 58', 'Zapatas', 41.652940, -4.728380, 'martaND9', 'Activada');
  
 INSERT INTO Bicicleta
-      VALUES (default, 'Esta bicicleta es perfecta para los nuevos riders, que quieran atreverse a hacer una ruta de montaña, esta mountain bike cuenta con un cuadro muy ligero de solo 10 KG de peso, perfecta para iniciarte en el descenso de montañas.', 51, CAST (X'FFFF' AS BLOB) , 'CANNONDALE', 'CAAD Optimo', 'Disco', 34.7, 55.6, 'juan.pperez', 'Activada');
+      VALUES (default, 'Esta bicicleta es perfecta para los nuevos riders, que quieran atreverse a hacer una ruta de montaña, esta mountain bike cuenta con un cuadro muy ligero de solo 10 KG de peso, perfecta para iniciarte en el descenso de montañas.', 46, CAST (X'FFFF' AS BLOB) , 'Rockville', 'Rockville 27.5', 'Disco', 41.652740, -4.731530, 'juan.pperez', 'Activada');
+
+INSERT INTO Bicicleta
+      VALUES (default, 'Esta es una bicicleta de carretera perfecta para rutas de caminos largos, además incluye unas ruedas de 28 pulgadas y esta en perfecto estado, comprada en 2016 tiene 4 años, las camaras de las ruedas están recien cambiadas.', 51, CAST (X'FFFF' AS BLOB) , 'CANNONDALE', 'CAAD Optimo', 'Zapatas', 41.654263, -4.795995, 'juan.pperez', 'Activada');
+
+INSERT INTO Bicicleta
+      VALUES (default, 'Perfecta bicicleta para el uso diario por la ciudad, cuenta con 2 cubre ruedas, por si llueve para que no te salqpique agua del suelo mientras estas conduciendo la bici, ademas tiene luces, delantera y trasera que funcionan según das pedasles. Su sillín es uno de los más comodos del mercado.', 60, CAST (X'FFFF' AS BLOB) , 'Ortler', 'Monet', 'Zapatas', 41.652720, -4.722092, 'martaND9', 'Activada');
  
+-- Peticiones
 INSERT INTO Peticion
       VALUES (default, '2020-01-01 12:30:46', '2020-01-01 13:00:46', 1, 'juan.pperez', 'estandar');
 
+INSERT INTO Peticion
+      VALUES (default, '2020-01-02 11:30:40', '2020-01-02 12:00:40', 4, 'juan.pperez', 'estandar');
+
+INSERT INTO Peticion
+      VALUES (default, '2020-01-03 16:12:30', '2020-01-03 16:42:30', 3, 'martaND9', 'enMano');
+
+INSERT INTO Peticion
+      VALUES (default, '2020-02-05 20:22:11', '2020-02-05 20:52:11', 2, 'martaND9', 'estandar');
+
+-- Alquileres
 INSERT INTO Alquiler
-      VALUES (3.8, '2020-01-01 14:03:20', '2020-01-01 12:33:07', default, 1, 0, 'Calle de Santa Clara 12', 'Calle Cardenal Cisneros 24');
+      VALUES (3.8, '2020-01-01 14:03:20', '2020-01-01 12:33:07', default, 1, 0, 'Calle de Santa Clara nº 12', 'Calle Cardenal Cisneros nº 24');
+
+INSERT INTO Alquiler
+      VALUES (5.2, '2020-01-03 17:33:21', '2020-01-03 16:42:28', default, 3, 0, 'Plaza de Poniente', 'Covaresa');
+
+INSERT INTO Alquiler
+      VALUES (2.5, '2020-01-02 12:00:21', '2020-01-02 11:42:28', default, 2, 0, 'Plaza de la Universidad', 'La Flecha');
  
+
+-- Valoraciones
 INSERT INTO ValoracionUsuario
-      VALUES ('', 4, 1, 'juan.pperez');
+      VALUES ('', 4, 3, 'juan.pperez');
+
+INSERT INTO ValoracionBicicleta
+      VALUES ('', 0, 2, 3);
