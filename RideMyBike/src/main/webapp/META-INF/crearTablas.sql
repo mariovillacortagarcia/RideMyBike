@@ -24,7 +24,7 @@ CREATE TABLE Bicicleta(
   codigoBici INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   descripcion varchar(1000) not null,
   tamCuadro float not null,
-  imagen blob not null,
+  imagen blob, --not null,
   marca varchar(30) not null,
   modelo varchar(50) not null,
   freno varchar(30) not null,
