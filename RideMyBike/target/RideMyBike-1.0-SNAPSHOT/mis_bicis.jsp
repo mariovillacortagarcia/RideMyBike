@@ -29,54 +29,6 @@
     </jsp:include>    
     
     
-  <div class="container-fluid" style="background-color:#85c1e9">
-    <!---Cabecera -->
-    <div class="row p-3 align-items-center">
-      <div class="col-2">
-        <img style="height:auto;max-width:125%" src="img/RideMyBike_icon_green.png" />
-      </div>
-      <div class="col-6">
-        <h5 class="text-white"><b>RideMyBike</b>, la página de préstamo de bicicletas que lucha por un aire
-          más puro en nuestras ciudades</h5>
-      </div>
-      <div class="col-4">
-        <div>
-          <button type="button" onclick="location.href='registrarse.html'" class="btn btn-light">Registrarse</button>
-          <button type="button" onclick="location.href='iniciar_sesion.html'" class="btn btn-success">Iniciar sesión</button>
-        </div>
-
-      </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <!-- Menu de navegacion -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle	navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home 🏠</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="mis_bicis.html">Mis Bicis 🚴‍<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="viajes.html">Viajes 🚵‍</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="garantias.html">Garantías 🛡️</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sobre_nosotros.html">Sobre nosotros 💬</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="ayuda.html">Ayuda ❓</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-
   <!-- TBicicletas que el usuario tiene en la aplicación registradas o en proceso -->
 
 
@@ -100,7 +52,7 @@
           </div>
         </div>
         <div class="col-6 text-right">
-          <a href="registrar_bicicleta.html"><button type="button" class="btn btn-secondary " name="botonRegistraBicicleta">Registrar nueva bicicleta</button> </a>
+          <a href="registrar_bicicleta.jsp"><button type="button" class="btn btn-secondary " name="botonRegistraBicicleta">Registrar nueva bicicleta</button> </a>
         </div>
       </div>
       <div class="row pt-4">
@@ -179,23 +131,21 @@
                               Opciones
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="ValoracionesBicicleta.jsp?bicicleta=${listaSeleccionada.get(i)}">Opiniones</a>
-                              <a class="dropdown-item" href="ActivacionBicicleta?codigoBicicleta=<%=listaSeleccionada.get(i).getcodigoBici()%>">Activar/Desactivar Bicicleta</a>
-                              <a class="dropdown-item" href="#">Historial de Alquileres</a>
+                              <a class="dropdown-item" href="ValoracionesBicicleta.jsp?codigoBicicleta=${listaSeleccionada.get(i).getcodigoBici()}">Opiniones</a>
+                              <a class="dropdown-item" href="ActivacionBicicleta?bicicleta=<%=listaSeleccionada.get(i)%>">Activar/Desactivar Bicicleta</a>
+                              <a class="dropdown-item" href="HistorialAlquileres.jsp?codigoBicicleta=${listaSeleccionada.get(i).getcodigoBici()}">Historial de Alquileres</a>
                               <a class="dropdown-item" href="#EliminarBicicleta?bicicleta=<%=listaSeleccionada.get(i)%>">Eliminar</a>
                             </div>
-                            <% switch(request.getParameter("selector2")){
-                                case("Opciones"):
-                                    break;
-                                case("Activar/Desactivar Bicicleta"):
-                                    
-                                    break;
-                                case("Historial de Alquileres"):
-                                    break;
-                                case("Eliminar"):
-                                    break;
-                                 
-                            }
+                            <%  switch(request.getParameter("selector2")){
+                                    case("Opciones"):
+                                        break;
+                                    case("Activar/Desactivar Bicicleta"):
+                                        break;
+                                    case("Historial de Alquileres"):
+                                        break;
+                                    case("Eliminar"):
+                                        break;
+                                }
                               %>
                           </div>
                         </div>
