@@ -84,4 +84,20 @@ public class IncidenciaDB {
             return null;
         }
     }
+    public static void eliminaIncidencia(Incidencia inci) throws SQLException{
+        if(inci == null){
+            throw new IllegalArgumentException("La incidencia a eliminar es nula");
+        }
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        ResultSet rs = null;
+        Integer codigoinci = inci.getCodigoIncidencia();
+        String query= "DELETE FROM Incidencia“+“WHERE codigoinci= ‘”+codigoinci+ “’”;";
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(query);
+        rs.close();
+        ps.close();
+        pool.freeConnection(connection);
+    }
 }

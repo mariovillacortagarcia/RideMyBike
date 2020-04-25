@@ -1,5 +1,5 @@
 <%@page import="ridemybike.dominio.Incidencia"%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
 
@@ -18,7 +18,7 @@
   <div class="container-fluid" style="background-color:#85c1e9">
     <!---Cabecera -->
             <jsp:include page="header.jsp" >
-                <jsp:param name="paginaMostrada" value="viajes" />
+                <jsp:param name="paginaMostrada" value="MisBicis" />
                 <jsp:param name="sesionIniciada" value="false" />
             </jsp:include>
   <!-- Contenido -->
@@ -26,9 +26,9 @@
     <!--Formulario de Registro de una incidencia-->
 
     <form class="form-group mb-2">
-      <h5><b>Anota la información de la incidencia</b>??</h5>
+      <h5><b>Anota la informaciÃ³n de la incidencia</b>??</h5>
       <div class="form-group mb-2">
-        <label for="descripcionIncidencia">Descripción</label>
+        <label for="descripcionIncidencia">DescripciÃ³n</label>
         <textarea type="String" class="form-control" id="descripcionIncindencia" rows="4"> </textarea>
       </div>
       <div class="form-group mb-2">
@@ -36,28 +36,33 @@
         <div class="form-check">
           <input class="form-check-input" type="radio" name="grado" id="grado1" value="option1" checked>
           <label class="form-check-label" for="grado1">
-            <b>Leve</b>: la bicicleta es utilizable, solo presenta daños superficiales y/o estéticos.
+            <b>Leve</b>: la bicicleta es utilizable, solo presenta daÃ±os superficiales y/o estÃ©ticos.
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="grado" id="grado2" value="option2">
           <label class="form-check-label" for="grado2">
-            <b>Moderada</b>: la bicicleta no es utilizable, pero se puede reparar en un plazo máximo de un día.
+            <b>Moderada</b>: la bicicleta no es utilizable, pero se puede reparar en un plazo mÃ¡ximo de un dÃ­a.
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="grado" id="grado3" value="option3">
           <label class="form-check-label" for="grado3">
-            <b>Grave</b>: la bicicleta no es utilizable, tiene que pasar por un mecánico.
+            <b>Grave</b>: la bicicleta no es utilizable, tiene que pasar por un mecÃ¡nico.
           </label>
         </div>
       </div>
       <div class="pt-4">
-        <button class="btn btn-outline-success" type="submit">Registrar incidencia</button>
+        
+        <button type="button" onclick="location.href='viajes_en_proceso.jsp'" class="btn btn-success">Registrar incidencia</button>
       </div>
     </form>
   </div>
-
+<!-- Footer -->
+    <jsp:include page="footer.jsp" >
+        <jsp:param name="etiqueta" value="RideMyBike" />
+        <jsp:param name="mostrarBoton" value="false" />
+    </jsp:include>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
