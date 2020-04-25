@@ -73,21 +73,21 @@
           <input type="file" name="fileToUpload" id="fileToUpload">
         </div>
       </form>
-      <div class="form-group mb-2">
+      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="get"> <!---  NO SE SI SE HACE ASI SI NO MIRAR DIAPOS --->
         <label for="marcaBiciRegistro">Marca</label>
-        <input type="String" class="form-control" id="marcaNuevaBici">
+        <input type="String" class="form-control" id="marcaNuevaBici" name="marca">
       </div>
-      <div class="form-group mb-2">
+      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="get">
         <label for="modeloBiciRegistro">Modelo</label>
-        <input type="String" class="form-control" id="modeloNuevaBici">
+        <input type="String" class="form-control" id="modeloNuevaBici" name="modelo">
       </div>
-      <div class="form-group mb-2">
+      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="get">
         <label for="tamanoBiciRegistro">Tamaño de Cuadro (cm)</label>
-        <input type="String" class="form-control" id="tamanoNuevaBici">
+        <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro">
       </div>
       <label for="frenoBiciRegistro">Tipo de Freno</label>
-      <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle " role="button" id="frenoNuevaBici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tipos:</a>
+      <div class="dropdown" action="registrar_bicicleta.jsp" method="get">
+        <a class="btn btn-secondary dropdown-toggle " role="button" id="frenoNuevaBici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="tipoFreno">Tipos:</a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="#">Disco</a>
           <a class="dropdown-item" href="#">Hidráulicos</a>
@@ -95,14 +95,14 @@
           <a class="dropdown-item" href="#">Holandeses</a>
         </div>
       </div>
-      <div class="form-group mb-2">
+      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="get">
         <label for="descripcionBiciRegistro">Descripción</label>
-        <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4"> </textarea>
+        <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion"> </textarea>
       </div>
       <label for="informacionRevisionBici" class="pt-4">Para poder dar de alta la nueva bicicleta, necesitamos revisarla en un taller cercano a la ciudad que nos indiques</label>
 
-      <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle " role="button" id="talleresCiudades" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ciudades:</a>
+      <div class="dropdown" action="registrar_bicicleta.jsp" method="get">
+        <a class="btn btn-secondary dropdown-toggle " role="button" id="talleresCiudades" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="ciudad">Ciudades:</a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="#">Valladolid, C/Falsa 123</a>
           <a class="dropdown-item" href="#">Barcelona, C/Falsa 123</a>
