@@ -94,25 +94,3 @@ CREATE TABLE Incidencia(
   PRIMARY KEY (codigoIncidencia),
   FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion)
 );
-
-
-INSERT INTO Usuario
-      VALUES ('juan.pperez', 'Juan Pedro', 'Perez Sanchez', '71245360y', 'juanpperez@gmail.com', 634772244, '1234567898765432', 'hashpassword', CAST (X'FFFF' AS BLOB) , 'Calle Molina 13');
-
-INSERT INTO Usuario
-      VALUES ('martaND9', 'Marta', 'Nadal Dalmau', '71941363h', 'martand89@gmail.com', 622114455, '98765432346789', 'hashpassword', CAST (X'FFFF' AS BLOB) , 'Calle Bierzo 7');
-
-INSERT INTO Bicicleta
-      VALUES (default, 'Bicicleta perfecta para andar por ciudad, es una bici que cuenta con 24 marchas y además su peso es perfecto, solo 5 KG, permite unos desplazamientos rápidos y con poco coste energético.', 51, CAST (X'FFFF' AS BLOB) , 'FROG BIKES', 'Track 58', 'Zapatas', 12.3, 34.5, 'martaND9', 'Activada');
- 
-INSERT INTO Bicicleta
-      VALUES (default, 'Esta bicicleta es perfecta para los nuevos riders, que quieran atreverse a hacer una ruta de montaña, esta mountain bike cuenta con un cuadro muy ligero de solo 10 KG de peso, perfecta para iniciarte en el descenso de montañas.', 51, CAST (X'FFFF' AS BLOB) , 'CANNONDALE', 'CAAD Optimo', 'Disco', 34.7, 55.6, 'juan.pperez', 'Activada');
- 
-INSERT INTO Peticion
-      VALUES (default, '2020-01-01 12:30:46', '2020-01-01 13:00:46', 1, 'juan.pperez', 'estandar');
-
-INSERT INTO Alquiler
-      VALUES (3.8, '2020-01-01 14:03:20', '2020-01-01 12:33:07', default, 1, 0, 'Calle de Santa Clara 12', 'Calle Cardenal Cisneros 24');
- 
-INSERT INTO ValoracionUsuario
-      VALUES ('', 4, 1, 'juan.pperez');
