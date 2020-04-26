@@ -35,8 +35,8 @@
     
   <%
       String nombreUsuarioEj = "juan.pperez";
-      ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
-      lista = (ArrayList<Bicicleta>) request.getAttribute("lista");
+      ArrayList<Bicicleta> listaBicicletas = new ArrayList<Bicicleta>();
+      listaBicicletas = (ArrayList<Bicicleta>) request.getAttribute("lista");
   %>
   <div class="container pt-4 ">
       <div class="row">
@@ -62,9 +62,17 @@
             <ol class="carousel-indicators">
                 
                 <% 
-                    if(lista != null){
+                    if(listaBicicletas != null){
                         Boolean var = true;
-                        Boolean var2 = true;                                         
+                        Boolean var2 = true;
+                        EstadoBicicleta estado = EstadoBicicleta.Activado;   
+                        ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
+                        for(Bicicleta bici : listaBicicletas){
+                            if(bici.getEstado() == estado){
+                                lista.add(bici);
+                            }
+                        }
+                    
                         for(Bicicleta bici : lista){
                                 String marca = bici.getMarca();
                                 String modelo = bici.getModelo();
@@ -72,7 +80,6 @@
                                 String freno = bici.getFreno().toString();
                                 String descripcion = bici.getDescripcion();
                                 String codigoBici = bici.getcodigoBici();
-                                EstadoBicicleta estado = bici.getEstado();
                 %>
                 
                    
@@ -106,7 +113,7 @@
                     <div class="col-5">
                       <div class="row">
                           <div class="col-12"><b>Estado:</b> 
-                              <a class="text-success"><%=estado %></a>
+                              <a class="text-success">Activada</a>
                           </div> 
 
                         <div class="col-12"><b>Marca:</b><%=marca %></div>
@@ -145,7 +152,8 @@
               <% } 
                }%>          
                         
-             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </a>

@@ -35,8 +35,8 @@
     
   <%
       String nombreUsuarioEj = "juan.pperez";
-      ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
-      lista = (ArrayList<Bicicleta>) request.getAttribute("lista");
+      ArrayList<Bicicleta> listaBicicletas = new ArrayList<Bicicleta>();
+      listaBicicletas = (ArrayList<Bicicleta>) request.getAttribute("lista");
   %>
   <div class="container pt-4 ">
       <div class="row">
@@ -62,9 +62,17 @@
             <ol class="carousel-indicators">
                 
                 <% 
-                    if(lista != null){
+                    if(listaBicicletas != null){
                         Boolean var = true;
-                        Boolean var2 = true;                                         
+                        Boolean var2 = true;
+                        EstadoBicicleta estado = EstadoBicicleta.Desactivado;
+                        EstadoBicicleta estado2 = EstadoBicicleta.Pendiente;
+                        ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
+                        for(Bicicleta bici : listaBicicletas){
+                            if(bici.getEstado() == estado || bici.getEstado() == estado2){
+                                lista.add(bici);
+                            }
+                        }
                         for(Bicicleta bici : lista){
                                 String marca = bici.getMarca();
                                 String modelo = bici.getModelo();
@@ -72,7 +80,7 @@
                                 String freno = bici.getFreno().toString();
                                 String descripcion = bici.getDescripcion();
                                 String codigoBici = bici.getcodigoBici();
-                                EstadoBicicleta estado = bici.getEstado();
+                                EstadoBicicleta estadoBici = bici.getEstado();
                 %>
                 
                    
@@ -87,9 +95,7 @@
                             var = false;
                         }
                 %>
-
             </ol>
-
             <div class="carousel-inner" style="height: 450px">
                 <%
                     if(var2){ %>
@@ -106,7 +112,7 @@
                     <div class="col-5">
                       <div class="row">
                           <div class="col-12"><b>Estado:</b> 
-                              <a class="text-success"><%=estado %></a>
+                              <a class="text-success"><%=estadoBici %></a>
                           </div> 
 
                         <div class="col-12"><b>Marca:</b><%=marca %></div>
@@ -115,6 +121,21 @@
                         <div class="col-12"><b>Tipo de Freno:</b><%=freno %></div>
                         <div class="col-12"><b>Descripción:</b> <%=descripcion %></div>
                         <div class="col-12 text-center pt-4">
+                        <% if(estadoBici == estado2){
+                        %>
+                        <input type="String" class="form-control mb-2" id="codigoAct" placeholder="Introduzca el código de activación">
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Opciones
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Activar</a>
+                            <a class="dropdown-item" href="#">Eliminar</a>
+                          </div>
+                        </div>
+                        <% }else{ %>
+ 
+                      
                           <div class="dropdown" name="selector2">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Opciones
@@ -125,7 +146,11 @@
                               <a class="dropdown-item" href="HistorialAlquileres.jsp?codigoBicicleta=${codigoBici}">Historial de Alquileres</a>
                               <a class="dropdown-item" href="#EliminarBicicleta?bicicleta=<%=bici%>">Eliminar</a>
                             </div>
-                              <%
+                         </div>
+
+                              <%} %>
+                        </div>
+                               <%   
                                    }
                     }else{
                         %>
@@ -145,7 +170,8 @@
               <% } 
                }%>          
                         
-             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </a>
