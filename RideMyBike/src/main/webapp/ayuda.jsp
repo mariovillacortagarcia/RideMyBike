@@ -24,7 +24,7 @@
 
   <!-- Contenido -->
   <div class="container align-items-center py-4 mt-4">
-    <h4>Preguntas frecuentes:</h4>
+      <h4><b>Preguntas frecuentes:</b></h4>
     <div class="row py-4">
       <div class="col-sm-12 col-md-6 col-lg-4">
         <h5>¿Como creo una cuenta?</h5>

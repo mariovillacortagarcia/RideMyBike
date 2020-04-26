@@ -63,7 +63,7 @@
                 <% 
                     if(lista != null){
                         Boolean var = true;
-                        Boolean var2 = true;                                         
+                        Boolean var2 = true;        
                         for(Bicicleta bici : lista){
                                 String marca = bici.getMarca();
                                 String modelo = bici.getModelo();

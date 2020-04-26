@@ -15,18 +15,18 @@
 </head>
 
 <body>
-  <div class="container-fluid" style="background-color:#85c1e9">
     <!---Cabecera -->
-            <jsp:include page="header.jsp" >
-                <jsp:param name="paginaMostrada" value="MisBicis" />
-                <jsp:param name="sesionIniciada" value="false" />
-            </jsp:include>
+    <jsp:include page="header.jsp" >
+        <jsp:param name="paginaMostrada" value="MisBicis" />
+        <jsp:param name="sesionIniciada" value="false" />
+    </jsp:include>
+    
   <!-- Contenido -->
-  <div class="container pt-4">
+  <div class="container pt-4 mt-1">
     <!--Formulario de Registro de una incidencia-->
 
     <form class="form-group mb-2">
-      <h5><b>Anota la información de la incidencia</b>??</h5>
+      <h5><b>Anota la información de la incidencia </b>⚠️</h5>
       <div class="form-group mb-2">
         <label for="descripcionIncidencia">Descripción</label>
         <textarea type="String" class="form-control" id="descripcionIncindencia" rows="4"> </textarea>
