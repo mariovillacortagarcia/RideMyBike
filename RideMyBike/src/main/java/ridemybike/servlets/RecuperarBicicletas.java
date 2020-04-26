@@ -36,9 +36,8 @@ public class RecuperarBicicletas extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "/mis_bicics.jsp";
+        String url = "/mis_bicis.jsp";
         String nombreUsuario = "juan.pperez";
-        System.out.println(nombreUsuario);   
         ArrayList<Bicicleta> listaBicicletas = BicicletaDB.getBicicletasRegistradas(nombreUsuario);
         request.setAttribute("lista", listaBicicletas);
         
