@@ -46,7 +46,7 @@
             <a class="nav-link" href="mis_bicis.jsp">Mis Bicis 🚴</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Viajes">Viajes 🚵</a>
+            <a class="nav-link" href="RecuperarViajes">Viajes 🚵</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="garantias.jsp">Garantías 🛡</a>

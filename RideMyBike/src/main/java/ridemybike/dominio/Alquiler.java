@@ -1,7 +1,7 @@
 package ridemybike.dominio;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 /**
  * Representa un alquiler de una bicicleta realizado en el sistema.
@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 public class Alquiler implements Serializable {
 
     private double precio;
-    private LocalDateTime horaInicial;
-    private LocalDateTime horaFinal;
+    private Timestamp horaInicial;
+    private Timestamp horaFinal;
     private int codigoAlquiler;
-    private String peticion;
+    private String codigoPeticion;
     private boolean archivado;
     private String inicio;
     private String fin;
@@ -27,22 +27,21 @@ public class Alquiler implements Serializable {
         horaInicial = null;
         horaFinal = null;
         codigoAlquiler = 0;
-        peticion = null;
+        codigoPeticion = null;
         archivado = false;
         inicio = null;
         fin = null;
-
     }
 
     /**
      * Establece el inicio del alquiler
      *
      * @param inicio: nombre de la ubicacion de inicio del alquiler
-     * @throws IllegalArgumentException si {@code getInicio() != null}
+     * @throws IllegalArgumentException si el inicio es igual a null
      */
     public void setInicio(String inicio) {
-        if (inicio != null) {
-            throw new IllegalArgumentException("Ya se establecio un inicio");
+        if (inicio == null) {
+            throw new IllegalArgumentException("Inicio de viaje igual a null");
         }
 
         this.inicio = inicio;
@@ -62,13 +61,9 @@ public class Alquiler implements Serializable {
      * Establece el fin del alquiler
      *
      * @param fin: nombre de la ubicacion de fin del alquiler
-     * @throws IllegalArgumentException si {@code getFin() != null}
+     * @throws IllegalArgumentException si el fin especificado es igual a null
      */
     public void setFin(String fin) {
-        if (inicio != null) {
-            throw new IllegalArgumentException("Ya se establecio un inicio");
-        }
-
         this.fin = fin;
     }
 
@@ -98,7 +93,7 @@ public class Alquiler implements Serializable {
      * @throws IllegalArgumentExeption si {@code getHoraFinal() == null}
      */
     public void setArchivado(boolean archivado) {
-        if (getHoraFinal() == null) {
+        if (getHoraFinal() == null && archivado) {
             throw new IllegalArgumentException("No se puede archivar un viaje no finalizado");
         }
         this.archivado = archivado;
@@ -133,7 +128,7 @@ public class Alquiler implements Serializable {
      * @param horaInicial: hora a la que se inicia el prestamo, distinta de null
      * @throws IllegalArgumentException si {@code horaInicial == null}
      */
-    public void setHoraInicial(LocalDateTime horaInicial) {
+    public void setHoraInicial(Timestamp horaInicial) {
         if (horaInicial == null) {
             throw new IllegalArgumentException("La hora inicial no puede estar vacia");
         }
@@ -146,7 +141,7 @@ public class Alquiler implements Serializable {
      * @return Hora de inicio del prestamo o null si
      * {@code viajeIniciado() == false}
      */
-    public LocalDateTime getHoraInicial() {
+    public Timestamp getHoraInicial() {
         return horaInicial;
     }
 
@@ -155,7 +150,7 @@ public class Alquiler implements Serializable {
      *
      * @param horaFinal: hora a la que se finaliza el prestamo.
      */
-    public void setHoraFinal(LocalDateTime horaFinal) {
+    public void setHoraFinal(Timestamp horaFinal) {
         this.horaFinal = horaFinal;
     }
 
@@ -165,7 +160,7 @@ public class Alquiler implements Serializable {
      * @return Hora de finalizacion del prestamo o null si
      * {@code viajeFinalizado() == false}
      */
-    public LocalDateTime getHoraFinal() {
+    public Timestamp getHoraFinal() {
         return horaFinal;
     }
 
@@ -178,10 +173,8 @@ public class Alquiler implements Serializable {
         if (peticion == null) {
             throw new IllegalArgumentException("La peticion no puede ser nula");
         }
-        if (this.peticion != null) {
-            throw new IllegalArgumentException("Ya se ha establecido una peticion del alquiler");
-        }
-        this.peticion = peticion;
+        
+        codigoPeticion = peticion;
     }
 
     /**
@@ -190,7 +183,7 @@ public class Alquiler implements Serializable {
      * @return peticion del alquiler, null si no esta establecida.
      */
     public String getPeticion() {
-        return peticion;
+        return codigoPeticion;
     }
 
     public void setCodigoAlquiler(int codigo) {

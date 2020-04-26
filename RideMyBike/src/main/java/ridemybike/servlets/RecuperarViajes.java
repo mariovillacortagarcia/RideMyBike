@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Alquiler;
 import ridemybike.dominio.db.AlquilerDB;
 
-/**
- *
- * @author mario
- */
+
 @WebServlet(name = "RecuperarViajes", urlPatterns = {"/RecuperarViajes"})
 public class RecuperarViajes extends HttpServlet {
 
@@ -36,21 +28,13 @@ public class RecuperarViajes extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Alquiler alquileres[] = (Alquiler [])AlquilerDB.selectAllAlquiler().toArray();        
+        String nombreUsuario = "juan.pperez";
+        ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresRealizados(nombreUsuario);        
         request.setAttribute("alquileres", alquileres);
         
         String url = "/viajes.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
-        
-        url = "/viajes_en_proceso.jsp";
-        dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
-        
-        url = "/viajes_archivados.jsp";
-        dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

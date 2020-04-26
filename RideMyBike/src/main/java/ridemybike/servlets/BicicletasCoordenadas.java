@@ -40,6 +40,7 @@ public class BicicletasCoordenadas extends HttpServlet {
         String ubicacion = null;
         String lat;
         String lon;
+        
         for(Bicicleta bicicleta : bicicletas){
            lat = Double.toString(bicicleta.getLatitud());
            lon = Double.toString(bicicleta.getLongitud());

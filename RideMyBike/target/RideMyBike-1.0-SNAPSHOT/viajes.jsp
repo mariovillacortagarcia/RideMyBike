@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="ridemybike.dominio.Alquiler"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,10 +25,9 @@
     </head>
 
     <body>
-        <div class="container-fluid" style="background-color:#85c1e9">
             <!---Cabecera -->
             <jsp:include page="header.jsp" >
-                <jsp:param name="paginaMostrada" value="viajes" />
+                <jsp:param name="paginaMostrada" value="Viajes" />
                 <jsp:param name="sesionIniciada" value="false" />
             </jsp:include>
 
@@ -38,13 +38,13 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" href="viajes.jsp">Realizados</a>
+                                <a class="nav-link active" href="RecuperarViajes">Realizados</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="viajes_en_proceso.jsp">En proceso</a>
+                                <a class="nav-link" href="RecuperarViajesEnProceso">En proceso</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="viajes_archivados.jsp">Archivados</a>
+                                <a class="nav-link" href="RecuperarViajesArchivados">Archivados</a>
                             </li>
                         </ul>
                     </div>
@@ -53,7 +53,7 @@
 
                         <ul class="list-group overflow-auto">
                             <%
-                                Alquiler alquileres[] = (Alquiler[]) request.getAttribute("alquileres");
+                                ArrayList<Alquiler> alquileres = (ArrayList<Alquiler>) request.getAttribute("alquileres");
                                 boolean sinViajes = true;
                                 if (alquileres != null) {
                                     for (Alquiler alquiler : alquileres) {
@@ -64,16 +64,17 @@
                                             continue;
                                         }
                                         sinViajes = false;
-                                        LocalDateTime fechaInicio = alquiler.getHoraInicial();
-                                        LocalDateTime fechaFin = alquiler.getHoraFinal();
+                                        LocalDateTime fechaInicio = alquiler.getHoraInicial().toLocalDateTime();
+                                        LocalDateTime fechaFin = alquiler.getHoraFinal().toLocalDateTime();
+                                        String mesFin = Integer.toString(fechaFin.getMonthValue());
+                                        String anoFin = Integer.toString(fechaFin.getYear());
+                                        String horaFin = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());
+                                        String diaFin = Integer.toString(fechaFin.getDayOfMonth());
                                         String diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
                                         String mesInicio = Integer.toString(fechaInicio.getMonthValue());
                                         String anoInicio = Integer.toString(fechaInicio.getYear());
                                         String horaInicio = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());
-                                        String diaFin = Integer.toString(fechaFin.getDayOfMonth());
-                                        String mesFin = Integer.toString(fechaFin.getMonthValue());
-                                        String anoFin = Integer.toString(fechaFin.getYear());
-                                        String horaFin = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());;
+                                        
                             %>
                             <li class="list-group-item">
                                 <!--Viaje 1-->
@@ -88,6 +89,7 @@
                                             <h6 class=""><b><%=inicio%> - <%=fin%></b></h6>
                                             <p>
                                                 Desde el <%=diaInicio%> de <%=mesInicio%> de <%=anoInicio%> a las <%=horaInicio%> <br>
+                                                
                                                 Hasta el <%=diaFin%> de <%=mesFin%> de <%=anoFin%> a las <%=horaFin%>
                                             </p>
                                             <p>

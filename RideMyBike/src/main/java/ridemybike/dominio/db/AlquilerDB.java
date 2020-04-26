@@ -6,6 +6,7 @@
 package ridemybike.dominio.db;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import ridemybike.dominio.Alquiler;
@@ -74,12 +75,13 @@ public class AlquilerDB {
             rs = ps.executeQuery();
             Alquiler alquiler = null;
             if (rs.next()) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                 alquiler = new Alquiler();
                 alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
                 alquiler.setInicio(rs.getString("inicio"));
                 alquiler.setFin(rs.getString("fin"));
-                alquiler.setHoraInicial(LocalDateTime.parse(rs.getString("horaInicial")));
-                alquiler.setHoraFinal(LocalDateTime.parse(rs.getString("horaFinal")));
+                alquiler.setHoraInicial(new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime()));
+                alquiler.setHoraFinal(new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime()));
                 alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
                 alquiler.setPeticion(rs.getString("peticion"));
                 String archivado = rs.getString("archivado");
@@ -94,37 +96,41 @@ public class AlquilerDB {
             ps.close();
             pool.freeConnection(connection);
             return alquiler;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+    
     /**
-     * Obtiene todos los alquileres.
+     * Obtiene todos los alquileres de un usuario.
      * 
-     * @return lista con todos los alquileres existentes
+     * @param nombreUsuario el nombre de usuario
+     * @return lista con todos los alquileres del usuario
      */
-    public static ArrayList<Alquiler> selectAllAlquiler() {
-        
+    public static ArrayList<Alquiler> selectAllAlquiler(String nombreUsuario) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM Alquiler";
+        String query = "SELECT * FROM Alquiler, Peticion WHERE Alquiler.codigoPeticion = Peticion.codigoPeticion AND Peticion.usuarioArrendatario = ?";
         try {
             ps = connection.prepareStatement(query);
+            ps.setString(1, nombreUsuario);
             rs = ps.executeQuery();
             Alquiler alquiler = null;
             ArrayList<Alquiler> alquileres = new ArrayList();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
             while (rs.next()) {
                 alquiler = new Alquiler();
                 alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
                 alquiler.setInicio(rs.getString("inicio"));
                 alquiler.setFin(rs.getString("fin"));
-                alquiler.setHoraInicial(LocalDateTime.parse(rs.getString("horaInicial")));
-                alquiler.setHoraFinal(LocalDateTime.parse(rs.getString("horaFinal")));
+                alquiler.setHoraInicial(new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime()));
+                Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
+                alquiler.setHoraFinal(horaFinal);
                 alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
-                alquiler.setPeticion(rs.getString("peticion"));
+                alquiler.setPeticion(rs.getString("codigoPeticion"));
                 String archivado = rs.getString("archivado");
                 if(archivado.equals("1")){
                     alquiler.setArchivado(true);
@@ -132,16 +138,278 @@ public class AlquilerDB {
                     alquiler.setArchivado(false);
                 }
                 alquileres.add(alquiler);
-               
             }
+            
             rs.close();
             ps.close();
             pool.freeConnection(connection);
+            
             return alquileres;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
     
+    /**
+     * Obtiene todos los alquileres realizados de un usuario. 
+     * En esta lista no se incluiran los viajes en proceso ni los alquileres 
+     * archivados.
+     * 
+     * @param nombreUsuario el nombre de usuario
+     * @return lista con todos los alquileres del usuario
+     */
+    public static ArrayList<Alquiler> selectAlquileresRealizados(String nombreUsuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Alquiler, Peticion WHERE Alquiler.codigoPeticion = Peticion.codigoPeticion AND Peticion.usuarioArrendatario = ? AND Alquiler.horaFinal IS NOT NULL AND Alquiler.archivado = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, nombreUsuario);
+            rs = ps.executeQuery();
+            Alquiler alquiler = null;
+            ArrayList<Alquiler> alquileres = new ArrayList();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            while (rs.next()) {
+                alquiler = new Alquiler();
+                alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
+                alquiler.setInicio(rs.getString("inicio"));
+                alquiler.setFin(rs.getString("fin"));
+                alquiler.setHoraInicial(new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime()));
+                Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
+                alquiler.setHoraFinal(horaFinal);
+                alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
+                alquiler.setPeticion(rs.getString("codigoPeticion"));
+                String archivado = rs.getString("archivado");
+                if(archivado.equals("1")){
+                    alquiler.setArchivado(true);
+                }else{
+                    alquiler.setArchivado(false);
+                }
+                alquileres.add(alquiler);
+            }
+            
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            
+            return alquileres;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Obtiene todos los alquileres en proceso de un usuario.
+     * 
+     * @param nombreUsuario el nombre de usuario
+     * @return lista con todos los alquileres del usuario
+     */
+    public static ArrayList<Alquiler> selectAlquileresEnProceso(String nombreUsuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Alquiler, Peticion WHERE Alquiler.codigoPeticion = Peticion.codigoPeticion AND Peticion.usuarioArrendatario = ? AND Alquiler.horaFinal IS NULL";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, nombreUsuario);
+            rs = ps.executeQuery();
+            Alquiler alquiler = null;
+            ArrayList<Alquiler> alquileres = new ArrayList();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            while (rs.next()) {
+                alquiler = new Alquiler();
+                alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
+                alquiler.setInicio(rs.getString("inicio"));
+                alquiler.setFin(rs.getString("fin"));
+                alquiler.setHoraInicial(new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime()));
+                Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
+                alquiler.setHoraFinal(horaFinal);
+                alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
+                alquiler.setPeticion(rs.getString("codigoPeticion"));
+                String archivado = rs.getString("archivado");
+                if(archivado.equals("1")){
+                    alquiler.setArchivado(true);
+                }else{
+                    alquiler.setArchivado(false);
+                }
+                alquileres.add(alquiler);
+            }
+            
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            
+            return alquileres;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Obtiene todos los alquileres archivados de un usuario.
+     * 
+     * @param nombreUsuario el nombre de usuario
+     * @return lista con todos los alquileres del usuario
+     */
+    public static ArrayList<Alquiler> selectAlquileresArchivados(String nombreUsuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Alquiler, Peticion WHERE Alquiler.codigoPeticion = Peticion.codigoPeticion AND Peticion.usuarioArrendatario = ? AND Alquiler.archivado = 1";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, nombreUsuario);
+            rs = ps.executeQuery();
+            Alquiler alquiler = null;
+            ArrayList<Alquiler> alquileres = new ArrayList();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            while (rs.next()) {
+                alquiler = new Alquiler();
+                alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
+                alquiler.setInicio(rs.getString("inicio"));
+                alquiler.setFin(rs.getString("fin"));
+                alquiler.setHoraInicial(new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime()));
+                Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
+                alquiler.setHoraFinal(horaFinal);
+                alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
+                alquiler.setPeticion(rs.getString("codigoPeticion"));
+                String archivado = rs.getString("archivado");
+                if(archivado.equals("1")){
+                    alquiler.setArchivado(true);
+                }else{
+                    alquiler.setArchivado(false);
+                }
+                alquileres.add(alquiler);
+            }
+            
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            
+            return alquileres;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Archiva el viaje especificado
+     * 
+     * @param codigoAlquiler el codigo del alquiler
+     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
+     */
+    public static int archivarViaje(int codigoAlquiler) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        String query;
+        query = "UPDATE Alquiler SET archivado = 1 WHERE codigoAlquiler = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoAlquiler+"");
+            
+            int res = ps.executeUpdate();
+            ps.close();
+            pool.freeConnection(connection);
+            return res;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    /**
+     * Desarchiva el viaje especificado
+     * 
+     * @param codigoAlquiler el codigo del alquiler
+     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
+     */
+    public static int desarchivarViaje(int codigoAlquiler) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        String query;
+        query = "UPDATE Alquiler SET archivado = 0 WHERE codigoAlquiler = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoAlquiler+"");
+            
+            int res = ps.executeUpdate();
+            ps.close();
+            pool.freeConnection(connection);
+            return res;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    /**
+     * Elimina el viaje especificado, ocultandolo a nivel de usuario pero sin 
+     * borrarlo de la base de datos
+     * 
+     * @param codigoAlquiler el codigo del alquiler
+     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
+     */
+    public static int eliminarViaje(int codigoAlquiler) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        String query;
+        query = "UPDATE Alquiler SET archivado = 2 WHERE codigoAlquiler = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoAlquiler+"");
+            
+            int res = ps.executeUpdate();
+            ps.close();
+            pool.freeConnection(connection);
+            return res;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    } 
+    
+    /**
+     * Termina el viaje especificado
+     * 
+     * @param codigoAlquiler el codigo del alquiler
+     * @ubicacionFinal la ubicacion de fin del viaje
+     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
+     */
+    public static int terminarViaje(int codigoAlquiler, String ubicacionFinal) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        String query;
+        query = "UPDATE Alquiler SET horaFinal = ?, fin = ? WHERE codigoAlquiler = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            Timestamp horaFinal = new Timestamp(System.currentTimeMillis());
+            ps.setString(1, horaFinal.toString());
+            ps.setString(2, ubicacionFinal);
+            ps.setString(3, codigoAlquiler+"");
+            
+            int res = ps.executeUpdate();
+            ps.close();
+            pool.freeConnection(connection);
+            return res;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    } 
 }

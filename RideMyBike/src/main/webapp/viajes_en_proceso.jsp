@@ -1,5 +1,7 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="ridemybike.dominio.Alquiler"%>
 <%@page import="java.time.LocalDateTime"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
 
@@ -23,12 +25,12 @@
     </head>
 
     <body>
-        <div class="container-fluid" style="background-color:#85c1e9">
             <!---Cabecera -->
             <jsp:include page="header.jsp" >
-                <jsp:param name="paginaMostrada" value="viajes" />
+                <jsp:param name="paginaMostrada" value="Viajes" />
                 <jsp:param name="sesionIniciada" value="false" />
             </jsp:include>
+            
             <!-- Contenido -->
             <div class="container pt-4">
                 <!-- Navegacion por los viajes -->
@@ -36,13 +38,13 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" href="viajes.jsp">Realizados</a>
+                                <a class="nav-link" href="RecuperarViajes">Realizados</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="viajes_en_proceso.jsp">En proceso</a>
+                                <a class="nav-link active" href="RecuperarViajesEnProceso">En proceso</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="viajes_archivados.jsp">Archivados</a>
+                                <a class="nav-link" href="RecuperarViajesArchivados">Archivados</a>
                             </li>
                         </ul>
                     </div>
@@ -50,18 +52,13 @@
                         <!-- Lista de viajes -->
                         <ul class="list-group overflow-auto">
                             <%
-                                Alquiler alquileres[] = (Alquiler[]) request.getAttribute("alquileres");
+                                ArrayList<Alquiler> alquileres = (ArrayList<Alquiler>) request.getAttribute("alquileres");
                                 boolean sinViajes = true;
                                 if (alquileres != null) {
                                     for (Alquiler alquiler : alquileres) {
                                         String precio = Double.toString(alquiler.getPrecio());
                                         String inicio = alquiler.getInicio();
-                                        String fin = alquiler.getFin();
-                                        LocalDateTime fechaInicio = alquiler.getHoraInicial();
-                                        LocalDateTime fechaFin = alquiler.getHoraFinal();
-                                        if (alquiler.getFin() != null || alquiler.getHoraFinal() != null) {
-                                            continue;
-                                        }
+                                        LocalDateTime fechaInicio = alquiler.getHoraInicial().toLocalDateTime();
                                         sinViajes = false;
                                         String diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
                                         String mesInicio = Integer.toString(fechaInicio.getMonthValue());
@@ -78,19 +75,19 @@
                                         </div>
                                         <div class="col-6">
                                             <!--Informacion del viaje-->
-                                            <h6 class=""><b><%=inicio%> - <%=fin%></b></h6>
+                                            <h6 class=""><b><%=inicio%> - ?</b></h6>
                                             <p>
                                                 Desde el <%=diaInicio%> de <%=mesInicio%> de <%=anoInicio%> a las <%=horaInicio%> <br>
                                             </p>
                                             <p>
-                                                <a class="text-secondary">Estimado: </a><b><%=precio%> ?</b>
+                                                <a class="text-secondary">Estimado: </a><b><%=precio%> â‚¬</b>
                                             </p>
                                         </div>
                                         <div class="col-3">
                                             <!--Precio y valoracion-->
                                             <!--
                                             <div class="container pb-2">
-                                                <p class="text-secondary">No se puede puntuar todavía </p>
+                                                <p class="text-secondary">No se puede puntuar todavÃ­a </p>
                                             </div>-->
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -112,7 +109,7 @@
                             <li class="list-group-item">
                                 <!--Viaje 1-->
                                 <div class="alert alert-light" role="alert">
-                                    No hay ningún viaje en proceso
+                                    No hay ningÃºn viaje en proceso
                                 </div>
                             </li>
                             <% }%>

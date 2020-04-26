@@ -53,13 +53,13 @@ CREATE TABLE Peticion(
 
 CREATE TABLE Alquiler(
   precio real not null,
-  horaFinal Timestamp not null,
+  horaFinal Timestamp,
   horaInicial Timestamp not null,
   codigoAlquiler INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   codigoPeticion int not null,
   archivado int not null,
   inicio varchar(100) not null,
-  fin varchar(100) not null,
+  fin varchar(100),
   PRIMARY KEY (codigoAlquiler),
   FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion)
 );
@@ -125,20 +125,23 @@ INSERT INTO Peticion
       VALUES (default, '2020-01-02 11:30:40', '2020-01-02 12:00:40', 4, 'juan.pperez', 'estandar');
 
 INSERT INTO Peticion
-      VALUES (default, '2020-01-03 16:12:30', '2020-01-03 16:42:30', 3, 'martaND9', 'enMano');
+      VALUES (default, '2020-01-03 16:12:30', '2020-01-03 16:42:30', 3, 'juan.pperez', 'enMano');
 
 INSERT INTO Peticion
-      VALUES (default, '2020-02-05 20:22:11', '2020-02-05 20:52:11', 2, 'martaND9', 'estandar');
+      VALUES (default, '2020-02-05 20:22:11', '2020-02-05 20:52:11', 2, 'juan.pperez', 'estandar');
 
 -- Alquileres
 INSERT INTO Alquiler
-      VALUES (3.8, '2020-01-01 14:03:20', '2020-01-01 12:33:07', default, 1, 0, 'Calle de Santa Clara nº 12', 'Calle Cardenal Cisneros nº 24');
+      VALUES (3.8, '2020-01-01 14:03:20', '2020-01-01 12:33:07', default, 1, 1, 'Calle de Santa Clara nº 12', 'Calle Cardenal Cisneros nº 24');
 
 INSERT INTO Alquiler
       VALUES (5.2, '2020-01-03 17:33:21', '2020-01-03 16:42:28', default, 3, 0, 'Plaza de Poniente', 'Covaresa');
 
 INSERT INTO Alquiler
-      VALUES (2.5, '2020-01-02 12:00:21', '2020-01-02 11:42:28', default, 2, 0, 'Plaza de la Universidad', 'La Flecha');
+      VALUES (2.5, NULL, '2020-01-02 11:42:28', default, 2, 0, 'Plaza de la Universidad', 'La Flecha');
+
+INSERT INTO Alquiler
+      VALUES (4.1, '2020-02-05 21:00:21', '2020-02-05 20:42:28', default, 4, 0, 'Plaza de la Mazorca', 'Calle la Chancla nº 4');
  
 
 -- Valoraciones

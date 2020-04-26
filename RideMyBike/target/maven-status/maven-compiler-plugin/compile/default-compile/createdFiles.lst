@@ -14,7 +14,6 @@ ridemybike/dominio/Freno.class
 ridemybike/dominio/Incidencia.class
 ridemybike/dominio/Peticion.class
 ridemybike/servlets/extraeBicicleta.class
-ridemybike/servlets/ObtenerViajes.class
 ridemybike/dominio/GradoIncidencia.class
 ridemybike/servlets/RecuperarViajes.class
 ridemybike/servlets/BicicletasCoordenadas.class
