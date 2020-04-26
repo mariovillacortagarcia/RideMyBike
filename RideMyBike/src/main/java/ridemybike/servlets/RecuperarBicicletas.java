@@ -38,7 +38,6 @@ public class RecuperarBicicletas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = "/mis_bicis.jsp";
         String nombreUsuario = "juan.pperez";
-        System.out.println(nombreUsuario);   
         ArrayList<Bicicleta> listaBicicletas = BicicletaDB.getBicicletasRegistradas(nombreUsuario);
         request.setAttribute("lista", listaBicicletas);
         
