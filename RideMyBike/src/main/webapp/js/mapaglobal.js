@@ -14,8 +14,10 @@ L.tileLayer(PROVEEDOR, {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(mapa);
 
-//Obtencion de las coordenadas de las bicis a traves de peticion al servler
-$.get('${pageContext.request.contextPath}/BicicletasCoordenadas', function (data) {
+console.log("Mapa creado");
+//Obtencion de las coordenadas de las bicis a traves de peticion al servlet
+$.get('BicicletasCoordenadas', function (data) {
+    console.log(data);
     var ubicaciones = JSON.parse(data);
     for (i = 0; i < ubicaciones.length; i++) {
         var lat = ubicaciones[i].lat;
