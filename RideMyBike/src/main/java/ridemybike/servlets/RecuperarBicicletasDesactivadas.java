@@ -15,14 +15,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Bicicleta;
+import ridemybike.dominio.EstadoBicicleta;
 import ridemybike.dominio.db.BicicletaDB;
 
 /**
- * Servlet par obtener la lista de bicicletas de un usuario.
+ * Servlet que extrae las bicicleras Desactivadas del usuario
  * @author Alberto
  */
-@WebServlet(name = "RecuperarBicicletas", urlPatterns = {"/RecuperarBicicletas"})
-public class RecuperarBicicletas extends HttpServlet {
+@WebServlet(name = "RecuperarBicicletasDesactivadas", urlPatterns = {"/RecuperarBicicletasDesactivadas"})
+public class RecuperarBicicletasDesactivadas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +36,19 @@ public class RecuperarBicicletas extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url = "/mis_bicis.jsp";
+         response.setContentType("text/html;charset=UTF-8");
+        String url = "/mis_bicisDesactivadas.jsp";
         String nombreUsuario = "juan.pperez";
-        System.out.println(nombreUsuario);   
-        ArrayList<Bicicleta> listaBicicletas = BicicletaDB.getBicicletasRegistradas(nombreUsuario);
-        request.setAttribute("lista", listaBicicletas);
+        System.out.println(nombreUsuario);  
+        EstadoBicicleta estado = EstadoBicicleta.Desactivado;
+        EstadoBicicleta estado2 = EstadoBicicleta.Pendiente;
+        ArrayList<Bicicleta> listaBicicletas = BicicletaDB.getBicicletasEstado(nombreUsuario, estado);
+        ArrayList<Bicicleta> listaBicicletas2 = BicicletaDB.getBicicletasEstado(nombreUsuario, estado2);
+        request.setAttribute("lista", listaBicicletas.addAll(listaBicicletas2));
         
         RequestDispatcher dispatcher=getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
-//      listaBicicletas = BicicletaDB.getBicicletasRegistradas(nombreUsuarioEj);
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
