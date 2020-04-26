@@ -200,7 +200,7 @@ public class BicicletaDB{
         ps.setString(1, nombreUsuario);
         
         ResultSet rs = ps.executeQuery();
-        if(rs.next()){
+        while(rs.next()){
             Bicicleta bicicleta = new Bicicleta();
             bicicleta.setCodigoBici(rs.getString("codigoBici"));
             bicicleta.setDescripcion(rs.getString("descripcion"));
