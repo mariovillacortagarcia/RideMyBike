@@ -35,7 +35,6 @@ public class BicicletasCoordenadas extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("PUTO UTI");
         ArrayList<Bicicleta> bicicletas = (ArrayList<Bicicleta>)BicicletaDB.selectAllBicicleta();
         String ubicaciones ="[";
         String ubicacion = null;
