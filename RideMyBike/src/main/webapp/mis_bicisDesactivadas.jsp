@@ -34,7 +34,6 @@
 
     
   <%
-      String nombreUsuarioEj = "juan.pperez";
       ArrayList<Bicicleta> listaBicicletas = new ArrayList<Bicicleta>();
       listaBicicletas = (ArrayList<Bicicleta>) request.getAttribute("lista");
   %>
@@ -43,10 +42,10 @@
         <div class="col-6">
           <div class="dropdown" >
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Bicicletas
+              Bicicletas Desactivadas
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-              <a class="dropdown-menu" href="mis_bicis.jsp">Todas</a>
+              <a class="dropdown-item" href="mis_bicis.jsp">Todas las bicicletas</a>
               <a class="dropdown-item" href="mis_bicisActivas.jsp">Bicicletas Activas</a>
               <a class="dropdown-item" href="mis_bicisDesactivadas.jsp">Bicicletas Desactivadas</a>
             </div>
@@ -166,9 +165,7 @@
                       </div>
                     </div>
                 </div>
-              </div>
-              <% } 
-               }%>          
+              </div>        
                         
                         
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
