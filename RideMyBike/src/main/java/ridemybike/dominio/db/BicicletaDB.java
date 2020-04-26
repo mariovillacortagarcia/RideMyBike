@@ -117,14 +117,18 @@ public class BicicletaDB{
                 bicicleta.setDescripcion(rs.getString("descripcion"));
                 bicicleta.setModelo(rs.getString("modelo"));
                 bicicleta.setTamCuadro(Double.parseDouble(rs.getString("tamCuadro")));
+
 //                bicicleta.setImagen((Part)rs.getBlob("imagen"));
+
+                //bicicleta.setImagen((Part)rs.getBlob("imagen"));
+
                 bicicleta.setMarca(rs.getString("marca"));
                 bicicleta.setFreno(Freno.valueOf(rs.getString("freno")));
                 bicicleta.setLatitud(Double.parseDouble(rs.getString("latitud")));
                 bicicleta.setLongitud(Double.parseDouble(rs.getString("longitud")));
                 bicicleta.setUsuarioPropietario(rs.getString("usuarioPropietario"));
                 bicicleta.setEstado(EstadoBicicleta.valueOf(rs.getString("estado")));
-                bicicleta.setCodigoActivacion(rs.getString("codigoAcivacion"));
+                //bicicleta.setCodigoActivacion(rs.getString("codigoAcivacion"));
                 lista.add(bicicleta);
             }
             rs.close();

@@ -35,27 +35,27 @@ public class BicicletasCoordenadas extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("PUTO UTI");
         ArrayList<Bicicleta> bicicletas = (ArrayList<Bicicleta>)BicicletaDB.selectAllBicicleta();
         String ubicaciones ="[";
         String ubicacion = null;
         String lat;
         String lon;
-        
+        if(bicicletas != null)
         for(Bicicleta bicicleta : bicicletas){
            lat = Double.toString(bicicleta.getLatitud());
            lon = Double.toString(bicicleta.getLongitud());
-           ubicacion = "{'lat':"+lat+", 'lon':"+ lon+"},";
+           ubicacion = "{"+'"'+"lat"+'"'+":"+lat+','+'"'+"lon"+'"'+":"+ lon+"},";
            ubicaciones += ubicacion;
         }
         if(ubicacion != null)
             ubicaciones = ubicaciones.substring(0, ubicaciones.length()-1);
         ubicaciones += "]";
-
-        response.setContentType("application/json");
+        response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.print(ubicaciones);
+            out.write(ubicaciones);
             out.flush();
         }
     }
