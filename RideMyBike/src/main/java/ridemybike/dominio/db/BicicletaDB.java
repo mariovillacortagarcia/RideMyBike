@@ -84,7 +84,7 @@ public class BicicletaDB{
                 bicicleta.setLongitud(Double.parseDouble(rs.getString("longitud")));
                 bicicleta.setUsuarioPropietario(rs.getString("usuarioPropietario"));
                 bicicleta.setEstado(EstadoBicicleta.valueOf(rs.getString("estado")));
-                bicicleta.setCodigoActivacion(rs.getString("codigoActivacion"));
+                //bicicleta.setCodigoActivacion(rs.getString("codigoActivacion"));
             }
             rs.close();
             ps.close();
