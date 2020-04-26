@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.db.AlquilerDB;
 
 
@@ -26,10 +27,8 @@ public class TerminarViaje extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String ubicacionFinal = "Ubicacion final"; //TODO obtener la ubicacion final aqui
-                                                   // Habria que sacarla de la bici, pero no searia realista porque la
-                                                   // ubicacion de la bici no cambia nunca al no tener los sensores gps
-                                                   // enviando señales cada minuto
+        Bicicleta bici = AlquilerDB.getBicicletaDelAlquiler(Integer.parseInt(request.getParameter("codigoAlquiler")));
+        String ubicacionFinal = "Ubicacion final ["+bici.getLatitud()+", "+bici.getLongitud()+"]"; //Traducir aqui las coordenadas finales por la direccion
         AlquilerDB.terminarViaje(Integer.parseInt(request.getParameter("codigoAlquiler")), ubicacionFinal);
         
         String url = "/RecuperarViajesEnProceso";

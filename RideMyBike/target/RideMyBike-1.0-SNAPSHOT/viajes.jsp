@@ -32,7 +32,7 @@
             </jsp:include>
 
             <!-- Contenido -->
-            <div class="container pt-4">
+            <div class="container pt-4 mb-5">
                 <!-- Navegacion por los viajes -->
                 <div class="card text-center">
                     <div class="card-header">
@@ -111,8 +111,8 @@
                                                     Opciones
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a action="ArchivarViaje" class="dropdown-item" href="#">Archivar viaje</a>
-                                                    <a action="EliminarViaje" class="dropdown-item" href="#">Eliminar viaje</a>
+                                                    <a class="dropdown-item" href="ArchivarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler() %>">Archivar viaje</a>
+                                                    <a class="dropdown-item" href="EliminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler() %>">Eliminar viaje</a>
                                                 </div>
                                             </div>
                                         </div>

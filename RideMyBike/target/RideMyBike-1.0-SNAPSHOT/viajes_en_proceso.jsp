@@ -32,7 +32,7 @@
             </jsp:include>
             
             <!-- Contenido -->
-            <div class="container pt-4">
+            <div class="container pt-4 mb-5">
                 <!-- Navegacion por los viajes -->
                 <div class="card text-center">
                     <div class="card-header">
@@ -95,7 +95,7 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="registrar_incidencia.html">Registrar incidencia</a>
-                                                    <a action="FinalizarViaje" class="dropdown-item" href="#">Finalizar viaje</a>
+                                                    <a class="dropdown-item" href="TerminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler() %>">Finalizar viaje</a>
                                                 </div>
                                             </div>
                                         </div>

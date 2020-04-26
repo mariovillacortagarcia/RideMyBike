@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import ridemybike.dominio.Alquiler;
+import ridemybike.dominio.Bicicleta;
 
  /**
  * @author Mario Villacorta Garcia
@@ -294,6 +295,39 @@ public class AlquilerDB {
             pool.freeConnection(connection);
             
             return alquileres;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Devuelve la bicicleta usada en el alquiler
+     * 
+     * @param codigoAlquiler el codigo del alquiler
+     * @return una Bicicleta con la bicicleta
+     */
+    public static Bicicleta getBicicletaDelAlquiler(int codigoAlquiler) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT codigoBici FROM Alquiler, Peticion WHERE Alquiler.codigoPeticion = Peticion.codigoPeticion AND Alquiler.codigoAlquiler = codigoAlquiler";
+        try {
+            // Obtenemos el codigo de la bici
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            String codigoBici = "";
+            if(rs.next()){
+                codigoBici = rs.getString("codigoBici");
+            }
+            
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            
+            return BicicletaDB.selectBicicleta(codigoBici);
+            
         } catch (Exception e) {
             e.printStackTrace();
             return null;
