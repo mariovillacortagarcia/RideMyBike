@@ -64,7 +64,6 @@
                     if(lista != null){
                         Boolean var = true;
                         Boolean var2 = true;        
-                        System.out.println(lista.size());
                         for(Bicicleta bici : lista){
                                 String marca = bici.getMarca();
                                 String modelo = bici.getModelo();
