@@ -41,13 +41,13 @@
                     //DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("hh:mm");
                     String hora1 = request.getParameter("hora");
                     //LocalDateTime hora = LocalDateTime.parse(hora1, formatter1);
-                    
+                    String nombreUsuario = "juan.pperez";
                 %>
                 <h5><b>Anota la información de la bicicleta que quieras añadir</b>🚴</h5>
                 <form action="upload.php" method="post" enctype="multipart/form-data"><br>
                     Selecciona una imagen para subir:
                     <div class="form-label-group pb-3">
-                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <input type="file" name="foto" id="fileToUpload">
                     </div>
                 </form>
                 <div class="form-group mb-2">

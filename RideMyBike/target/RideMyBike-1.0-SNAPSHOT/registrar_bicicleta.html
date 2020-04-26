@@ -67,26 +67,26 @@
 
     <form class="form-group mb-2">
       <h5><b>Anota la información de la bicicleta que quieras añadir</b>🚴</h5>
-      <form action="upload.php" method="post" enctype="multipart/form-data"><br>
+      <form action="upload.php" method="post" enctype="multipart/form-data" ><br>
         Selecciona una imagen para subir:
         <div class="form-label-group pb-3">
-          <input type="file" name="fileToUpload" id="fileToUpload">
+          <input type="file" name="fileToUpload" id="fileToUpload" name="foto">
         </div>
       </form>
-      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="get"> <!---  NO SE SI SE HACE ASI SI NO MIRAR DIAPOS --->
+      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="post"> <!---  NO SE SI SE HACE ASI SI NO MIRAR DIAPOS --->
         <label for="marcaBiciRegistro">Marca</label>
         <input type="String" class="form-control" id="marcaNuevaBici" name="marca">
       </div>
-      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="get">
+      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="post">
         <label for="modeloBiciRegistro">Modelo</label>
         <input type="String" class="form-control" id="modeloNuevaBici" name="modelo">
       </div>
-      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="get">
+      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="post">
         <label for="tamanoBiciRegistro">Tamaño de Cuadro (cm)</label>
         <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro">
       </div>
       <label for="frenoBiciRegistro">Tipo de Freno</label>
-      <div class="dropdown" action="registrar_bicicleta.jsp" method="get">
+      <div class="dropdown" action="registrar_bicicleta.jsp" method="post">
         <a class="btn btn-secondary dropdown-toggle " role="button" id="frenoNuevaBici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="tipoFreno">Tipos:</a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="#">Disco</a>
@@ -95,13 +95,13 @@
           <a class="dropdown-item" href="#">Holandeses</a>
         </div>
       </div>
-      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="get">
+      <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="post">
         <label for="descripcionBiciRegistro">Descripción</label>
         <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion"> </textarea>
       </div>
       <label for="informacionRevisionBici" class="pt-4">Para poder dar de alta la nueva bicicleta, necesitamos revisarla en un taller cercano a la ciudad que nos indiques</label>
 
-      <div class="dropdown" action="registrar_bicicleta.jsp" method="get">
+      <div class="dropdown" action="registrar_bicicleta.jsp" method="post">
         <a class="btn btn-secondary dropdown-toggle " role="button" id="talleresCiudades" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="ciudad">Ciudades:</a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="#">Valladolid, C/Falsa 123</a>
@@ -113,14 +113,14 @@
 
       <div class="row pt-4">
         <div class="col-6">
-          <div class="form-group mb-2">
-            <input type="date" class="form-control" id="exampleInputFechaRevision" aria-describedby="emailHelp" placeholder="dd/mm/aa">
+          <div class="form-group mb-2" action="registrar_bicicleta.jsp" method="post">
+            <input type="date" class="form-control" id="exampleInputFechaRevision" aria-describedby="emailHelp" placeholder="dd/mm/aa" name="fecha1">
             <small id="emailHelp" class="form-text text-muted">La fecha de revisión de la bicicleta (dd/mm/aaaa)</small>
           </div>
         </div>
         <div class="col-6">
-          <div class="form group mb-2">
-            <input type="time" class="form-control" id="exampleInputHoraRevision" aria-describedby="emailHelp" placeholder="hh:mm">
+          <div class="form group mb-2" action="registrar_bicicleta.jsp" method="post">
+            <input type="time" class="form-control" id="exampleInputHoraRevision" aria-describedby="emailHelp" placeholder="hh:mm" name="hora1">
             <small id="emailHelp" class="form-text text-muted">Añade tu hora, solo se atiende por cita previa y el horario es de 10:00 a 13:00 y de 16:00 a 20:00 (hh:mm)**</small>
           </div>
         </div>

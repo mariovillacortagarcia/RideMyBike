@@ -18,7 +18,6 @@ public class PeticionRevision {
     private String nombreUsuario;
     private LocalDate fecha;
     private LocalDateTime hora;
-    private String codigo;
     private String codigoBicicleta;
     
     /**
@@ -29,7 +28,6 @@ public class PeticionRevision {
         nombreUsuario = "";
         fecha = null;
         hora = null;
-        codigo = "";
         codigoBicicleta = "";
     }
     
@@ -76,16 +74,7 @@ public class PeticionRevision {
         this.hora = hora;
     }
     
-    /**
-     * Metodo para dar valor al codigo identificador de la reunion que se va a realizar 
-     * @param codigo Es la cadena identificadora de la reunion
-     */
-    public void setCodigo(String codigo){
-        if(codigo == null || codigo.equals("")){
-            throw new IllegalArgumentException("Codigo no valida");
-        }
-        this.codigo = codigo;
-    }
+
     
     /**
      * Metodo para dar valor al identificador de la bicicleta que se va a anadir al sistema
@@ -129,14 +118,7 @@ public class PeticionRevision {
     public LocalDateTime getHora(){
         return hora;
     }
-    
-    /**
-     * Funcion que retorna el codigo identificador de la reunion
-     * @return La cadena identificadora de la reunion establecida
-     */
-    public String getCodigo(){
-        return codigo;
-    }
+
     
     /**
      * Funcion que retorna el codigo de la bicicleta que se dara de alta en la reunion

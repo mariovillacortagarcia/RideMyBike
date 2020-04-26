@@ -38,15 +38,14 @@ public class PeticionRevisionDB {
           ConnectionPool pool = ConnectionPool.getInstance();
           Connection connection = pool.getConnection();
           PreparedStatement ps;
-          String query = "INSERT INTO PeticionRevision(codigo, nombreUsuario, ciudad, fecha, hora, ,codigoBicicleta) VALUES (?, ?, ?, ?, ?, ?)";
+          String query = "INSERT INTO PeticionRevision(nombreUsuario, ciudad, fecha, hora, ,codigoBicicleta) VALUES (?, ?, ?, ?, ?)";
           try {
               ps = connection.prepareStatement(query);
-              ps.setString(1, peticion.getCodigo());
-              ps.setString(2, peticion.getNombreUsuario());
-              ps.setString(3, peticion.getCiudad());
-              ps.setString(4, peticion.getFecha().toString());
-              ps.setString(5, peticion.getHora().toString());
-              ps.setString(6, peticion.getCodigoBicicleta());
+              ps.setString(1, peticion.getNombreUsuario());
+              ps.setString(2, peticion.getCiudad());
+              ps.setString(3, peticion.getFecha().toString());
+              ps.setString(4, peticion.getHora().toString());
+              ps.setString(5, peticion.getCodigoBicicleta());
               int res = ps.executeUpdate();
               ps.close();
               pool.freeConnection(connection);
@@ -78,7 +77,6 @@ public class PeticionRevisionDB {
             PeticionRevision peticion = null;
             if  (rs.next()) {
                 peticion = new PeticionRevision();
-                peticion.setCodigo(rs.getString("codigo"));
                 peticion.setCodigoUsuario(rs.getString("nombreUsuario"));
                 peticion.setFecha(LocalDate.parse(rs.getString("fecha")));
                 peticion.setHora(LocalDateTime.parse(rs.getString("hora")));
