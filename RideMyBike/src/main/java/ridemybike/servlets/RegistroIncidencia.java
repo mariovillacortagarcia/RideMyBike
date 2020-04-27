@@ -13,6 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ridemybike.dominio.GradoIncidencia;
+import ridemybike.dominio.Incidencia;
+import ridemybike.dominio.db.IncidenciaDB;
 
 /**
  *
@@ -34,17 +37,36 @@ public class RegistroIncidencia extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-       //try{
+        try {
+            Incidencia incidencia = new Incidencia();
             String descripcionIncidencia = (String) request.getParameter("descripcionIncidencia");
-            if(descripcionIncidencia == null)
+            if (descripcionIncidencia == null) {
                 descripcionIncidencia = "";
+            }
             String grado = (String) request.getParameter("grado");
-            int idAlquiler = Integer.parseInt((String)request.getParameter("idAlquiler"));
-            
-            out.println(Integer.toString(idAlquiler)+" "+grado+" "+descripcionIncidencia);
-        //}catch(Exception e){
-        
-        //}
+            switch (grado) {
+                case "leve":
+                    incidencia.setGravedad(GradoIncidencia.Leve);
+                    break;
+                case "moderada":
+                    incidencia.setGravedad(GradoIncidencia.Moderado);
+                    break;
+                default:
+                    incidencia.setGravedad(GradoIncidencia.Grave);
+            }
+            int idAlquiler = Integer.parseInt((String) request.getParameter("idAlquiler"));
+            incidencia.setCodigoPeticion(idAlquiler);
+            incidencia.setDescripcion(descripcionIncidencia);
+            IncidenciaDB.insertarIncidencia(incidencia);
+            String url = "/incidenciaRegistroCorrecto.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            String url = "/incidenciaRegistroIncorrecto.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

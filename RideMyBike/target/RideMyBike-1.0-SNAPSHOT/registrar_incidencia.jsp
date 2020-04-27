@@ -25,28 +25,28 @@
   <div class="container pt-4 mt-1">
     <!--Formulario de Registro de una incidencia-->
 
-    <form class="form-group mb-2">
+    <form action="RegistroIncidencia?idAlquiler=<%=request.getParameter("idAlquiler")%>" method="POST" class="form-group mb-2">
       <h5><b>Anota la información de la incidencia </b>⚠️</h5>
       <div class="form-group mb-2">
         <label for="descripcionIncidencia">Descripción</label>
-        <textarea type="String" class="form-control" id="descripcionIncindencia" rows="4"> </textarea>
+        <textarea type="String" class="form-control" id="descripcionIncindencia" name="descripcionIncidencia" rows="4"> </textarea>
       </div>
       <div class="form-group mb-2">
         <label for="gradoIncidencia">Grado</label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="grado" id="grado1" value="option1" checked>
+          <input class="form-check-input" type="radio" name="grado" id="grado1" value="leve" checked>
           <label class="form-check-label" for="grado1">
             <b>Leve</b>: la bicicleta es utilizable, solo presenta daños superficiales y/o estéticos.
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="grado" id="grado2" value="option2">
+          <input class="form-check-input" type="radio" name="grado" id="grado2" value="moderada">
           <label class="form-check-label" for="grado2">
             <b>Moderada</b>: la bicicleta no es utilizable, pero se puede reparar en un plazo máximo de un día.
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="grado" id="grado3" value="option3">
+          <input class="form-check-input" type="radio" name="grado" id="grado3" value="grave">
           <label class="form-check-label" for="grado3">
             <b>Grave</b>: la bicicleta no es utilizable, tiene que pasar por un mecánico.
           </label>
@@ -54,7 +54,7 @@
       </div>
       <div class="pt-4">
         
-        <button type="button" onclick="location.href='viajes_en_proceso.jsp'" class="btn btn-success">Registrar incidencia</button>
+        <button type="submit" onclick="location.href='viajes_en_proceso.jsp'" class="btn btn-success">Registrar incidencia</button>
       </div>
     </form>
   </div>
