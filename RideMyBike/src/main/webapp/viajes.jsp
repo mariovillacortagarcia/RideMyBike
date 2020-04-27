@@ -28,7 +28,7 @@
             <!---Cabecera -->
             <jsp:include page="header.jsp" >
                 <jsp:param name="paginaMostrada" value="Viajes" />
-                <jsp:param name="sesionIniciada" value="false" />
+                <jsp:param name="sesionIniciada" value="true" />
             </jsp:include>
 
             <!-- Contenido -->
@@ -136,6 +136,12 @@
                 </div>
 
             </div>
+                            
+<!-- Footer -->
+    <jsp:include page="footer.jsp" >
+        <jsp:param name="etiqueta" value="RideMyBike" />
+        <jsp:param name="mostrarBoton" value="false" />
+    </jsp:include>
             <!-- Optional JavaScript -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
