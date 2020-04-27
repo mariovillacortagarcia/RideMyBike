@@ -1,3 +1,14 @@
+<%-- 
+    Document   : index
+    Created on : 25 abr. 2020, 15:05:10
+    Author     : JCHFJ
+--%>
+
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="ridemybike.dominio.*"%>
+<%@page import="ridemybike.dominio.db.*"%>
 <!doctype html>
 <html lang="es">
 
@@ -22,56 +33,13 @@
     </head>
 
     <body>
-        <div class="container-fluid" style="background-color:#85c1e9">
-            <!---Cabecera -->
-            <div class="row p-3 align-items-center">
-                <div class="col-2">
-                    <img style="height:auto;max-width:125%" src="img/RideMyBike_icon_green.png" />
-                </div>
-                <div class="col-6">
-                    <h5 class="text-white"><b>RideMyBike</b>, la página de préstamo de bicicletas que lucha por un aire
-                        más puro en nuestras ciudades</h5>
-                </div>
-                <div class="col-4">
-                    <div>
-                        <button type="button" onclick="location.href = 'registrarse.html'" class="btn btn-light">Registrarse</button>
-                        <button type="button" onclick="location.href = 'iniciar_sesion.html'" class="btn btn-success">Iniciar sesión</button>
-                    </div>
-
-                </div>
-            </div>
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <!-- Menu de navegacion -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle	navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home 🏠<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="mis_bicis.html">Mis Bicis 🚴‍</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="viajes.html">Viajes 🚵‍</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="garantias.html">Garantías 🛡️</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sobre_nosotros.html">Sobre nosotros 💬</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="ayuda.html">Ayuda ❓</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-
+        <!--- Cabecera -->
+        <jsp:include page="header.jsp" >
+            <jsp:param name="paginaMostrada" value="Home" />
+            <jsp:param name="sesionIniciada" value="true" />
+        </jsp:include>
+        
         <!-- Contenido -->
-
         <div id="carouselAlquiler" class="carousel slide" data-ride="carousel" data-interval="false">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -84,21 +52,21 @@
                                 <h5><b>1. Elige una bici libre </b>🚴</h5>
                                 <div id="mapaglobal" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black">
                                 </div><br>
-                                Bicicleta seleccionada: <a id="bicicletaSeleccionada">Ninguna </a>
+                                Bicicleta seleccionada: <a id="bicicletaSeleccionada">Ninguna  </a>
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <!--Formulario de fecha -->
-                                <form class="form-group mb-2">
+                                <form class="form-group mb-2" action="InicioPeticion" method="post">
                                     <h5><b>2. Indica el tiempo de uso </b>🕒</h5>
                                     <div class="form-group mb-2">
                                         <label for="entradaFechaInicio">Inicio del préstamo</label>
-                                        <input type="datetime-local" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Desde...">
-                                        <small id="emailHelp" class="form-text text-muted">La fecha de inicio del préstamo (dd/mm/aaaa)</small>
+                                        <input type="datetime-local" class="form-control" id="fechaInicioPrestamo" aria-describedby="emailHelp" placeholder="Desde...">
+                                        <small id="fechaInicioHelp" class="form-text text-muted">La fecha de inicio del préstamo (dd/mm/aaaa)</small>
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="entradaFechaFinalización">Fin del préstamo</label>
-                                        <input type="datetime-local" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Hasta...">
-                                        <small id="emailHelp" class="form-text text-muted">La fecha de finalización del préstamo (dd/mm/aaaa)</small>
+                                        <input type="datetime-local" class="form-control" id="fechaFinPrestamo" aria-describedby="emailHelp" placeholder="Hasta...">
+                                        <small id="fechaFinHelp" class="form-text text-muted">La fecha de finalización del préstamo (dd/mm/aaaa)</small>
                                     </div>
                                     <a href="#carouselAlquiler" role="button" data-slide="next">
                                         <button class="btn btn-outline-success" type="submit">Siguiente</button>
@@ -108,28 +76,43 @@
                         </div>
                     </div>
                 </div>
+                <%
+                    // TO - DO: Obtener correctamente la id de la bicicletaSeleccionada.
+                    //int idBiciSeleccionada = Integer.parseInt(request.getParameter("bicicletaSeleccionada"));
+                    SimpleDateFormat FormFechaEntera = new SimpleDateFormat("dd-MM-yyyy-hh-mm");
+                    Date fechaInicioPrestamo = FormFechaEntera.parse(request.getParameter("fechaInicioPrestamo"));
+                    Date fechaFinPrestamo = FormFechaEntera.parse(request.getParameter("fechaFinPrestamo"));
+                    SimpleDateFormat FormFecha = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat FormHora = new SimpleDateFormat("hh-mm");
+                    Date fechaInicio = FormFecha.parse(request.getParameter("fechaInicioPrestamo"));
+                    Date fechaFin = FormFecha.parse(request.getParameter("fechaFinPrestamo"));
+                    Date horaInicio = FormHora.parse(request.getParameter("fechaInicioPrestamo"));
+                    Date horaFin = FormHora.parse(request.getParameter("fechaFinPrestamo"));
+                %>
                 <div class="carousel-item">
                     <!-- Parte 2/2 del formulario-->
                     <div class="container p-4">
                         <div class="row">
+                             <!-- Form añadido para enviar al servlet -->
+                            <form method="post"
                             <div class="col-lg-8 col-sm-12">
                                 <div class="container mb-10">
                                     <!-- Opciones adicionales del alquiler -->
                                     <h5><b>3. Opciones adicionales </b></h5>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="opcion1">
-                                        <label class="form-check-label" for="opcion1">
+                                        <input class="form-check-input" type="checkbox" value="" id="opSeguro">
+                                        <label class="form-check-label" for="opSeguro">
                                             Seguro de viaje +1€
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="opcion2">
-                                        <label class="form-check-label" for="opcion2">
+                                        <input class="form-check-input" type="checkbox" value="" id="opTarde">
+                                        <label class="form-check-label" for="opTarde">
                                             Llegaré tarde (media hora extra de espera) +1€
                                         </label>
                                     </div>
                                     <div class="form-check mb-5">
-                                        <input class="form-check-input" type="checkbox" value="" id="opcion3" disabled>
+                                        <input class="form-check-input" type="checkbox" value="" id="opEnMano" disabled>
                                         <label class="form-check-label" for="opcion3">
                                             Alquiler en mano (no disponible para esta bici)
                                         </label>
@@ -139,7 +122,8 @@
                                     <button class="btn btn-outline-secondary">Anterior</button>
                                 </a>
                             </div>
-
+                            </form>
+                            
                             <div class="col-lg-4 col-sm-12">
                                 <!-- Resumen de confirmacion -->
                                 <h5><b>4. Confirmar pago</b></h5>
@@ -147,12 +131,12 @@
                                     <li class="list-group-item">
                                         <p>
                                             Bicicleta: --- <br>
-                                            Desde el 20/3/2020 a las 13:00<br>
-                                            Hasta el 20/3/2020 a las 14:00<br>
+                                            Desde el <%=fechaInicio%> a las <%=horaInicio%><br>
+                                            Hasta el <%=fechaFin%> a las <%=horaFin%><br>
                                             Metodo de pago: Mastercard
                                         </p>
                                     </li>
-                                    <li class="list-group-item"><b>Total:</b> 3,15€</li>
+                                    <li class="list-group-item"><b>Total:</b> <%=request.getParameter("precio")%>€</li>
                                 </ul>
                                 <div class="container p-3">
                                     <button class="btn btn-outline-success">RideMyBike!</button>
@@ -167,9 +151,14 @@
             <a class="carousel-control-prev" href="#carouselAlquiler" role="button" data-slide="prev">
             </a>-->
         </div>
+        <!-- Footer -->
+        <jsp:include page="footer.jsp" >
+            <jsp:param name="etiqueta" value="RideMyBike" />
+            <jsp:param name="mostrarBoton" value="false" />
+        </jsp:include>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="js/bootstrap.js"></script>
         <!-- Make sure you put this AFTER Leaflet's CSS -->
