@@ -56,6 +56,7 @@
                             boolean sinViajes = true;
                             if (alquileres != null) {
                                 for (Alquiler alquiler : alquileres) {
+                                    int idAlquiler = alquiler.getCodigoAlquiler();
                                     String precio = Double.toString(alquiler.getPrecio());
                                     String inicio = alquiler.getInicio();
                                     LocalDateTime fechaInicio = alquiler.getHoraInicial().toLocalDateTime();
@@ -94,7 +95,7 @@
                                                 Opciones
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="registrar_incidencia.jsp">Registrar incidencia</a>
+                                                <a class="dropdown-item" href="registrar_incidencia.jsp&idAlquiler=<%=idAlquiler%>">Registrar incidencia</a>
                                                 <a class="dropdown-item" href="TerminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Finalizar viaje</a>
                                             </div>
                                         </div>
