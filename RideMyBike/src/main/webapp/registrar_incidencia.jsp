@@ -34,19 +34,19 @@
       <div class="form-group mb-2">
         <label for="gradoIncidencia">Grado</label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="grado" id="grado1" value="option1" checked>
+          <input class="form-check-input" type="radio" name="grado" id="grado1" value="leve" checked>
           <label class="form-check-label" for="grado1">
             <b>Leve</b>: la bicicleta es utilizable, solo presenta daños superficiales y/o estéticos.
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="grado" id="grado2" value="option2">
+          <input class="form-check-input" type="radio" name="grado" id="grado2" value="moderada">
           <label class="form-check-label" for="grado2">
             <b>Moderada</b>: la bicicleta no es utilizable, pero se puede reparar en un plazo máximo de un día.
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="grado" id="grado3" value="option3">
+          <input class="form-check-input" type="radio" name="grado" id="grado3" value="grave">
           <label class="form-check-label" for="grado3">
             <b>Grave</b>: la bicicleta no es utilizable, tiene que pasar por un mecánico.
           </label>
