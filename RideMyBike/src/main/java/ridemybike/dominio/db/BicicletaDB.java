@@ -287,8 +287,30 @@ public class BicicletaDB{
         insertarBicicleta(bici);    
   }
     
-    public static void insertaImagen(){
-        
+    /**
+     * Funcion que sirve para activar una bicicleta con su codigo de activacion
+     * @param codigoActivacion Es el codigo de activacion de la Bicicleta
+     * @param codigoBicicleta Es el identificador de la bicicleta la cual se va a identificar
+     * @throws SQLException Excepcion que se lanza si existe algun tipo de fallo con la base de datos
+     * @throws IOException 
+     */
+    public static void activaBicicletaCodigo(String codigoActivacion, String codigoBicicleta) throws SQLException, IOException{
+        if(codigoActivacion == null || codigoActivacion.equals("")){
+            throw new IllegalArgumentException("El codigo de activacion de la bicicleta introducida NO es valido.");
+        }
+        if(codigoBicicleta == null || codigoBicicleta.equals("")){
+            throw new IllegalArgumentException("El codigo de la bicicleta introducida NO es valido.");
+        }
+        Bicicleta bici = BicicletaDB.selectBicicleta(codigoBicicleta);
+        if(bici.getCodigoActivacion().equals(codigoActivacion)){ //es el codigo de activacion de la bici
+            bici.setEstado(EstadoBicicleta.Activado);
+            BicicletaDB.eliminaUnaBicicleta(codigoBicicleta);
+            BicicletaDB.insertarBicicleta(bici);
+        }
     }
+        
+        
+        
+    
   
 }

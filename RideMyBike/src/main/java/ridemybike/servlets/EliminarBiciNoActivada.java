@@ -17,17 +17,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Bicicleta;
-import ridemybike.dominio.ValoracionBicicleta;
 import ridemybike.dominio.db.BicicletaDB;
 import ridemybike.dominio.db.PeticionDB;
 import ridemybike.dominio.db.ValoracionBicicletaDB;
 
 /**
- *
+ * Servlet que sirve para eliminar una bicicleta que se ha dado de alta en el sistema pero no se quiere activar, sino que se quiere sacar del sistema.
  * @author Alberto
  */
-@WebServlet(name = "EliminarBicicleta", urlPatterns = {"/EliminarBicicleta"})
-public class EliminarBicicleta extends HttpServlet {
+@WebServlet(name = "EliminarBiciNoActivada", urlPatterns = {"/EliminarBiciNoActivada"})
+public class EliminarBiciNoActivada extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,14 +40,14 @@ public class EliminarBicicleta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        Bicicleta bici = (Bicicleta)request.getAttribute("bicicleta");
-        BicicletaDB.eliminaUnaBicicleta(bici.getcodigoBici());
-        PeticionDB.eliminaUnaBicicleta(bici);
-        ValoracionBicicletaDB.eliminaUnaBicicleta(bici);
-
+        String codigoBicicleta = request.getAttribute("codigoBici").toString();
+        BicicletaDB.eliminaUnaBicicleta(codigoBicicleta);
+        
         String url = "/mis_bicisDesactivadas.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
+
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,7 +65,7 @@ public class EliminarBicicleta extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(EliminarBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EliminarBiciNoActivada.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -84,7 +83,7 @@ public class EliminarBicicleta extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(EliminarBicicleta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EliminarBiciNoActivada.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

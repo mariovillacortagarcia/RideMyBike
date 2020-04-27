@@ -122,19 +122,17 @@
                         <div class="col-12 text-center pt-4">
                         <% if(estadoBici == estado2){
                         %>
-                        <input type="String" class="form-control mb-2" id="codigoAct" placeholder="Introduzca el código de activación">
+                        <input type="String" class="form-control mb-2" name ="codigoActivacion" id="codigoAct" method="get" placeholder="Introduzca el código de activación">
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Opciones
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Activar</a>
-                            <a class="dropdown-item" href="#">Eliminar</a>
+                            <a class="dropdown-item" href="ActivarBiciCodigo">Activar</a>
+                            <a class="dropdown-item" href="EliminarBiciNoActivada">Eliminar</a>
                           </div>
                         </div>
                         <% }else{ %>
- 
-                      
                           <div class="dropdown" name="selector2">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Opciones
