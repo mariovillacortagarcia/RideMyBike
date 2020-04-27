@@ -25,7 +25,7 @@
   <div class="container pt-4 mt-1">
     <!--Formulario de Registro de una incidencia-->
 
-    <form class="form-group mb-2">
+    <form action="RegistroIncidencia" method="post" class="form-group mb-2">
       <h5><b>Anota la información de la incidencia </b>⚠️</h5>
       <div class="form-group mb-2">
         <label for="descripcionIncidencia">Descripción</label>
