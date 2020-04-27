@@ -50,9 +50,6 @@ public class registrarPeticionRevision extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "/registrar_bicicleta.jsp";
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
         try {
             String Marca = request.getParameter("marca");
             String Modelo = request.getParameter("modelo");
@@ -122,6 +119,9 @@ public class registrarPeticionRevision extends HttpServlet {
             out.println("</div>");
             out.println("</body>)");
             out.println("</html>");
+            String url = "direccionregistrocorrecto";
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+        dispatcher.forward(request, response);
 
         } catch (Exception e) {
             out.println("<!doctype html>");

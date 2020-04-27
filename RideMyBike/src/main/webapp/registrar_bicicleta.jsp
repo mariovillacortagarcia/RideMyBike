@@ -27,7 +27,7 @@
         </jsp:include>  
         <div class="container pt-4">
             <!--Formulario de Registro de una Nueva Bicicleta-->
-            <form action="registrarPeticionRevision" method="post"  class="form-group mb-2">
+            <form action="registrarPeticionRevision" method="POST"  class="form-group mb-2">
                 <h5><b>Anota la información de la bicicleta que quieras añadir</b>🚴</h5>
                     Selecciona una imagen para subir:
                     <div class="form-label-group pb-3">
@@ -47,12 +47,12 @@
                 </div>
                 <label for="frenoBiciRegistro">Tipo de Freno</label>
                 <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle " role="button" id="frenoNuevaBici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="tipoFreno">Tipos:</a>
+                    <a class="btn btn-secondary dropdown-toggle " role="button" id="frenoNuevaBici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Tipos:</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Disco</a>
-                        <a class="dropdown-item" href="#">Hidráulicos</a>
-                        <a class="dropdown-item" href="#">Zapatas</a>
-                        <a class="dropdown-item" href="#">Holandeses</a>
+                        <a class="dropdown-item" name="tipoFreno" value="disco">Disco</a>
+                        <a class="dropdown-item" name="tipoFreno" value="disco">Hidráulicos</a>
+                        <a class="dropdown-item" name="tipoFreno" value="disco">Zapatas</a>
+                        <a class="dropdown-item" name="tipoFreno" value="disco">Holandeses</a>
                     </div>
                 </div>
                 <div class="form-group mb-2">
@@ -62,25 +62,25 @@
                 <label for="informacionRevisionBici" class="pt-4">Para poder dar de alta la nueva bicicleta, necesitamos revisarla en un taller cercano a la ciudad que nos indiques</label>
 
                 <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle " role="button" id="talleresCiudades" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="ciudad">Ciudades:</a>
+                    <a class="btn btn-secondary dropdown-toggle " role="button" id="talleresCiudades" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Ciudades:</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Valladolid, C/Falsa 123</a>
-                        <a class="dropdown-item" href="#">Barcelona, C/Falsa 123</a>
-                        <a class="dropdown-item" href="#">Madrid, C/Falsa 123</a>
-                        <a class="dropdown-item" href="#">Zamora, C/Falsa 123</a>
+                        <a class="dropdown-item" name="ciudad" value="Valladolid, C/Falsa 123" >Valladolid, C/Falsa 123</a>
+                        <a class="dropdown-item" name="ciudad" value="Barcelona, C/Falsa 123" >Barcelona, C/Falsa 123</a>
+                        <a class="dropdown-item" name="ciudad" value="Madrid, C/Falsa 123" >Madrid, C/Falsa 123</a>
+                        <a class="dropdown-item" name="ciudad" value="Zamora, C/Falsa 123" >Zamora, C/Falsa 123</a>
                     </div>
                 </div>
 
                 <div class="row pt-4">
                     <div class="col-6">
                         <div class="form-group mb-2">
-                            <input type="date" class="form-control" id="exampleInputFechaRevision" aria-describedby="emailHelp" placeholder="dd/mm/aa">
+                            <input type="date" name="fecha1" class="form-control" id="exampleInputFechaRevision" aria-describedby="emailHelp" placeholder="dd/mm/aa">
                             <small id="emailHelp" class="form-text text-muted">La fecha de revisión de la bicicleta (dd/mm/aaaa)</small>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form group mb-2">
-                            <input type="time" class="form-control" id="exampleInputHoraRevision" aria-describedby="emailHelp" placeholder="hh:mm">
+                            <input type="time" name="hora1" class="form-control" id="exampleInputHoraRevision" aria-describedby="emailHelp" placeholder="hh:mm">
                             <small id="emailHelp" class="form-text text-muted">Añade tu hora, solo se atiende por cita previa y el horario es de 10:00 a 13:00 y de 16:00 a 20:00 (hh:mm)**</small>
                         </div>
                     </div>
