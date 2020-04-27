@@ -38,7 +38,7 @@ public class ActivarBiciCodigo extends HttpServlet {
             throws ServletException, IOException, SQLException {
         String codigoActivacion = request.getParameter("codigoActivacion");
         String codigoBicicleta = request.getParameter("codigoBici");
-        BicicletaDB.activaBicicletaCodigo(codigoActivacion, codigoBicicleta);
+        BicicletaDB.activaBicicletaCodigo(codigoActivacion, Integer.parseInt(codigoBicicleta));
         String url = "/mis_bicis.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);

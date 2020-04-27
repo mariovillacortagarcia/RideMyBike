@@ -35,7 +35,7 @@
   <!-- Contenido -->
 <!----- --->
 <% 
-    String codigoIncidencia = request.getAttribute("codigoIncidencia").toString();
+    int codigoIncidencia = Integer.parseInt(request.getAttribute("codigoIncidencia").toString());
     //se supone que codigoBicicleta es el parametro del anterior JSP y que usare para llamar al servlet extraeBicicleta para obtener la bicicleta
     ArrayList<Incidencia> listaOpiniones= new ArrayList<Incidencia>();
     listaOpiniones = (ArrayList<Incidencia>) request.getAttribute("lista");

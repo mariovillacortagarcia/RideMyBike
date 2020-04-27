@@ -70,7 +70,7 @@
                                 Double tamano = bici.getTamCuadro();
                                 String freno = bici.getFreno().toString();
                                 String descripcion = bici.getDescripcion();
-                                String codigoBici = bici.getcodigoBici();
+                                int codigoBici = bici.getcodigoBici();
                                 EstadoBicicleta estado = bici.getEstado();
                 %>
                 

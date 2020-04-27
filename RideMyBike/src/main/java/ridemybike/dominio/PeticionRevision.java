@@ -5,20 +5,20 @@
  */
 package ridemybike.dominio;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * Peticion que hace un usuario para poder dar de alta la bicicleta que quiere anadir al sistema
- * @author Alberto
  */
 
-public class PeticionRevision {
+public class PeticionRevision implements Serializable{
     private String ciudad;
     private String nombreUsuario;
     private LocalDate fecha;
     private LocalDateTime hora;
-    private String codigoBicicleta;
+    private int codigoBicicleta;
     
     /**
      * Metodo constructor que cumple los estandares de JavaBeans sin argumentos
@@ -28,7 +28,7 @@ public class PeticionRevision {
         nombreUsuario = "";
         fecha = null;
         hora = null;
-        codigoBicicleta = "";
+        codigoBicicleta = 0;
     }
     
     /**
@@ -80,8 +80,8 @@ public class PeticionRevision {
      * Metodo para dar valor al identificador de la bicicleta que se va a anadir al sistema
      * @param codigoBicicleta  Es el identificador de la bicicleta que se esta dando de alta
      */
-    public void setCodigoBicicleta(String codigoBicicleta){
-        if(codigoBicicleta == null || codigoBicicleta.equals("")){
+    public void setCodigoBicicleta(int codigoBicicleta){
+        if(codigoBicicleta <= 0){
             throw new IllegalArgumentException("El codigo de la bicicleta no es valido");
         }
         this.codigoBicicleta = codigoBicicleta;
@@ -124,7 +124,7 @@ public class PeticionRevision {
      * Funcion que retorna el codigo de la bicicleta que se dara de alta en la reunion
      * @return el identificador de la bicicleta que se dara de alta
      */
-    public String getCodigoBicicleta(){
+    public int getCodigoBicicleta(){
         return codigoBicicleta;
     }
 

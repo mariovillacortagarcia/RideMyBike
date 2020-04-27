@@ -31,7 +31,7 @@ public class BicicletaDB{
           String query = "INSERT INTO Bicicleta(codigoBici, descripcion, modelo, tamCuadro, imagen, marca, freno, latitud, longitud, usuarioPropietario, estado, codigoActivacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
           try {
               ps = connection.prepareStatement(query);
-              ps.setString(1, bicicleta.getcodigoBici());
+              ps.setString(1, bicicleta.getcodigoBici()+"");
               ps.setString(2, bicicleta.getDescripcion());
               ps.setString(3, bicicleta.getModelo());
               ps.setString(4, bicicleta.getTamCuadro() +"");
@@ -58,9 +58,9 @@ public class BicicletaDB{
      * @param codigoBici Es el codigo asignado a la bicicleta que queremos extraer
      * @return Una bicicleta almacenada en el sistema
      */
-    public static Bicicleta selectBicicleta(String codigoBici) {
-        if(codigoBici == null){
-            throw new IllegalArgumentException("El codigo de la bicicleta es igual a null");
+    public static Bicicleta selectBicicleta(int codigoBici) {
+        if(codigoBici <= 0){
+            throw new IllegalArgumentException("El codigo de la bicicleta es <= 0");
         }
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection= pool.getConnection();
@@ -69,12 +69,12 @@ public class BicicletaDB{
         String query= "SELECT * FROM Bicicleta WHERE codigoBici = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, codigoBici);
+            ps.setString(1, codigoBici+"");
             rs = ps.executeQuery();
             Bicicleta bicicleta = null;
             if  (rs.next()) {
                 bicicleta = new Bicicleta();
-                bicicleta.setCodigoBici(rs.getString("codigoBici"));
+                bicicleta.setCodigoBici(Integer.parseInt(rs.getString("codigoBici")));
                 bicicleta.setDescripcion(rs.getString("descripcion"));
                 bicicleta.setModelo(rs.getString("modelo"));
                 bicicleta.setTamCuadro(Double.parseDouble(rs.getString("tamCuadro")));
@@ -113,7 +113,7 @@ public class BicicletaDB{
             Bicicleta bicicleta = null;
             while(rs.next()) {
                 bicicleta = new Bicicleta();
-                bicicleta.setCodigoBici(rs.getString("codigoBici"));
+                bicicleta.setCodigoBici(Integer.parseInt(rs.getString("codigoBici")));
                 bicicleta.setDescripcion(rs.getString("descripcion"));
                 bicicleta.setModelo(rs.getString("modelo"));
                 bicicleta.setTamCuadro(Double.parseDouble(rs.getString("tamCuadro")));
@@ -146,9 +146,9 @@ public class BicicletaDB{
      * @param codigoBici Es el codigo de la bici que se usa para identificarla
      * @throws SQLException Excepcion relacionada con la base de datos
      */
-    public static void eliminaUnaBicicleta(String codigoBici) throws SQLException{
-        if(codigoBici == null){
-            throw new IllegalArgumentException("El codigo de la bicicleta es igual a null");
+    public static void eliminaUnaBicicleta(int codigoBici) throws SQLException{
+        if(codigoBici <= 0){
+            throw new IllegalArgumentException("El codigo de la bicicleta es menor a 0");
         }
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection= pool.getConnection();
@@ -202,7 +202,7 @@ public class BicicletaDB{
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             Bicicleta bicicleta = new Bicicleta();
-            bicicleta.setCodigoBici(rs.getString("codigoBici"));
+            bicicleta.setCodigoBici(Integer.parseInt(rs.getString("codigoBici")));
             bicicleta.setDescripcion(rs.getString("descripcion"));
             bicicleta.setModelo(rs.getString("modelo"));
             bicicleta.setTamCuadro(Double.parseDouble(rs.getString("tamCuadro")));            
@@ -231,13 +231,13 @@ public class BicicletaDB{
    * @param codigoBicicleta Es el codigo asociado a la bicicleta cuya foto se quiere extraer
    * @param respuesta Sera el formato sobre el que se devolvera la imagen de la bicleta
    */
-  public static void getImagen(String codigoBicicleta, OutputStream respuesta) {
+  public static void getImagen(int codigoBicicleta, OutputStream respuesta) {
       try {
           ConnectionPool pool = ConnectionPool.getInstance();
           Connection connection = pool.getConnection();
           PreparedStatement statement = null;
           statement = connection.prepareStatement("SELECT imagen FROM Bicicleta WHERE codigoBici=? ");
-          statement.setString(1, codigoBicicleta);
+          statement.setString(1, codigoBicicleta+"");
           ResultSet result = statement.executeQuery();
           if (result.next()) {
               Blob blob = result.getBlob("imagen");
@@ -294,12 +294,12 @@ public class BicicletaDB{
      * @throws SQLException Excepcion que se lanza si existe algun tipo de fallo con la base de datos
      * @throws IOException 
      */
-    public static void activaBicicletaCodigo(String codigoActivacion, String codigoBicicleta) throws SQLException, IOException{
+    public static void activaBicicletaCodigo(String codigoActivacion, int codigoBicicleta) throws SQLException, IOException{
         if(codigoActivacion == null || codigoActivacion.equals("")){
             throw new IllegalArgumentException("El codigo de activacion de la bicicleta introducida NO es valido.");
         }
-        if(codigoBicicleta == null || codigoBicicleta.equals("")){
-            throw new IllegalArgumentException("El codigo de la bicicleta introducida NO es valido.");
+        if(codigoBicicleta <= 0){
+            throw new IllegalArgumentException("El codigo de la bicicleta introducido NO es valido.");
         }
         Bicicleta bici = BicicletaDB.selectBicicleta(codigoBicicleta);
         if(bici.getCodigoActivacion().equals(codigoActivacion)){ //es el codigo de activacion de la bici

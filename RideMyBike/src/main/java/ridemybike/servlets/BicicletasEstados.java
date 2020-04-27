@@ -44,7 +44,7 @@ public class BicicletasEstados extends HttpServlet {
         response.setContentType("image/jpg");
         OutputStream respuesta = response.getOutputStream();
         String codigoBicicleta = request.getParameter("codigoBici");
-        BicicletaDB.getImagen(codigoBicicleta, respuesta);
+        BicicletaDB.getImagen(Integer.parseInt(codigoBicicleta), respuesta);
         respuesta.close();
         response.flushBuffer();
         

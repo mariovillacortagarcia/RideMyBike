@@ -5,8 +5,6 @@ import java.sql.Timestamp;
 
 /**
  * Representa un alquiler de una bicicleta realizado en el sistema.
- *
- * @author Mario Villacorta Garcia
  */
 public class Alquiler implements Serializable {
 
@@ -14,7 +12,7 @@ public class Alquiler implements Serializable {
     private Timestamp horaInicial;
     private Timestamp horaFinal;
     private int codigoAlquiler;
-    private String codigoPeticion;
+    private int codigoPeticion;
     private boolean archivado;
     private String inicio;
     private String fin;
@@ -27,7 +25,7 @@ public class Alquiler implements Serializable {
         horaInicial = null;
         horaFinal = null;
         codigoAlquiler = 0;
-        codigoPeticion = null;
+        codigoPeticion = 0;
         archivado = false;
         inicio = null;
         fin = null;
@@ -169,8 +167,8 @@ public class Alquiler implements Serializable {
      *
      * @param peticion: id de la peticion del alquiler.
      */
-    public void setPeticion(String peticion) {
-        if (peticion == null) {
+    public void setPeticion(int peticion) {
+        if (peticion <= 0) {
             throw new IllegalArgumentException("La peticion no puede ser nula");
         }
         
@@ -182,7 +180,7 @@ public class Alquiler implements Serializable {
      *
      * @return peticion del alquiler, null si no esta establecida.
      */
-    public String getPeticion() {
+    public int getPeticion() {
         return codigoPeticion;
     }
 

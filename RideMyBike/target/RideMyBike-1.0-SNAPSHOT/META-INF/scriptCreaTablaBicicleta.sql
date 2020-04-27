@@ -98,6 +98,18 @@ CREATE TABLE Incidencia(
   FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion)
 );
 
+CREATE TABLE PeticionRevision(
+  ciudad varchar(50) not null,
+  nombreUsuario varchar(30) not null,
+  fecha Timestamp not null,
+  hora Timestamp not null,
+  codigoBici int not null,
+  PRIMARY KEY (codigoBici),
+  FOREIGN KEY (codigoBici) REFERENCES Bicicleta(codigoBici),
+  FOREIGN KEY (nombreUsuario) REFERENCES Usuario(nombreUsuario)
+);
+
+
 -- Usuario
 INSERT INTO Usuario
       VALUES ('juan.pperez', 'Juan Pedro', 'Perez Sanchez', '71245360y', 'juanpperez@gmail.com', 634772244, '1234567898765432', 'hashpassword', CAST (X'FFFF' AS BLOB) , 'Calle Molina nº 13');

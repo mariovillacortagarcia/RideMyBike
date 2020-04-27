@@ -19,7 +19,7 @@ public class Usuario implements Serializable {
     private String direccion;
     
     /**
-     * Inicializador
+     * Inicializador segun los patrones JavaBeans
      */
     public Usuario(){
         nombre = null;

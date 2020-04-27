@@ -3,9 +3,11 @@ package ridemybike.dominio;
 import java.io.Serializable;
 import javax.servlet.http.Part;
 
-
+/**
+ * Bicicleta que se regista en el sistema para ser alquilada
+ */
 public class Bicicleta implements Serializable{
-  private String codigoBici;
+  private int codigoBici;
   private String descripcion;
   private String modelo;
   private double tamCuadro;
@@ -22,7 +24,7 @@ public class Bicicleta implements Serializable{
   * Metodo constructor creado a partir de los estandares JavaBeans
   */
   public Bicicleta(){
-      codigoBici = "";
+      codigoBici = 0;
       descripcion = "";
       modelo = "";
       tamCuadro = 0;
@@ -39,9 +41,9 @@ public class Bicicleta implements Serializable{
   * Metodo para dar un valor al codigo de la bicicleta
   * @param codigoBici es una cadena de texto que contiene el valor que se le da como identificador a la bicicleta
   */
-  public void setCodigoBici(String codigoBici){
-    if((codigoBici == null) || (codigoBici.equals(""))){
-      throw new IllegalArgumentException("El codigo de la bicicleta no puede ser vacio o nulo");
+  public void setCodigoBici(int codigoBici){
+    if(codigoBici <= 0 ){
+      throw new IllegalArgumentException("El codigo de la bicicleta no puede ser menor que 0");
     }
     this.codigoBici = codigoBici;
   }
@@ -156,7 +158,7 @@ public class Bicicleta implements Serializable{
   * Funcion que devuelve el valor del codigo de la bicileta
   * @return El codigo identificador de la bicicleta
   */
-  public String getcodigoBici(){
+  public int getcodigoBici(){
     return codigoBici;
   }
   /**

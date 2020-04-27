@@ -1,13 +1,15 @@
 package ridemybike.dominio;
 
 /**
- *
- * @author Alberto
+ * La valoracion que se le hace al ususario tanto si es el usuario que alquila como si es el dueno de la bicicleta
  */
 public class ValoracionUsuario extends Valoracion{
     
     private String usuarioValorado;
     
+    /**
+     * Metodo constructor de la valoracion, sigue los patrones JavaBeans
+     */
     public ValoracionUsuario(){
         super();
         super.setDescripcion("");
@@ -29,7 +31,4 @@ public class ValoracionUsuario extends Valoracion{
     public String getCodigoUsuario(){
         return usuarioValorado;
     }
-    
-    
-    
 }

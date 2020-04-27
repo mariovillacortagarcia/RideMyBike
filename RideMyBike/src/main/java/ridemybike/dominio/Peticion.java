@@ -16,7 +16,7 @@ public class Peticion implements Serializable{
     private TipoAlquiler tipo;
 
     /**
-     * Constructor de una petición por defecto.
+     * Constructor de una petición por defecto, sigue los patrones JavaBeans
      */
     public Peticion() {
         codigoPeticion = -1;

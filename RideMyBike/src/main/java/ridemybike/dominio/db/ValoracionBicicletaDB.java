@@ -22,7 +22,7 @@ public class ValoracionBicicletaDB{
             ps.setString(1, Integer.toString(valoracionBici.getCodigo()));
             ps.setString(2, valoracionBici.getDescripcion());
             ps.setString(3, Integer.toString(valoracionBici.getPuntuacion()));
-            ps.setString(4, valoracionBici.getCodigoBicicleta());
+            ps.setString(4, valoracionBici.getCodigoBicicleta()+"");
             int res = ps.executeUpdate();
             ps.close();
             pool.freeConnection(connection);
@@ -53,7 +53,7 @@ public class ValoracionBicicletaDB{
                 valoracionBici.setCodigo(Integer.parseInt(rs.getString("codigoAlquiler")));
                 valoracionBici.setDescripcion(rs.getString("descripcion"));
                 valoracionBici.setPuntuacion(Integer.parseInt(rs.getString("puntuacion")));
-                valoracionBici.setCodigoBicicleta(rs.getString("codigoBicicleta"));
+                valoracionBici.setCodigoBicicleta(Integer.parseInt(rs.getString("codigoBicicleta")));
             }
             rs.close();
             ps.close();
@@ -87,7 +87,7 @@ public class ValoracionBicicletaDB{
                 valoracion.setCodigo(Integer.parseInt(rs.getString("codigoAlquiler")));
                 valoracion.setDescripcion(rs.getString("descripcion"));
                 valoracion.setPuntuacion(Integer.parseInt(rs.getString("puntuacion")));
-                valoracion.setCodigoBicicleta(rs.getString("codigoBicicleta"));
+                valoracion.setCodigoBicicleta(Integer.parseInt(rs.getString("codigoBicicleta")));
                 lista.add(valoracion);
             }
             rs.close();
@@ -108,7 +108,7 @@ public class ValoracionBicicletaDB{
         Connection connection= pool.getConnection();
         PreparedStatement ps= null;
         ResultSet rs = null;
-        String codigoBici = bici.getcodigoBici();
+        int codigoBici = bici.getcodigoBici();
         String query= "DELETE FROM ValoracionBicicleta“+“WHERE codigoBici= ‘”+codigoBici+ “’”;";
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);

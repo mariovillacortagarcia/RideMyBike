@@ -41,7 +41,7 @@ public class EliminarBiciNoActivada extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String codigoBicicleta = request.getAttribute("codigoBici").toString();
-        BicicletaDB.eliminaUnaBicicleta(codigoBicicleta);
+        BicicletaDB.eliminaUnaBicicleta(Integer.parseInt(codigoBicicleta));
         
         String url = "/mis_bicisDesactivadas.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);

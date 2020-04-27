@@ -84,7 +84,7 @@ public class AlquilerDB {
                 alquiler.setHoraInicial(new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime()));
                 alquiler.setHoraFinal(new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime()));
                 alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
-                alquiler.setPeticion(rs.getString("peticion"));
+                alquiler.setPeticion(Integer.parseInt(rs.getString("peticion")));
                 String archivado = rs.getString("archivado");
                 if(archivado.equals("1")){
                     alquiler.setArchivado(true);
@@ -131,7 +131,7 @@ public class AlquilerDB {
                 Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
                 alquiler.setHoraFinal(horaFinal);
                 alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
-                alquiler.setPeticion(rs.getString("codigoPeticion"));
+                alquiler.setPeticion(Integer.parseInt(rs.getString("codigoPeticion")));
                 String archivado = rs.getString("archivado");
                 if(archivado.equals("1")){
                     alquiler.setArchivado(true);
@@ -182,7 +182,7 @@ public class AlquilerDB {
                 Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
                 alquiler.setHoraFinal(horaFinal);
                 alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
-                alquiler.setPeticion(rs.getString("codigoPeticion"));
+                alquiler.setPeticion(Integer.parseInt(rs.getString("codigoPeticion")));
                 String archivado = rs.getString("archivado");
                 if(archivado.equals("1")){
                     alquiler.setArchivado(true);
@@ -231,7 +231,7 @@ public class AlquilerDB {
                 Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
                 alquiler.setHoraFinal(horaFinal);
                 alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
-                alquiler.setPeticion(rs.getString("codigoPeticion"));
+                alquiler.setPeticion(Integer.parseInt(rs.getString("codigoPeticion")));
                 String archivado = rs.getString("archivado");
                 if(archivado.equals("1")){
                     alquiler.setArchivado(true);
@@ -280,7 +280,7 @@ public class AlquilerDB {
                 Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
                 alquiler.setHoraFinal(horaFinal);
                 alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
-                alquiler.setPeticion(rs.getString("codigoPeticion"));
+                alquiler.setPeticion(Integer.parseInt(rs.getString("codigoPeticion")));
                 String archivado = rs.getString("archivado");
                 if(archivado.equals("1")){
                     alquiler.setArchivado(true);
@@ -326,7 +326,7 @@ public class AlquilerDB {
             ps.close();
             pool.freeConnection(connection);
             
-            return BicicletaDB.selectBicicleta(codigoBici);
+            return BicicletaDB.selectBicicleta(Integer.parseInt(codigoBici));
             
         } catch (Exception e) {
             e.printStackTrace();

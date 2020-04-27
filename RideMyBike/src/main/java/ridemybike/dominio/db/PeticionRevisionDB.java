@@ -45,7 +45,7 @@ public class PeticionRevisionDB {
               ps.setString(2, peticion.getCiudad());
               ps.setString(3, peticion.getFecha().toString());
               ps.setString(4, peticion.getHora().toString());
-              ps.setString(5, peticion.getCodigoBicicleta());
+              ps.setString(5, peticion.getCodigoBicicleta()+"");
               int res = ps.executeUpdate();
               ps.close();
               pool.freeConnection(connection);
@@ -81,7 +81,7 @@ public class PeticionRevisionDB {
                 peticion.setFecha(LocalDate.parse(rs.getString("fecha")));
                 peticion.setHora(LocalDateTime.parse(rs.getString("hora")));
                 peticion.setCiudad(rs.getString("ciudad"));
-                peticion.setCodigoBicicleta(rs.getString("codigoBicicleta"));
+                peticion.setCodigoBicicleta(Integer.parseInt(rs.getString("codigoBicicleta")));
 
             }
             rs.close();

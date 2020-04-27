@@ -3,6 +3,9 @@ package ridemybike.dominio;
 import java.io.Serializable;
 
 
+/**
+ * La valoracion que se realiza sobre los servicios ofrecidos
+ */
 public abstract class Valoracion implements Serializable{
     
     private int codigoAlquiler;

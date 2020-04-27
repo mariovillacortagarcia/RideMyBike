@@ -101,7 +101,7 @@ public class PeticionDB {
         Connection connection= pool.getConnection();
         PreparedStatement ps= null;
         ResultSet rs = null;
-        String codigoBici = bici.getcodigoBici();
+        int codigoBici = bici.getcodigoBici();
         String query= "DELETE FROM Peticion“+“WHERE codigoBici= ‘”+codigoBici+ “’”;";
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);

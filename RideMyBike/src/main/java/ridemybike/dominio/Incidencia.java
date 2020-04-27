@@ -12,7 +12,7 @@ public class Incidencia implements Serializable {
     private GradoIncidencia gravedad;
     
     /**
-     * Inicializador
+     * Inicializador segun los parametros JavaBeans
      */
     public Incidencia(){
         descripcion = "";
