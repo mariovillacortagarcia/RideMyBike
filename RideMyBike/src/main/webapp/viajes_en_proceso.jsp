@@ -95,7 +95,7 @@
                                                 Opciones
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="registrar_incidencia.jsp&idAlquiler=<%=idAlquiler%>">Registrar incidencia</a>
+                                                <a class="dropdown-item" href="FormularioRegistroIncidencia?idAlquiler=<%=idAlquiler%>">Registrar incidencia</a>
                                                 <a class="dropdown-item" href="TerminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Finalizar viaje</a>
                                             </div>
                                         </div>
