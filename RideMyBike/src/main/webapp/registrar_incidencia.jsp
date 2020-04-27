@@ -25,11 +25,11 @@
   <div class="container pt-4 mt-1">
     <!--Formulario de Registro de una incidencia-->
 
-    <form action="RegistroIncidencia" method="post" class="form-group mb-2">
+    <form action="RegistroIncidencia?idAlquiler=<%=request.getParameter("idAlquiler")%>" method="POST" class="form-group mb-2">
       <h5><b>Anota la información de la incidencia </b>⚠️</h5>
       <div class="form-group mb-2">
         <label for="descripcionIncidencia">Descripción</label>
-        <textarea type="String" class="form-control" id="descripcionIncindencia" rows="4"> </textarea>
+        <textarea type="String" class="form-control" id="descripcionIncindencia" name="descripcionIncidencia" rows="4"> </textarea>
       </div>
       <div class="form-group mb-2">
         <label for="gradoIncidencia">Grado</label>
@@ -54,7 +54,7 @@
       </div>
       <div class="pt-4">
         
-        <button type="button" onclick="location.href='viajes_en_proceso.jsp'" class="btn btn-success">Registrar incidencia</button>
+        <button type="submit" onclick="location.href='viajes_en_proceso.jsp'" class="btn btn-success">Registrar incidencia</button>
       </div>
     </form>
   </div>
