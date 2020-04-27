@@ -31,6 +31,7 @@ import ridemybike.dominio.db.PeticionRevisionDB;
 
 /**
  * Insertar una bicicleta en la BD pendiente de aprovacion
+ *
  * @author Alberto
  */
 @WebServlet(name = "registrarPeticionRevision", urlPatterns = {"/registrarPeticionRevision"})
@@ -48,53 +49,56 @@ public class registrarPeticionRevision extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String Marca = request.getParameter("marca");
-        String Modelo = request.getParameter("modelo");
-        String TamanoCuadro = request.getParameter("tamanoCuadro");
-        String Descripcion = request.getParameter("descripcion");
-        String TipoFreno = request.getParameter("tipoFreno");
-        String Ciudad = request.getParameter("ciudad");
-        String fecha1 = request.getParameter("fecha");
-        String hora1 = request.getParameter("hora");
-        String nombreUsuario = request.getParameter("nombreUsuario");
-        Part foto = request.getPart("foto");
-        
-        Bicicleta bici = new Bicicleta();
-        bici.setMarca(Marca);
-        bici.setDescripcion(Descripcion);
-        bici.setModelo(Modelo);
-        bici.setTamCuadro(Double.parseDouble(TamanoCuadro));
-        Freno freno = Freno.valueOf(TipoFreno);
-        bici.setFreno(freno);
-        EstadoBicicleta estado = EstadoBicicleta.Pendiente;
-        bici.setEstado(estado);
-        bici.setUsuarioPropietario(nombreUsuario);
-        UUID idUno = UUID.randomUUID();
-        bici.setCodigoActivacion(idUno.toString());
-        bici.setImagen(foto);
-        BicicletaDB.insertarBicicleta(bici);
-
-        PeticionRevision peticion = new PeticionRevision();
-        peticion.setCiudad(Ciudad);
-        peticion.setFecha(LocalDate.parse(fecha1));
-        peticion.setHora(LocalDateTime.parse(hora1));
-        peticion.setCodigoUsuario(nombreUsuario);
-        
-        ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
-        lista = BicicletaDB.getBicicletasEstado(nombreUsuario, estado);
-        for(int i = 0; i < lista.size(); i++){
-            Bicicleta b1 = new Bicicleta();
-            b1 = lista.get(i);
-            if(b1.getCodigoActivacion().equals(idUno.toString())){
-                peticion.setCodigoBicicleta(b1.getcodigoBici());
-            }
-        }
-        PeticionRevisionDB.insertarPeticionRevision(peticion);
-        
-        String url= "/registrar_bicicleta.jsp";
+        String url = "/registrar_bicicleta.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);   
-        
+        dispatcher.forward(request, response);
+        try {
+            String Marca = request.getParameter("marca");
+            String Modelo = request.getParameter("modelo");
+            String TamanoCuadro = request.getParameter("tamanoCuadro");
+            String Descripcion = request.getParameter("descripcion");
+            String TipoFreno = request.getParameter("tipoFreno");
+            String Ciudad = request.getParameter("ciudad");
+            String fecha1 = request.getParameter("fecha");
+            String hora1 = request.getParameter("hora");
+            String nombreUsuario = "juan.pperez";
+            Part foto = request.getPart("foto");
+
+            Bicicleta bici = new Bicicleta();
+            bici.setMarca(Marca);
+            bici.setDescripcion(Descripcion);
+            bici.setModelo(Modelo);
+            bici.setTamCuadro(Double.parseDouble(TamanoCuadro));
+            Freno freno = Freno.valueOf(TipoFreno);
+            bici.setFreno(freno);
+            EstadoBicicleta estado = EstadoBicicleta.Pendiente;
+            bici.setEstado(estado);
+            bici.setUsuarioPropietario(nombreUsuario);
+            UUID idUno = UUID.randomUUID();
+            bici.setCodigoActivacion(idUno.toString());
+            bici.setImagen(foto);
+            BicicletaDB.insertarBicicleta(bici);
+
+            PeticionRevision peticion = new PeticionRevision();
+            peticion.setCiudad(Ciudad);
+            peticion.setFecha(LocalDate.parse(fecha1));
+            peticion.setHora(LocalDateTime.parse(hora1));
+            peticion.setCodigoUsuario(nombreUsuario);
+
+            ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
+            lista = BicicletaDB.getBicicletasEstado(nombreUsuario, estado);
+            for (int i = 0; i < lista.size(); i++) {
+                Bicicleta b1 = new Bicicleta();
+                b1 = lista.get(i);
+                if (b1.getCodigoActivacion().equals(idUno.toString())) {
+                    peticion.setCodigoBicicleta(b1.getcodigoBici());
+                }
+            }
+            PeticionRevisionDB.insertarPeticionRevision(peticion);
+            //Registro OK
+        } catch (Exception e) {
+            //Registro Mal
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

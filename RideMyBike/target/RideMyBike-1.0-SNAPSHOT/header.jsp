@@ -50,7 +50,7 @@
                 <a class="nav-link" href="index.jsp">Home 🏠</a>
           </li>
           <li class="nav-item <% s = pagina.equals("MisBicis") ? "active" : ""; %> <%= s %>">
-            <a class="nav-link" href="mis_bicis.jsp">Mis Bicis 🚴‍</a>
+            <a class="nav-link" href="RecuperarBicicletas">Mis Bicis 🚴‍</a>
           </li>
           <li class="nav-item <% s = pagina.equals("Viajes") ? "active" : ""; %> <%= s %> ">
             <a class="nav-link" href="RecuperarViajes">Viajes 🚵‍</a>

@@ -27,29 +27,12 @@
         </jsp:include>  
         <div class="container pt-4">
             <!--Formulario de Registro de una Nueva Bicicleta-->
-            <form class="form-group mb-2">
-                <%
-                    String Marca = request.getParameter("marca");
-                    String Modelo = request.getParameter("modelo");
-                    String TamanoCuadro = request.getParameter("tamanoCuadro");
-                    String Descripcion = request.getParameter("descripcion");
-                    String TipoFreno = request.getParameter("tipoFreno");
-                    String Ciudad = request.getParameter("ciudad");
-                    //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-                    String fecha1 = request.getParameter("fecha");
-                    //LocalDate fecha = LocalDate.parse(fecha1, formatter);
-                    //DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("hh:mm");
-                    String hora1 = request.getParameter("hora");
-                    //LocalDateTime hora = LocalDateTime.parse(hora1, formatter1);
-                    String nombreUsuario = "juan.pperez";
-                %>
+            <form action="registrarPeticionRevision" method="post"  class="form-group mb-2">
                 <h5><b>Anota la información de la bicicleta que quieras añadir</b>🚴</h5>
-                <form action="upload.php" method="post" enctype="multipart/form-data"><br>
                     Selecciona una imagen para subir:
                     <div class="form-label-group pb-3">
                         <input type="file" name="foto" id="fileToUpload">
                     </div>
-                </form>
                 <div class="form-group mb-2">
                     <label for="marcaBiciRegistro">Marca</label>
                     <input type="String" class="form-control" id="marcaNuevaBici" name="marca">
