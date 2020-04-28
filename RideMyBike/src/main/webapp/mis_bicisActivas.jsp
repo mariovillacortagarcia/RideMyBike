@@ -126,9 +126,9 @@
                               Opciones
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="ValoracionesBicicleta.jsp?codigoBicicleta=${codigoBici}">Opiniones</a>
+                              <a class="dropdown-item" href="ValoracionesBicicleta.jsp?codigoBicicleta=<%=codigoBici%>">Opiniones</a>
                               <a class="dropdown-item" href="ActivacionBicicleta?bicicleta=<%=bici%>">Activar/Desactivar Bicicleta</a>
-                              <a class="dropdown-item" href="HistorialAlquileres.jsp?codigoBicicleta=${codigoBici}">Historial de Alquileres</a>
+                              <a class="dropdown-item" href="HistorialAlquileres.jsp?codigoBicicleta=<%=codigoBici%>">Historial de Alquileres</a>
                               <a class="dropdown-item" href="EliminarBicicleta?bicicleta=<%=bici%>">Eliminar</a>
                             </div>
                               <%
