@@ -6,6 +6,8 @@
 package ridemybike.dominio.db;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.Peticion;
 import ridemybike.dominio.TipoAlquiler;
@@ -28,11 +30,11 @@ public class PeticionDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps;
-        String query = "INSERT INTO Peticion(hora, tiempoLimite, codigoBici, nombreArrendatario, tipo) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Peticion(hora, tiempoLimite, codigoBici, usuarioArrendatario, tipo) VALUES (?, ?, ?, ?, ?)";
         try {
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, peticion.getHora()+"");
-            ps.setString(2, peticion.getTiempoLimite()+"");
+            ps.setString(1, peticion.getHoraInicio().toString());
+            ps.setString(2, peticion.getHoraLimite().toString());
             ps.setString(3, peticion.getCodigoBici()+"");
             ps.setString(4, peticion.getNombreArrendatario());
             ps.setString(5, peticion.getTipo()+"");
@@ -60,7 +62,7 @@ public class PeticionDB {
      * el código especificado
      * @throws IllegalArgumentException si el código dado es negativo
      */
-    public static Peticion selectPeticion(int codigoPeticion) {
+    public static Peticion selectPeticion(int codigoPeticion) throws ParseException {
         if(codigoPeticion < 0){
             throw new IllegalArgumentException("El código de petición es negativo.");
         }
@@ -76,9 +78,10 @@ public class PeticionDB {
             rs = ps.executeQuery();
             Peticion peticion = null;
             if  (rs.next()) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                 peticion = new Peticion();
-                peticion.setHora(Time.valueOf(rs.getString("hora")));
-                peticion.setTiempoLimite(Time.valueOf(rs.getString("tiempoLimite")));
+                peticion.setHoraInicio(new Timestamp(dateFormat.parse(rs.getString("hora")).getTime()));
+                peticion.setHoraLimite(new Timestamp(dateFormat.parse(rs.getString("tiempoLimite")).getTime()));
                 peticion.setCodigoBici(Integer.parseInt(rs.getString("codigoBici")));
                 peticion.setNombreArrendatario(rs.getString("nombreArrendatario"));
                 peticion.setTipo(TipoAlquiler.valueOf(rs.getString("tipo")));

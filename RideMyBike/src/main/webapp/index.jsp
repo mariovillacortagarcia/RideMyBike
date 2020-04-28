@@ -49,8 +49,7 @@
                                     <h5><b>1. Elige una bici libre </b>🚴</h5>
                                     <div id="mapaglobal" class="mt-3 mb-2" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black"></div>
                                     Bicicleta seleccionada: <a id="bicicletaUbicacion">Ninguna  </a>
-                                    <a id="bicicletaId">sfsad</a>
-                                    <!-- <input type="hidden" id="bicicletaId" value=""> -->
+                                    <input type="hidden" name="bicicletaId" id="bicicletaId" value="">
                                 </div>
 
                                 <!-- Formulario de fecha -->
@@ -67,7 +66,7 @@
                                             <input type="date" class="form-control" name="fechaInicioPrestamo" id="fechaInicioPrestamo">
                                         </div>
                                         <div class="col">
-                                            <input type="time" class="form-control" id="horaInicioPrestamo">
+                                            <input type="time" class="form-control" name="horaInicioPrestamo" id="horaInicioPrestamo">
                                         </div>
                                     </div>
 
@@ -83,10 +82,10 @@
 
                                         <div class="row">
                                             <div class="col">
-                                                <input type="date" class="form-control" id="fechaFinPrestamo">
+                                                <input type="date" class="form-control" name="fechaFinPrestamo" id="fechaFinPrestamo">
                                             </div>
                                             <div class="col">
-                                                <input type="time" class="form-control" id="horaFinPrestamo">
+                                                <input type="time" class="form-control" name="horaFinPrestamo" id="horaFinPrestamo">
                                             </div>
                                         </div>
 
@@ -114,7 +113,7 @@
 
                                         <!-- Seguro de viaje -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="seguroViaje">
+                                            <input class="form-check-input" type="checkbox" value="" name="seguroViaje" id="seguroViaje">
                                             <label class="form-check-label" for="seguroViaje">
                                                 Seguro de viaje +1€
                                             </label>
@@ -122,7 +121,7 @@
 
                                         <!-- Llegaré tarde -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="llegareTarde">
+                                            <input class="form-check-input" type="checkbox" value="" name="llegareTarde" id="llegareTarde">
                                             <label class="form-check-label" for="llegareTarde">
                                                 Llegaré tarde (media hora extra de espera) +1€
                                             </label>
@@ -130,7 +129,7 @@
 
                                         <!-- Alquiler en mano o estandar -->
                                         <div class="form-check mb-5">
-                                            <input class="form-check-input" type="checkbox" value="" id="alquilerEnMano">
+                                            <input class="form-check-input" type="checkbox" value="" name="alquilerEnMano" id="alquilerEnMano">
                                             <label class="form-check-label" for="alquilerEnMano">
                                                 Alquiler en mano (bicicleta entregada presencialmente)
                                             </label>
@@ -153,13 +152,13 @@
                                                 Metodo de pago: Mastercard
                                             </p>
                                         </li>
-                                        <li class="list-group-item"><b>Total: </b> <label id="textoPrecioTotal"></label>€</li>
+                                        <li class="list-group-item"><b>Total: </b> <label name="textoPrecioTotal" id="textoPrecioTotal"></label>€</li>
                                     </ul>
                                     <div class="container p-3">
                                         <button class="btn btn-outline-success" type="submit">RideMyBike!</button>
 
                                         <a href="index.jsp" role="button">
-                                            <button class="btn btn-outline-danger" id="cancelarPeticion">Cancelar</button>
+                                            <button class="btn btn-outline-danger" name="cancelarPeticion" id="cancelarPeticion">Cancelar</button>
                                         </a>
 
                                     </div>

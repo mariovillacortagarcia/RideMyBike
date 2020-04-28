@@ -37,17 +37,22 @@ public class ActivacionBicicleta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        Bicicleta bici = (Bicicleta)request.getAttribute("bicicleta");
-        EstadoBicicleta nuevoEstado = bici.getEstado();
-        if(bici.getEstado().equals(EstadoBicicleta.Activado)){
-            nuevoEstado = nuevoEstado.Desactivado;
-        }else{
-            nuevoEstado = nuevoEstado.Activado;
-        }
-        BicicletaDB.cambiaEstadoBicicleta(bici, nuevoEstado);       
-        String url = "/mis_bicis.jsp";
-        RequestDispatcher dispacher = getServletContext().getRequestDispatcher(url);
-        dispacher.forward(request, response);
+       
+
+            int codigoBicicleta = Integer.parseInt(request.getParameter("codigoBicicleta"));
+            Bicicleta bici = BicicletaDB.selectBicicleta(codigoBicicleta);
+            EstadoBicicleta nuevoEstado = bici.getEstado();
+            if(bici.getEstado().equals(EstadoBicicleta.Activado)){
+                nuevoEstado = nuevoEstado.Desactivado;
+            }else{
+                nuevoEstado = nuevoEstado.Activado;
+            }
+            BicicletaDB.cambiaEstadoBicicleta(bici, nuevoEstado); 
+            String url = "/RecuperarBicicletas";
+            RequestDispatcher dispacher = getServletContext().getRequestDispatcher(url);
+            dispacher.forward(request, response);
+
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

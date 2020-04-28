@@ -47,7 +47,7 @@ public class InicioPeticion extends HttpServlet {
         String alquilerEnMano = request.getParameter("alquilerEnMano");
               
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-        Date parsedDate = dateFormat.parse(fechaInicio+" "+horaInicio);
+        Date parsedDate = dateFormat.parse(fechaInicio+" "+horaInicio+":00.000");
         Timestamp horaInicioPeticion = new java.sql.Timestamp(parsedDate.getTime());
         Timestamp horaLimite;
         Calendar cal = Calendar.getInstance();

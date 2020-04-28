@@ -41,7 +41,8 @@ public class EliminarBicicleta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        Bicicleta bici = (Bicicleta)request.getAttribute("bicicleta");
+        int codigoBicicleta = Integer.parseInt(request.getParameter("codigoBicicleta"));
+        Bicicleta bici = BicicletaDB.selectBicicleta(codigoBicicleta);
         BicicletaDB.eliminaUnaBicicleta(bici.getcodigoBici());
         PeticionDB.eliminaUnaBicicleta(bici);
         ValoracionBicicletaDB.eliminaUnaBicicleta(bici);

@@ -1,3 +1,8 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 //Iconos bicicletas
 var biciLibre = L.icon({
     iconUrl: 'img/mapa/bicicleta_libre.png',
@@ -33,22 +38,16 @@ $.get('BicicletasCoordenadas', function (data) {
         var id = ubicaciones[i].id;
         var lat = ubicaciones[i].lat;
         var lon = ubicaciones[i].lon;
-<<<<<<< HEAD
-        var marcador = L.marker([lat, lon], {icon: biciLibre, title:id}).addTo(mapa).on('click', function (e) {
-            $("#bicicletaUbicacion").text(e.latlng);
-            $("#bicicletaId").text(e.title);
-=======
         ids.push({lat: lat, lon: lon, id: id});
         var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
             $("#bicicletaUbicacion").text(e.latlng);
             for (j = 0; j < ids.length; j++) {
                 if (Math.abs(e.latlng.lat - ids[j].lat) < 0.001 && Math.abs(e.latlng.lng - ids[j].lon) < 0.001) {
-                    $("#bicicletaId").text(ids[j].id);
+                    $("#bicicletaId").val(ids[j].id);
                     break;
                 }
             }
 
->>>>>>> 94fabebb6aeb8e4379fa22f96649fbcc1e24e4ae
         });
         ;
     }
