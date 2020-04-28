@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 <%@page import="java.time.LocalDateTime"%>
@@ -34,9 +35,7 @@
 
 <!----- --->
 <% 
-
     int codigoBicicleta = Integer.parseInt(request.getParameter("codigoBicicleta"));
-
     //se supone que codigoBicicleta es el parametro del anterior JSP y que usare para 
     //llamar al servlet extraeBicicleta para obtener la bicicleta
     ArrayList<ValoracionBicicleta> listaOpiniones= new ArrayList<ValoracionBicicleta>();
