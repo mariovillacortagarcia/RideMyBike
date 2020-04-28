@@ -94,61 +94,15 @@ public class registrarPeticionRevision extends HttpServlet {
             }
             PeticionRevisionDB.insertarPeticionRevision(peticion);
             
-            out.println("<!doctype html>");
-            out.println("<html lang=\"es\">");
-            out.println("<head>");
-            out.println("<title> Mis bicis - RideMyBike </title>");
-            out.println("<meta charset=\"utf-8\">");
-            out.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">");
-            out.println("<link rel=\"icon\" type=\"image/png\" href=\"img/RideMyBike_icon_green.png\">");
-            out.println("<link rel=\"stylesheet\" href=\"css/bootstrap.css\">");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<jsp:include page=\"header.jsp\" >");
-            out.println("<jsp:param name=\"paginaMostrada\" value=\"MisBicis\" />");            
-            out.println("<jsp:param name=\"sesionIniciada\" value=\"true\" />");
-            out.println("</jsp:include>");
-            out.println("<div class=\"row\">");
-            out.println("<div class=\"col-sm\"></div>");
-            out.println("<div class=\"col-sm text-center pt-3\" >\n");
-            out.println("<li class=\"list-group-item\" style=\"background: #1bb670\">");
-            out.println("<h2 class=\"text-white\">Registro Completado!!! </h2>");
-            out.println("</li>");
-            out.println("</div>");
-            out.println("<div class=\"col-sm\"></div>");
-            out.println("</div>");
-            out.println("</body>)");
-            out.println("</html>");
-            String url = "direccionregistrocorrecto";
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+            String url = "/direccionRegistroCorrecto.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
 
         } catch (Exception e) {
-            out.println("<!doctype html>");
-            out.println("<html lang=\"es\">");
-            out.println("<head>");
-            out.println("<title> Mis bicis - RideMyBike </title>");
-            out.println("<meta charset=\"utf-8\">");
-            out.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">");
-            out.println("<link rel=\"icon\" type=\"image/png\" href=\"img/RideMyBike_icon_green.png\">");
-            out.println("<link rel=\"stylesheet\" href=\"css/bootstrap.css\">");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<jsp:include page=\"header.jsp\" >");
-            out.println("<jsp:param name=\"paginaMostrada\" value=\"MisBicis\" />");            
-            out.println("<jsp:param name=\"sesionIniciada\" value=\"true\" />");
-            out.println("</jsp:include>");
-            out.println("<div class=\"row\">");
-            out.println("<div class=\"col-sm\"></div>");
-            out.println("<div class=\"col-sm text-center pt-3\" >\n");
-            out.println("<li class=\"list-group-item\" style=\"background: #ec7b43\">");
-            out.println("<h2 class=\"text-white\">Registro Incorrecto, vuelve a intentarlo </h2>");
-            out.println("</li>");
-            out.println("</div>");
-            out.println("<div class=\"col-sm\"></div>");
-            out.println("</div>");
-            out.println("</body>)");
-            out.println("</html>");
+            
+            String url = "/direccionRegistroIncorrecto.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
         }
     }
 
