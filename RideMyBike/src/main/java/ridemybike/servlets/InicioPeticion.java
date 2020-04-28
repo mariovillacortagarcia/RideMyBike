@@ -38,7 +38,7 @@ public class InicioPeticion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String codigoBici = request.getParameter("bicicletaSeleccionada");
+        String codigoBici = request.getParameter("bicicletaId");
         String hora = request.getParameter("fechaInicioPrestamo");
         String tiempoLimite = request.getParameter("fechaFinPrestamo");
         String nombreArrendatario = "juan.pperez";            //---------------> Usuario de ejemplo
