@@ -34,10 +34,12 @@ $.get('BicicletasCoordenadas', function (data) {
     console.log(data);
     var ubicaciones = JSON.parse(data);
     for (i = 0; i < ubicaciones.length; i++) {
+        var id = ubicaciones[i].id;
         var lat = ubicaciones[i].lat;
         var lon = ubicaciones[i].lon;
         var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
-            $("#bicicletaSeleccionada").text(e.latlng);
+            $("#bicicletaubicacion").text(e.latlng);
+            $("#bicicletaId").text(id);
         });
         ;
     }
