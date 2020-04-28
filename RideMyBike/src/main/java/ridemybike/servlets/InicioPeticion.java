@@ -1,24 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Time;
-import java.time.LocalTime;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.HTMLEditorKit;
 import ridemybike.dominio.Peticion;
-import ridemybike.dominio.TipoAlquiler;
-import ridemybike.dominio.db.PeticionDB;
+
 
 /**
  * Servlet para crear una nueva petición.
@@ -36,42 +30,30 @@ public class InicioPeticion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        String nombreArrendatario = "juan.pperez"; 
         String codigoBici = request.getParameter("bicicletaId");
-        String hora = request.getParameter("fechaInicioPrestamo");
-        String tiempoLimite = request.getParameter("fechaFinPrestamo");
-        String nombreArrendatario = "juan.pperez";            //---------------> Usuario de ejemplo
+        String horaInicio = request.getParameter("horaInicioPrestamo");
+        String fechaInicio = request.getParameter("fechaInicioPrestamo");
+        String llegareTarde = request.getParameter("llegareTarde");
+        String seguroViaje = request.getParameter("seguroViaje");
         
-        Peticion peticion = new Peticion();
+        throw new IllegalStateException("\n\n\n\n fechaInicio: "+fechaInicio+" horaInicio: "+horaInicio+"\n\n\n\n");
+        /*Peticion peticion = new Peticion();
         peticion.setCodigoBici(Integer.parseInt(codigoBici));
-        peticion.setHora(Time.valueOf(hora));
-        peticion.setTiempoLimite(Time.valueOf(tiempoLimite));
-        peticion.setNombreArrendatario(nombreArrendatario);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+        Date parsedDate = dateFormat.parse(fechaInicio.replace('/', '-')+" ");
+        Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
         
-        boolean seguro = Boolean.parseBoolean(request.getParameter("opSeguro"));
-        boolean tarde = Boolean.parseBoolean(request.getParameter("opTarde"));
-        boolean enMano = Boolean.parseBoolean(request.getParameter("opEnMano"));
-        if (enMano){
-            peticion.setTipo(TipoAlquiler.enMano);
-        }else{
-            peticion.setTipo(TipoAlquiler.estandar);
-        }
-        PeticionDB.insertarPeticion(peticion);
         
-        int minutosEnAlquiler =(int) ((Time.valueOf(hora).getTime()-Time.valueOf(tiempoLimite).getTime())/60000);
-        double precio = 0.1*minutosEnAlquiler;
-        if (seguro){
-            precio = precio+1;        // suplemento de 1 euro por contrato de seguro.
-        }
-        if (tarde){
-            precio = precio+1;        // suplemento de 1 euro por ampliar plazo de alquiler al llegar tarde.
-        }
         
-        request.setAttribute("precio", precio);
-        String url = "/index.jsp";
+        
+        
+        String url = "/RecuperarViajesEnProceso";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+        dispatcher.forward(request, response);*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,7 +1,7 @@
 package ridemybike.dominio;
 
 import java.io.Serializable;
-import java.sql.Time;
+import java.sql.Timestamp;
 
 /**
  * Implementación de una petición
@@ -9,8 +9,8 @@ import java.sql.Time;
 public class Peticion implements Serializable{
 
     private int codigoPeticion;
-    private Time hora;
-    private Time tiempoLimite;
+    private Timestamp hora;
+    private Timestamp horaLimite;
     private int codigoBici;
     private String nombreArrendatario;
     private TipoAlquiler tipo;
@@ -21,7 +21,7 @@ public class Peticion implements Serializable{
     public Peticion() {
         codigoPeticion = -1;
         hora = null;
-        tiempoLimite = null;
+        horaLimite = null;
         codigoBici = -1;
         nombreArrendatario = "";
         tipo = null;
@@ -50,7 +50,7 @@ public class Peticion implements Serializable{
      * Devuelve el momento temporal para el que se ha realizado una petición.
      * @return fecha y hora para la que se realiza la petición.
      */
-    public Time getHora() {
+    public Timestamp getHora() {
         return hora;
     }
 
@@ -58,7 +58,7 @@ public class Peticion implements Serializable{
      * Fija la fecha y hora para la que se realiza una petición.
      * @param hora: fecha y hora para la que se realiza la petición.
      */
-    public void setHora(Time hora) {
+    public void setHora(Timestamp hora) {
         if (hora == null) {
             throw new IllegalArgumentException("La hora está vacía.");
         }
@@ -69,19 +69,19 @@ public class Peticion implements Serializable{
      * Devuelve el momento temporal límite para la caducidad de una petición.
      * @return fecha y hora en la que caduca la petición.
      */
-    public Time getTiempoLimite() {
-        return tiempoLimite;
+    public Timestamp getHoraLimite() {
+        return horaLimite;
     }
 
     /**
      * Fija la fecha y hora para la que caduca una petición.
      * @param tiempoLimite: fecha y hora en la que caduca la petición.
      */
-    public void setTiempoLimite(Time tiempoLimite) {
+    public void setHoraLimite(Timestamp tiempoLimite) {
         if (tiempoLimite == null) {
             throw new IllegalArgumentException("El tiempo límite está vacío.");
         }
-        this.tiempoLimite = tiempoLimite;
+        this.horaLimite = tiempoLimite;
     }
 
     /**

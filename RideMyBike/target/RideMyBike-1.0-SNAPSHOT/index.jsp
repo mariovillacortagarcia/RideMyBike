@@ -49,7 +49,8 @@
                                     <h5><b>1. Elige una bici libre </b>🚴</h5>
                                     <div id="mapaglobal" class="mt-3 mb-2" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black"></div>
                                     Bicicleta seleccionada: <a id="bicicletaUbicacion">Ninguna  </a>
-                                    <a id="bicicletaId">id</a>
+                                    <a id="bicicletaId">sfsad</a>
+                                    <!-- <input type="hidden" id="bicicletaId" value=""> -->
                                 </div>
 
                                 <!-- Formulario de fecha -->
@@ -113,16 +114,16 @@
 
                                         <!-- Seguro de viaje -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="opSeguro">
-                                            <label class="form-check-label" for="opSeguro">
+                                            <input class="form-check-input" type="checkbox" value="" id="seguroViaje">
+                                            <label class="form-check-label" for="seguroViaje">
                                                 Seguro de viaje +1€
                                             </label>
                                         </div>
 
                                         <!-- Llegaré tarde -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="opTarde">
-                                            <label class="form-check-label" for="opTarde">
+                                            <input class="form-check-input" type="checkbox" value="" id="llegareTarde">
+                                            <label class="form-check-label" for="llegareTarde">
                                                 Llegaré tarde (media hora extra de espera) +1€
                                             </label>
                                         </div>
