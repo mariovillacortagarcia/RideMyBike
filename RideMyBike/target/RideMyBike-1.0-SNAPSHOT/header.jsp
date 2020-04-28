@@ -46,8 +46,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-            <li class="nav-item" <% String s = pagina.equals("Home") ? "active" : ""; %> <%= s %> >
-                <a class="nav-link" href="index.jsp">Home 🏠</a>
+          <li class="nav-item <% String s = pagina.equals("Home") ? "active" : ""; %> <%= s %>" >
+            <a class="nav-link" href="index.jsp">Home 🏠</a>
           </li>
           <li class="nav-item <% s = pagina.equals("MisBicis") ? "active" : ""; %> <%= s %>">
             <a class="nav-link" href="RecuperarBicicletas">Mis Bicis 🚴‍</a>
