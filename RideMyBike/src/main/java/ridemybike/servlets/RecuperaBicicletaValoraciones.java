@@ -14,17 +14,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.ValoracionBicicleta;
-import ridemybike.dominio.db.BicicletaDB;
 import ridemybike.dominio.db.ValoracionBicicletaDB;
 
 /**
- * Servlet para recoger de la BD las Valoraciones de una bicicleta, identificada por su codigo que se pasa por parametro Para el historial de Alquileres
+ * Servlet para obtener las Valoraciones de las bicicletas para mostrarlas
  * @author Alberto
  */
-@WebServlet(name = "extraeBicicleta", urlPatterns = {"/extraeBicicleta"})
-public class extraeBicicleta extends HttpServlet {
+@WebServlet(name = "RecuperaBicicletaValoraciones", urlPatterns = {"/RecuperaBicicletaValoraciones"})
+public class RecuperaBicicletaValoraciones extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,16 +35,15 @@ public class extraeBicicleta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
         String codigoBicicleta = request.getParameter("codigoBicicleta");
         ArrayList<ValoracionBicicleta> lista = new ArrayList<ValoracionBicicleta>();
         lista = ValoracionBicicletaDB.getValoraciones(codigoBicicleta);
         request.setAttribute("lista", lista);
-
         
-        String url = "/HistorialAlquileres.jsp";
+        String url = "/ValoracionesBicicleta.jsp";
         RequestDispatcher dispatcher=getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);        
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
