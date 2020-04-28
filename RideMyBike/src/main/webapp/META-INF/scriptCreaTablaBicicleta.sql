@@ -55,7 +55,7 @@ CREATE TABLE Peticion(
 CREATE TABLE Alquiler(
   precio real not null,
   horaFinal Timestamp,
-  horaInicial Timestamp not null,
+  horaInicial Timestamp,
   codigoAlquiler INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   codigoPeticion int not null,
   archivado int not null,

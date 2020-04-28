@@ -37,7 +37,7 @@ $.get('BicicletasCoordenadas', function (data) {
         var lat = ubicaciones[i].lat;
         var lon = ubicaciones[i].lon;
         var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
-            $("#bicicletaSeleccionada").text(e.latlng);
+            $("#bicicletaUbicacion").text(e.latlng);
         });
         ;
     }

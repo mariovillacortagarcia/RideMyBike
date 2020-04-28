@@ -35,13 +35,8 @@ public class Alquiler implements Serializable {
      * Establece el inicio del alquiler
      *
      * @param inicio: nombre de la ubicacion de inicio del alquiler
-     * @throws IllegalArgumentException si el inicio es igual a null
      */
     public void setInicio(String inicio) {
-        if (inicio == null) {
-            throw new IllegalArgumentException("Inicio de viaje igual a null");
-        }
-
         this.inicio = inicio;
     }
 

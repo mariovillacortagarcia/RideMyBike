@@ -48,7 +48,7 @@
                                 <div class="col-lg-8 col-sm-12">
                                     <h5><b>1. Elige una bici libre </b>🚴</h5>
                                     <div id="mapaglobal" class="mt-3 mb-2" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black"></div>
-                                    Bicicleta seleccionada: <label id="bicicletaSeleccionada">Ninguna  </label>
+                                    Bicicleta seleccionada: <label id="bicicletaUbicacion">Ninguna  </label>
                                 </div>
                                 
                                 <!-- Formulario de fecha -->
@@ -155,7 +155,11 @@
                                     </ul>
                                     <div class="container p-3">
                                         <button class="btn btn-outline-success" type="submit">RideMyBike!</button>
-                                        <button class="btn btn-outline-danger" id="cancelarPeticion">Cancelar</button>
+                                        
+                                        <a href="index.jsp" role="button">
+                                            <button class="btn btn-outline-danger" id="cancelarPeticion">Cancelar</button>
+                                        </a>
+                                        
                                     </div>
                                 </div>
                             </div>
