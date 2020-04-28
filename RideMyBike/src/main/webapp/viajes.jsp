@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="col-6">
                                             <!--Informacion del viaje-->
-                                            <h6 class=""><b><%=inicio%> - <%=fin%></b></h6>
+                                            <b><h6 class="inicioViaje"><%=inicio%></h6><h6> - </h6><h6 class="finViaje"><%=fin%></h6></b>
                                             <p>
                                                 Desde el <%=diaInicio%> de <%=mesInicio%> de <%=anoInicio%> a las <%=horaInicio%> <br>
                                                 
