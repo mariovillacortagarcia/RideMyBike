@@ -1,5 +1,6 @@
 
 
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="ridemybike.dominio.*"%>
@@ -55,6 +56,16 @@
                         for(int i = 0; i < listaOpiniones.size(); i++){
                         //Servlet SeleccionaAlquiler
                             Alquiler alquiler = listaAlquileres.get(i);
+                            int diaI = alquiler.getHoraInicial().toLocalDateTime().getDayOfMonth();
+                            int diaS = alquiler.getHoraFinal().toLocalDateTime().getDayOfMonth();
+                            int mesI = alquiler.getHoraInicial().toLocalDateTime().getMonthValue();
+                            int mesS = alquiler.getHoraFinal().toLocalDateTime().getMonthValue();
+                            int anyoI = alquiler.getHoraInicial().toLocalDateTime().getYear();
+                            int anyoS = alquiler.getHoraFinal().toLocalDateTime().getYear();
+                            int horaI = alquiler.getHoraInicial().toLocalDateTime().getHour();
+                            int horaS = alquiler.getHoraFinal().toLocalDateTime().getHour();
+                            int minI = alquiler.getHoraInicial().toLocalDateTime().getMinute();
+                            int minS = alquiler.getHoraFinal().toLocalDateTime().getMinute();
                     %>
                             <li class="list-group-item">
                               <!--Opinion 1-->
@@ -64,8 +75,8 @@
                                     <div class="col-5">
                                     <!--Informacion-->
                                         <p align="left">
-                                            Desde el <%=alquiler.getHoraInicial().getDayOfMonth() %> del <%=alquiler.getHoraInicial().getMonthValue() %> de <%=alquiler.getHoraInicial().getYear() %> a las <%=alquiler.getHoraInicial().getHour() %>:<%=alquiler.getHoraInicial().getMinute()%> <br>
-                                            Hasta el <%=alquiler.getHoraFinal().getDayOfMonth() %> del <%=alquiler.getHoraFinal().getMonthValue() %> de <%=alquiler.getHoraFinal().getYear() %> a las <%=alquiler.getHoraFinal().getHour() %>:<%=alquiler.getHoraFinal().getMinute()%>
+                                            Desde el <%=diaI %> del <%=mesI %> de <%=anyoI %> a las <%=horaI %>:<%=minI %> <br>
+                                            Hasta el <%=diaS %> del <%=mesS %> de <%=anyoS %> a las <%=horaS %>:<%=minS %>
                                         </p>
                                         <p>
                                             <b>Descripcion:</b><%=listaOpiniones.get(i).getDescripcion() %>
