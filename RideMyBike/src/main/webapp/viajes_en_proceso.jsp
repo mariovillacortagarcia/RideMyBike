@@ -64,7 +64,7 @@
                                     String mesInicio = "";
                                     String anoInicio = "";
                                     String horaInicio = "";
-                                    if(alquiler.getHoraInicial() != null){
+                                    if (alquiler.getHoraInicial() != null) {
                                         fechaInicio = alquiler.getHoraInicial().toLocalDateTime();
                                         sinViajes = false;
                                         diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
@@ -72,7 +72,7 @@
                                         anoInicio = Integer.toString(fechaInicio.getYear());
                                         horaInicio = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());
                                     }
-                                    
+
                         %>
                         <li class="list-group-item">
                             <!--Viaje 1-->
@@ -85,15 +85,15 @@
                                     <div class="col-6">
                                         <!--Informacion del viaje-->
                                         <h6 class=""><b><%=inicio%> - ?</b></h6>
-                                        <% if(alquiler.getHoraInicial() != null){ %>
+                                        <% if (alquiler.getHoraInicial() != null) {%>
                                         <p>
                                             Desde el <%=diaInicio%> de <%=mesInicio%> de <%=anoInicio%> a las <%=horaInicio%> <br>
                                         </p>
-                                        <% } else{ %>
+                                        <% } else { %>
                                         <p>
                                             Viaje no iniciado <br>
                                         </p>
-                                        <% } %>
+                                        <% }%>
                                         <p>
                                             <a class="text-secondary">Estimado: </a><b><%=precio%> €</b>
                                         </p>
@@ -110,7 +110,12 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="FormularioRegistroIncidencia?idAlquiler=<%=idAlquiler%>">Registrar incidencia</a>
+                                                <%if (alquiler.getHoraInicial() != null) {%>
                                                 <a class="dropdown-item" href="TerminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Finalizar viaje</a>
+                                                <%} else {%>
+                                                <a class="dropdown-item" href="IniciarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Iniciar viaje</a>
+
+                                                <%}%>
                                             </div>
                                         </div>
                                     </div>
