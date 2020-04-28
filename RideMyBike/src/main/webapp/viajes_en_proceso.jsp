@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="col-6">
                                         <!--Informacion del viaje-->
-                                        <h6 class=""><b><%=inicio%> - ?</b></h6>
+                                        <b><h6 class="inicioViaje"><%=inicio%></h6><h6> - ?</h6></b>
                                         <% if (alquiler.getHoraInicial() != null) {%>
                                         <p>
                                             Desde el <%=diaInicio%> de <%=mesInicio%> de <%=anoInicio%> a las <%=horaInicio%> <br>
