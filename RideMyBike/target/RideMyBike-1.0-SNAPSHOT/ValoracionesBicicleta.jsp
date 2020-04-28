@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
