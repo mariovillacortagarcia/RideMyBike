@@ -20,11 +20,11 @@ import ridemybike.dominio.db.AlquilerDB;
 import ridemybike.dominio.db.ValoracionBicicletaDB;
 
 /**
- * Servlet para poder extraer alquileres de la BD con los codigos de los Alquileres
+ *
  * @author Alberto
  */
-@WebServlet(name = "SeleccionaAlquiler", urlPatterns = {"/SeleccionaAlquiler"})
-public class SeleccionaAlquiler extends HttpServlet {
+@WebServlet(name = "RecuperaAlquiler", urlPatterns = {"/RecuperaAlquiler"})
+public class RecuperaAlquiler extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,7 +38,6 @@ public class SeleccionaAlquiler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         String codigoBicicleta = request.getParameter("codigoBicicleta");
         ArrayList<ValoracionBicicleta> listaOpiniones = new ArrayList<ValoracionBicicleta>();
         listaOpiniones = ValoracionBicicletaDB.getValoraciones(codigoBicicleta);
@@ -46,9 +45,9 @@ public class SeleccionaAlquiler extends HttpServlet {
         for(int i = 0; i < listaOpiniones.size(); i++){
             lista.add(AlquilerDB.selectAlquiler(listaOpiniones.get(i).getCodigo()));
         }
-
-        request.setAttribute("listaAlquileres", lista);       
-        String url = "/HistorialAlquileres.jsp";
+        
+        String url = "/ValoracionesBicicleta.jsp";
+        request.setAttribute("listaAlquileres", lista);
         RequestDispatcher dispatcher=getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
