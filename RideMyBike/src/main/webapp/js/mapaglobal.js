@@ -42,7 +42,7 @@ $.get('BicicletasCoordenadas', function (data) {
         var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
             $("#bicicletaUbicacion").text(e.latlng);
             for (j = 0; j < ids.length; j++) {
-                if (Math.abs(e.latlng.lat - ids[j].lat) < 0.001 && Math.abs(e.latlng.lng - ids[j].lng) < 0.001) {
+                if (Math.abs(e.latlng.lat - ids[j].lat) < 0.001 && Math.abs(e.latlng.lng - ids[j].lon) < 0.001) {
                     $("#bicicletaId").text(ids[j].id);
                     break;
                 }
