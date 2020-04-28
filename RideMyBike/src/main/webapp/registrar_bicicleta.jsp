@@ -34,8 +34,8 @@
                     <input type="file" name="foto" id="fileToUpload">
                 </div>
                 <div class="form-group mb-2">
-                    <label for="marca">Marca</label>
-                    <input type="text" class="form-control" id="marca" name="marca">
+                    <label for="marcaBici">Marca</label>
+                    <input type="String" class="form-control" id="marcaBici" name="marca">
                 </div>
                 <div class="form-group mb-2">
                     <label for="modeloBiciRegistro">Modelo</label>
