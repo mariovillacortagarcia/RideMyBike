@@ -61,7 +61,12 @@ public class registrarPeticionRevision extends HttpServlet {
             String hora1 = request.getParameter("hora");
             String nombreUsuario = "juan.pperez";
             Part foto = request.getPart("foto");
+<<<<<<< HEAD
             System.out.println(TipoFreno);
+=======
+            
+
+>>>>>>> 94fabebb6aeb8e4379fa22f96649fbcc1e24e4ae
             Bicicleta bici = new Bicicleta();
             bici.setMarca(Marca);
             bici.setDescripcion(Descripcion);

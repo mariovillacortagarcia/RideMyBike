@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Peticion;
+import ridemybike.dominio.TipoAlquiler;
+import ridemybike.dominio.db.PeticionDB;
 
 
 /**
@@ -39,21 +44,29 @@ public class InicioPeticion extends HttpServlet {
         String fechaInicio = request.getParameter("fechaInicioPrestamo");
         String llegareTarde = request.getParameter("llegareTarde");
         String seguroViaje = request.getParameter("seguroViaje");
-        
-        throw new IllegalStateException("\n\n\n\n fechaInicio: "+fechaInicio+" horaInicio: "+horaInicio+"\n\n\n\n");
-        /*Peticion peticion = new Peticion();
-        peticion.setCodigoBici(Integer.parseInt(codigoBici));
+        String alquilerEnMano = request.getParameter("alquilerEnMano");
+              
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-        Date parsedDate = dateFormat.parse(fechaInicio.replace('/', '-')+" ");
-        Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+        Date parsedDate = dateFormat.parse(fechaInicio+" "+horaInicio);
+        Timestamp horaInicioPeticion = new java.sql.Timestamp(parsedDate.getTime());
+        Timestamp horaLimite;
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(horaInicioPeticion.getTime());
+        cal.add(Calendar.MINUTE, llegareTarde == null ? 15 : 15+30);
+        horaLimite = new Timestamp(cal.getTime().getTime());
         
+        Peticion peticion = new Peticion();
+        peticion.setCodigoBici(Integer.parseInt(codigoBici));
+        peticion.setNombreArrendatario(nombreArrendatario);
+        peticion.setHoraInicio(horaInicioPeticion);
+        peticion.setHoraLimite(horaLimite);
+        peticion.setTipo(alquilerEnMano == null ? TipoAlquiler.estandar : TipoAlquiler.enMano);
         
-        
-        
-        
+        PeticionDB.insertarPeticion(peticion);
+              
         String url = "/RecuperarViajesEnProceso";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);*/
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,7 +81,11 @@ public class InicioPeticion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(InicioPeticion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -82,7 +99,11 @@ public class InicioPeticion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(InicioPeticion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -130,9 +130,9 @@
 
                                         <!-- Alquiler en mano o estandar -->
                                         <div class="form-check mb-5">
-                                            <input class="form-check-input" type="checkbox" value="" id="opEnMano" disabled>
-                                            <label class="form-check-label" for="opcion3">
-                                                Alquiler en mano (no disponible para esta bici)
+                                            <input class="form-check-input" type="checkbox" value="" id="alquilerEnMano">
+                                            <label class="form-check-label" for="alquilerEnMano">
+                                                Alquiler en mano (bicicleta entregada presencialmente)
                                             </label>
                                         </div>
                                     </div>

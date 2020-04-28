@@ -65,8 +65,8 @@
                                             continue;
                                         }
                                         sinViajes = false;
-                                        LocalDateTime fechaInicio = alquiler.getHoraInicial();
-                                        LocalDateTime fechaFin = alquiler.getHoraFinal();
+                                        LocalDateTime fechaInicio = alquiler.getHoraInicial().toLocalDateTime();
+                                        LocalDateTime fechaFin = alquiler.getHoraFinal().toLocalDateTime();
                                         String diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
                                         String mesInicio = Integer.toString(fechaInicio.getMonthValue());
                                         String anoInicio = Integer.toString(fechaInicio.getYear());

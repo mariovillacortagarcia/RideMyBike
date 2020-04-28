@@ -50,7 +50,7 @@ public class Peticion implements Serializable{
      * Devuelve el momento temporal para el que se ha realizado una petición.
      * @return fecha y hora para la que se realiza la petición.
      */
-    public Timestamp getHora() {
+    public Timestamp getHoraInicio() {
         return hora;
     }
 
@@ -58,7 +58,7 @@ public class Peticion implements Serializable{
      * Fija la fecha y hora para la que se realiza una petición.
      * @param hora: fecha y hora para la que se realiza la petición.
      */
-    public void setHora(Timestamp hora) {
+    public void setHoraInicio(Timestamp hora) {
         if (hora == null) {
             throw new IllegalArgumentException("La hora está vacía.");
         }

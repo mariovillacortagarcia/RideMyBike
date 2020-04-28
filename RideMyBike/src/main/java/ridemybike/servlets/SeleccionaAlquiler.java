@@ -38,7 +38,7 @@ public class SeleccionaAlquiler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "/ValoracionesBicicleta.jsp";
+        
         String codigoBicicleta = request.getParameter("codigoBicicleta");
         ArrayList<ValoracionBicicleta> listaOpiniones = new ArrayList<ValoracionBicicleta>();
         listaOpiniones = ValoracionBicicletaDB.getValoraciones(codigoBicicleta);
@@ -46,12 +46,10 @@ public class SeleccionaAlquiler extends HttpServlet {
         for(int i = 0; i < listaOpiniones.size(); i++){
             lista.add(AlquilerDB.selectAlquiler(listaOpiniones.get(i).getCodigo()));
         }
-        request.setAttribute("listaAlquileres", lista);
+
+        request.setAttribute("listaAlquileres", lista);       
+        String url = "/HistorialAlquileres.jsp";
         RequestDispatcher dispatcher=getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
-        
-        url = "/HistorialAlquileres.jsp";
-        dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
 

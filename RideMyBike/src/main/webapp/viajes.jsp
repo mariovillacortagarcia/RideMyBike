@@ -60,9 +60,6 @@
                                         String precio = Double.toString(alquiler.getPrecio());
                                         String inicio = alquiler.getInicio();
                                         String fin = alquiler.getFin();
-                                        if (inicio == null || fin == null || alquiler.getArchivado()) {
-                                            continue;
-                                        }
                                         sinViajes = false;
                                         LocalDateTime fechaInicio = alquiler.getHoraInicial().toLocalDateTime();
                                         LocalDateTime fechaFin = alquiler.getHoraFinal().toLocalDateTime();
