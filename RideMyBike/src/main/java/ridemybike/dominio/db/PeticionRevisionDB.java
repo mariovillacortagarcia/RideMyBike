@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ridemybike.dominio.db;
 
 import java.io.IOException;
@@ -10,12 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import javax.servlet.http.Part;
-import ridemybike.dominio.Bicicleta;
-import ridemybike.dominio.EstadoBicicleta;
-import ridemybike.dominio.Freno;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import ridemybike.dominio.PeticionRevision;
 
 /**
@@ -38,14 +30,13 @@ public class PeticionRevisionDB {
           ConnectionPool pool = ConnectionPool.getInstance();
           Connection connection = pool.getConnection();
           PreparedStatement ps;
-          String query = "INSERT INTO PeticionRevision(nombreUsuario, ciudad, fecha, hora, ,codigoBicicleta) VALUES (?, ?, ?, ?, ?)";
+          String query = "INSERT INTO PeticionRevision(nombreUsuario, ciudad, fecha,codigoBicicleta) VALUES (?, ?, ?, ?)";
           try {
               ps = connection.prepareStatement(query);
               ps.setString(1, peticion.getNombreUsuario());
               ps.setString(2, peticion.getCiudad());
               ps.setString(3, peticion.getFecha().toString());
-              ps.setString(4, peticion.getHora().toString());
-              ps.setString(5, peticion.getCodigoBicicleta()+"");
+              ps.setString(4, peticion.getCodigoBicicleta()+"");
               int res = ps.executeUpdate();
               ps.close();
               pool.freeConnection(connection);
@@ -61,7 +52,7 @@ public class PeticionRevisionDB {
      * @param codigoPeticion Es el codigo asignado a la peticion que queremos extraer
      * @return Una peticion almacenada en el sistema
      */
-    public static PeticionRevision selectPeticionRevision(String codigoPeticion) {
+    public static PeticionRevision selectPeticionRevision(String codigoPeticion) throws ParseException {
         if(codigoPeticion == null){
             throw new IllegalArgumentException("El codigo de la peticion es null");
         }
@@ -76,10 +67,10 @@ public class PeticionRevisionDB {
             rs = ps.executeQuery();
             PeticionRevision peticion = null;
             if  (rs.next()) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                 peticion = new PeticionRevision();
                 peticion.setCodigoUsuario(rs.getString("nombreUsuario"));
-                peticion.setFecha(LocalDate.parse(rs.getString("fecha")));
-                peticion.setHora(LocalDateTime.parse(rs.getString("hora")));
+                peticion.setFecha(new Timestamp(dateFormat.parse(rs.getString("fecha")).getTime()));
                 peticion.setCiudad(rs.getString("ciudad"));
                 peticion.setCodigoBicicleta(Integer.parseInt(rs.getString("codigoBicicleta")));
 

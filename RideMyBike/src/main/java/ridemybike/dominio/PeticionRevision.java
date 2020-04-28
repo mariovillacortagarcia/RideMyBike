@@ -6,7 +6,7 @@
 package ridemybike.dominio;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -16,8 +16,7 @@ import java.time.LocalDateTime;
 public class PeticionRevision implements Serializable{
     private String ciudad;
     private String nombreUsuario;
-    private LocalDate fecha;
-    private LocalDateTime hora;
+    private Timestamp fecha;
     private int codigoBicicleta;
     
     /**
@@ -27,7 +26,6 @@ public class PeticionRevision implements Serializable{
         ciudad = "";
         nombreUsuario = "";
         fecha = null;
-        hora = null;
         codigoBicicleta = 0;
     }
     
@@ -57,21 +55,11 @@ public class PeticionRevision implements Serializable{
      * Metodo para dar el valor a la fecha de la reunion 
      * @param fecha Es la fecha de la reunion
      */
-    public void setFecha(LocalDate fecha){
+    public void setFecha(Timestamp fecha){
         if(fecha == null){
             throw new IllegalArgumentException("Fecha no valida");
         }
         this.fecha = fecha;
-    }
-    /**
-     * Metodo para dar valor a la hora de la reunion
-     * @param hora Es la hora de la reunion 
-     */
-    public void setHora(LocalDateTime hora){
-        if(hora == null){
-            throw new IllegalArgumentException("Hora no valida");
-        }
-        this.hora = hora;
     }
     
 
@@ -107,17 +95,10 @@ public class PeticionRevision implements Serializable{
      * Funcion que retorna la fecha a la que esta programada la reunion
      * @return La Fecha establecida de la reunion
      */
-    public LocalDate getFecha(){
+    public Timestamp getFecha(){
         return fecha;
     }
-    
-    /**
-     * Funcion que retorna la hora a la que esta establecida la reunion
-     * @return Es la hora de la reunion
-     */
-    public LocalDateTime getHora(){
-        return hora;
-    }
+   
 
     
     /**

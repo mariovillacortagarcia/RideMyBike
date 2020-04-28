@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import static ridemybike.dominio.db.BicicletaDB.*;
  * @author Alberto
  */
 @WebServlet(name = "BicicletasEstados", urlPatterns = {"/BicicletasEstados"})
+@MultipartConfig
 public class BicicletasEstados extends HttpServlet {
 
     /**
@@ -47,11 +49,6 @@ public class BicicletasEstados extends HttpServlet {
         BicicletaDB.getImagen(Integer.parseInt(codigoBicicleta), respuesta);
         respuesta.close();
         response.flushBuffer();
-        
-        response.setContentType("text/html;charset=UTF-8");
-        String url = "/mis_bicis.jsp";
-        RequestDispatcher dispacher = getServletContext().getRequestDispatcher(url);
-        dispacher.forward(request, response);
     }
     
    

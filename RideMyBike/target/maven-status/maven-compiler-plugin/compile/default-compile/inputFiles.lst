@@ -10,12 +10,12 @@
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/Alquiler.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/TerminarViaje.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/ActualizarPerfil.java
+/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RegistrarPeticionRevision.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/Peticion.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/db/UsuarioDB.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/PeticionRevision.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/ActivarBiciCodigo.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/FormularioRegistroIncidencia.java
-/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/registrarPeticionRevision.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/TipoAlquiler.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarImagenPerfil.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/db/ConnectionPool.java
@@ -28,6 +28,7 @@
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/DesarchivarViaje.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/db/ValoracionUsuarioDB.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/EliminarBiciNoActivada.java
+/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/ExtraeBicicleta.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarBicicletasDesactivadas.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/Freno.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/db/ValoracionBicicletaDB.java
@@ -41,7 +42,6 @@
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RegistroIncidencia.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarIncidencia.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/BicicletasCoordenadas.java
-/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/extraeBicicleta.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/Valoracion.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarPerfil.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/EstadoBicicleta.java

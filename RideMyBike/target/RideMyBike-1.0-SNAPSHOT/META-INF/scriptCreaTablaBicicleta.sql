@@ -5,6 +5,7 @@ DROP TABLE Alquiler;
 DROP TABLE Peticion;
 DROP TABLE Bicicleta;
 DROP TABLE Usuario;
+DROP TABLE PeticionRevision;
 
 CREATE TABLE Usuario(
   nombreUsuario varchar(30) not null,
@@ -102,7 +103,6 @@ CREATE TABLE PeticionRevision(
   ciudad varchar(50) not null,
   nombreUsuario varchar(30) not null,
   fecha Timestamp not null,
-  hora Timestamp not null,
   codigoBici int not null,
   PRIMARY KEY (codigoBici),
   FOREIGN KEY (codigoBici) REFERENCES Bicicleta(codigoBici),
