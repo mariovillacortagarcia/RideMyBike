@@ -30,7 +30,7 @@ public class PeticionRevisionDB {
           ConnectionPool pool = ConnectionPool.getInstance();
           Connection connection = pool.getConnection();
           PreparedStatement ps;
-          String query = "INSERT INTO PeticionRevision(nombreUsuario, ciudad, fecha,codigoBicicleta) VALUES (?, ?, ?, ?)";
+          String query = "INSERT INTO PeticionRevision(nombreUsuario, ciudad, fecha,codigoBici) VALUES (?, ?, ?, ?)";
           try {
               ps = connection.prepareStatement(query);
               ps.setString(1, peticion.getNombreUsuario());
@@ -60,7 +60,7 @@ public class PeticionRevisionDB {
         Connection connection= pool.getConnection();
         PreparedStatement ps= null;
         ResultSet rs = null;
-        String query= "SELECT * FROM PeticionRevision WHERE codigo = ?";
+        String query= "SELECT * FROM PeticionRevision WHERE codigoBici = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, codigoPeticion);

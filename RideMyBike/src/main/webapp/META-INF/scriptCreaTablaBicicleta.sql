@@ -1,3 +1,4 @@
+DROP TABLE PeticionRevision;
 DROP TABLE valoracionUsuario;
 DROP TABLE valoracionBicicleta;
 DROP TABLE Incidencia;
@@ -5,7 +6,7 @@ DROP TABLE Alquiler;
 DROP TABLE Peticion;
 DROP TABLE Bicicleta;
 DROP TABLE Usuario;
-DROP TABLE PeticionRevision;
+
 
 CREATE TABLE Usuario(
   nombreUsuario varchar(30) not null,

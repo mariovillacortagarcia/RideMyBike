@@ -28,22 +28,26 @@ public class BicicletaDB{
           ConnectionPool pool = ConnectionPool.getInstance();
           Connection connection = pool.getConnection();
           PreparedStatement ps;
-          String query = "INSERT INTO Bicicleta(codigoBici, descripcion, modelo, tamCuadro, imagen, marca, freno, latitud, longitud, usuarioPropietario, estado, codigoActivacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          String query = "INSERT INTO Bicicleta(descripcion, modelo, tamCuadro, imagen, marca, freno, latitud, longitud, usuarioPropietario, estado, codigoActivacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
           try {
-              ps = connection.prepareStatement(query);
-              ps.setString(1, bicicleta.getcodigoBici()+"");
-              ps.setString(2, bicicleta.getDescripcion());
-              ps.setString(3, bicicleta.getModelo());
-              ps.setString(4, bicicleta.getTamCuadro() +"");
-              ps.setBlob(5, bicicleta.getImagen().getInputStream());
-              ps.setString(6, bicicleta.getMarca());
-              ps.setString(7, bicicleta.getFreno()+"");
-              ps.setString(8, bicicleta.getLatitud()+"");
-              ps.setString(9, bicicleta.getLongitud()+"");
-              ps.setString(10, bicicleta.getUsuarioPropietario());
-              ps.setString(11, bicicleta.getEstado()+"");
-              ps.setString(12, bicicleta.getCodigoActivacion());
-              int res = ps.executeUpdate();
+              ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+              ps.setString(1, bicicleta.getDescripcion());
+              ps.setString(2, bicicleta.getModelo());
+              ps.setString(3, bicicleta.getTamCuadro() +"");
+              ps.setBlob(4, bicicleta.getImagen().getInputStream());
+              ps.setString(5, bicicleta.getMarca());
+              ps.setString(6, bicicleta.getFreno()+"");
+              ps.setString(7, bicicleta.getLatitud()+"");
+              ps.setString(8, bicicleta.getLongitud()+"");
+              ps.setString(9, bicicleta.getUsuarioPropietario());
+              ps.setString(10, bicicleta.getEstado()+"");
+              ps.setString(11, bicicleta.getCodigoActivacion());
+              ps.executeUpdate();
+              ResultSet rs = ps.getGeneratedKeys();
+            int res = 0;
+            if (rs.next()) {
+                res = rs.getInt(1);
+            } 
               ps.close();
               pool.freeConnection(connection);
               return res;
@@ -84,7 +88,7 @@ public class BicicletaDB{
                 bicicleta.setLongitud(Double.parseDouble(rs.getString("longitud")));
                 bicicleta.setUsuarioPropietario(rs.getString("usuarioPropietario"));
                 bicicleta.setEstado(EstadoBicicleta.valueOf(rs.getString("estado")));
-                //bicicleta.setCodigoActivacion(rs.getString("codigoActivacion"));
+                bicicleta.setCodigoActivacion(rs.getString("codigoActivacion"));
             }
             rs.close();
             ps.close();
@@ -128,7 +132,7 @@ public class BicicletaDB{
                 bicicleta.setLongitud(Double.parseDouble(rs.getString("longitud")));
                 bicicleta.setUsuarioPropietario(rs.getString("usuarioPropietario"));
                 bicicleta.setEstado(EstadoBicicleta.valueOf(rs.getString("estado")));
-                //bicicleta.setCodigoActivacion(rs.getString("codigoAcivacion"));
+                bicicleta.setCodigoActivacion(rs.getString("codigoAcivacion"));
                 lista.add(bicicleta);
             }
             rs.close();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ridemybike.servlets;
 
 import java.io.IOException;
@@ -21,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +35,7 @@ import ridemybike.dominio.db.PeticionRevisionDB;
  * @author Alberto
  */
 @WebServlet(name = "RegistrarPeticionRevision", urlPatterns = {"/RegistrarPeticionRevision"})
+@MultipartConfig
 public class RegistrarPeticionRevision extends HttpServlet {
 
     /**
@@ -53,22 +50,30 @@ public class RegistrarPeticionRevision extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-
+        String Modelo = "";
+            String marca = "";
+            String TamanoCuadro = "";
+            String Descripcion = "";
+            String TipoFreno = "";
+            String Ciudad = "";
+            String fecha1 = "";
+            String hora1 = "";
+            String nombreUsuario = "";
         try {
-            String marca = request.getParameter("marca");
-            String Modelo = request.getParameter("modelo");
-            String TamanoCuadro = request.getParameter("tamanoCuadro");
-            String Descripcion = request.getParameter("descripcion");
-            String TipoFreno = request.getParameter("tipoFreno");
-            String Ciudad = request.getParameter("ciudad");
-            String fecha1 = request.getParameter("fecha1");
-            String hora1 = request.getParameter("hora1");
-            String nombreUsuario = "juan.pperez";
+             Modelo = request.getParameter("modelo");
+             marca = request.getParameter("marca");
+             TamanoCuadro = request.getParameter("tamanoCuadro");
+             Descripcion = request.getParameter("descripcion");
+             TipoFreno = request.getParameter("tipoFreno");
+             Ciudad = request.getParameter("ciudad");
+             fecha1 = request.getParameter("fecha1");
+             hora1 = request.getParameter("hora1");
+             nombreUsuario = "juan.pperez";
             Part foto = request.getPart("foto");
             
             Bicicleta bici = new Bicicleta();
-            bici.setMarca(marca);
             bici.setDescripcion(Descripcion);
+            bici.setMarca(marca);
             bici.setModelo(Modelo);
             bici.setTamCuadro(Double.parseDouble(TamanoCuadro));
             Freno freno = Freno.valueOf(TipoFreno);
@@ -79,10 +84,8 @@ public class RegistrarPeticionRevision extends HttpServlet {
             UUID idUno = UUID.randomUUID();
             bici.setCodigoActivacion(idUno.toString());
             bici.setImagen(foto);
-            BicicletaDB.insertarBicicleta(bici);
+            int codigoBici = BicicletaDB.insertarBicicleta(bici);
 
-            
-            
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
             Date parsedDate = dateFormat.parse(fecha1+" "+hora1+":00.000");
             Timestamp fechaPeticion = new java.sql.Timestamp(parsedDate.getTime());
@@ -94,15 +97,7 @@ public class RegistrarPeticionRevision extends HttpServlet {
 
             peticion.setFecha(fechaPeticion);
 
-            ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
-            lista = BicicletaDB.getBicicletasEstado(nombreUsuario, estado);
-            for (int i = 0; i < lista.size(); i++) {
-                Bicicleta b1 = new Bicicleta();
-                b1 = lista.get(i);
-                if (b1.getCodigoActivacion().equals(idUno.toString())) {
-                    peticion.setCodigoBicicleta(b1.getcodigoBici());
-                }
-            }
+            peticion.setCodigoBicicleta(codigoBici);
             PeticionRevisionDB.insertarPeticionRevision(peticion);
             
             String url = "/direccionRegistroCorrecto.jsp";
@@ -111,6 +106,7 @@ public class RegistrarPeticionRevision extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+            //response.getWriter().println(e.toString()+" Marca: "+marca+" Modelo: "+Modelo+" TamCuadro: "+TamanoCuadro+" TipoFreno: "+TipoFreno+" Ciudad: "+Ciudad+" Hora1: "+hora1 );
             String url = "/direccionRegistroIncorrecto.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
