@@ -7,16 +7,16 @@
 var biciLibre = L.icon({
     iconUrl: 'img/mapa/bicicleta_libre.png',
 
-    iconSize:     [57, 33], // size of the icon
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    iconSize: [57, 33], // size of the icon
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var biciSeleccionada = L.icon({
     iconUrl: 'img/mapa/bicicleta_seleccionada.png',
 
-    iconSize:     [57, 33], // size of the icon
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    iconSize: [57, 33], // size of the icon
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 //Creacion del mapa
 const PROVEEDOR = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -30,6 +30,7 @@ L.tileLayer(PROVEEDOR, {
 
 console.log("Mapa creado");
 //Obtencion de las coordenadas de las bicis a traves de peticion al servlet
+var ids = [];
 $.get('BicicletasCoordenadas', function (data) {
     console.log(data);
     var ubicaciones = JSON.parse(data);
@@ -37,9 +38,16 @@ $.get('BicicletasCoordenadas', function (data) {
         var id = ubicaciones[i].id;
         var lat = ubicaciones[i].lat;
         var lon = ubicaciones[i].lon;
-        var marcador = L.marker([lat, lon], {icon: biciLibre, id:id}).addTo(mapa).on('click', function (e) {
+        ids.push({lat: lat, lon: lon, id: id});
+        var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
             $("#bicicletaUbicacion").text(e.latlng);
-            $("#bicicletaId").text(e.id);
+            for (j = 0; j < ids.length; j++) {
+                if (Math.abs(e.latlng.lat - ids[j].lat) < 0.001 && Math.abs(e.latlng.lng - ids[j].lon) < 0.001) {
+                    $("#bicicletaId").text(ids[j].id);
+                    break;
+                }
+            }
+
         });
         ;
     }
