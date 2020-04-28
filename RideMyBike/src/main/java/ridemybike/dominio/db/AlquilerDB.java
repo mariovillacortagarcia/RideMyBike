@@ -24,21 +24,26 @@ public class AlquilerDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        String query = "INSERT INTO Alquiler(precio,inicio,fin ,horaInicial, horaFinal, codigoAlquiler, peticion, archivado) VALUES (?,?,?,?,?,?,?,?,?)"; 
+        String query = "INSERT INTO Alquiler(precio,inicio,fin ,horaInicial, horaFinal, codigoPeticion, archivado) VALUES (?,?,?,?,?,?,?)"; 
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, alquiler.getPrecio()+"");
-            ps.setString(1, alquiler.getInicio()+"");
-            ps.setString(1, alquiler.getFin()+"");
-            ps.setString(2, alquiler.getHoraInicial().toString());
-            ps.setString(3, alquiler.getHoraFinal().toString());
-            ps.setString(4, alquiler.getCodigoAlquiler()+"");
-            ps.setString(5, alquiler.getPeticion()+"");
+            ps.setString(2, alquiler.getInicio()+"");
+            ps.setString(3, alquiler.getFin()+"");
+            if(alquiler.getHoraFinal() == null){
+                ps.setString(4, null);
+                ps.setString(5, null);
+            } else{
+                ps.setString(4, alquiler.getHoraInicial().toString());
+                ps.setString(5, alquiler.getHoraFinal().toString());
+            }
+            
+            ps.setString(6, alquiler.getPeticion()+"");
             boolean archivado = alquiler.getArchivado();
             if(archivado){
-                ps.setString(6, "1"+"");
+                ps.setString(7, "1");
             }else{
-                ps.setString(6, "0"+"");
+                ps.setString(7, "0");
             }
             int res = ps.executeUpdate();
             ps.close();
@@ -221,7 +226,8 @@ public class AlquilerDB {
                 alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
                 alquiler.setInicio(rs.getString("inicio"));
                 alquiler.setFin(rs.getString("fin"));
-                alquiler.setHoraInicial(new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime()));
+                Timestamp horaInicial = rs.getString("horaInicial") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime());
+                alquiler.setHoraInicial(horaInicial);
                 Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
                 alquiler.setHoraFinal(horaFinal);
                 alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));

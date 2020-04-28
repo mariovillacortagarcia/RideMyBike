@@ -59,12 +59,20 @@
                                     int idAlquiler = alquiler.getCodigoAlquiler();
                                     String precio = Double.toString(alquiler.getPrecio());
                                     String inicio = alquiler.getInicio();
-                                    LocalDateTime fechaInicio = alquiler.getHoraInicial().toLocalDateTime();
-                                    sinViajes = false;
-                                    String diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
-                                    String mesInicio = Integer.toString(fechaInicio.getMonthValue());
-                                    String anoInicio = Integer.toString(fechaInicio.getYear());
-                                    String horaInicio = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());
+                                    LocalDateTime fechaInicio;
+                                    String diaInicio = "";
+                                    String mesInicio = "";
+                                    String anoInicio = "";
+                                    String horaInicio = "";
+                                    if(alquiler.getHoraInicial() != null){
+                                        fechaInicio = alquiler.getHoraInicial().toLocalDateTime();
+                                        sinViajes = false;
+                                        diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
+                                        mesInicio = Integer.toString(fechaInicio.getMonthValue());
+                                        anoInicio = Integer.toString(fechaInicio.getYear());
+                                        horaInicio = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());
+                                    }
+                                    
                         %>
                         <li class="list-group-item">
                             <!--Viaje 1-->
@@ -77,9 +85,15 @@
                                     <div class="col-6">
                                         <!--Informacion del viaje-->
                                         <h6 class=""><b><%=inicio%> - ?</b></h6>
+                                        <% if(alquiler.getHoraInicial() != null){ %>
                                         <p>
                                             Desde el <%=diaInicio%> de <%=mesInicio%> de <%=anoInicio%> a las <%=horaInicio%> <br>
                                         </p>
+                                        <% } else{ %>
+                                        <p>
+                                            Viaje no iniciado <br>
+                                        </p>
+                                        <% } %>
                                         <p>
                                             <a class="text-secondary">Estimado: </a><b><%=precio%> €</b>
                                         </p>

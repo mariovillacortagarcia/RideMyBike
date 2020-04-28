@@ -122,9 +122,6 @@ public class Alquiler implements Serializable {
      * @throws IllegalArgumentException si {@code horaInicial == null}
      */
     public void setHoraInicial(Timestamp horaInicial) {
-        if (horaInicial == null) {
-            throw new IllegalArgumentException("La hora inicial no puede estar vacia");
-        }
         this.horaInicial = horaInicial;
     }
 

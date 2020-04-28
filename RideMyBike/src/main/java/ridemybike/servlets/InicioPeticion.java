@@ -14,8 +14,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ridemybike.dominio.Alquiler;
 import ridemybike.dominio.Peticion;
 import ridemybike.dominio.TipoAlquiler;
+import ridemybike.dominio.db.AlquilerDB;
 import ridemybike.dominio.db.PeticionDB;
 
 
@@ -42,6 +44,8 @@ public class InicioPeticion extends HttpServlet {
         String codigoBici = request.getParameter("bicicletaId");
         String horaInicio = request.getParameter("horaInicioPrestamo");
         String fechaInicio = request.getParameter("fechaInicioPrestamo");
+        String horaFin = request.getParameter("horaFinPrestamo");
+        String fechaFin = request.getParameter("fechaFinPrestamo");
         String llegareTarde = request.getParameter("llegareTarde");
         String seguroViaje = request.getParameter("seguroViaje");
         String alquilerEnMano = request.getParameter("alquilerEnMano");
@@ -62,7 +66,26 @@ public class InicioPeticion extends HttpServlet {
         peticion.setHoraLimite(horaLimite);
         peticion.setTipo(alquilerEnMano == null ? TipoAlquiler.estandar : TipoAlquiler.enMano);
         
-        PeticionDB.insertarPeticion(peticion);
+        int codigoPeticion = PeticionDB.insertarPeticion(peticion);
+        
+        
+        Alquiler alquiler = new Alquiler();
+        parsedDate = dateFormat.parse(fechaFin+" "+horaFin+":00.000");
+        Timestamp horaFinPeticion = new java.sql.Timestamp(parsedDate.getTime());
+        double precio = horaFinPeticion.toLocalDateTime().getMinute()/100;
+        if(seguroViaje != null){
+            precio ++;
+        }
+        if(llegareTarde != null){
+            precio ++;
+        }
+        alquiler.setPrecio(precio);
+        alquiler.setPeticion(codigoPeticion);
+        alquiler.setArchivado(false);
+        alquiler.setInicio("?");
+        alquiler.setFin("?");
+        
+        AlquilerDB.insertarAlquiler(alquiler);
               
         String url = "/RecuperarViajesEnProceso";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
