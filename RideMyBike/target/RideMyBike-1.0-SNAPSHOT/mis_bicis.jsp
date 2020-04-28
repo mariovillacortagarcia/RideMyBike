@@ -79,15 +79,17 @@
                     for(int i = 0; i < lista.size();i ++){
                     
                 %>
-                    
                         <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" class="active"></li>
                         <%
                             }
                             var = false;
+%>
+            </ol>
+                        <%
                         }
                 %>
 
-            </ol>
+            
 
             <div class="carousel-inner" style="height: 450px">
                 <%
@@ -107,7 +109,7 @@
                           <div class="col-12"><b>Estado:</b> 
                               <a class="text-success"><%=estado %></a>
                           </div> 
-
+                        <div class="col-12"><b>Longitud de la listaaaa -BOOOOOORRRARRRRR</b><%=lista.size() %></div>
                         <div class="col-12"><b>Marca:</b><%=marca %></div>
                         <div class="col-12"><b>Modelo:</b><%=modelo %></div>
                         <div class="col-12"><b>Tamaño de Cuadro:</b><%=tamano %>cm</div>
