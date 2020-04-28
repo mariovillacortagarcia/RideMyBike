@@ -50,6 +50,7 @@ public class registrarPeticionRevision extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        String problemas ="";
         try {
             String Marca = request.getParameter("marca");
             String Modelo = request.getParameter("modelo");
@@ -57,12 +58,11 @@ public class registrarPeticionRevision extends HttpServlet {
             String Descripcion = request.getParameter("descripcion");
             String TipoFreno = request.getParameter("tipoFreno");
             String Ciudad = request.getParameter("ciudad");
-            String fecha1 = request.getParameter("fecha");
-            String hora1 = request.getParameter("hora");
+            String fecha1 = request.getParameter("fecha1");
+            String hora1 = request.getParameter("hora1");
             String nombreUsuario = "juan.pperez";
-            Part foto = request.getPart("foto");
-            
-
+//            Part foto = request.getPart("foto");
+            problemas = "Marca: "+Marca+" Modelo: "+Modelo+" TamanoCuadro: "+TamanoCuadro+" Descripcion "+Descripcion+" TipoFreno "+TipoFreno+" Ciudad:"+Ciudad+" Fecha1: "+fecha1+" Hora1: "+hora1;
             Bicicleta bici = new Bicicleta();
             bici.setMarca(Marca);
             bici.setDescripcion(Descripcion);
@@ -75,7 +75,7 @@ public class registrarPeticionRevision extends HttpServlet {
             bici.setUsuarioPropietario(nombreUsuario);
             UUID idUno = UUID.randomUUID();
             bici.setCodigoActivacion(idUno.toString());
-            bici.setImagen(foto);
+  //          bici.setImagen(foto);
             BicicletaDB.insertarBicicleta(bici);
 
             PeticionRevision peticion = new PeticionRevision();
@@ -100,10 +100,12 @@ public class registrarPeticionRevision extends HttpServlet {
             dispatcher.forward(request, response);
 
         } catch (Exception e) {
-            
-            String url = "/direccionRegistroIncorrecto.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
+            PrintWriter out = response.getWriter();
+            out.println(e.toString());
+            out.println(problemas);
+            //String url = "/direccionRegistroIncorrecto.jsp";
+            //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            //dispatcher.forward(request, response);
         }
     }
 

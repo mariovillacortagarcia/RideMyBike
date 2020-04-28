@@ -29,10 +29,10 @@
             <!--Formulario de Registro de una Nueva Bicicleta-->
             <form action="registrarPeticionRevision" method="POST"  class="form-group mb-2">
                 <h5><b>Anota la información de la bicicleta que quieras añadir</b>🚴</h5>
-                    Selecciona una imagen para subir:
-                    <div class="form-label-group pb-3">
-                        <input type="file" name="foto" id="fileToUpload">
-                    </div>
+                Selecciona una imagen para subir:
+                <div class="form-label-group pb-3">
+                    <input type="file" name="foto" id="fileToUpload">
+                </div>
                 <div class="form-group mb-2">
                     <label for="marcaBiciRegistro">Marca</label>
                     <input type="String" class="form-control" id="marcaNuevaBici" name="marca">
@@ -45,31 +45,27 @@
                     <label for="tamanoBiciRegistro">Tamaño de Cuadro (cm)</label>
                     <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro">
                 </div>
-                <label for="frenoBiciRegistro">Tipo de Freno</label>
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle " role="button" id="frenoNuevaBici" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Tipos:</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" name="tipoFreno" value="disco">Disco</a>
-                        <a class="dropdown-item" name="tipoFreno" value="disco">Hidráulicos</a>
-                        <a class="dropdown-item" name="tipoFreno" value="disco">Zapatas</a>
-                        <a class="dropdown-item" name="tipoFreno" value="disco">Holandeses</a>
-                    </div>
-                </div>
+                <label class="my-1 mr-2" for="tipoFreno">Tipo de freno</label>
+                <select class="custom-select my-1 mr-sm-2" id="tipoFreno" name="tipoFreno">
+                    <option selected>Elige un tipo de freno...</option>
+                    <option value="Disco">Disco</option>
+                    <option value="Hidraulicos">Hidraulico</option>
+                    <option value="Zapatas">Zapatas</option>
+                    <option value="Holandeses">Holandeses</option>
+                </select>
                 <div class="form-group mb-2">
                     <label for="descripcionBiciRegistro">Descripción</label>
                     <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion"> </textarea>
                 </div>
                 <label for="informacionRevisionBici" class="pt-4">Para poder dar de alta la nueva bicicleta, necesitamos revisarla en un taller cercano a la ciudad que nos indiques</label>
 
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle " role="button" id="talleresCiudades" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Ciudades:</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" name="ciudad" value="Valladolid, C/Falsa 123" >Valladolid, C/Falsa 123</a>
-                        <a class="dropdown-item" name="ciudad" value="Barcelona, C/Falsa 123" >Barcelona, C/Falsa 123</a>
-                        <a class="dropdown-item" name="ciudad" value="Madrid, C/Falsa 123" >Madrid, C/Falsa 123</a>
-                        <a class="dropdown-item" name="ciudad" value="Zamora, C/Falsa 123" >Zamora, C/Falsa 123</a>
-                    </div>
-                </div>
+                <label class="my-1 mr-2" for="ciudad">Ciudadades para revisar la bicicleta</label>
+                <select class="custom-select my-1 mr-sm-2" id="ciudad" name="ciudad">
+                    <option selected>Elige una ciudad...</option>
+                    <option value="Valladolid">Sede de Valladolid</option>
+                    <option value="Palencia">Sede de Palencia</option>
+                    <option value="Madrid">Sede de Madrid</option>
+                </select>
 
                 <div class="row pt-4">
                     <div class="col-6">
@@ -94,11 +90,11 @@
             </form>
         </div>
 
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-      <script src="js/bootstrap.js"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.js"></script>
 
     </body>
 </html>
