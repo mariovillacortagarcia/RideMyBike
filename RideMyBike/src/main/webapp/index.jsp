@@ -1,12 +1,6 @@
-<%-- 
-    Document   : index
-    Created on : 25 abr. 2020, 15:05:10
-    Author     : JCHFJ
---%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="ridemybike.dominio.*"%>
 <%@page import="ridemybike.dominio.db.*"%>
 <!doctype html>
@@ -40,132 +34,148 @@
         </jsp:include>
         
         <!-- Contenido -->
-        <div id="carouselAlquiler" class="carousel slide" data-ride="carousel" data-interval="false">
+        <div id="carouselAlquiler" class="carousel slide mt-4" data-ride="carousel" data-interval="false">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <!-- Parte 1/2 del formulario-->
-
-                    <div id="principal" class="container p-4">
-                        <div class="row">
-                            <div class="col-lg-8 col-sm-12">
+                <form action="InicioPeticion" method="post">
+                    
+                    <!-- Parte 1/2 del formulario -->
+                    <!-- Mapa y fecha de la peticion -->
+                    <div class="carousel-item active">
+                        <div id="principal" class="container p-4">
+                            <div class="row">
+                                
                                 <!-- Mapa-->
-                                <h5><b>1. Elige una bici libre </b>🚴</h5>
-                                <div id="mapaglobal" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black">
-                                </div><br>
-                                Bicicleta seleccionada: <a id="bicicletaSeleccionada">Ninguna  </a>
-                            </div>
-                            <div class="col-lg-4 col-sm-12">
-                                <!--Formulario de fecha -->
-                                <form class="form-group mb-2" action="InicioPeticion" method="post">
+                                <div class="col-lg-8 col-sm-12">
+                                    <h5><b>1. Elige una bici libre </b>🚴</h5>
+                                    <div id="mapaglobal" class="mt-3 mb-2" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black"></div>
+                                    Bicicleta seleccionada: <label id="bicicletaSeleccionada">Ninguna  </label>
+                                </div>
+                                
+                                <!-- Formulario de fecha -->
+                                <div class="col-lg-4 col-sm-12 mt-4">
                                     <h5><b>2. Indica el tiempo de uso </b>🕒</h5>
-                                    <div class="form-group mb-2">
+                                    
+                                    <!-- Inicio de la peticion -->
+                                    <div class="row mt-3 pl-3">
                                         <label for="entradaFechaInicio">Inicio del préstamo</label>
-                                        <input type="datetime-local" class="form-control" id="fechaInicioPrestamo" aria-describedby="emailHelp" placeholder="Desde...">
-                                        <small id="fechaInicioHelp" class="form-text text-muted">La fecha de inicio del préstamo (dd/mm/aaaa)</small>
                                     </div>
-                                    <div class="form-group mb-5">
-                                        <label for="entradaFechaFinalización">Fin del préstamo</label>
-                                        <input type="datetime-local" class="form-control" id="fechaFinPrestamo" aria-describedby="emailHelp" placeholder="Hasta...">
-                                        <small id="fechaFinHelp" class="form-text text-muted">La fecha de finalización del préstamo (dd/mm/aaaa)</small>
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="date" class="form-control" name="fechaInicioPrestamo" id="fechaInicioPrestamo">
+                                        </div>
+                                        <div class="col">
+                                            <input type="time" class="form-control" id="horaInicioPrestamo">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mb-3">
+                                        <small id="fechaInicioHelp" class="form-text text-muted ml-3">La fecha y hora aproximada de inicio del préstamo.</small>
+                                    </div> 
+                                    
+                                    <!-- Fin de la peticion -->
+                                    <div class="form-group">
+                                        <div class="row mt-3 pl-3">
+                                            <label for="entradaFechaFinalización">Fin del préstamo</label>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="date" class="form-control" id="fechaFinPrestamo">
+                                            </div>
+                                            <div class="col">
+                                                <input type="time" class="form-control" id="horaFinPrestamo">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mb-4">
+                                            <small id="fechaFinHelp" class="form-text text-muted ml-3">La fecha y hora estimada de finalización del préstamo.</small>
+                                        </div> 
                                     </div>
                                     <a href="#carouselAlquiler" role="button" data-slide="next">
-                                        <button class="btn btn-outline-success" type="submit">Siguiente</button>
+                                        <button class="btn btn-outline-success">Siguiente</button>
                                     </a>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <%
-                    // TO - DO: Obtener correctamente la id de la bicicletaSeleccionada.
-                    //int idBiciSeleccionada = Integer.parseInt(request.getParameter("bicicletaSeleccionada"));
-                    SimpleDateFormat FormFechaEntera = new SimpleDateFormat("dd-MM-yyyy-hh-mm");
-                    Date fechaInicioPrestamo = FormFechaEntera.parse(request.getParameter("fechaInicioPrestamo"));
-                    Date fechaFinPrestamo = FormFechaEntera.parse(request.getParameter("fechaFinPrestamo"));
-                    SimpleDateFormat FormFecha = new SimpleDateFormat("dd-MM-yyyy");
-                    SimpleDateFormat FormHora = new SimpleDateFormat("hh-mm");
-                    Date fechaInicio = FormFecha.parse(request.getParameter("fechaInicioPrestamo"));
-                    Date fechaFin = FormFecha.parse(request.getParameter("fechaFinPrestamo"));
-                    Date horaInicio = FormHora.parse(request.getParameter("fechaInicioPrestamo"));
-                    Date horaFin = FormHora.parse(request.getParameter("fechaFinPrestamo"));
-                %>
-                <div class="carousel-item">
+                
                     <!-- Parte 2/2 del formulario-->
-                    <div class="container p-4">
-                        <div class="row">
-                             <!-- Form añadido para enviar al servlet -->
-                            <form method="post"
-                            <div class="col-lg-8 col-sm-12">
-                                <div class="container mb-10">
-                                    <!-- Opciones adicionales del alquiler -->
-                                    <h5><b>3. Opciones adicionales </b></h5>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="opSeguro">
-                                        <label class="form-check-label" for="opSeguro">
-                                            Seguro de viaje +1€
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="opTarde">
-                                        <label class="form-check-label" for="opTarde">
-                                            Llegaré tarde (media hora extra de espera) +1€
-                                        </label>
-                                    </div>
-                                    <div class="form-check mb-5">
-                                        <input class="form-check-input" type="checkbox" value="" id="opEnMano" disabled>
-                                        <label class="form-check-label" for="opcion3">
-                                            Alquiler en mano (no disponible para esta bici)
-                                        </label>
-                                    </div>
-                                </div>
-                                <a href="#carouselAlquiler" role="button" data-slide="prev">
-                                    <button class="btn btn-outline-secondary">Anterior</button>
-                                </a>
-                            </div>
-                            </form>
+                    <div class="carousel-item mt-5">
+                        <div class="container p-4">
+                            <div class="row">
                             
-                            <div class="col-lg-4 col-sm-12">
+                                <!-- Opciones adicionales del alquiler -->
+                                <div class="col-lg-8 col-sm-12">
+                                    <div class="container mb-10">
+                                        <h5><b>3. Opciones adicionales </b></h5>
+                                    
+                                        <!-- Seguro de viaje -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="opSeguro">
+                                            <label class="form-check-label" for="opSeguro">
+                                                Seguro de viaje +1€
+                                            </label>
+                                        </div>
+                                    
+                                        <!-- Llegaré tarde -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="opTarde">
+                                            <label class="form-check-label" for="opTarde">
+                                                Llegaré tarde (media hora extra de espera) +1€
+                                            </label>
+                                        </div>
+                                    
+                                        <!-- Alquiler en mano o estandar -->
+                                        <div class="form-check mb-5">
+                                            <input class="form-check-input" type="checkbox" value="" id="opEnMano" disabled>
+                                            <label class="form-check-label" for="opcion3">
+                                                Alquiler en mano (no disponible para esta bici)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <a href="#carouselAlquiler" role="button" data-slide="prev">
+                                        <button class="btn btn-outline-secondary">Anterior</button>
+                                    </a>
+                                </div>
+                            
                                 <!-- Resumen de confirmacion -->
-                                <h5><b>4. Confirmar pago</b></h5>
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <p>
-                                            Bicicleta: --- <br>
-                                            Desde el <%=fechaInicio%> a las <%=horaInicio%><br>
-                                            Hasta el <%=fechaFin%> a las <%=horaFin%><br>
-                                            Metodo de pago: Mastercard
-                                        </p>
-                                    </li>
-                                    <li class="list-group-item"><b>Total:</b> <%=request.getParameter("precio")%>€</li>
-                                </ul>
-                                <div class="container p-3">
-                                    <button class="btn btn-outline-success">RideMyBike!</button>
-                                    <button class="btn btn-outline-danger">Cancelar</button>
+                                <div class="col-lg-4 col-sm-12">
+                                    <h5><b>4. Confirmar pago</b></h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <p>
+                                                Bicicleta: <label id="textoBiciSeleccionada"></label><br>
+                                                Desde el <label name="textoFechaInicio" id="textoFechaInicio"></label> a las <label id="textoHoraInicio"></label><br>
+                                                Hasta el <label id="textoFechaFin"></label> a las <label id="textoHoraFin"></label> <br>
+                                                Metodo de pago: Mastercard
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item"><b>Total: </b> <label id="textoPrecioTotal"></label>€</li>
+                                    </ul>
+                                    <div class="container p-3">
+                                        <button class="btn btn-outline-success" type="submit">RideMyBike!</button>
+                                        <button class="btn btn-outline-danger" id="cancelarPeticion">Cancelar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-            <!-- Anterior
-            <a class="carousel-control-prev" href="#carouselAlquiler" role="button" data-slide="prev">
-            </a>-->
         </div>
-        <!-- Footer -->
-        <jsp:include page="footer.jsp" >
-            <jsp:param name="etiqueta" value="RideMyBike" />
-            <jsp:param name="mostrarBoton" value="false" />
-        </jsp:include>
+        
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="js/bootstrap.js"></script>
-        <!-- Make sure you put this AFTER Leaflet's CSS -->
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
+        
+        <!-- Leaflet's JS -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
         <script src="js/mapaglobal.js"></script>
+        
+        <!-- Index JS -->
+        <script src="js/index.js"></script>
     </body>
-
 </html>
