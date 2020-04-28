@@ -2,13 +2,14 @@ var geocodeService = L.esri.Geocoding.geocodeService();
 
 $(document).ready(function () {
     $(".ubicacion:contains({)").each(function (index) {
-        var coordenadas = JSON.parse($(this).text());
+        var texto = this;
+        var coordenadas = JSON.parse($(texto).text());
         console.log(coordenadas);
         var ubicacion = convertToAddress([coordenadas.lat, coordenadas.lng]);
         $.when(ubicacion).done(function (r) {
             ubicacion = r;
             console.log(ubicacion);
-            $(this).text(ubicacion);
+            $(texto).text(ubicacion);
         })
     });
 });
