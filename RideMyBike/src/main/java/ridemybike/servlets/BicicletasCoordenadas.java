@@ -40,11 +40,13 @@ public class BicicletasCoordenadas extends HttpServlet {
         String ubicacion = null;
         String lat;
         String lon;
+        String id;
         if(bicicletas != null)
         for(Bicicleta bicicleta : bicicletas){
+           id = Integer.toString(bicicleta.getcodigoBici());
            lat = Double.toString(bicicleta.getLatitud());
            lon = Double.toString(bicicleta.getLongitud());
-           ubicacion = "{"+'"'+"lat"+'"'+":"+lat+','+'"'+"lon"+'"'+":"+ lon+"},";
+           ubicacion = "{"+'"'+"id"+'"'+":"+id+','+'"'+"lat"+'"'+":"+lat+','+'"'+"lon"+'"'+":"+ lon+"},";
            ubicaciones += ubicacion;
         }
         if(ubicacion != null)
