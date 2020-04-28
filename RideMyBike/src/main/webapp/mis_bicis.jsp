@@ -63,11 +63,14 @@
                             <%
                                 if (!lista.isEmpty()) { 
                                     for (int i = 0; i < lista.size(); i++) {
+                                        if(i == 0){
                             %>
                             <li data-target="#carouselExampleIndicators" data-slide-to="<%= i%>" class="active"></li>
                                 <%
-                                    }   
+                                    } else{  
                                 %>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="<%= i%>"></li>
+                            <% } } %>
                         </ol>
                         
 
