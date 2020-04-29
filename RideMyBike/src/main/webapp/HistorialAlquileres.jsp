@@ -45,7 +45,7 @@
             </jsp:include>
 
             <!-- Contenido -->
-            <div class="container pt-4">
+            <div class="container pt-4 mt-3">
                 <!-- Navegacion por los viajes -->
                 <div class="card text-center">
                     <div class="card-body">

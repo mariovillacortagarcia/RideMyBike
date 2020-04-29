@@ -63,7 +63,7 @@
                                         lista.add(bici);
                                     }
                                 }
-                                if (!lista.isEmpty()) {
+                                
                                     for (int i = 0; i < lista.size(); i++) {
                             %>
                             <li data-target="#carouselExampleIndicators" data-slide-to="<%= i%>" class="active"></li>
@@ -78,66 +78,52 @@
                                     String descripcion = lista.get(i).getDescripcion();
                                     int codigoBici = lista.get(i).getcodigoBici();
                                     //EstadoBicicleta estado = lista.get(i).getEstado();
-                        if (i == 0) { %>
-                            <div class="carousel-item active">
-                                <%} else { %>
-                                <div class="carousel-item" >
-                                    <%}%>
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-5">
-                                            <img src="BicicletasEstados?codigoBici=<%=codigoBici%>" class="img-thumbnail" alt="..." style="width:  350px;">
-                                        </div>
-                                        <div class="col-5">
-                                            <div class="row">
-                                                <div class="col-12"><b>Estado:</b> 
-                                                    <a class="text-success"><%=estado%></a>
-                                                </div> 
-                                                <div class="col-12"><b>Marca:</b><%=marca%></div>
-                                                <div class="col-12"><b>Modelo:</b><%=modelo%></div>
-                                                <div class="col-12"><b>Tamaño de Cuadro:</b><%=tamano%>cm</div>
-                                                <div class="col-12"><b>Tipo de Freno:</b><%=freno%></div>
-                                                <div class="col-12"><b>Descripción:</b> <%=descripcion%></div>
-                                                <div class="col-12 text-center pt-4">
-                                                    <div class="dropdown" name="selector2">
-                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Opciones
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="ValoracionesBicicleta.jsp?codigoBicicleta=<%=codigoBici%>">Opiniones</a>
-                                                            <a class="dropdown-item" href="ActivacionBicicleta?codigoBicicleta=<%=codigoBici%>">Activar/Desactivar Bicicleta</a>
-                                                            <a class="dropdown-item" href="HistorialAlquileres.jsp?codigoBicicleta=<%=codigoBici%>">Historial de Alquileres</a>
-                                                            <a class="dropdown-item" href="EliminarBicicleta?codigoBicicleta=<%=codigoBici%>">Eliminar</a>
-                                                        </div>
+                            %>
+                            <div class="carousel-item <% String s = (i == 0) ? "active" : "";%> <%= s%> ">
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-5">
+                                        <img src="BicicletasEstados?codigoBici=<%=codigoBici%>" class="img-thumbnail" alt="..." style="width:  350px;">
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="row">
+                                            <div class="col-12"><b>Estado:</b> 
+                                                <a class="text-success"><%=estado%></a>
+                                            </div> 
+                                            <div class="col-12"><b>Marca:</b><%=marca%></div>
+                                            <div class="col-12"><b>Modelo:</b><%=modelo%></div>
+                                            <div class="col-12"><b>Tamaño de Cuadro:</b><%=tamano%>cm</div>
+                                            <div class="col-12"><b>Tipo de Freno:</b><%=freno%></div>
+                                            <div class="col-12"><b>Descripción:</b> <%=descripcion%></div>
+                                            <div class="col-12 text-center pt-4">
+                                                <div class="dropdown" name="selector2">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Opciones
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="ValoracionesBicicleta.jsp?codigoBicicleta=<%=codigoBici%>">Opiniones</a>
+                                                        <a class="dropdown-item" href="ActivacionBicicleta?codigoBicicleta=<%=codigoBici%>">Activar/Desactivar Bicicleta</a>
+                                                        <a class="dropdown-item" href="HistorialAlquileres.jsp?codigoBicicleta=<%=codigoBici%>">Historial de Alquileres</a>
+                                                        <a class="dropdown-item" href="EliminarBicicleta?codigoBicicleta=<%=codigoBici%>">Eliminar</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                              
-                                </div>              
-                                <%
-                                    }
-                                } else {
-                                %>
-                                <li class="list-group-item">
-                                    <!--Viaje 1-->
-                                    <div class="alert alert-light" role="alert">
-                                        No hay ninguna bicicleta activa
                                     </div>
-                                </li>
-                                <%}%>
+                                </div>                              
+                            </div>              
+                            <% } %>
 
                             <% if (lista.isEmpty()) { %>
                             <li class="list-group-item">
                                 <!--Viaje 1-->
                                 <div class="alert alert-light" role="alert">
-                                    No hay ninguna bicicleta activa
+                                    No hay ninguna bicicleta desactivada
                                 </div>
                             </li>
                             <% }%>
-              
-                            
-                                <% if (!lista.isEmpty()) { %>
+
+                            <% if (!lista.isEmpty()) { %>
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>

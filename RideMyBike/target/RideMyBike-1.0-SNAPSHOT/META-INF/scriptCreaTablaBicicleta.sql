@@ -120,7 +120,7 @@ INSERT INTO Usuario
 
 -- Bicicletas
 INSERT INTO Bicicleta
-      VALUES (default, 'Bicicleta perfecta para andar por ciudad, es una bici que cuenta con 24 marchas y además su peso es perfecto, solo 5 KG, permite unos desplazamientos rápidos y con poco coste energético.', 50, CAST (X'FFFF' AS BLOB) , 'FROG BIKES', 'Track 58', 'Zapatas', 41.652940, -4.728380, 'martaND9', 'Activado', 'g27328jsdks');
+      VALUES (default, 'Bicicleta perfecta para andar por ciudad, es una bici que cuenta con 24 marchas y además su peso es perfecto, solo 5 KG, permite unos desplazamientos rápidos y con poco coste energético.', 50, CAST (X'FFFF' AS BLOB) , 'FROG BIKES', 'Track 58', 'Zapatas', 41.652940, -4.728380, 'juan.pperez', 'Activado', 'g27328jsdks');
  
 INSERT INTO Bicicleta
       VALUES (default, 'Esta bicicleta es perfecta para los nuevos riders, que quieran atreverse a hacer una ruta de montaña, esta mountain bike cuenta con un cuadro muy ligero de solo 10 KG de peso, perfecta para iniciarte en el descenso de montañas.', 46, CAST (X'FFFF' AS BLOB) , 'Rockville', 'Rockville 27.5', 'Disco', 41.652740, -4.731530, 'juan.pperez', 'Activado', 'g163eeh546');
@@ -164,3 +164,6 @@ INSERT INTO ValoracionUsuario
 
 INSERT INTO ValoracionBicicleta
       VALUES ('', 0, 2, 3);
+
+INSERT INTO ValoracionBicicleta
+      VALUES ('Una bicicleta wenisima es la mejor', 5, 1, 1);

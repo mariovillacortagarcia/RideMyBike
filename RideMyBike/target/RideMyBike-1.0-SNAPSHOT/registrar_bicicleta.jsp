@@ -25,13 +25,14 @@
             <jsp:param name="paginaMostrada" value="MisBicis" />
             <jsp:param name="sesionIniciada" value="true" />
         </jsp:include>  
-        <div class="container pt-4">
+        <div class="container pt-4 mt-3 mb-5">
             <!--Formulario de Registro de una Nueva Bicicleta-->
             <form action="RegistrarPeticionRevision" method="POST"  class="form-group mb-2" enctype="multipart/form-data">
-                <h5><b>Anota la información de la bicicleta que quieras añadir</b>🚴</h5>
-                Selecciona una imagen para subir:
-                <div class="form-label-group pb-3">
-                    <input type="file" name="foto" id="fileToUpload">
+                <h5><b>Anota la información de la bicicleta que quieras añadir </b>🚴</h5>
+                
+                <div class="form-label-group pb-3 mt-3">
+                    Selecciona una imagen para subir: <br>
+                    <input type="file" name="foto" id="fileToUpload" class="mt-1" >
                 </div>
                 <div class="form-group mb-2">
                     <label for="marcaBici">Marca</label>
