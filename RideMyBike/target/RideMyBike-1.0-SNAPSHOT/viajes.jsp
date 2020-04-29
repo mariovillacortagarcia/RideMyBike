@@ -134,11 +134,7 @@
 
             </div>
                             
-<!-- Footer -->
-    <jsp:include page="footer.jsp" >
-        <jsp:param name="etiqueta" value="RideMyBike" />
-        <jsp:param name="mostrarBoton" value="false" />
-    </jsp:include>
+
             <!-- Optional JavaScript -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
             <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>

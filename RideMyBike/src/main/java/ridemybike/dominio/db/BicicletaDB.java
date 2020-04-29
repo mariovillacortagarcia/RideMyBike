@@ -166,7 +166,7 @@ public class BicicletaDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps;
-        String query = "UPDATE FROM Bicicleta SET eliminada = 1 WHERE codigoBici= ?";
+        String query = "UPDATE Bicicleta SET eliminada = 1 WHERE codigoBici= ?";
 
         ps = connection.prepareStatement(query);
         ps.setString(1, codigoBici + "");
@@ -358,7 +358,7 @@ public class BicicletaDB {
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, codigoActivacion);
-            ps.setString(1, codigoBicicleta+"");
+            ps.setString(2, codigoBicicleta+"");
             
             int res = ps.executeUpdate();
             ps.close();

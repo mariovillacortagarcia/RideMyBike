@@ -95,16 +95,18 @@
                                             <div class="col-12 text-center pt-4">
                                                 <% if (lista.get(i).getEstado() == estadoPendiente) {
                                                 %>
-                                                <input type="String" class="form-control mb-4" name ="codigoActivacion" id="codigoAct" method="get" placeholder="Introduzca el código de activación">
+                                                <form action="ActivarBiciCodigo?codigoBici=<%=codigoBici%>" method="post">
+                                                <input type="text" class="form-control mb-4" name ="codigoActivacion" id="codigoActivacion" placeholder="Introduzca el código de activación">
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Opciones
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="ActivarBiciCodigo">Activar</a>
-                                                        <a class="dropdown-item" href="EliminarBiciNoActivada">Eliminar</a>
+                                                        <a class="dropdown-item" type="submit" >Activar</a>
+                                                        <a class="dropdown-item" type = "button" href="EliminarBiciNoActivada?codigoBici=<%=codigoBici%>">Eliminar</a>
                                                     </div>
                                                 </div>
+                                                </form>
 
                                                 <% } else {%>
                                                 <div class="dropdown" name="selector2">

@@ -72,7 +72,7 @@ public class InicioPeticion extends HttpServlet {
         Alquiler alquiler = new Alquiler();
         parsedDate = dateFormat.parse(fechaFin+" "+horaFin+":00.000");
         Timestamp horaFinPeticion = new java.sql.Timestamp(parsedDate.getTime());
-        double precio = horaFinPeticion.toLocalDateTime().getMinute()/100;
+        double precio = ((horaFinPeticion.getTime()-horaInicioPeticion.getTime())/60000)*1.0/100;
         if(seguroViaje != null){
             precio ++;
         }

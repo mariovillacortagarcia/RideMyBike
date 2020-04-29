@@ -53,8 +53,7 @@
                     <ul class="list-group overflow-auto">
                         <%
                             ArrayList<Alquiler> alquileres = (ArrayList<Alquiler>) request.getAttribute("alquileres");
-                            boolean sinViajes = true;
-                            if (alquileres != null) {
+                            if (!alquileres.isEmpty()) {
                                 for (Alquiler alquiler : alquileres) {
                                     int idAlquiler = alquiler.getCodigoAlquiler();
                                     String precio = Double.toString(alquiler.getPrecio());
@@ -66,7 +65,6 @@
                                     String horaInicio = "";
                                     if (alquiler.getHoraInicial() != null) {
                                         fechaInicio = alquiler.getHoraInicial().toLocalDateTime();
-                                        sinViajes = false;
                                         diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
                                         mesInicio = Integer.toString(fechaInicio.getMonthValue());
                                         anoInicio = Integer.toString(fechaInicio.getYear());
@@ -109,7 +107,7 @@
                                                 Opciones
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="FormularioRegistroIncidencia?idAlquiler=<%=idAlquiler%>">Registrar incidencia</a>
+                                                <a class="dropdown-item" href="registrar_incidencia.jsp?idAlquiler=<%=idAlquiler%>">Registrar incidencia</a>
                                                 <%if (alquiler.getHoraInicial() != null) {%>
                                                 <a class="dropdown-item" href="TerminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Finalizar viaje</a>
                                                 <%} else {%>
@@ -125,7 +123,7 @@
 
                         <% }
                             }
-                            if (sinViajes) {%>
+                            else {%>
                         <li class="list-group-item">
                             <!--Viaje 1-->
                             <div class="alert alert-light" role="alert">
@@ -139,11 +137,7 @@
 
         </div>
 
-        <!-- Footer -->
-        <jsp:include page="footer.jsp" >
-            <jsp:param name="etiqueta" value="RideMyBike" />
-            <jsp:param name="mostrarBoton" value="false" />
-        </jsp:include>
+        
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>

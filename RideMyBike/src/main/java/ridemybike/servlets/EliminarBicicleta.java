@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.db.BicicletaDB;
-import ridemybike.dominio.db.PeticionDB;
-import ridemybike.dominio.db.ValoracionBicicletaDB;
 
 /**
  *
@@ -38,7 +36,7 @@ public class EliminarBicicleta extends HttpServlet {
         Bicicleta bici = BicicletaDB.selectBicicleta(codigoBicicleta);
         BicicletaDB.eliminaBicicleta(bici.getcodigoBici());
 
-        String url = "/mis_bicisDesactivadas.jsp";
+        String url = "/RecuperarBicicletas";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }

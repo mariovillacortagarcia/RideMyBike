@@ -15,7 +15,7 @@
         
         <div class="row">
             <div class="col-sm"></div>
-            <div class="col-sm text-center pt-3" >
+            <div class="col-sm text-center pt-3 mt-5" >
                 <li class="list-group-item" style="background: #ec7b43">
                     <h2 class="text-white">Registro Incorrecto, vuelve a intentarlo </h2>
                 </li>

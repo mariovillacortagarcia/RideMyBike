@@ -164,7 +164,7 @@ INSERT INTO ValoracionUsuario
       VALUES ('', 4, 3, 'juan.pperez');
 
 INSERT INTO ValoracionBicicleta
-      VALUES ('', 0, 2, 3);
+      VALUES ('Una mierda', 0, 2, 3);
 
 INSERT INTO ValoracionBicicleta
       VALUES ('Una bicicleta wenisima es la mejor', 5, 1, 1);

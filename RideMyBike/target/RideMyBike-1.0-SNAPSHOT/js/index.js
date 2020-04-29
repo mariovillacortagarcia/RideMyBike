@@ -12,16 +12,10 @@ $('#fechaFinPrestamo').change(function() {
 
 $('#horaFinPrestamo').change(function() {
     document.getElementById('textoHoraFin').innerHTML = document.getElementById('horaFinPrestamo').value;
+    document.getElementById('textoPrecioTotal').innerHTML = 2.3;
 });
 
 $('#bicicletaSeleccionada').change(function() {
     document.getElementById('textoBiciSeleccionada').innerHTML = document.getElementById('bicicletaSeleccionada').value;
 });
 
-document.getElementById('cancelarPeticion').onclick = function() {
-    document.getElementById('fechaInicioPrestamo').value = "";
-    document.getElementById('horaInicioPrestamo').value = "";
-    document.getElementById('fechaFinPrestamo').value = "";
-    document.getElementById('horaFinPrestamo').value = "";
-    document.getElementById('bicicletaSeleccionada').value = "Ninguna";
-};

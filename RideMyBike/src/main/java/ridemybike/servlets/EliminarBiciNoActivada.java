@@ -31,10 +31,11 @@ public class EliminarBiciNoActivada extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String codigoBicicleta = request.getAttribute("codigoBici").toString();
+        
+        String codigoBicicleta = request.getParameter("codigoBici");
         BicicletaDB.eliminaBicicleta(Integer.parseInt(codigoBicicleta));
         
-        String url = "/mis_bicisDesactivadas.jsp";
+        String url = "/RecuperarBicicletas";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
 

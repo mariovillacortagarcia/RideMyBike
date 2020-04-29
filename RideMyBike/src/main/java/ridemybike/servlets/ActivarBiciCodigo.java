@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,7 +33,7 @@ public class ActivarBiciCodigo extends HttpServlet {
         String codigoActivacion = request.getParameter("codigoActivacion");
         String codigoBicicleta = request.getParameter("codigoBici");
         BicicletaDB.activaBicicletaCodigo(codigoActivacion, Integer.parseInt(codigoBicicleta));
-        String url = "/mis_bicis.jsp";
+        String url = "/RecuperarBicicletas";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
