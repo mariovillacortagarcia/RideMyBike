@@ -38,7 +38,6 @@
     %>
     
     <body>
-        <div class="container-fluid" style="background-color:#85c1e9">
             <!---Cabecera -->
             <jsp:include page="header.jsp" >
                 <jsp:param name="paginaMostrada" value="viajes" />

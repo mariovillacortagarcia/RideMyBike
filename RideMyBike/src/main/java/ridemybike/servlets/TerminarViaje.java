@@ -32,7 +32,7 @@ public class TerminarViaje extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         Bicicleta bici = AlquilerDB.getBicicletaDelAlquiler(Integer.parseInt(request.getParameter("codigoAlquiler")));
-        String ubicacionFinal = "Ubicacion final ["+bici.getLatitud()+", "+bici.getLongitud()+"]"; //Traducir aqui las coordenadas finales por la direccion
+        String ubicacionFinal = "{"+'"'+"lat"+'"'+":"+bici.getLatitud()+", "+'"'+"lng"+'"'+":"+bici.getLongitud()+"}";
         AlquilerDB.terminarViaje(Integer.parseInt(request.getParameter("codigoAlquiler")), ubicacionFinal);
         
         String url = "/RecuperarViajesEnProceso";
