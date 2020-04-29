@@ -43,9 +43,9 @@ public class ActivacionBicicleta extends HttpServlet {
             Bicicleta bici = BicicletaDB.selectBicicleta(codigoBicicleta);
             EstadoBicicleta nuevoEstado = bici.getEstado();
             if(bici.getEstado().equals(EstadoBicicleta.Activado)){
-                nuevoEstado = nuevoEstado.Desactivado;
+                nuevoEstado = EstadoBicicleta.Desactivado;
             }else{
-                nuevoEstado = nuevoEstado.Activado;
+                nuevoEstado = EstadoBicicleta.Activado;
             }
             BicicletaDB.cambiaEstadoBicicleta(bici, nuevoEstado); 
             String url = "/RecuperarBicicletas";
