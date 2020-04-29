@@ -1,5 +1,6 @@
 package ridemybike.dominio;
 
+import ridemybike.dominio.TipoAlquiler;
 import java.io.Serializable;
 import java.sql.Timestamp;
 

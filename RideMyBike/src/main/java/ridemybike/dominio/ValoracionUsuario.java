@@ -1,5 +1,7 @@
 package ridemybike.dominio;
 
+import ridemybike.dominio.Valoracion;
+
 /**
  * La valoracion que se le hace al ususario tanto si es el usuario que alquila como si es el dueno de la bicicleta
  */

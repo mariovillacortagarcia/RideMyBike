@@ -9,8 +9,8 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import ridemybike.dominio.Bicicleta;
-import ridemybike.dominio.Peticion;
 import ridemybike.dominio.TipoAlquiler;
+import ridemybike.dominio.Peticion;
 
 /**
  * Implementación del gestor de peticiones de la base de datos

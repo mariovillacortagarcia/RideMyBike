@@ -1,4 +1,3 @@
-
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="ridemybike.dominio.*"%>
@@ -37,7 +36,7 @@
                 <div class="col-6">
                     <div class="dropdown" >
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Todas las bicicletas
+                            Bicicletas Desactivadas
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
                             <a class="dropdown-item" href="RecuperarBicicletas">Todas las bicicletas</a>
@@ -110,6 +109,7 @@
                                                         <a class="dropdown-item" href="ActivarBiciCodigo">Activar</a>
                                                         <a class="dropdown-item" href="EliminarBiciNoActivada">Eliminar</a>
                                                     </div>
+
                                                 </div>
                                                 <% } else {%>
                                                 <div class="dropdown" name="selector2">
@@ -118,17 +118,18 @@
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                         <a class="dropdown-item" href="ValoracionesBicicleta.jsp?codigoBicicleta=<%=codigoBici%>">Opiniones</a>
-                                                        <a class="dropdown-item" href="ActivacionBicicleta?codigoBicicleta=<%=codigoBici%>">Activar/Desactivar Bicicleta</a>
+                                                        <a class="dropdown-item" href="ActivacionBicicletasDesactivadas?codigoBicicleta=<%=codigoBici%>">Activar/Desactivar Bicicleta</a>
                                                         <a class="dropdown-item" href="HistorialAlquileres.jsp?codigoBicicleta=<%=codigoBici%>">Historial de Alquileres</a>
                                                         <a class="dropdown-item" href="EliminarBicicleta?codigoBicicleta=<%=codigoBici%>">Eliminar</a>
-                                                    </div>
+
+                                                        <% }%>
+                                                    </div>                          
                                                 </div>
-                                                <%} %>                             
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>  
+                                </div>  
+                            </div> 
                             <% } %>
 
                             <% if (lista.isEmpty()) { %>

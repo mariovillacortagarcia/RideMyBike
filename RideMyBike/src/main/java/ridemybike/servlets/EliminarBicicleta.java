@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Bicicleta;
-import ridemybike.dominio.ValoracionBicicleta;
 import ridemybike.dominio.db.BicicletaDB;
 import ridemybike.dominio.db.PeticionDB;
 import ridemybike.dominio.db.ValoracionBicicletaDB;
@@ -43,9 +36,7 @@ public class EliminarBicicleta extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         int codigoBicicleta = Integer.parseInt(request.getParameter("codigoBicicleta"));
         Bicicleta bici = BicicletaDB.selectBicicleta(codigoBicicleta);
-        BicicletaDB.eliminaUnaBicicleta(bici.getcodigoBici());
-        PeticionDB.eliminaUnaBicicleta(bici);
-        ValoracionBicicletaDB.eliminaUnaBicicleta(bici);
+        BicicletaDB.eliminaBicicleta(bici.getcodigoBici());
 
         String url = "/mis_bicisDesactivadas.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);

@@ -158,7 +158,7 @@
                                         <button class="btn btn-outline-success" type="submit">RideMyBike!</button>
 
                                         <a href="index.jsp" role="button">
-                                            <button class="btn btn-outline-danger" name="cancelarPeticion" id="cancelarPeticion">Cancelar</button>
+                                            <button type="button" class="btn btn-outline-danger" href="index.jsp" name="cancelarPeticion" id="cancelarPeticion">Cancelar</button>
                                         </a>
 
                                     </div>

@@ -19,6 +19,7 @@ public class Bicicleta implements Serializable{
   private String usuarioPropietario;
   private EstadoBicicleta estado;
   private String codigoActivacion;
+  private int eliminada;
 
   /**
   * Metodo constructor creado a partir de los estandares JavaBeans
@@ -36,6 +37,7 @@ public class Bicicleta implements Serializable{
       usuarioPropietario = "";
       estado = null;
       codigoActivacion = "";
+      eliminada = -1;
   }
   /**
   * Metodo para dar un valor al codigo de la bicicleta
@@ -238,5 +240,9 @@ public class Bicicleta implements Serializable{
   public String getCodigoActivacion(){
       return codigoActivacion;
   }
+
+    public void setEliminada(int n) {
+        eliminada = n;
+    }
   
 }

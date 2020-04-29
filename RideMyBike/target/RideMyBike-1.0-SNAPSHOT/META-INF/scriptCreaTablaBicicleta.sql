@@ -35,6 +35,7 @@ CREATE TABLE Bicicleta(
   usuarioPropietario varchar(30) not null,
   estado varchar(30) not null,
   codigoActivacion varchar(150),
+  eliminada int not null,
   CHECK (freno IN ('Disco','Hidraulicos','Zapatas','Holandeses')),
   CHECK (estado IN ('Pendiente','Activado','Desactivado')),
   PRIMARY KEY (codigoBici),
@@ -120,16 +121,16 @@ INSERT INTO Usuario
 
 -- Bicicletas
 INSERT INTO Bicicleta
-      VALUES (default, 'Bicicleta perfecta para andar por ciudad, es una bici que cuenta con 24 marchas y además su peso es perfecto, solo 5 KG, permite unos desplazamientos rápidos y con poco coste energético.', 50, CAST (X'FFFF' AS BLOB) , 'FROG BIKES', 'Track 58', 'Zapatas', 41.652940, -4.728380, 'juan.pperez', 'Activado', 'g27328jsdks');
+      VALUES (default, 'Bicicleta perfecta para andar por ciudad, es una bici que cuenta con 24 marchas y además su peso es perfecto, solo 5 KG, permite unos desplazamientos rápidos y con poco coste energético.', 50, CAST (X'FFFF' AS BLOB) , 'FROG BIKES', 'Track 58', 'Zapatas', 41.652940, -4.728380, 'juan.pperez', 'Activado', 'g27328jsdks', 0);
  
 INSERT INTO Bicicleta
-      VALUES (default, 'Esta bicicleta es perfecta para los nuevos riders, que quieran atreverse a hacer una ruta de montaña, esta mountain bike cuenta con un cuadro muy ligero de solo 10 KG de peso, perfecta para iniciarte en el descenso de montañas.', 46, CAST (X'FFFF' AS BLOB) , 'Rockville', 'Rockville 27.5', 'Disco', 41.652740, -4.731530, 'juan.pperez', 'Activado', 'g163eeh546');
+      VALUES (default, 'Esta bicicleta es perfecta para los nuevos riders, que quieran atreverse a hacer una ruta de montaña, esta mountain bike cuenta con un cuadro muy ligero de solo 10 KG de peso, perfecta para iniciarte en el descenso de montañas.', 46, CAST (X'FFFF' AS BLOB) , 'Rockville', 'Rockville 27.5', 'Disco', 41.652740, -4.731530, 'juan.pperez', 'Activado', 'g163eeh546', 0);
 
 INSERT INTO Bicicleta
-      VALUES (default, 'Esta es una bicicleta de carretera perfecta para rutas de caminos largos, además incluye unas ruedas de 28 pulgadas y esta en perfecto estado, comprada en 2016 tiene 4 años, las camaras de las ruedas están recien cambiadas.', 51, CAST (X'FFFF' AS BLOB) , 'CANNONDALE', 'CAAD Optimo', 'Zapatas', 41.654263, -4.795995, 'juan.pperez', 'Activado', 'h3645df37a8');
+      VALUES (default, 'Esta es una bicicleta de carretera perfecta para rutas de caminos largos, además incluye unas ruedas de 28 pulgadas y esta en perfecto estado, comprada en 2016 tiene 4 años, las camaras de las ruedas están recien cambiadas.', 51, CAST (X'FFFF' AS BLOB) , 'CANNONDALE', 'CAAD Optimo', 'Zapatas', 41.654263, -4.795995, 'juan.pperez', 'Activado', 'h3645df37a8', 0);
 
 INSERT INTO Bicicleta
-      VALUES (default, 'Perfecta bicicleta para el uso diario por la ciudad, cuenta con 2 cubre ruedas, por si llueve para que no te salqpique agua del suelo mientras estas conduciendo la bici, ademas tiene luces, delantera y trasera que funcionan según das pedasles. Su sillín es uno de los más comodos del mercado.', 60, CAST (X'FFFF' AS BLOB) , 'Ortler', 'Monet', 'Zapatas', 41.652720, -4.722092, 'martaND9', 'Activado', 'l01836dge6');
+      VALUES (default, 'Perfecta bicicleta para el uso diario por la ciudad, cuenta con 2 cubre ruedas, por si llueve para que no te salqpique agua del suelo mientras estas conduciendo la bici, ademas tiene luces, delantera y trasera que funcionan según das pedasles. Su sillín es uno de los más comodos del mercado.', 60, CAST (X'FFFF' AS BLOB) , 'Ortler', 'Monet', 'Zapatas', 41.652720, -4.722092, 'martaND9', 'Activado', 'l01836dge6', 0);
  
 -- Peticiones
 INSERT INTO Peticion

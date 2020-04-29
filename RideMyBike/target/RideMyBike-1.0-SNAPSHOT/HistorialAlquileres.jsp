@@ -26,15 +26,7 @@
         </style>
     </head>
     <%
-    int codigoBicicleta = Integer.parseInt(request.getParameter("codigoBicicleta"));
-    //se supone que codigoBicicleta es el parametro del anterior JSP y que usare para 
-    //llamar al servlet extraeBicicleta para obtener la bicicleta
-    ArrayList<ValoracionBicicleta> listaOpiniones= new ArrayList<ValoracionBicicleta>();
-    listaOpiniones = (ArrayList<ValoracionBicicleta>) request.getAttribute("lista");
-    //se supone que codigoBicicleta es el parametro del anterior JSP y que usare para 
-    //llamar al servlet SeleccionaAlquiler para obtener la lista de Alquileres (mismo tamano que valoraciones)
-    ArrayList<Alquiler> listaAlquileres= new ArrayList<Alquiler>();
-    listaAlquileres = (ArrayList<Alquiler>) request.getAttribute("listaAlquileres");
+    ArrayList<Alquiler> listaAlquileres = (ArrayList<Alquiler>) request.getAttribute("alquileres");
     %>
     
     <body>
@@ -55,7 +47,7 @@
                             <%
                                 
                                 boolean sinViajes = true;
-                                if (listaAlquileres != null) {
+                                if (!listaAlquileres.isEmpty()) {
                                     for (Alquiler alquiler : listaAlquileres) {
                                         String precio = Double.toString(alquiler.getPrecio());
                                         String inicio = alquiler.getInicio();
@@ -108,12 +100,9 @@
                                 </div>
                             </li>
                             <% }%>
-
-
                         </ul>
                     </div>
                 </div>
-
             </div>
             <!-- Optional JavaScript -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->

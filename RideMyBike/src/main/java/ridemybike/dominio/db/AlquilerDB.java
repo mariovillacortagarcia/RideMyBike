@@ -302,6 +302,50 @@ public class AlquilerDB {
             return null;
         }
     }
+    
+    
+    public static ArrayList<Alquiler> getAlquileresBicicleta(String codigoBici) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Alquiler, Peticion WHERE Alquiler.codigoPeticion = Peticion.codigoPeticion AND Peticion.codigoBici = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoBici);
+            rs = ps.executeQuery();
+            Alquiler alquiler = null;
+            ArrayList<Alquiler> alquileres = new ArrayList();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            while (rs.next()) {
+                alquiler = new Alquiler();
+                alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
+                alquiler.setInicio(rs.getString("inicio"));
+                alquiler.setFin(rs.getString("fin"));
+                alquiler.setHoraInicial(new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime()));
+                Timestamp horaFinal = rs.getString("horaFinal") == null ? null : new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
+                alquiler.setHoraFinal(horaFinal);
+                alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
+                alquiler.setPeticion(Integer.parseInt(rs.getString("codigoPeticion")));
+                String archivado = rs.getString("archivado");
+                if (archivado.equals("1")) {
+                    alquiler.setArchivado(true);
+                } else {
+                    alquiler.setArchivado(false);
+                }
+                alquileres.add(alquiler);
+            }
+
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+
+            return alquileres;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /**
      * Devuelve la bicicleta usada en el alquiler

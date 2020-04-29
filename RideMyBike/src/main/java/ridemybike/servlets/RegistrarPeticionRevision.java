@@ -1,15 +1,9 @@
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import static java.lang.Double.parseDouble;
-import static java.lang.System.out;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 import java.util.logging.Level;

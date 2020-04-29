@@ -8,12 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ridemybike.dominio.Alquiler;
 import ridemybike.dominio.ValoracionBicicleta;
-import ridemybike.dominio.db.AlquilerDB;
 import ridemybike.dominio.db.ValoracionBicicletaDB;
 
-
+/**
+ * Servlet para obtener el historial de valoraciones de una bicicleta especificada en 
+ * request.codigoBicicleta.
+ * Devuelve el control a ValoracionBicicleta.jsp
+ */
 @WebServlet(name = "ValoracionesBicicleta", urlPatterns = {"/ValoracionesBicicleta"})
 public class ValoracionesBicicleta extends HttpServlet {
 
