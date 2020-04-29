@@ -1,8 +1,3 @@
-<%-- 
-    Document   : mis_bicis
-    Created on : 22 abr. 2020, 18:12:10
-    Author     : Alberto
---%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -34,20 +29,20 @@
 
     
   <%
-      ArrayList<Bicicleta> listaBicicletas = new ArrayList<Bicicleta>();
+      ArrayList<Bicicleta> listaBicicletas = null;
       listaBicicletas = (ArrayList<Bicicleta>) request.getAttribute("lista");
   %>
-  <div class="container pt-4 ">
+  <div class="container pt-4 mt-3">
       <div class="row">
         <div class="col-6">
           <div class="dropdown" >
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Bicicletas Desactivadas
+              Todas las bicicletas
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-              <a class="dropdown-item" href="mis_bicis.jsp">Todas las bicicletas</a>
-              <a class="dropdown-item" href="mis_bicisActivas.jsp">Bicicletas Activas</a>
-              <a class="dropdown-item" href="mis_bicisDesactivadas.jsp">Bicicletas Desactivadas</a>
+              <a class="dropdown-item" href="RecuperarBicicletas">Todas las bicicletas</a>
+              <a class="dropdown-item" href="RecuperarBicicletasActivas">Bicicletas Activas</a>
+              <a class="dropdown-item" href="RecuperarBicicletasDesactivadas">Bicicletas Desactivadas</a>
             </div>
           </div>
         </div>
@@ -55,52 +50,37 @@
           <a href="registrar_bicicleta.jsp"><button type="button" class="btn btn-secondary " name="botonRegistraBicicleta">Registrar nueva bicicleta</button> </a>
         </div>
       </div>
-      <div class="row pt-4">
+      <div class="row pt-4 mt-4">
         <div class="col-12">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-                
                 <% 
-                    if(listaBicicletas != null){
-                        Boolean var = true;
-                        Boolean var2 = true;
-                        EstadoBicicleta estado = EstadoBicicleta.Desactivado;
-                        EstadoBicicleta estado2 = EstadoBicicleta.Pendiente;
-                        ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
-                        for(Bicicleta bici : listaBicicletas){
-                            if(bici.getEstado() == estado || bici.getEstado() == estado2){
-                                lista.add(bici);
-                            }
+                    EstadoBicicleta estado = EstadoBicicleta.Desactivado;
+                    EstadoBicicleta estado2 = EstadoBicicleta.Pendiente;  
+                    ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
+                    for(Bicicleta bici : listaBicicletas){
+                        if(bici.getEstado() == estado || bici.getEstado() == estado2){
+                            lista.add(bici);
                         }
-                        for(Bicicleta bici : lista){
-                                String marca = bici.getMarca();
-                                String modelo = bici.getModelo();
-                                Double tamano = bici.getTamCuadro();
-                                String freno = bici.getFreno().toString();
-                                String descripcion = bici.getDescripcion();
-                                int codigoBici = bici.getcodigoBici();
-                                EstadoBicicleta estadoBici = bici.getEstado();
+                    }
+                    if(!lista.isEmpty()){
+                        for(int i = 0; i < lista.size();i ++){
                 %>
-                
-                   
-                <% if(var){
-                    for(int i = 0; i < lista.size();i ++){
-                    
-                %>
-                    
                         <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" class="active"></li>
-                        <%
-                            }
-                            var = false;
-                        }
-                %>
-            </ol>
+                <%}%>
+            </ol>         
             <div class="carousel-inner" style="height: 450px">
-                <%
-                    if(var2){ %>
+                <%  for(int i = 0; i < lista.size(); i++){
+                        String marca = lista.get(i).getMarca();
+                        String modelo = lista.get(i).getModelo();
+                        Double tamano = lista.get(i).getTamCuadro();
+                        String freno = lista.get(i).getFreno().toString();
+                        String descripcion = lista.get(i).getDescripcion();
+                        int codigoBici = lista.get(i).getcodigoBici();
+                        //EstadoBicicleta estado = lista.get(i).getEstado();
+                    if(i == 0){ %>
               <div class="carousel-item active">
-                <% var2 = false;
-                    }else{ %>
+                <%}else{ %>
               <div class="carousel-item" >
                  <%}%>
                 <div class="row">
@@ -111,18 +91,20 @@
                     <div class="col-5">
                       <div class="row">
                           <div class="col-12"><b>Estado:</b> 
-                              <a class="text-success"><%=estadoBici %></a>
+                              <a class="text-success"><%=estado %></a>
                           </div> 
-
                         <div class="col-12"><b>Marca:</b><%=marca %></div>
                         <div class="col-12"><b>Modelo:</b><%=modelo %></div>
                         <div class="col-12"><b>Tamaño de Cuadro:</b><%=tamano %>cm</div>
                         <div class="col-12"><b>Tipo de Freno:</b><%=freno %></div>
                         <div class="col-12"><b>Descripción:</b> <%=descripcion %></div>
-                        <div class="col-12 text-center pt-4">
-                        <% if(estadoBici == estado2){
+                        <div class="col-12 text-center pt-4"> 
+             <!--             <div class="dropdown" name="selector2">      --->
+                              
+                              
+                        <% if(lista.get(i).getEstado() == estado2){
                         %>
-                        <input type="String" class="form-control mb-2" name ="codigoActivacion" id="codigoAct" method="get" placeholder="Introduzca el código de activación">
+                        <input type="String" class="form-control mb-4" name ="codigoActivacion" id="codigoAct" method="get" placeholder="Introduzca el código de activación">
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Opciones
@@ -144,10 +126,14 @@
                               <a class="dropdown-item" href="EliminarBicicleta?codigoBicicleta=<%=codigoBici%>">Eliminar</a>
                             </div>
                          </div>
-
-                              <%} %>
+                              <%} %>                             
+                          </div>
                         </div>
-                               <%   
+                      </div>
+                    </div>
+                </div>                              
+                </div>              
+                              <%
                                    }
                     }else{
                         %>
@@ -158,15 +144,11 @@
                                 </div>
                             </li>
                                 <%}%>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-              </div>        
-                        
-                        
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+
+              </div>  
+              </div>
+              </div>          
+             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </a>
@@ -175,12 +157,9 @@
               <span class="sr-only">Next</span>
             </a>
                
-          </div>
-           
+
         </div>
       </div>
-  </div>
-
       
       
   <!-- Optional JavaScript -->
@@ -191,3 +170,4 @@
 </body>
 
 </html>
+

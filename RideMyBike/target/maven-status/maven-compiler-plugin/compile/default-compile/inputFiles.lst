@@ -1,6 +1,7 @@
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarViajes.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarViajesEnProceso.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/EliminarBicicleta.java
+/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/IniciarViaje.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/ValoracionBicicleta.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperaBicicletaValoraciones.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/EliminarViaje.java

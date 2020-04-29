@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,15 +30,17 @@ public class RecuperarBicicletasDesactivadas extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+        
+        response.setContentType("text/html;charset=UTF-8");
         String url = "/mis_bicisDesactivadas.jsp";
         String nombreUsuario = "juan.pperez";
-        System.out.println(nombreUsuario);  
+        
         EstadoBicicleta estado = EstadoBicicleta.Desactivado;
         EstadoBicicleta estado2 = EstadoBicicleta.Pendiente;
         ArrayList<Bicicleta> listaBicicletas = BicicletaDB.getBicicletasEstado(nombreUsuario, estado);
         ArrayList<Bicicleta> listaBicicletas2 = BicicletaDB.getBicicletasEstado(nombreUsuario, estado2);
-        request.setAttribute("lista", listaBicicletas.addAll(listaBicicletas2));
+        listaBicicletas.addAll(listaBicicletas2);
+        request.setAttribute("lista", listaBicicletas);
         
         RequestDispatcher dispatcher=getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
