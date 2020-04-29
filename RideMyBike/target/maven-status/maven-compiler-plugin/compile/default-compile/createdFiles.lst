@@ -36,7 +36,6 @@ ridemybike/dominio/db/PeticionRevisionDB.class
 ridemybike/dominio/Alquiler.class
 ridemybike/servlets/ValoracionesBicicleta.class
 ridemybike/servlets/IniciarViaje.class
-ridemybike/servlets/FormularioRegistroIncidencia.class
 ridemybike/dominio/db/BicicletaDB.class
 ridemybike/dominio/db/UsuarioDB.class
 ridemybike/dominio/db/ValoracionBicicletaDB.class

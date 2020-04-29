@@ -354,7 +354,7 @@ public class BicicletaDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         PreparedStatement statement = null;
-        String query = "UPDATE Bicicleta SET estado = Activado , codigoActivacion = ? WHERE codigoBici = ?";
+        String query = "UPDATE Bicicleta SET estado = 'Activado' , codigoActivacion = ? WHERE codigoBici = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, codigoActivacion);

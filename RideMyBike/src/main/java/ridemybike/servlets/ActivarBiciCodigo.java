@@ -33,6 +33,7 @@ public class ActivarBiciCodigo extends HttpServlet {
         String codigoActivacion = request.getParameter("codigoActivacion");
         String codigoBicicleta = request.getParameter("codigoBici");
         BicicletaDB.activaBicicletaCodigo(codigoActivacion, Integer.parseInt(codigoBicicleta));
+        
         String url = "/RecuperarBicicletas";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);

@@ -102,7 +102,7 @@
                                                         Opciones
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" type="submit" >Activar</a>
+                                                        <button class="dropdown-item" type="submit" >Activar</button>
                                                         <a class="dropdown-item" type = "button" href="EliminarBiciNoActivada?codigoBici=<%=codigoBici%>">Eliminar</a>
                                                     </div>
                                                 </div>
