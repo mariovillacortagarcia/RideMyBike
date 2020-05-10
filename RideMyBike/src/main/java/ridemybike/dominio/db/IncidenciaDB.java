@@ -1,6 +1,8 @@
 package ridemybike.dominio.db;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import ridemybike.dominio.GradoIncidencia;
 import ridemybike.dominio.Incidencia;
 
@@ -23,12 +25,13 @@ public class IncidenciaDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps;
-        String query = "INSERT INTO Incidencia(codigoPeticion, descripcion, grado) VALUES (?, ?, ?)";
+        String query = "INSERT INTO Incidencia(codigoPeticion, descripcion, grado) VALUES (?, ?, ?, ?)";
         try {
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, incidencia.getCodigoPeticion()+"");
             ps.setString(2, incidencia.getDescripcion());
             ps.setString(3, incidencia.getGravedad()+"");
+            ps.setString(4, 0+"");
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             int res = 0;
@@ -84,6 +87,54 @@ public class IncidenciaDB {
             return null;
         }
     }
+    
+    /**
+     * Devuelve las incidencias no resueltas del alquiler especificado
+     * 
+     * @param codigoAlquiler el codigo del alquiler
+     * @return un ArrayList con las incidencias
+     * @throws IllegalArgumentException si el codigo dado es negativo
+     */
+    public static ArrayList<Incidencia> selectIncidenciasSinSolucionar(int codigoAlquiler) {
+        if(codigoAlquiler < 0){
+            throw new IllegalArgumentException("Codigo de incidencia negativo");
+        }
+    
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        ResultSet rs = null;
+        String query= "SELECT * FROM Incidencia, Alquiler WHERE Alquiler.codigoAlquiler = ? AND Alquiler.codigoPeticion = Incidencia.codigoPeticion AND solucionada = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoAlquiler+"");
+            rs = ps.executeQuery();
+            ArrayList<Incidencia> incidenciasSinSolucionar = new ArrayList<>();
+            Incidencia incidencia = null;
+            while (rs.next()) {
+                incidencia = new Incidencia();
+                incidencia.setDescripcion(rs.getString("descripcion"));
+                incidencia.setCodigoIncidencia(Integer.parseInt(rs.getString("codigoIncidencia")));
+                incidencia.setCodigoPeticion(Integer.parseInt(rs.getString("codigoPeticion")));
+                incidencia.setGravedad(GradoIncidencia.valueOf(rs.getString("grado")));
+                incidenciasSinSolucionar.add(incidencia);
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return incidenciasSinSolucionar;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Elimina la incidencia especificada del sistema
+     * 
+     * @param inci la incidencia especificada
+     * @throws IllegalArgumentException si la incidencia es null 
+     */
     public static void eliminaIncidencia(Incidencia inci) throws SQLException{
         if(inci == null){
             throw new IllegalArgumentException("La incidencia a eliminar es nula");
@@ -93,11 +144,77 @@ public class IncidenciaDB {
         PreparedStatement ps= null;
         ResultSet rs = null;
         Integer codigoinci = inci.getCodigoIncidencia();
-        String query= "DELETE FROM Incidencia“+“WHERE codigoinci= ‘”+codigoinci+ “’”;";
+        String query= "DELETE FROM Incidencia WHERE codigoIncidencia = "+codigoinci;
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);
         rs.close();
         ps.close();
         pool.freeConnection(connection);
+    }
+    
+    /**
+     * Marca la incidencia especificada como solucionada
+     * 
+     * @param codigoIncidencia el codigo de la incidencia
+     * @return un int positivo si la actualizacion ha tenido exito; negativo en caso contrario
+     * @throws IllegalArgumentException si el codigo es negativo o nulo 
+     */
+    public static int solucionarIncidencia(int codigoIncidencia) throws IOException{
+        if(codigoIncidencia <= 0){
+            throw new IllegalArgumentException("Codigo de incidencia negativo o nulo");
+        }
+    
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        String query;
+        query = "UPDATE Incidencia SET solucionada = 1 WHERE codigoIncidencia = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoIncidencia+"");
+            
+            int res = ps.executeUpdate();
+            ps.close();
+            pool.freeConnection(connection);
+            return res;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static ArrayList<Incidencia> selectIncidenciasSinSolucionarPorBici(int codigoBici) {
+        if(codigoBici <= 0){
+            throw new IllegalArgumentException("Codigo de bicicleta negativo o nulo");
+        }
+    
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        ResultSet rs = null;
+        String query= "SELECT * FROM Incidencia, Peticion WHERE Peticion.codigoBici = ? AND Peticion.codigoPeticion = Incidencia.codigoPeticion AND solucionada = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoBici+"");
+            rs = ps.executeQuery();
+            ArrayList<Incidencia> incidenciasSinSolucionar = new ArrayList<>();
+            Incidencia incidencia = null;
+            while (rs.next()) {
+                incidencia = new Incidencia();
+                incidencia.setDescripcion(rs.getString("descripcion"));
+                incidencia.setCodigoIncidencia(Integer.parseInt(rs.getString("codigoIncidencia")));
+                incidencia.setCodigoPeticion(Integer.parseInt(rs.getString("codigoPeticion")));
+                incidencia.setGravedad(GradoIncidencia.valueOf(rs.getString("grado")));
+                incidenciasSinSolucionar.add(incidencia);
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return incidenciasSinSolucionar;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

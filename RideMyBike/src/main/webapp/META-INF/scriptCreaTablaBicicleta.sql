@@ -96,6 +96,7 @@ CREATE TABLE Incidencia(
   codigoPeticion int not null,
   descripcion varchar(1000) not null,
   grado varchar(30) not null,
+  solucionada int not null,
   CHECK (grado IN ('Leve','Moderado','Grave')),
   PRIMARY KEY (codigoIncidencia),
   FOREIGN KEY (codigoPeticion) REFERENCES Peticion(codigoPeticion)
@@ -158,6 +159,16 @@ INSERT INTO Alquiler
 INSERT INTO Alquiler
       VALUES (4.1, '2020-02-05 21:00:21', '2020-02-05 20:42:28', default, 4, 0, 'Plaza de la Mazorca', 'Calle la Chancla nº 4');
  
+-- Incidencias
+INSERT INTO Incidencia
+    VALUES (default, 3, 'La dirección anda algo torcida y me la pegué. La bici sufrió algun rayón', 'Leve', 0);
+
+INSERT INTO Incidencia
+    VALUES (default, 3, 'Se pinchó la rueda we', 'Moderado', 0);
+
+INSERT INTO Incidencia
+    VALUES (default, 3, 'Pasé por un mal barrio y me robaron la bici', 'Grave', 0);
+
 
 -- Valoraciones
 INSERT INTO ValoracionUsuario

@@ -120,7 +120,6 @@
                                 }
                                 if (sinViajes) {%>
                             <li class="list-group-item">
-                                <!--Viaje 1-->
                                 <div class="alert alert-light" role="alert">
                                     No hay ningún viaje realizado
                                 </div>

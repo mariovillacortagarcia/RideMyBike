@@ -209,7 +209,7 @@ public class BicicletaDB {
         if (nombreUsuario == null || nombreUsuario.equals("")) {
             throw new IllegalArgumentException("Nombre de usuario no aceptado ");
         }
-        ArrayList<Bicicleta> lista = new ArrayList<Bicicleta>();
+        ArrayList<Bicicleta> lista = new ArrayList<>();
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
 

@@ -7,34 +7,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ridemybike.dominio.Incidencia;
 import ridemybike.dominio.db.IncidenciaDB;
 
 /**
- *
- * @author David
+ * Servlet que marca la incidencia especificada en la request como solucionada
  */
-@WebServlet(name = "RecuperarIncidencia", urlPatterns = {"/RecuperarIncidencia"})
-public class RecuperarIncidencia extends HttpServlet{
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name = "SolucionarIncidencia", urlPatterns = {"/SolucionarIncidencia"})
+public class SolucionarIncidencia extends HttpServlet {
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Incidencia incidencia = IncidenciaDB.selectIncidencia(0);
-        request.setAttribute("incidencia", incidencia);
+        response.setContentType("text/html;charset=UTF-8");
         
-        String url = "/Incidencia.jsp";
+        IncidenciaDB.solucionarIncidencia(Integer.parseInt(request.getParameter("codigoIncidencia")));
+        
+        String url = "/VerIncidenciasAlquiler?codigoAlquiler="+request.getParameter("codigoAlquiler");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,14 +55,5 @@ public class RecuperarIncidencia extends HttpServlet{
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    
 }

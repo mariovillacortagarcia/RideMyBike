@@ -86,14 +86,14 @@
                                     </div>
                                     <div class="col-5">
                                         <div class="row">
-                                            <div class="col-12"><b>Estado:</b> 
+                                            <div class="col-12"><b>Estado: </b> 
                                                 <a class="text-success"><%=estado%></a>
                                             </div> 
-                                            <div class="col-12"><b>Marca:</b><%=marca%></div>
-                                            <div class="col-12"><b>Modelo:</b><%=modelo%></div>
-                                            <div class="col-12"><b>Tamaño de Cuadro:</b><%=tamano%>cm</div>
-                                            <div class="col-12"><b>Tipo de Freno:</b><%=freno%></div>
-                                            <div class="col-12"><b>Descripción:</b> <%=descripcion%></div>
+                                            <div class="col-12"><b>Marca: </b><%=marca%></div>
+                                            <div class="col-12"><b>Modelo: </b><%=modelo%></div>
+                                            <div class="col-12"><b>Tamaño de Cuadro: </b><%=tamano%>cm</div>
+                                            <div class="col-12"><b>Tipo de Freno: </b><%=freno%></div>
+                                            <div class="col-12"><b>Descripción: </b> <%=descripcion%></div>
                                             <div class="col-12 text-center pt-4"> 
                                                 <!--             <div class="dropdown" name="selector2">      --->
 
@@ -120,6 +120,7 @@
                                                         <a class="dropdown-item" href="ValoracionesBicicleta?codigoBicicleta=<%=codigoBici%>">Opiniones</a>
                                                         <a class="dropdown-item" href="ActivacionBicicleta?codigoBicicleta=<%=codigoBici%>">Activar/Desactivar Bicicleta</a>
                                                         <a class="dropdown-item" href="HistorialAlquileresBicicleta?codigoBicicleta=<%=codigoBici%>">Historial de Alquileres</a>
+                                                        <a class="dropdown-item" href="VerIncidenciasBicicleta?codigoBicicleta=<%=codigoBici%>">Ver incidencias</a>
                                                         <a class="dropdown-item" href="EliminarBicicleta?codigoBicicleta=<%=codigoBici%>">Eliminar</a>
                                                     </div>                          
                                                 </div>
