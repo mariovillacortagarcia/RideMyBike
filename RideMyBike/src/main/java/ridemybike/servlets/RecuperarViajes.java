@@ -31,10 +31,9 @@ public class RecuperarViajes extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Usuario usuario = (Usuario)(request.getSession().getAttribute("usuario"));
-        String nombreUsuario = usuario.getNickName();
+        String nombreUsuario = request.getSession().getAttribute("usuario").toString();
         ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresRealizados(nombreUsuario); 
-        ArrayList<Peticion> peticiones = PeticionDB.selectPeticionesAlquileres(alquileres);
+        ArrayList<Peticion> peticiones = PeticionDB.selectPeticionesAlquileres(alquileres, nombreUsuario);
         request.setAttribute("alquileres", alquileres);
         request.setAttribute("peticiones", peticiones);
         

@@ -117,7 +117,7 @@ public class PeticionDB {
         pool.freeConnection(connection);
     }
 
-    public static ArrayList<Peticion> selectPeticionesAlquileres(ArrayList<Alquiler> alquileres) {
+    public static ArrayList<Peticion> selectPeticionesAlquileres(ArrayList<Alquiler> alquileres, String nombreUsuario) {
         ArrayList<Peticion> peticiones = new ArrayList();
         for (Alquiler alquiler : alquileres) {
             String codigoPeticion = Integer.toString(alquiler.getPeticion());
@@ -129,6 +129,7 @@ public class PeticionDB {
             try {
                 ps = connection.prepareStatement(query);
                 ps.setString(1, codigoPeticion);
+                ps.setString(2, nombreUsuario);
                 rs = ps.executeQuery();
                 Peticion peticion = null;
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
