@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import ridemybike.dominio.ValoracionBicicleta;
 import ridemybike.dominio.db.ValoracionBicicletaDB;
 
@@ -35,6 +36,8 @@ public class ValoracionesBicicleta extends HttpServlet {
         String codigoBici = request.getParameter("codigoBicicleta");
         ArrayList<ValoracionBicicleta> valoraciones = ValoracionBicicletaDB.getValoraciones(codigoBici);     
         request.setAttribute("valoraciones", valoraciones);
+
+        
         
         String url = "/ValoracionesBicicleta.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);

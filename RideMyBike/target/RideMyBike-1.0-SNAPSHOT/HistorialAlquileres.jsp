@@ -31,10 +31,11 @@
 
     <body>
         <!---Cabecera -->
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
-            <jsp:param name="paginaMostrada" value="viajes" />
-            <jsp:param name="sesionIniciada" value="false" />
-        </jsp:include>
+            <jsp:param name="paginaMostrada" value="HistorialAlquileres" />
+            <jsp:param name="sesionIniciada" value="<%= s %>" />
+        </jsp:include>  
 
         <!-- Contenido -->
         <div class="container pt-4 mt-3">

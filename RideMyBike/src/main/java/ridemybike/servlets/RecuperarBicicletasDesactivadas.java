@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.EstadoBicicleta;
 import ridemybike.dominio.db.BicicletaDB;
@@ -33,7 +34,9 @@ public class RecuperarBicicletasDesactivadas extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         String url = "/mis_bicisDesactivadas.jsp";
-        String nombreUsuario = "juan.pperez";
+        HttpSession session= request.getSession();
+        String nombreUsuario = session.getAttribute("usuario").toString();
+        request.setAttribute("nombreUsuario", nombreUsuario);
         
         EstadoBicicleta estado = EstadoBicicleta.Desactivado;
         EstadoBicicleta estado2 = EstadoBicicleta.Pendiente;

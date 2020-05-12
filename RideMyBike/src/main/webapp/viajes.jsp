@@ -27,7 +27,6 @@
     </head>
 
     <body>
-<<<<<<< HEAD
             <!---Cabecera -->
             <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
             <jsp:include page="header.jsp" >
@@ -115,7 +114,7 @@
                                                     <a class="dropdown-item" href="ArchivarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler() %>">Archivar viaje</a>
                                                     <a class="dropdown-item" href="EliminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler() %>">Eliminar viaje</a>
                                                 </div>
-=======
+
         <!---Cabecera -->
         <% String s = session.getAttribute("usuario") == null ? "false" : "true";%>
         <jsp:include page="header.jsp" >
@@ -213,7 +212,7 @@
                                                 <%}%>
                                                 <a class="dropdown-item" href="ArchivarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Archivar viaje</a>
                                                 <a class="dropdown-item" href="EliminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Eliminar viaje</a>
->>>>>>> 41428e835a6153d1fef5ac1433b21f7e64a1bf7b
+
                                             </div>
                                         </div>
                                     </div>

@@ -25,15 +25,15 @@
     </head>
 
     <body>
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
-            <jsp:param name="paginaMostrada" value="MisBicis" />
-            <jsp:param name="sesionIniciada" value="true" />
-        </jsp:include> 
-
+            <jsp:param name="paginaMostrada" value="ValoracionesBicicleta" />
+            <jsp:param name="sesionIniciada" value="<%= s %>" />
+        </jsp:include>  
         <!----- --->
         <%
-
-            ArrayList<ValoracionBicicleta> valoraciones = (ArrayList<ValoracionBicicleta>) request.getAttribute("valoraciones");
+            String nombreUsuario = session.getAttribute("usuario") == null ? "value='false'" : "value='true'";  
+            ArrayList<ValoracionBicicleta> valoraciones = (ArrayList<ValoracionBicicleta>) request.getAttribute("valoraciones");           
         %>
         <div class="container pt-4 my-3">
             <!-- Navegacion por los viajes -->

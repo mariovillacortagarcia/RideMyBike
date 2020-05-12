@@ -17,10 +17,11 @@
     </head>
 
     <body>
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
-            <jsp:param name="paginaMostrada" value="MisBicis" />
-            <jsp:param name="sesionIniciada" value="true" />
-        </jsp:include>    
+            <jsp:param name="paginaMostrada" value="MisBicisDesactivadas" />
+            <jsp:param name="sesionIniciada" value="<%= s %>" />
+        </jsp:include>  
 
 
         <!-- TBicicletas que el usuario tiene en la aplicación registradas o en proceso -->

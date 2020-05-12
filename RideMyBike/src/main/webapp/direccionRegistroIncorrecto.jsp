@@ -8,10 +8,11 @@
         <link rel="stylesheet" href="css/bootstrap.css">
     </head>
     <body>
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
-        <jsp:param name="paginaMostrada" value="MisBicis" />            
-        <jsp:param name="sesionIniciada" value="true" />
-        </jsp:include>
+            <jsp:param name="paginaMostrada" value="RegistroIncorrectoBici" />
+            <jsp:param name="sesionIniciada" value="<%= s %>" />
+        </jsp:include>  
         
         <div class="row">
             <div class="col-sm"></div>
