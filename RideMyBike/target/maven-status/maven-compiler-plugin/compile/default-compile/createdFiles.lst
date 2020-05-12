@@ -14,12 +14,14 @@ ridemybike/dominio/Incidencia.class
 ridemybike/dominio/Peticion.class
 ridemybike/servlets/RecuperarBicicletasDesactivadas.class
 ridemybike/servlets/RecuperarViajesArchivados.class
+ridemybike/servlets/EliminarIncidencia.class
 ridemybike/servlets/RegistrarPeticionRevision.class
 ridemybike/servlets/RecuperarBicicletas.class
 ridemybike/servlets/RegistroIncidencia.class
 ridemybike/servlets/DesarchivarViaje.class
 ridemybike/dominio/GradoIncidencia.class
 ridemybike/servlets/VerIncidenciasBicicleta.class
+ridemybike/servlets/CerrarSesion.class
 ridemybike/servlets/BicicletasCoordenadas.class
 ridemybike/servlets/RecuperarImagenPerfil.class
 ridemybike/dominio/PeticionRevision.class

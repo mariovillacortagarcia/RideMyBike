@@ -11,10 +11,10 @@ import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
 
 /**
- * Servlet que gestiona el inicio de sesion
+ * Servlet que gestiona el cierre de sesion
  */
-@WebServlet(name = "IniciarSesion", urlPatterns = {"/IniciarSesion"})
-public class IniciarSesion extends HttpServlet {
+@WebServlet(name = "CerrarSesion", urlPatterns = {"/CerrarSesion"})
+public class CerrarSesion extends HttpServlet {
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,20 +29,9 @@ public class IniciarSesion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String usuarioIntroducido = request.getParameter("usuario");
-        String passwordIntroducida = request.getParameter("password");
-        
-        Usuario presuntoUser = UsuarioDB.selectUser(usuarioIntroducido);
-        
-        String url;
-        if(presuntoUser != null && presuntoUser.getHashPasswd().equals(passwordIntroducida)){
-            request.getSession().setAttribute("usuario", usuarioIntroducido);
-             url = "/index.jsp";
-        } else{
-            url = "/iniciar_sesion.jsp";
-        }
+        request.getSession().invalidate();
 
-        
+        String url = "/index.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }

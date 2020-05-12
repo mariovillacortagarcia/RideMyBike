@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/RideMyBike">
-  <Resource auth="Container" driverClassName="org.apache.derby.jdbc.ClientDriver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="10" jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer" jmxEnabled="true" logAbandoned="true" maxActive="100" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="10" name="jdbc/RideMyBike" password="admin" removeAbandoned="true" removeAbandonedTimeout="60" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:derby://localhost:1527/RideMyBike" username="dbadmin" validationInterval="30000" validationQuery="SELECT 1 FROM SYSIBM.SYSDUMMY1"/>
-</Context>

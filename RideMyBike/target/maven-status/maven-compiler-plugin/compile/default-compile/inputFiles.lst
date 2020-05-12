@@ -19,6 +19,7 @@
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/SeleccionaAlquiler.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/ArchivarViaje.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/DesarchivarViaje.java
+/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/EliminarIncidencia.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/IniciarViaje.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/GradoIncidencia.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/EliminarBiciNoActivada.java
@@ -54,5 +55,6 @@
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/ActivacionBicicleta.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/IniciarSesion.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/EliminarBicicleta.java
+/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/CerrarSesion.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/ActualizarPerfil.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/ValoracionUsuario.java
