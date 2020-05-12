@@ -19,7 +19,7 @@
         <!---Cabecera -->
         <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
-            <jsp:param name="paginaMostrada" value="Viajes" />
+            <jsp:param name="paginaMostrada" value="SobreNosotros" />
             <jsp:param name="sesionIniciada" value="<%= s %>" />
         </jsp:include>
 
