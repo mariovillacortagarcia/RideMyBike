@@ -84,6 +84,7 @@ public class UsuarioDB {
                 usuario.setTarjetaCredito(rs.getString("numeroTarjeta"));
                 usuario.setNombreUsuario(rs.getString("nombreUsuario"));
                 usuario.setDireccion(rs.getString("direccion"));
+                usuario.setHashPasswd(rs.getString("hashPassword"));
             }
             rs.close();
             ps.close();

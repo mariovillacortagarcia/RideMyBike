@@ -1,24 +1,21 @@
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import ridemybike.dominio.Bicicleta;
-import ridemybike.dominio.db.BicicletaDB;
+import ridemybike.dominio.Usuario;
+import ridemybike.dominio.db.UsuarioDB;
 
 /**
- * Servlet par obtener la lista de bicicletas de un usuario.
- * @author Alberto
+ * Servlet que gestiona el inicio de sesion
  */
-@WebServlet(name = "RecuperarBicicletas", urlPatterns = {"/RecuperarBicicletas"})
-public class RecuperarBicicletas extends HttpServlet {
-
+@WebServlet(name = "IniciarSesion", urlPatterns = {"/IniciarSesion"})
+public class IniciarSesion extends HttpServlet {
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,16 +28,20 @@ public class RecuperarBicicletas extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "/mis_bicis.jsp";
-        String nombreUsuario = "juan.pperez";
-        ArrayList<Bicicleta> listaBicicletas = BicicletaDB.getBicicletasRegistradas(nombreUsuario);
-        request.setAttribute("lista", listaBicicletas);
+
+        String usuarioIntroducido = request.getParameter("usuario");
+        String passwordIntroducida = request.getParameter("password");
         
-        RequestDispatcher dispatcher=getServletContext().getRequestDispatcher(url);
+        Usuario presuntoUser = UsuarioDB.selectUser(usuarioIntroducido);
+        if(presuntoUser != null && presuntoUser.getHashPasswd().equals(passwordIntroducida)){
+            request.getSession().setAttribute("usuario", usuarioIntroducido);
+        }
+
+        String url = "/index.jsp";
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
-//      listaBicicletas = BicicletaDB.getBicicletasRegistradas(nombreUsuarioEj);
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -69,15 +70,6 @@ public class RecuperarBicicletas extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    
+    
 }

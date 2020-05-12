@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
 import ridemybike.dominio.db.ValoracionUsuarioDB;
@@ -22,7 +23,8 @@ public class RecuperarPerfil extends HttpServlet {
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String nombreUsuario = "juan.pperez";
+        HttpSession session= request.getSession();
+        String nombreUsuario = session.getAttribute("usuario").toString();
         
         Usuario usuario = UsuarioDB.selectUser(nombreUsuario);
         request.setAttribute("user", usuario);
