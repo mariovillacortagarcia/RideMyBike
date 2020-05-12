@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import ridemybike.dominio.Alquiler;
 import ridemybike.dominio.Peticion;
 import ridemybike.dominio.TipoAlquiler;
@@ -40,7 +41,8 @@ public class InicioPeticion extends HttpServlet {
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String nombreArrendatario = "juan.pperez"; 
+        HttpSession session= request.getSession();
+        String nombreArrendatario = session.getAttribute("usuario").toString();
         String codigoBici = request.getParameter("bicicletaId");
         String horaInicio = request.getParameter("horaInicioPrestamo");
         String fechaInicio = request.getParameter("fechaInicioPrestamo");
@@ -67,7 +69,6 @@ public class InicioPeticion extends HttpServlet {
         peticion.setTipo(alquilerEnMano == null ? TipoAlquiler.estandar : TipoAlquiler.enMano);
         
         int codigoPeticion = PeticionDB.insertarPeticion(peticion);
-        
         
         Alquiler alquiler = new Alquiler();
         parsedDate = dateFormat.parse(fechaFin+" "+horaFin+":00.000");

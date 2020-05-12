@@ -10,6 +10,7 @@ public class Incidencia implements Serializable {
     private int codigoIncidencia;
     private int codigoPeticion;
     private GradoIncidencia gravedad;
+    private int solucionada;
     
     /**
      * Inicializador segun los parametros JavaBeans
@@ -19,6 +20,7 @@ public class Incidencia implements Serializable {
         codigoIncidencia = -1;
         codigoPeticion = -1;
         gravedad = null;
+        solucionada= -1;
     }
     
     /**
@@ -49,6 +51,15 @@ public class Incidencia implements Serializable {
     }
     
     /**
+     * Devuelve si la incidencia esta solucionada
+     * 
+     * @return un int con el codigo
+     */
+    public int getSolucionada(){
+        return solucionada;
+    }
+    
+    /**
      * Devuelve la gravedad de la incidencia
      * 
      * @return un GradoIncidencia con el grado de gravedad
@@ -56,6 +67,8 @@ public class Incidencia implements Serializable {
     public GradoIncidencia getGravedad(){
         return gravedad;
     }
+    
+    
     
     /**
      * Establece el codigo de la incidencia
@@ -107,5 +120,17 @@ public class Incidencia implements Serializable {
             throw new IllegalArgumentException("Gravedad de incidencia igual a null");
         }
         this.gravedad = gravedad;
+    }
+    /**
+     * Establece la incidencia como solucionada
+     * 
+     * @param gravedad la gravedad de la incidencia
+     * @throws IllegalAccessException si la gravedad es igual a null
+     */
+    public void setSolucionada(GradoIncidencia gravedad){
+        if(solucionada <0){
+            throw new IllegalArgumentException("Incidencia solucionada igual a null");
+        }
+        this.solucionada = solucionada;
     }
 }

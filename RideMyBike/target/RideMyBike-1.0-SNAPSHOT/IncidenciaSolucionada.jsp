@@ -1,10 +1,16 @@
+<%-- 
+    Document   : IncidenciaSolucionada
+    Created on : 11-may-2020, 18:48:21
+    Author     : David
+--%>
+
 <%@page import="ridemybike.dominio.Incidencia"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
 
     <head>
-        <title> Registrar incidencia - RideMyBike </title>
+        <title> Incidencia Solucionada - RideMyBike </title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,7 +33,7 @@
             <div class="col-sm"></div>
             <div class="col-sm text-center pt-3 mt-5" >
                 <li class="list-group-item" style="background: #1bb670">
-                    <h2 class="text-white">La incidencia fue registrada correctamente. </h2>
+                    <h2 class="text-white">La incidencia fue solucionada satisfactoriamente. </h2>
                 </li>
             </div>
             <div class="col-sm"></div>

@@ -130,26 +130,29 @@ public class IncidenciaDB {
     }
     
     /**
-     * Elimina la incidencia especificada del sistema
+     * Funcion que realiza la eliminacion de una incidencia
      * 
-     * @param inci la incidencia especificada
-     * @throws IllegalArgumentException si la incidencia es null 
+     *
+     * @param codigoIncidencia Es el codigo de la bici que se usa para identificarla
+     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
+     * @throws SQLException Excepcion relacionada con la base de datos
      */
-    public static void eliminaIncidencia(Incidencia inci) throws SQLException{
-        if(inci == null){
+    public static int eliminaIncidencia(int codigoIncidencia) throws SQLException{
+        if(codigoIncidencia <= 0){
             throw new IllegalArgumentException("La incidencia a eliminar es nula");
         }
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection= pool.getConnection();
-        PreparedStatement ps= null;
-        ResultSet rs = null;
-        Integer codigoinci = inci.getCodigoIncidencia();
-        String query= "DELETE FROM Incidencia WHERE codigoIncidencia = "+codigoinci;
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(query);
-        rs.close();
+        PreparedStatement ps;
+        String query = "DELETE Incidencia SET WHERE codigoIncidencia= ?";
+
+        ps = connection.prepareStatement(query);
+        ps.setString(1, codigoIncidencia + "");
+        int res = ps.executeUpdate();
         ps.close();
         pool.freeConnection(connection);
+        return res;
+        
     }
     
     /**

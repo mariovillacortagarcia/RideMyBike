@@ -22,13 +22,17 @@
         </jsp:include>
 
         <!-- Contenido -->
-        <div class="container pt-4 mt-1">
-            <!--Formulario de Registro de una incidencia-->
-
-            Hubo algún error en el registro de la incidencia.<br>
-            Vuelva a intentarlo.
-        </div>
         
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm text-center pt-3 mt-5" >
+                <li class="list-group-item" style="background: #ec7b43">
+                    <h2 class="text-white">Hubo algún error en el registro de la incidencia.<br>
+            Vuelva a intentarlo. </h2>
+                </li>
+            </div>
+            <div class="col-sm"></div>
+        </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
