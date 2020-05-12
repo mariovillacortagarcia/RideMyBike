@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Alquiler;
+import ridemybike.dominio.Peticion;
+import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.AlquilerDB;
+import ridemybike.dominio.db.PeticionDB;
 
 
 @WebServlet(name = "RecuperarViajesArchivados", urlPatterns = {"/RecuperarViajesArchivados"})
@@ -28,9 +31,12 @@ public class RecuperarViajesArchivados extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String nombreUsuario = "juan.pperez";
+        Usuario usuario = (Usuario)(request.getSession().getAttribute("usuario"));
+        String nombreUsuario = usuario.getNickName();
         ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresArchivados(nombreUsuario);        
+        ArrayList<Peticion> peticiones = PeticionDB.selectPeticionesAlquileres(alquileres);
         request.setAttribute("alquileres", alquileres);
+        request.setAttribute("peticiones", peticiones);
         
         String url = "/viajes_archivados.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
