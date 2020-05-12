@@ -4,7 +4,7 @@
 <html lang="es">
 
 <head>
-  <title> Registrar incidencia - RideMyBike </title>
+  <title> Valorar usuario - RideMyBike </title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,7 +25,7 @@
   <div class="container pt-4 mt-1">
     <!--Formulario de Registro de una incidencia-->
 
-    <form action="RegistroIncidencia?idAlquiler=<%=request.getParameter("idAlquiler")%>" method="POST" class="form-group mb-2">
+    <form action="ValorarUsuario?usuarioArrendatario=<%=request.getParameter("usuarioArrendatario")%>" method="POST" class="form-group mb-2">
       <h5><b>Anota la información de la incidencia </b>⚠️</h5>
       <div class="form-group mb-2">
         <label for="descripcionIncidencia">Descripción</label>
