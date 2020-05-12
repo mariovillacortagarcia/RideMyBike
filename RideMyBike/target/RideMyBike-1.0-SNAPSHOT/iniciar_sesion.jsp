@@ -23,20 +23,20 @@
 
   <!-- Contenido -->
   <div class="row justify-content-center my-auto pt-5">
-    <form class="form-signin">
+    <form class="form-signin" action="IniciarSesion" method="post">
       <div class="text-center mb-4">
 
         <h1 class="h3 mb-3 font-weight-normal"><b>Iniciar sesión</b></h1>
       </div>
 
       <div class="form-label-group pb-2">
-        <label for="inputEmail">Usuario o email</label>
-        <input type="text" id="inputEmail" class="form-control" placeholder="Usuario o email" required autofocus>
+        <label for="usuario">Usuario o email</label>
+        <input type="text" name="usuario" class="form-control" placeholder="Usuario o email" required autofocus>
       </div>
 
       <div class="form-label-group pb-2">
-        <label for="inputPassword">Contraseña</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
       </div>
 
       <div class="checkbox mb-3">

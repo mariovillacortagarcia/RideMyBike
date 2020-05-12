@@ -27,11 +27,12 @@
     </head>
 
     <body>
-        <!--- Cabecera -->
-        <jsp:include page="header.jsp" >
-            <jsp:param name="paginaMostrada" value="Home" />
-            <jsp:param name="sesionIniciada" value="true" />
-        </jsp:include>
+        <!---Cabecera -->
+            <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
+            <jsp:include page="header.jsp" >
+                <jsp:param name="paginaMostrada" value="Home" />
+                <jsp:param name="sesionIniciada" value="<%= s %>" />
+            </jsp:include>
 
         <!-- Contenido -->
         <div id="carouselAlquiler" class="carousel slide mt-4" data-ride="carousel" data-interval="false">

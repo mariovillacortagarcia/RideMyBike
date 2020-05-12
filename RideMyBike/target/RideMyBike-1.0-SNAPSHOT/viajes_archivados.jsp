@@ -1,3 +1,5 @@
+<%@page import="ridemybike.dominio.TipoAlquiler"%>
+<%@page import="ridemybike.dominio.Peticion"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="ridemybike.dominio.Alquiler"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -26,9 +28,11 @@
 
     <body>
         <!---Cabecera -->
+        <!---Cabecera -->
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true";%>
         <jsp:include page="header.jsp" >
             <jsp:param name="paginaMostrada" value="Viajes" />
-            <jsp:param name="sesionIniciada" value="true" />
+            <jsp:param name="sesionIniciada" value="<%= s%>" />
         </jsp:include>
 
         <!-- Contenido -->
@@ -53,9 +57,12 @@
                     <ul class="list-group overflow-auto">
                         <%
                             ArrayList<Alquiler> alquileres = (ArrayList<Alquiler>) request.getAttribute("alquileres");
+                            ArrayList<Peticion> peticiones = (ArrayList<Peticion>) request.getAttribute("peticiones");
                             boolean sinViajes = true;
-                            if (alquileres != null) {
+                            if (alquileres != null) {int i = -1;
                                 for (Alquiler alquiler : alquileres) {
+                                    i++;
+                                    TipoAlquiler tipo = peticiones.get(i).getTipo();
                                     String precio = Double.toString(alquiler.getPrecio());
                                     String inicio = alquiler.getInicio();
                                     String fin = alquiler.getFin();
@@ -104,6 +111,11 @@
                                                 Opciones
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <%if (tipo.equals(TipoAlquiler.enMano)) {
+                                                    String usuarioArrendatario = peticiones.get(i).getNombreArrendatario();
+                                                %>
+                                                <a class="dropdown-item" href="ValorarUsuario?usuarioArrendatario=<%=usuarioArrendatario%>">Valorar propietario</a>
+                                                <%}%>
                                                 <a class="dropdown-item" href="DesarchivarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Desarchivar viaje</a>
                                                 <a class="dropdown-item" href="EliminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Eliminar viaje</a>
                                             </div>
