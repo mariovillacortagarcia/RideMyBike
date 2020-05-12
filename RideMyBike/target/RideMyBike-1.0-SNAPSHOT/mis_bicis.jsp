@@ -11,6 +11,7 @@
 <!doctype html>
 <html lang="es">
 
+    
     <head>
         <title> Mis bicis - RideMyBike </title>
         <!-- Required meta tags -->
@@ -23,9 +24,10 @@
     </head>
 
     <body>
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
             <jsp:param name="paginaMostrada" value="MisBicis" />
-            <jsp:param name="sesionIniciada" value="true" />
+            <jsp:param name="sesionIniciada" value="<%= s %>" />
         </jsp:include>    
 
 
@@ -36,6 +38,7 @@
         <%
             ArrayList<Bicicleta> lista = null;
             lista = (ArrayList<Bicicleta>) request.getAttribute("lista");
+            
         %>
         <div class="container pt-4 mt-3">
             <div class="row">

@@ -21,9 +21,10 @@
     </head>
 
     <body>
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
-            <jsp:param name="paginaMostrada" value="MisBicis" />
-            <jsp:param name="sesionIniciada" value="true" />
+            <jsp:param name="paginaMostrada" value="RegistrarBicicleta" />
+            <jsp:param name="sesionIniciada" value="<%= s %>" />
         </jsp:include>  
         <div class="container pt-4 mt-3 mb-5">
             <!--Formulario de Registro de una Nueva Bicicleta-->

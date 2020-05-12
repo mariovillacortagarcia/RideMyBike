@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.EstadoBicicleta;
@@ -62,7 +63,8 @@ public class RegistrarPeticionRevision extends HttpServlet {
              Ciudad = request.getParameter("ciudad");
              fecha1 = request.getParameter("fecha1");
              hora1 = request.getParameter("hora1");
-             nombreUsuario = "juan.pperez";
+            HttpSession session= request.getSession();
+            nombreUsuario = session.getAttribute("usuario").toString();
             Part foto = request.getPart("foto");
             
             Bicicleta bici = new Bicicleta();

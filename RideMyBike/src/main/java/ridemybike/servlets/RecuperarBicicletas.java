@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.db.BicicletaDB;
 
@@ -31,7 +32,8 @@ public class RecuperarBicicletas extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = "/mis_bicis.jsp";
-        String nombreUsuario = "juan.pperez";
+        HttpSession session= request.getSession();
+        String nombreUsuario = session.getAttribute("usuario").toString();
         ArrayList<Bicicleta> listaBicicletas = BicicletaDB.getBicicletasRegistradas(nombreUsuario);
         request.setAttribute("lista", listaBicicletas);
         
