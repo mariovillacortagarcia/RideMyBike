@@ -21,7 +21,6 @@ ridemybike/servlets/RegistroIncidencia.class
 ridemybike/servlets/DesarchivarViaje.class
 ridemybike/dominio/GradoIncidencia.class
 ridemybike/servlets/VerIncidenciasBicicleta.class
-ridemybike/servlets/CerrarSesion.class
 ridemybike/servlets/BicicletasCoordenadas.class
 ridemybike/servlets/RecuperarImagenPerfil.class
 ridemybike/dominio/PeticionRevision.class
@@ -43,16 +42,17 @@ ridemybike/servlets/SolucionarIncidencia.class
 ridemybike/dominio/db/BicicletaDB.class
 ridemybike/dominio/db/UsuarioDB.class
 ridemybike/dominio/db/ValoracionBicicletaDB.class
-ridemybike/servlets/ActualizarPerfil.class
 ridemybike/servlets/VerIncidenciasAlquiler.class
 ridemybike/servlets/ActivacionBicicletasDesactivadas.class
 ridemybike/servlets/RecuperaBicicletaValoraciones.class
 ridemybike/dominio/Valoracion.class
 ridemybike/dominio/db/AlquilerDB.class
 ridemybike/dominio/EstadoBicicleta.class
+.netbeans_automatic_build
 ridemybike/servlets/SolucionarIncidenciaDesdeBici.class
 ridemybike/servlets/ActivarBiciCodigo.class
 ridemybike/servlets/ExtraeBicicleta.class
+ridemybike/servlets/ValorarUsuario.class
 ridemybike/servlets/ActivacionBicicletaActivadas.class
 ridemybike/servlets/RecuperarViajes.class
 ridemybike/dominio/db/IncidenciaDB.class
