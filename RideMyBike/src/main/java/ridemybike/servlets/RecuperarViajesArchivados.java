@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Alquiler;
+import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.Peticion;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.AlquilerDB;
+import ridemybike.dominio.db.BicicletaDB;
 import ridemybike.dominio.db.PeticionDB;
-
 
 @WebServlet(name = "RecuperarViajesArchivados", urlPatterns = {"/RecuperarViajesArchivados"})
 public class RecuperarViajesArchivados extends HttpServlet {
@@ -30,13 +31,16 @@ public class RecuperarViajesArchivados extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String nombreUsuario = request.getSession().getAttribute("usuario").toString();
-        ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresArchivados(nombreUsuario);        
+        ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresArchivados(nombreUsuario);
         ArrayList<Peticion> peticiones = PeticionDB.selectPeticionesAlquileres(alquileres, nombreUsuario);
+        ArrayList<Bicicleta> bicicletas = BicicletaDB.selectBicicletasPeticiones(peticiones);
         request.setAttribute("alquileres", alquileres);
         request.setAttribute("peticiones", peticiones);
-        
+        request.setAttribute("bicicletas", bicicletas);
+
+
         String url = "/viajes_archivados.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);

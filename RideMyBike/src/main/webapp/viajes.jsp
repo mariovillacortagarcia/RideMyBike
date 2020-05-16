@@ -1,3 +1,4 @@
+<%@page import="ridemybike.dominio.Bicicleta"%>
 <%@page import="ridemybike.dominio.TipoAlquiler"%>
 <%@page import="ridemybike.dominio.Peticion"%>
 <%@page import="java.util.ArrayList"%>
@@ -58,7 +59,7 @@
                         <%
                             ArrayList<Alquiler> alquileres = (ArrayList<Alquiler>) request.getAttribute("alquileres");
                             ArrayList<Peticion> peticiones = (ArrayList<Peticion>) request.getAttribute("peticiones");
-
+                            ArrayList<Bicicleta> bicicletas = (ArrayList<Bicicleta>) request.getAttribute("bicicletas");
                             boolean sinViajes = true;
                             if (alquileres != null) {
 
@@ -118,9 +119,9 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <%if (tipo.equals(TipoAlquiler.enMano)) {
-                                                    String usuarioArrendatario = peticiones.get(i).getNombreArrendatario();
+                                                    String usuarioPropietario = bicicletas.get(i).getUsuarioPropietario();
                                                 %>
-                                                <a class="dropdown-item" href="valorar_usuario.jsp?usuarioArrendatario=<%=usuarioArrendatario%>">Valorar propietario</a>
+                                                <a class="dropdown-item" href="MuestraValorarUsuario?usuarioPropietario=<%=usuarioPropietario%>">Valorar propietario</a>
                                                 <%}%>
                                                 <a class="dropdown-item" href="ArchivarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Archivar viaje</a>
                                                 <a class="dropdown-item" href="EliminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Eliminar viaje</a>

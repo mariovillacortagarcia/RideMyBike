@@ -13,14 +13,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ridemybike.dominio.db.AlquilerDB;
+import javax.servlet.http.HttpSession;
+import ridemybike.dominio.Usuario;
+import ridemybike.dominio.db.UsuarioDB;
+import ridemybike.dominio.db.ValoracionUsuarioDB;
 
 /**
  *
  * @author Mario Villacorta
  */
-@WebServlet(name = "ValorarUsuario", urlPatterns = {"/ValorarUsuario"})
-public class ValorarUsuario extends HttpServlet {
+@WebServlet(name = "MuestraValorarUsuario", urlPatterns = {"/MuestraValorarUsuario"})
+public class MuestraValorarUsuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +36,17 @@ public class ValorarUsuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        request.setAttribute("", this);
-        String url = "/RecuperarViajes";
+         HttpSession session= request.getSession();
+        String nombreUsuario = session.getAttribute("usuario").toString();
+        
+        Usuario usuario = UsuarioDB.selectUser(nombreUsuario);
+        Usuario propietario = UsuarioDB.selectUser(request.getParameter("usuarioPropietario"));
+        request.setAttribute("usuarioArrendatario", usuario);
+        request.setAttribute("usuarioPropietario",propietario);
+        
+        String url = "/valorar_usuario.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
