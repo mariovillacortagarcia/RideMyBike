@@ -7,13 +7,18 @@ package ridemybike.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ridemybike.dominio.ValoracionUsuario;
 import ridemybike.dominio.db.AlquilerDB;
+import ridemybike.dominio.db.ValoracionUsuarioDB;
 
 /**
  *
@@ -34,8 +39,16 @@ public class ValorarUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        request.setAttribute("", this);
+        ValoracionUsuario val = new ValoracionUsuario();
+        val.setCodigo(Integer.parseInt(request.getParameter("codigoAlquiler")));
+        val.setDescripcion(request.getParameter("descripcion"));
+        val.setPuntuacion(Integer.parseInt((String)request.getParameter("valoracion")));
+        val.setUsuarioValorado(request.getParameter("usuarioValorado"));
+        try {
+            ValoracionUsuarioDB.insertarValoracionUsuario(val);
+        } catch (SQLException ex) {
+            Logger.getLogger(ValorarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String url = "/RecuperarViajes";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
