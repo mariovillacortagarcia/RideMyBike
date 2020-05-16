@@ -121,7 +121,7 @@
                                                 <%if (tipo.equals(TipoAlquiler.enMano)) {
                                                     String usuarioPropietario = bicicletas.get(i).getUsuarioPropietario();
                                                 %>
-                                                <a class="dropdown-item" href="valorar_usuario.jsp?usuarioPropietario=<%=usuarioPropietario%>">Valorar propietario</a>
+                                                <a class="dropdown-item" href="MuestraValorarUsuario?usuarioPropietario=<%=usuarioPropietario%>">Valorar propietario</a>
                                                 <%}%>
                                                 <a class="dropdown-item" href="ArchivarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Archivar viaje</a>
                                                 <a class="dropdown-item" href="EliminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Eliminar viaje</a>
