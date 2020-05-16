@@ -34,7 +34,7 @@
             String nombrePropietario = usuarioPropietario.getNombre();
             String apellidosPropietario = usuarioPropietario.getApellidos();
             String codigoAlquiler = request.getParameter("codigoAlquiler");
-            String nickPropietario = usuarioPropietario.getNick();
+            String nickPropietario = usuarioPropietario.getNickName();
         %>
         <div class="container pt-4 mt-1">
             <!--Formulario de Registro de una valoracion de usuario-->
