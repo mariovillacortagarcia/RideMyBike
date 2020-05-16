@@ -1,16 +1,18 @@
-//Fuente: https://medium.com/@ishitaa.ashley4/simple-star-rating-css-and-javascript-8c450046ba2b
-var list = ["uno", "dos", "tres", "cuatro", "cinco"];
-list.forEach(function (element) {
-    document.getElementById(element).addEventListener("click", function () {
-        var cls = document.getElementById(element).className;
-        if (cls.includes("unchecked"))
-        {
-            document.getElementById(element).classList.remove("unchecked");
-            document.getElementById(element).classList.add("checked");
-        } else
-        {
-            document.getElementById(element).classList.remove("checked");
-            document.getElementById(element).classList.add("unchecked");
+valoraciones = ["uno", "dos", "tres", "cuatro", "cinco"];
+valoracion = 3;
+for(let i = 0; i<valoracion; i++){
+    $("#"+valoraciones[i]).addClass("checked");
+}
+$("#valoracion").val(valoracion);
+for(let i = 0; i<valoraciones.length; i++){ 
+    $("#"+valoraciones[i]).click({indice:i},function(event){
+        valoracion = event.data.indice+1;
+        $("#valoracion").val(valoracion);
+        for(let j =0; j<valoraciones.length; j++){
+            $("#"+valoraciones[j]).removeClass("checked");
+            if(j<=event.data.indice){
+                $("#"+valoraciones[j]).addClass("checked");
+            }
         }
-    });
-});
+    });    
+}
