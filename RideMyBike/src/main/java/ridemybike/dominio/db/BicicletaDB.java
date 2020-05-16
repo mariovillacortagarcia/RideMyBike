@@ -380,7 +380,6 @@ public class BicicletaDB {
     }
     
 
-    //public static ArrayList<Bicicleta> selectBicicletasPeticiones(ArrayList<Peticion> peticiones) {
 
     /**
      *
