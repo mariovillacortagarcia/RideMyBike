@@ -27,10 +27,11 @@ public class RecuperarPerfil extends HttpServlet {
         String nombreUsuario = session.getAttribute("usuario").toString();
         
         Usuario usuario = UsuarioDB.selectUser(nombreUsuario);
-        request.setAttribute("user", usuario);
         
         int valoracionMedia = ValoracionUsuarioDB.selectValoracionMedia(nombreUsuario);
-        request.setAttribute("valoracionMedia", valoracionMedia);
+        usuario.setValoracionMedia(valoracionMedia);
+        
+        request.setAttribute("user", usuario);
         
         String url = "/perfil.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);

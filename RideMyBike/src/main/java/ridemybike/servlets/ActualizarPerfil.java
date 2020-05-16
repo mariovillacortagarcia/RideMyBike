@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-//import org.apache.commons.validator.routines.EmailValidator;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
+import ridemybike.dominio.db.ValoracionUsuarioDB;
 
 /**
  * Implementacion del servlet para la actualizacion de los datos del perfil dado
@@ -20,9 +20,16 @@ import ridemybike.dominio.db.UsuarioDB;
 @MultipartConfig
 public class ActualizarPerfil extends HttpServlet {
 
-    private boolean nombreValido(String nombre) {
-        return nombre.replace(" ", "").length() == 0 ? false : true;
-    }
+    private final String ERROR_NOMBRE = "Este nombre no es válido.";
+    private final String ERROR_APELLIDOS = "Estos apellidos no son válidos.";
+    private final String ERROR_EMAIL = "Este e-mail no es válido.";
+    private final String ERROR_DIRECCION = "Esta direccion no es válida.";
+    private final String ERROR_TLF = "Este teléfono no es válido.";
+    private final String ERROR_TARJETA = "Este número de tarjeta no es válido.";
+    private final String ERROR_PASSWORD_ACTUAL = "La contraseña actual no coincide con la introducida";
+    private final String ERROR_PASSWORD_NUEVA = "La contraseña debe contener almenos 8 caracteres válidos";
+    private final String ERROR_PASSWORD_NUEVA_BLANCO = "La contraseña no puede contener espacios en blanco";
+    private final String ERROR_PASSWORD_CONFIRMADA = "Las nuevas contraseñas no coinciden";
 
     private boolean cadenaNumerica(String tlf) {
         try {
@@ -42,56 +49,88 @@ public class ActualizarPerfil extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String direccion = request.getParameter("direccion");
         String tarjeta = request.getParameter("tarjeta");
-        String passwordAntigua = request.getParameter("passwordAntigua");
+        String passwordAntigua = UsuarioDB.selectUser(usuario).getHashPasswd();
         String passwordActual = request.getParameter("passwordActual");
         String passwordNueva = request.getParameter("passwordNueva");
         String passwordNuevaConfirmacion = request.getParameter("passwordNuevaConfirmacion");
 
-        if (nombre.isBlank() || apellidos.isBlank() || direccion.isBlank()) {
-            String url = "/RecuperarPerfil";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
-        } else {
-            if (!email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
-                String url = "/RecuperarPerfil";
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-                dispatcher.forward(request, response);
+        boolean todoCorrecto = true;
+        if (nombre.isBlank()) {
+            request.setAttribute("errorNombre", ERROR_NOMBRE);
+            todoCorrecto = false;
+        }
+        if (apellidos.isBlank()) {
+            request.setAttribute("errorApellidos", ERROR_APELLIDOS);
+            todoCorrecto = false;
+        }
+        if (direccion.isBlank()) {
+            request.setAttribute("errorDireccion", ERROR_DIRECCION);
+            todoCorrecto = false;
+        }
+        if (!email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
+            request.setAttribute("errorEmail", ERROR_EMAIL);
+            todoCorrecto = false;
+        }
+        if (!cadenaNumerica(telefono)) {
+            request.setAttribute("errorTlf", ERROR_TLF);
+            todoCorrecto = false;
+        }
+        if (!cadenaNumerica(tarjeta)) {
+            request.setAttribute("errorTarjeta", ERROR_TARJETA);
+            todoCorrecto = false;
+        }
+        if (!passwordNueva.isEmpty()) {
+            if (!passwordAntigua.equals(passwordActual)) {
+                request.setAttribute("errorPasswordActual", ERROR_PASSWORD_ACTUAL);
+                todoCorrecto = false;
             } else {
-                if (!cadenaNumerica(telefono) || !cadenaNumerica(tarjeta)) {
-                    String url = "/RecuperarPerfil";
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-                    dispatcher.forward(request, response);
+                if (passwordNueva.isBlank() || passwordNueva.contains(" ")) {
+                    request.setAttribute("errorPasswordNueva", ERROR_PASSWORD_NUEVA_BLANCO);
+                    todoCorrecto = false;
                 } else {
-                    if ((!passwordNueva.isBlank() && !passwordAntigua.equals(passwordActual)) || (!passwordNueva.isBlank() && !passwordNueva.equals(passwordNuevaConfirmacion))) {
-                        String url = "/RecuperarPerfil";
-                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-                        dispatcher.forward(request, response);
+                    if (passwordNueva.length() < 8) {
+                        request.setAttribute("errorPasswordNueva", ERROR_PASSWORD_NUEVA);
+                        todoCorrecto = false;
                     } else {
-                        Usuario user = new Usuario();
-                        user.setNombreUsuario(usuario);
-                        user.setNombre(nombre);
-                        user.setApellidos(apellidos);
-                        user.setEmail(email);
-                        user.setTlf(Long.parseLong(telefono));
-                        user.setDireccion(direccion);
-                        user.setTarjetaCredito(tarjeta);
-                        user.setHashPasswd(passwordNueva.isBlank() ? passwordAntigua : passwordNueva);
-
-                        UsuarioDB.actualizarUsuario(user);
-
-                        Part foto = request.getPart("fotoElegida");
-                        if (foto.getSize() != 0) {
-                            user.setFotoPerfil(foto);
-
-                            UsuarioDB.setImagen(user);
+                        if (!passwordNueva.equals(passwordNuevaConfirmacion)) {
+                            request.setAttribute("errorPasswordConfirmada", ERROR_PASSWORD_CONFIRMADA);
+                            todoCorrecto = false;
                         }
-
-                        String url = "/RecuperarPerfil";
-                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-                        dispatcher.forward(request, response);
                     }
                 }
             }
         }
+
+        Usuario user = new Usuario();
+        user.setNombreUsuario(usuario);
+        user.setNombre(nombre);
+        user.setApellidos(apellidos);
+        user.setEmail(email);
+        user.setTlf(telefono);
+        user.setDireccion(direccion);
+        user.setTarjetaCredito(tarjeta);
+        user.setHashPasswd(passwordNueva.isEmpty() ? passwordAntigua : passwordNueva);
+        
+        int valoracionMedia = ValoracionUsuarioDB.selectValoracionMedia(usuario);
+        user.setValoracionMedia(valoracionMedia);
+
+        String url;
+        if(todoCorrecto){
+            UsuarioDB.actualizarUsuario(user);
+            url = "/RecuperarPerfil";
+        } else{
+            request.setAttribute("usuarioErroneo", user);
+            url = "/perfil.jsp";
+        }
+        
+        Part foto = request.getPart("fotoElegida");
+        if (foto.getSize() != 0) {
+            user.setFotoPerfil(foto);
+
+            UsuarioDB.setImagen(user);
+        }
+        
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+        dispatcher.forward(request, response);
     }
 }

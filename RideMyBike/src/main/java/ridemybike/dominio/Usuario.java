@@ -11,12 +11,13 @@ public class Usuario implements Serializable {
     private String apellidos;
     private String dni;
     private String email;
-    private long tlf;
+    private String tlf;
     private String nombreUsuario;
     private String tarjetaCredito;
     private String hashPasswd;
     private Part fotoPerfil;
     private String direccion;
+    private int valoracionMedia;
     
     /**
      * Inicializador segun los patrones JavaBeans
@@ -26,12 +27,35 @@ public class Usuario implements Serializable {
         apellidos = null;
         dni = null;
         email = null;
-        tlf = -1;
+        tlf = null;
         nombreUsuario = null;
         tarjetaCredito = null;
         hashPasswd = null;  
         fotoPerfil = null;
         direccion = null;
+        valoracionMedia = -1;
+    }
+    
+    /**
+     * Establece la valoracion media del usuario
+     * 
+     * @param valoracionMedia la valoracion media
+     * @throws IllegalArgumentException si la valoracion no esta en el intervalo [0, 5]
+     */
+    public void setValoracionMedia(int valoracionMedia){
+        if(valoracionMedia < 0 || valoracionMedia > 5){
+            throw new IllegalArgumentException("Valoracion media fuera del rango [0, 5]. Valoracion media recibida = "+valoracionMedia);
+        }
+        this.valoracionMedia = valoracionMedia;
+    }
+    
+    /**
+     * Devuelve la valoracion media del usuario
+     * 
+     * @return un int con la valoracion media
+     */
+    public int getValoracionMedia(){
+        return valoracionMedia;
     }
     
     /**
@@ -112,12 +136,8 @@ public class Usuario implements Serializable {
      * Establece el telefono del usuario
      * 
      * @param tlf el telefono del usuario
-     * @throws IllegalArgumentException si el telefono dado es negativo
      */
-    public void setTlf(long tlf){
-        if(tlf < 0){
-            throw new IllegalArgumentException("Telefono de usuario negativo");
-        }
+    public void setTlf(String tlf){
         this.tlf = tlf;
     }
     
@@ -208,9 +228,9 @@ public class Usuario implements Serializable {
     /**
      * Devuelve el telefono del usuario
      * 
-     * @return un long con el telefono
+     * @return un String con el telefono
      */
-    public long getTlf(){
+    public String getTlf(){
         return tlf;
     }
     

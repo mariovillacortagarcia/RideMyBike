@@ -80,7 +80,7 @@ public class UsuarioDB {
                 usuario.setApellidos(rs.getString("apellidos"));
                 usuario.setEmail(rs.getString("email"));
                 usuario.setDni(rs.getString("dni"));
-                usuario.setTlf(Long.parseLong(rs.getString("telefono")));
+                usuario.setTlf(rs.getString("telefono"));
                 usuario.setTarjetaCredito(rs.getString("numeroTarjeta"));
                 usuario.setNombreUsuario(rs.getString("nombreUsuario"));
                 usuario.setDireccion(rs.getString("direccion"));
