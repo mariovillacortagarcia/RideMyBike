@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import ridemybike.dominio.Alquiler;
 import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.EstadoBicicleta;
 import ridemybike.dominio.Freno;
+import ridemybike.dominio.Peticion;
+import ridemybike.dominio.TipoAlquiler;
 
 public class BicicletaDB {
 
@@ -155,7 +159,8 @@ public class BicicletaDB {
      * No sera borrada de la base de datos
      *
      * @param codigoBici Es el codigo de la bici que se usa para identificarla
-     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
+     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha
+     * habido algun fallo
      * @throws SQLException Excepcion relacionada con la base de datos
      */
     public static int eliminaBicicleta(int codigoBici) throws SQLException {
@@ -336,7 +341,8 @@ public class BicicletaDB {
      * @param codigoActivacion Es el codigo de activacion de la Bicicleta
      * @param codigoBicicleta Es el identificador de la bicicleta la cual se va
      * a identificar
-     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha habido algun fallo
+     * @return un entero positivo si la actualizacion ha tenido exito; 0 si ha
+     * habido algun fallo
      * @throws SQLException Excepcion que se lanza si existe algun tipo de fallo
      * con la base de datos
      * @throws IOException
@@ -348,7 +354,7 @@ public class BicicletaDB {
         if (codigoBicicleta <= 0) {
             throw new IllegalArgumentException("El codigo de la bicicleta introducido NO es valido.");
         }
-        
+
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -358,8 +364,8 @@ public class BicicletaDB {
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, codigoActivacion);
-            ps.setString(2, codigoBicicleta+"");
-            
+            ps.setString(2, codigoBicicleta + "");
+
             int res = ps.executeUpdate();
             ps.close();
             pool.freeConnection(connection);
@@ -368,6 +374,14 @@ public class BicicletaDB {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public static ArrayList<Bicicleta> selectBicicletasPeticiones(ArrayList<Peticion> peticiones) {
+        ArrayList<Bicicleta> bicicletas = new ArrayList();
+        for (Peticion peticion : peticiones) {
+            bicicletas.add(selectBicicleta(peticion.getCodigoBici()));
+        }
+        return bicicletas;
     }
 
 }
