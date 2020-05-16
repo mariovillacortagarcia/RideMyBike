@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Alquiler;
+import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.Peticion;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.AlquilerDB;
+import ridemybike.dominio.db.BicicletaDB;
 import ridemybike.dominio.db.PeticionDB;
 
 
@@ -34,8 +36,10 @@ public class RecuperarViajes extends HttpServlet {
         String nombreUsuario = request.getSession().getAttribute("usuario").toString();
         ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresRealizados(nombreUsuario); 
         ArrayList<Peticion> peticiones = PeticionDB.selectPeticionesAlquileres(alquileres, nombreUsuario);
+        ArrayList<Bicicleta> bicicletas = BicicletaDB.selectBicicletasPeticiones(peticiones);
         request.setAttribute("alquileres", alquileres);
         request.setAttribute("peticiones", peticiones);
+        request.setAttribute("bicicletas", bicicletas);
         
         String url = "/viajes.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
