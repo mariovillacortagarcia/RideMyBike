@@ -17,10 +17,10 @@
     </head>
 
     <body>
-        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
+        <% String var = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
             <jsp:param name="paginaMostrada" value="MisBicisActivas" />
-            <jsp:param name="sesionIniciada" value="<%= s %>" />
+            <jsp:param name="sesionIniciada" value="<%= var %>" />
         </jsp:include>      
 
 
@@ -83,7 +83,7 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-5">
-                                        <img src="BicicletasEstados?codigoBici=<%=codigoBici%>" class="img-thumbnail" alt="..." style="width:  350px;">
+                                        <img src="BicicletasEstados?codigoBici=<%=codigoBici%>" class="img-thumbnail" alt="..." style="width:  350px;height:  400px">
                                     </div>
                                     <div class="col-5">
                                         <div class="row">

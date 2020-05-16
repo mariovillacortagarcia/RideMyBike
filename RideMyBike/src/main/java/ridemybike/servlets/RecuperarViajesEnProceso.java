@@ -28,7 +28,7 @@ public class RecuperarViajesEnProceso extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String nombreUsuario = "juan.pperez";
+        String nombreUsuario = request.getSession().getAttribute("usuario").toString();
         ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresEnProceso(nombreUsuario);        
         request.setAttribute("alquileres", alquileres);
         

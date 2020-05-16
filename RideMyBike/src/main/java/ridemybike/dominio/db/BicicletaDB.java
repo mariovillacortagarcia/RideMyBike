@@ -348,24 +348,26 @@ public class BicicletaDB {
         if (codigoBicicleta <= 0) {
             throw new IllegalArgumentException("El codigo de la bicicleta introducido NO es valido.");
         }
-        
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        PreparedStatement statement = null;
-        String query = "UPDATE Bicicleta SET estado = 'Activado' , codigoActivacion = ? WHERE codigoBici = ?";
-        try {
-            ps = connection.prepareStatement(query);
-            ps.setString(1, codigoActivacion);
-            ps.setString(2, codigoBicicleta+"");
-            
-            int res = ps.executeUpdate();
-            ps.close();
-            pool.freeConnection(connection);
-            return res;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        Bicicleta b1 = BicicletaDB.selectBicicleta(codigoBicicleta);
+        if(b1.getCodigoActivacion().equals(codigoActivacion)){
+            ConnectionPool pool = ConnectionPool.getInstance();
+            Connection connection = pool.getConnection();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            PreparedStatement statement = null;
+            String query = "UPDATE Bicicleta SET estado = 'Activado' , codigoActivacion = ? WHERE codigoBici = ?";
+            try {
+                ps = connection.prepareStatement(query);
+                ps.setString(1, codigoActivacion);
+                ps.setString(2, codigoBicicleta+"");
+
+                int res = ps.executeUpdate();
+                ps.close();
+                pool.freeConnection(connection);
+                return res;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return 0;
     }

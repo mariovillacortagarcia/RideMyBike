@@ -76,7 +76,7 @@
   <div class="col">
     <div class="row">
       <div class="col mb-3">
-       <form class="form" novalidate="" id="form-datos-usuario" name="form-datos-usuario" action="ActualizarPerfil" method="post" enctype="multipart/form-data">
+       <form class="form" novalidate="" id="form-datos-usuario" name="form-datos-usuario" action="ActualizarPerfil?passwordAntigua=<%= user.getHashPasswd()%>" method="post" enctype="multipart/form-data">
         <div class="card">
           <div class="card-body">
             <div class="e-profile">
@@ -132,13 +132,13 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Nombre</label>
-                              <input class="form-control" type="text" name="nombre" value="<%= user.getNombre() %>">
+                              <input class="form-control" type="text" maxlength="50" name="nombre" required="text" value="<%= user.getNombre() %>">
                             </div>
                           </div>
                           <div class="col">
                             <div class="form-group">
                               <label>Apellidos</label>
-                              <input class="form-control" type="text" name="apellidos" value="<%= user.getApellidos() %>">
+                              <input class="form-control" type="text" maxlength="100" name="apellidos" required="text" value="<%= user.getApellidos() %>">
                             </div>
                           </div>
                         </div>
@@ -146,7 +146,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>E-mail</label>
-                              <input class="form-control" type="text" name="email" value="<%= user.getEmail() %>">
+                              <input class="form-control" type="text" name="email" maxlength="100" required="text" value="<%= user.getEmail() %>">
                             </div>
                           </div>
                             <div class="col">
@@ -173,7 +173,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Teléfono móvil o fijo</label>
-                              <input class="form-control" type="text" name="telefono" value="<%= user.getTlf() %>">
+                              <input class="form-control" type="text" name="telefono" required="text" value="<%= user.getTlf() %>">
                             </div>
                           </div>
                         </div>
@@ -181,13 +181,13 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Dirección</label>
-                              <input class="form-control" type="text" name="direccion" value="<%= user.getDireccion() %>">
+                              <input class="form-control" type="text" name="direccion" maxlength="150" required="text" value="<%= user.getDireccion() %>">
                             </div>
                           </div>
                             <div class="col">
                             <div class="form-group">
                               <label>Número de tarjeta</label>
-                              <input class="form-control" type="text" name="tarjeta" value="<%= user.getTarjetaCredito() %>">
+                              <input class="form-control" type="text" maxlength="150" name="tarjeta" required="text" value="<%= user.getTarjetaCredito() %>">
                             </div>
                           </div>
                         </div>
@@ -203,7 +203,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Contraseña actual</label>
-                              <input class="form-control" type="password" name="passwordActual" placeholder="••••••">
+                              <input class="form-control" type="password" maxlength="128" name="passwordActual" placeholder="••••••">
                             </div>
                           </div>
                         </div>
@@ -211,7 +211,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Nueva contraseña</label>
-                              <input class="form-control" type="password" name="passwordNueva" placeholder="••••••">
+                              <input class="form-control" type="password" maxlength="128" name="passwordNueva" placeholder="••••••">
                             </div>
                           </div>
                         </div>
@@ -219,7 +219,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label><span class="d-none d-xl-inline">Confirmar contraseña</span></label>
-                              <input class="form-control" type="password" name="passwordNuevaConfirmacion" placeholder="••••••"></div>
+                              <input class="form-control" type="password" maxlength="128" name="passwordNuevaConfirmacion" placeholder="••••••"></div>
                           </div>
                         </div>
                       </div>

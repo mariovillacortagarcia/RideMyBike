@@ -31,6 +31,7 @@ public class ActivarBiciCodigo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String codigoActivacion = request.getParameter("codigoActivacion");
+
         String codigoBicicleta = request.getParameter("codigoBici");
         BicicletaDB.activaBicicletaCodigo(codigoActivacion, Integer.parseInt(codigoBicicleta));
         

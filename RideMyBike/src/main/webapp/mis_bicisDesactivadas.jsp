@@ -17,10 +17,10 @@
     </head>
 
     <body>
-        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
+        <% String var = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
             <jsp:param name="paginaMostrada" value="MisBicisDesactivadas" />
-            <jsp:param name="sesionIniciada" value="<%= s %>" />
+            <jsp:param name="sesionIniciada" value="<%= var %>" />
         </jsp:include>  
 
 
@@ -83,7 +83,7 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-5">
-                                        <img src="BicicletasEstados?codigoBici=<%=codigoBici%>" class="img-thumbnail" alt="..." style="width:  350px;">
+                                        <img src="BicicletasEstados?codigoBici=<%=codigoBici%>" class="img-thumbnail" alt="..." style="width:  350px;height:  400px">
                                     </div>
                                     <div class="col-5">
                                         <div class="row">
@@ -101,7 +101,7 @@
 
                                                 <% if (lista.get(i).getEstado() == estado2) {
                                                 %>
-                                                <input type="String" class="form-control mb-4" name ="codigoActivacion" id="codigoAct" method="get" placeholder="Introduzca el código de activación">
+                                                <input type="String" class="form-control mb-4" name ="codigoActivacion" id="codigoActivacion" method="get" placeholder="Introduzca el código de activación">
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Opciones

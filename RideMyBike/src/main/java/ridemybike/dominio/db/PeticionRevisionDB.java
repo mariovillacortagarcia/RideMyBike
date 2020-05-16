@@ -30,11 +30,11 @@ public class PeticionRevisionDB {
           ConnectionPool pool = ConnectionPool.getInstance();
           Connection connection = pool.getConnection();
           PreparedStatement ps;
-          String query = "INSERT INTO PeticionRevision(nombreUsuario, ciudad, fecha,codigoBici) VALUES (?, ?, ?, ?)";
+          String query = "INSERT INTO PeticionRevision(ciudad,nombreUsuario,fecha,codigoBici) VALUES (?, ?, ?, ?)";
           try {
               ps = connection.prepareStatement(query);
-              ps.setString(1, peticion.getNombreUsuario());
-              ps.setString(2, peticion.getCiudad());
+              ps.setString(1, peticion.getCiudad());
+              ps.setString(2, peticion.getNombreUsuario());
               ps.setString(3, peticion.getFecha().toString());
               ps.setString(4, peticion.getCodigoBicicleta()+"");
               int res = ps.executeUpdate();

@@ -83,7 +83,7 @@
                                 <div class="row">
                                     <div class="col-1"></div>
                                     <div class="col-5">
-                                        <img src="BicicletasEstados?codigoBici=<%=codigoBici%>" class="img-thumbnail" alt="..." style="width:  350px;">
+                                        <img src="BicicletasEstados?codigoBici=<%=codigoBici%>" class="img-thumbnail" alt="..." style="width:  350px;height:  400px">
                                     </div>
                                     <div class="col-5">
                                         <div class="row">

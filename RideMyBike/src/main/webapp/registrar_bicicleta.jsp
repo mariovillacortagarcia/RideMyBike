@@ -33,23 +33,23 @@
                 
                 <div class="form-label-group pb-3 mt-3">
                     Selecciona una imagen para subir: <br>
-                    <input type="file" name="foto" id="fileToUpload" class="mt-1" >
+                    <input type="file" name="foto" id="fileToUpload" class="mt-1" required="file" accept="image/x-png,image/gif,image/jpeg">
                 </div>
                 <div class="form-group mb-2">
                     <label for="marcaBici">Marca</label>
-                    <input type="String" class="form-control" id="marcaBici" name="marca">
+                    <input type="String" class="form-control" id="marcaBici" name="marca" required="text" maxlength="20" onpaste="return false;">
                 </div>
                 <div class="form-group mb-2">
                     <label for="modeloBiciRegistro">Modelo</label>
-                    <input type="String" class="form-control" id="modeloNuevaBici" name="modelo">
+                    <input type="String" class="form-control" id="modeloNuevaBici" name="modelo" required="text" maxlength="20" onpaste="return false;">
                 </div>
                 <div class="form-group mb-2">
                     <label for="tamanoBiciRegistro">Tamaño de Cuadro (cm)</label>
-                    <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro">
+                    <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro" required="number" maxlength="3" onpaste="return false;">
                 </div>
                 <label class="my-1 mr-2" for="tipoFreno">Tipo de freno</label>
-                <select class="custom-select my-1 mr-sm-2" id="tipoFreno" name="tipoFreno">
-                    <option selected>Elige un tipo de freno...</option>
+                <select class="custom-select my-1 mr-sm-2" id="tipoFreno" name="tipoFreno" required="text" >
+                    <option selected disabled hidden>Elige un tipo de freno...</option>
                     <option value="Disco">Disco</option>
                     <option value="Hidraulicos">Hidraulico</option>
                     <option value="Zapatas">Zapatas</option>
@@ -57,29 +57,30 @@
                 </select>
                 <div class="form-group mb-2">
                     <label for="descripcionBiciRegistro">Descripción</label>
-                    <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion"> </textarea>
+                    <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion" required="text" maxlength="500" onpaste="return false;"> </textarea>
                 </div>
                 <label for="informacionRevisionBici" class="pt-4">Para poder dar de alta la nueva bicicleta, necesitamos revisarla en un taller cercano a la ciudad que nos indiques</label>
 
                 <label class="my-1 mr-2" for="ciudad">Ciudadades para revisar la bicicleta</label>
-                <select class="custom-select my-1 mr-sm-2" id="ciudad" name="ciudad">
-                    <option selected>Elige una ciudad...</option>
+                <select class="custom-select my-1 mr-sm-2" id="ciudad" name="ciudad" required="text">
+                    <option selected disabled hidden>Elige una ciudad...</option>
                     <option value="Valladolid">Sede de Valladolid</option>
                     <option value="Palencia">Sede de Palencia</option>
                     <option value="Madrid">Sede de Madrid</option>
                 </select>
 
+
                 <div class="row pt-4">
                     <div class="col-6">
                         <div class="form-group mb-2">
-                            <input type="date" name="fecha1" class="form-control" id="exampleInputFechaRevision" aria-describedby="emailHelp" placeholder="dd/mm/aa">
-                            <small id="emailHelp" class="form-text text-muted">La fecha de revisión de la bicicleta (dd/mm/aaaa)</small>
+                            <small id="textfecha" class="form-text text-muted">La fecha de revisión de la bicicleta (dd/mm/aaaa)</small>
+                            <input type="date" class="form-control" name="fecha1" id="fecha1" placeholder="dd/mm/aa" required="date">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form group mb-2">
-                            <input type="time" name="hora1" class="form-control" id="exampleInputHoraRevision" aria-describedby="emailHelp" placeholder="hh:mm">
-                            <small id="emailHelp" class="form-text text-muted">Añade tu hora, solo se atiende por cita previa y el horario es de 10:00 a 13:00 y de 16:00 a 20:00 (hh:mm)**</small>
+                            <small id="texthora" class="form-text text-muted">Solo se atiende por cita previa y el horario es de 10:00 a 13:00 y de 16:00 a 20:00 (hh:mm)</small>
+                            <input type="time" class="form-control" name="hora1" id="hora1" placeholder="hh:mm" required="time">
                         </div>
                     </div>
                 </div>
