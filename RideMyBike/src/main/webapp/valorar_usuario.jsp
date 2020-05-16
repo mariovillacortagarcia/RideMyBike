@@ -31,10 +31,10 @@
         <!-- Contenido -->
         <%
             Usuario usuarioPropietario = (Usuario) request.getAttribute("usuarioPropietario");
-            Usuario usuarioArrendatario = (Usuario) request.getAttribute("usuarioArrendatario");
             String nombrePropietario = usuarioPropietario.getNombre();
             String apellidosPropietario = usuarioPropietario.getApellidos();
             String codigoAlquiler = request.getParameter("codigoAlquiler");
+            String nickPropietario = usuarioPropietario.getNick();
         %>
         <div class="container pt-4 mt-1">
             <!--Formulario de Registro de una valoracion de usuario-->
@@ -53,6 +53,8 @@
                         <label for="descripcionValoracion">Descripción</label>
                         <textarea type="String" class="form-control" id="descripcionValoracion" name="descripcion" rows="4"> </textarea>
                         
+                        
+                        <input name="usuarioValorado" type="text" value="<%=nickPropietario%>" style="display:none">
                         <input name="codigoAlquiler" type="number" value="<%=codigoAlquiler%>" style="display:none">
                         <input id="valoracion" name="valoracion" type="number" min="0" max="5" style="display:none">
                         <button type="submit" class="btn btn-success">Enviar valoración</button>
