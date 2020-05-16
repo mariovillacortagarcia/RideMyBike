@@ -36,7 +36,7 @@ public class ValorarUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         request.setAttribute("", this);
-        String url = "/RecuperarViajesArchivados";
+        String url = "/RecuperarViajes";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
 
