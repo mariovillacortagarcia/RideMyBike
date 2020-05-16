@@ -14,7 +14,7 @@ public class ValoracionUsuarioDB{
           ConnectionPool pool = ConnectionPool.getInstance();
           Connection connection = pool.getConnection();
           PreparedStatement ps;
-          String query = "INSERT INTO ValoracionBicicleta(codigoAlquiler, descripcion, puntuacion, usuarioValorado) VALUES (?, ?, ?, ?)";
+          String query = "INSERT INTO ValoracionUsuario(codigoAlquiler, descripcion, puntuacion, usuarioValorado) VALUES (?, ?, ?, ?)";
           try {
               ps = connection.prepareStatement(query);
               ps.setString(1, Integer.toString(valoracion.getCodigo()));

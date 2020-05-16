@@ -33,7 +33,7 @@
             Usuario usuarioPropietario = (Usuario) request.getAttribute("usuarioPropietario");
             String nombrePropietario = usuarioPropietario.getNombre();
             String apellidosPropietario = usuarioPropietario.getApellidos();
-            String codigoAlquiler = request.getParameter("codigoAlquiler");
+            String codigoAlquiler = request.getAttribute("codigoAlquiler").toString();
             String nickPropietario = usuarioPropietario.getNickName();
         %>
         <div class="container pt-4 mt-1">

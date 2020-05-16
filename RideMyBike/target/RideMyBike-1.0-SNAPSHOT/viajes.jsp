@@ -119,9 +119,10 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <%if (tipo.equals(TipoAlquiler.enMano)) {
-                                                    String usuarioPropietario = bicicletas.get(i).getUsuarioPropietario();
+                                                        String usuarioPropietario = bicicletas.get(i).getUsuarioPropietario();
+                                                        String codigoAlquiler = Integer.toString(alquiler.getCodigoAlquiler());
                                                 %>
-                                                <a class="dropdown-item" href="MuestraValorarUsuario?usuarioPropietario=<%=usuarioPropietario%>">Valorar propietario</a>
+                                                <a class="dropdown-item" href="MuestraValorarUsuario?usuarioPropietario=<%=usuarioPropietario%>&codigoAlquiler=<%=codigoAlquiler%>">Valorar propietario</a>
                                                 <%}%>
                                                 <a class="dropdown-item" href="ArchivarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Archivar viaje</a>
                                                 <a class="dropdown-item" href="EliminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Eliminar viaje</a>
