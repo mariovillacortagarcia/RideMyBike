@@ -14,10 +14,9 @@ CREATE TABLE Usuario(
   apellidos varchar(100) not null,
   dni char(9) not null,
   email varchar(100) not null,
-  telefono bigint not null,
+  telefono int not null,
   numeroTarjeta varchar(150) not null,
   hashPassword varchar(128) not null,
-  fotoPerfil Blob,
   direccion varchar(150) not null,
   PRIMARY KEY (nombreUsuario)
 );

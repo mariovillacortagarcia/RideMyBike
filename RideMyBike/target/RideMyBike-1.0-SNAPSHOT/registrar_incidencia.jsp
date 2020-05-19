@@ -12,24 +12,27 @@
   <link rel="icon" type="image/png" href="img/RideMyBike_icon_green.png">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.css">
+  
+
 </head>
 
 <body>
     <!---Cabecera -->
+    <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
     <jsp:include page="header.jsp" >
         <jsp:param name="paginaMostrada" value="Viajes" />
-        <jsp:param name="sesionIniciada" value="false" />
+        <jsp:param name="sesionIniciada" value="<%= s %>" />
     </jsp:include>
     
   <!-- Contenido -->
   <div class="container pt-4 mt-1">
     <!--Formulario de Registro de una incidencia-->
 
-    <form action="RegistroIncidencia?idAlquiler=<%=request.getParameter("idAlquiler")%>" method="POST" class="form-group mb-2">
+    <form action="RegistroIncidencia?idAlquiler=<%=request.getParameter("idAlquiler")%>" method="POST"  class="form-group mb-2">
       <h5><b>Anota la información de la incidencia </b>⚠️</h5>
       <div class="form-group mb-2">
         <label for="descripcionIncidencia">Descripción</label>
-        <textarea type="String" class="form-control" id="descripcionIncindencia" name="descripcionIncidencia" rows="4"> </textarea>
+        <textarea type="String" class="form-control" id="descripcionIncindencia" name="descripcionIncidencia" rows="4" maxlength="500" required="text" onpaste="return false;"></textarea>
       </div>
       <div class="form-group mb-2">
         <label for="gradoIncidencia">Grado</label>

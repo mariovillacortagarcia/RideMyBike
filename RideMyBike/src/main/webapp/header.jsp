@@ -19,7 +19,7 @@
     <div class="container-fluid" style="background-color:#85c1e9">
         <div class="row p-3 align-items-center">
             <div class="col-2">
-                <img style="height:auto;max-width:125%" src="img/RideMyBike_icon_green.png" />
+                <a href="index.jsp"><img style="height:auto;max-width:125%" href="index.jsp" src="img/RideMyBike_icon_green.png" ></a>
             </div>
             <div class="col-6">
                 <h5 class="text-white"><b>RideMyBike</b>, la página de préstamo de bicicletas que lucha por un aire
@@ -29,7 +29,8 @@
                 <div>
                     <%
                 if (request.getParameter("sesionIniciada").equals("true")) { %>
-                    <button type="button" onclick="location.href = 'RecuperarPerfil'" class="btn btn-success btn-lg">Mi perfil</button>
+                    <button type="button" onclick="location.href = 'RecuperarPerfil'" class="btn btn-success">Mi perfil</button>
+                    <button type="button" onclick="location.href = 'CerrarSesion'" class="btn btn-light">Cerrar Sesión</button>
                     <% } else { %>
                     <button type="button" onclick="location.href = 'registrarse.jsp'" class="btn btn-light">Registrarse</button>
                     <button type="button" onclick="location.href = 'iniciar_sesion.jsp'" class="btn btn-success">Iniciar sesión</button>

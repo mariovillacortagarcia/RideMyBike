@@ -1,5 +1,5 @@
 valoraciones = ["uno", "dos", "tres", "cuatro", "cinco"];
-valoracion = 3;
+valoracion = 0;
 for(let i = 0; i<valoracion; i++){
     $("#"+valoraciones[i]).addClass("checked");
 }

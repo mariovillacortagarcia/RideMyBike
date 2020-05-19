@@ -12,7 +12,7 @@ $('#fechaFinPrestamo').change(function() {
 
 $('#horaFinPrestamo').change(function() {
     document.getElementById('textoHoraFin').innerHTML = document.getElementById('horaFinPrestamo').value;
-    document.getElementById('textoPrecioTotal').innerHTML = 2.3;
+    document.getElementById('textoPrecioTotal').innerHTML = 2.4;
 });
 
 $('#bicicletaSeleccionada').change(function() {
