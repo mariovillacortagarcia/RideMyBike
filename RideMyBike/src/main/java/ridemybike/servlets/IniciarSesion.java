@@ -15,7 +15,10 @@ import ridemybike.dominio.db.UsuarioDB;
  */
 @WebServlet(name = "IniciarSesion", urlPatterns = {"/IniciarSesion"})
 public class IniciarSesion extends HttpServlet {
-    
+
+    private final String ERROR_USUARIO_INCORRECTO = "Este usuario no es válido.";
+    private final String PASSWORD_INCORRECTA = "Contraseña incorrecta.";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,22 +34,29 @@ public class IniciarSesion extends HttpServlet {
 
         String usuarioIntroducido = request.getParameter("usuario");
         String passwordIntroducida = request.getParameter("password");
-        
-        Usuario presuntoUser = UsuarioDB.selectUser(usuarioIntroducido);
-        
         String url;
-        if(presuntoUser != null && presuntoUser.getHashPasswd().equals(passwordIntroducida)){
-            request.getSession().setAttribute("usuario", usuarioIntroducido);
-             url = "/index.jsp";
-        } else{
+
+        if (!UsuarioDB.existeUsuario(usuarioIntroducido)) {
+            request.setAttribute("errorUsuario", ERROR_USUARIO_INCORRECTO);
+            request.setAttribute("usuarioIncorrecto", usuarioIntroducido);
             url = "/iniciar_sesion.jsp";
+        } else {
+            Usuario presuntoUser = UsuarioDB.selectUser(usuarioIntroducido);
+
+            if (presuntoUser.getHashPasswd().equals(passwordIntroducida)) {
+                request.getSession().setAttribute("usuario", usuarioIntroducido);
+                url = "/index.jsp";
+            } else {
+                request.setAttribute("errorPassword", PASSWORD_INCORRECTA);
+                request.setAttribute("passwordIncorrecta", passwordIntroducida);
+                url = "/iniciar_sesion.jsp";
+            }
         }
 
-        
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -75,6 +85,5 @@ public class IniciarSesion extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
-    
+
 }

@@ -97,6 +97,51 @@ public class UsuarioDB {
     }
     
     /**
+     * Devuelve el usuario con el email especificado
+     * 
+     * @param email el email del usuario
+     * @return un Usuario con los datos del usuario; null si no existe ningun usuario con 
+     * el email especificado
+     * @throws IllegalArgumentException si el email de usuario dado es igual a null
+     */
+    public static Usuario selectUserByEmail(String email) {
+        if(email == null){
+            throw new IllegalArgumentException("Email de usuario igual a null");
+        }
+    
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        ResultSet rs = null;
+        String query= "SELECT * FROM Usuario WHERE email = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            Usuario usuario = null;
+            if  (rs.next()) {
+                usuario = new Usuario();
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellidos(rs.getString("apellidos"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setDni(rs.getString("dni"));
+                usuario.setTlf(rs.getString("telefono"));
+                usuario.setTarjetaCredito(rs.getString("numeroTarjeta"));
+                usuario.setNombreUsuario(rs.getString("nombreUsuario"));
+                usuario.setDireccion(rs.getString("direccion"));
+                usuario.setHashPasswd(rs.getString("hashPassword"));
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return usuario;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
      * Verifica si existe algun usuario en la base de datos con el nombre 
      * de usuario especificado
      * 
@@ -118,6 +163,38 @@ public class UsuarioDB {
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, nombreUsuario);
+            rs = ps.executeQuery();
+            existe = rs.next();
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return existe;
+    }
+    
+    /**
+     * Verifica si existe algun usuario en la base de datos con el email especificado
+     * 
+     * @param email el email
+     * @return true si existe; false en caso contrario
+     * @throws IllegalArgumentException si el email dado es igual a null
+     */
+    public static boolean existeEmail(String email){
+        if(email == null){
+            throw new IllegalArgumentException("Email igual a null");
+        }
+    
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps= null;
+        ResultSet rs = null;
+        String query= "SELECT * FROM Usuario WHERE email = ?";
+        boolean existe = false;
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, email);
             rs = ps.executeQuery();
             existe = rs.next();
             rs.close();

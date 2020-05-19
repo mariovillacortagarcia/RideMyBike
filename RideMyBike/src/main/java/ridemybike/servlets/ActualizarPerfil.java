@@ -20,9 +20,11 @@ import ridemybike.dominio.db.ValoracionUsuarioDB;
 @MultipartConfig
 public class ActualizarPerfil extends HttpServlet {
 
+    private final String PATRON_EMAIL_CORRECTO = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
     private final String ERROR_NOMBRE = "Este nombre no es válido.";
     private final String ERROR_APELLIDOS = "Estos apellidos no son válidos.";
-    private final String ERROR_EMAIL = "Este e-mail no es válido.";
+    private final String ERROR_EMAIL_NO_VALIDO = "Este e-mail no es válido.";
+    private final String ERROR_EMAIL_YA_EN_USO = "Este e-mail ya está en uso.";
     private final String ERROR_DIRECCION = "Esta direccion no es válida.";
     private final String ERROR_TLF = "Este teléfono no es válido.";
     private final String ERROR_TARJETA = "Este número de tarjeta no es válido.";
@@ -67,8 +69,12 @@ public class ActualizarPerfil extends HttpServlet {
             request.setAttribute("errorDireccion", ERROR_DIRECCION);
             todoCorrecto = false;
         }
-        if (!email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
-            request.setAttribute("errorEmail", ERROR_EMAIL);
+        if (!email.matches(PATRON_EMAIL_CORRECTO)) {
+            request.setAttribute("errorEmail", ERROR_EMAIL_NO_VALIDO);
+            todoCorrecto = false;
+        }
+        if(UsuarioDB.existeEmail(email)){
+            request.setAttribute("errorEmail", ERROR_EMAIL_YA_EN_USO);
             todoCorrecto = false;
         }
         if (!cadenaNumerica(telefono)) {
