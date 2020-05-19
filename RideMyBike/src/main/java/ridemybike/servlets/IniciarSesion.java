@@ -38,7 +38,7 @@ public class IniciarSesion extends HttpServlet {
 
         if (!UsuarioDB.existeUsuario(usuarioIntroducido)) {
             request.setAttribute("errorUsuario", ERROR_USUARIO_INCORRECTO);
-            request.setAttribute("usuarioIncorrecto", usuarioIntroducido);
+            request.setAttribute("usuario", usuarioIntroducido);
             url = "/iniciar_sesion.jsp";
         } else {
             Usuario presuntoUser = UsuarioDB.selectUser(usuarioIntroducido);
@@ -48,6 +48,7 @@ public class IniciarSesion extends HttpServlet {
                 url = "/index.jsp";
             } else {
                 request.setAttribute("errorPassword", PASSWORD_INCORRECTA);
+                request.setAttribute("usuario", usuarioIntroducido);
                 request.setAttribute("passwordIncorrecta", passwordIntroducida);
                 url = "/iniciar_sesion.jsp";
             }

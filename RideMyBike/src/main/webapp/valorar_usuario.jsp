@@ -51,7 +51,7 @@
                     </div>
                     <form action="ValorarUsuario" method="POST">
                         <label for="descripcionValoracion">Descripción</label>
-                        <textarea type="String" class="form-control" id="descripcionValoracion" name="descripcion" rows="4"> </textarea>
+                        <textarea type="String" class="form-control" id="descripcionValoracion" name="descripcion" rows="4" maxlength="350" required="text" onpaste="return false;"></textarea>
                        
                         <input name="usuarioValorado" type="text" value="<%=nickPropietario%>" style="display:none">
                         <input name="codigoAlquiler" type="number" value="<%=codigoAlquiler%>" style="display:none">

@@ -26,9 +26,10 @@
     </head>
     <body>
         <!---Cabecera -->
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
             <jsp:param name="paginaMostrada" value="" />
-            <jsp:param name="sesionIniciada" value="true" />
+            <jsp:param name="sesionIniciada" value="<%= s %>" />
         </jsp:include>
 
         <!-- Contenido -->

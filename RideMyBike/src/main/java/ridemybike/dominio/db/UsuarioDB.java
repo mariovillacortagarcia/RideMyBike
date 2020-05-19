@@ -18,7 +18,7 @@ public class UsuarioDB {
      * @return un entero positivo si la insercion ha tenido exito; 0 si ha habido algun fallo
      * @throws IllegalArgumentException si el usuario dado es igual a null
      */
-    public static int insertarUsuario(Usuario usuario) throws IOException {
+    public static int insertarUsuario(Usuario usuario) throws SQLException, IOException  {
         if(usuario == null){
             throw new IllegalArgumentException("Usuario igual a null");
         }
@@ -26,10 +26,10 @@ public class UsuarioDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps;
         String query;
-        query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword, fotoPerfil, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword,  direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            ps = connection.prepareStatement(query);
+            ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, usuario.getNickName());
             ps.setString(2, usuario.getNombre());
             ps.setString(3, usuario.getApellidos());
@@ -38,10 +38,15 @@ public class UsuarioDB {
             ps.setString(6, usuario.getTlf()+"");
             ps.setString(7, usuario.getTarjetaCredito());
             ps.setString(8, usuario.getHashPasswd());
-            ps.setBlob(9, usuario.getFotoPerfil().getInputStream());
-            ps.setString(10, usuario.getDireccion());
             
-            int res = ps.executeUpdate();
+            ps.setString(9, usuario.getDireccion());
+            
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            int res = 0;
+            if (rs.next()) {
+                res = rs.getInt(1);
+            }
             ps.close();
             pool.freeConnection(connection);
             return res;

@@ -23,7 +23,7 @@
 
         <!-- Contenido -->
         <%
-            boolean usuarioIncorrecto = request.getAttribute("usuarioIncorrecto") != null;
+            boolean usuarioMostrable = request.getAttribute("usuario") != null;
             boolean passwordIncorrecta = request.getAttribute("errorPassword") != null;
         %>
         <div class="row justify-content-center my-auto pt-5">
@@ -35,7 +35,7 @@
 
                 <div class="form-label-group pb-2">
                     <label for="usuario">Usuario o email</label>
-                    <input type="text" name="usuario" class="form-control" placeholder="Usuario o email" <% if (usuarioIncorrecto) {%>value="<%= request.getAttribute("usuarioIncorrecto")%>" <% } %>required autofocus>
+                    <input type="text" name="usuario" class="form-control" placeholder="Usuario o email" <% if (usuarioMostrable) {%>value="<%= request.getAttribute("usuario")%>" <% } %>required autofocus>
                     <% if (request.getAttribute("errorUsuario") != null) {%>
                     <small style="color:red"><%=request.getAttribute("errorUsuario")%></small>
                     <% }%>
