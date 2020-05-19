@@ -17,9 +17,10 @@
 <body>
   
   <!-- Cabecera -->
+  
   <jsp:include page="header.jsp" >
     <jsp:param name="paginaMostrada" value="Registrarse" />
-    <jsp:param name="sesionIniciada" value="false" />
+    <jsp:param name="sesionIniciada" value="" />
   </jsp:include>
 
   <!-- Contenido -->
@@ -32,22 +33,21 @@
         </div>
         <hr class="mb-4">
         <h4 class="mb-3">Datos personales</h4>
-        <form class="needs-validation" novalidate>
+        <!--Formulario de Registro de un nuevo usuario-->
+        <form action="RegistrarUsuario" method="POST" class="form-group mb-2" enctype="multipart/form-data">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName">Nombre</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="String" class="form-control" id="firstName" name="nombre" required="text" maxlength="30" onpaste="return false;">
               <div class="invalid-feedback">
                 Introduce tu nombre.
               </div>
             </div>
-            <div class="col-md-6 mb-3">
-              <label for="lastName">Apellidos</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Introduce tus apellidos.
+              <div class="col-md-6 mb-3">
+                   <label for="lastName">Apellidos</label>
+                  <input type="String" class="form-control" id="lastName" name="apellidos" required="text" maxlength="30" onpaste="return false;">
               </div>
-            </div>
+              
           </div>
 
           <div class="mb-3">
@@ -56,7 +56,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">@</span>
               </div>
-              <input type="text" class="form-control" id="username" placeholder="Usuario" required>
+              
+              <input type="String" class="form-control" id="userName" name="usuario" placeholder="Usuario" required="text" maxlength="20" onpaste="return false;">
               <div class="invalid-feedback" style="width: 100%;">
                 Nombre de usuario ya en uso.
               </div>
@@ -65,7 +66,7 @@
 
           <div class="mb-3">
             <label for="dni">DNI, NIF, CIF y/o NIE</label>
-            <input type="text" class="form-control" id="dni" placeholder="">
+            <input type="String" class="form-control" id="dni" name="dni" required="text" maxlength="9" onpaste="return false;">
             <div class="invalid-feedback">
               Introduce un DNI, NIF, CIF y/o NIE válido.
             </div>
@@ -73,7 +74,7 @@
 
           <div class="mb-3">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="usuario@example.com">
+            <input type="email" class="form-control" id="email" name="email" placeholder="usuario@example.com" required="text" maxlength="20" onpaste="return false;">
             <div class="invalid-feedback">
               Introduce un email válido.
             </div>
@@ -81,7 +82,7 @@
 
           <div class="mb-3">
             <label for="movil">Teléfono movil o fijo</label>
-            <input type="tel" class="form-control" id="telefono" placeholder="" required>
+            <input type="tel" class="form-control" id="telefono" name="telefono" required="number" maxlength="20" onpaste="return false;">
             <div class="invalid-feedback">
               Por favor introduce un número de teléfono.
             </div>
@@ -89,7 +90,7 @@
 
           <div class="mb-3">
             <label for="address">Dirección de domicilio</label>
-            <input type="text" class="form-control" id="address" placeholder="" required>
+            <input type="String" class="form-control" id="address" name="direccion" required="text" maxlength="80" onpaste="return false;">
             <div class="invalid-feedback">
               Por favor introduce tu dirección de residencia.
             </div>
@@ -97,7 +98,7 @@
 
           <div class="mb-3">
             <label for="address2">Contraseña</label>
-            <input type="text" class="form-control" id="address2" placeholder="">
+            <input type="password" class="form-control" id="address2" name="password" required minleght="8" maxlength="128" onpaste="return false;">
             <div class="invalid-feedback">
               Las contraseñas no coinciden.
             </div>
@@ -105,14 +106,14 @@
 
           <div class="mb-3">
             <label for="address2">Repetir contraseña</label>
-            <input type="text" class="form-control" id="address2" placeholder="">
+            <input type="password" class="form-control" id="address2" name="passwordrepe" required minleght="8" maxlength="128" onpaste="return false;">
           </div>
 
           <div class="row">
             <div class="col-md-5 mb-3">
               <label for="country">País</label>
-              <select class="custom-select d-block w-100" id="country" required>
-                <option value="">Elige...</option>
+              <select class="custom-select d-block w-100" id="country" name="pais" required="text">
+                <option selected disabled hidden>Elige un país...</option>
                 <option>Alemania</option>
                 <option>Andorra</option>
                 <option>Argentina</option>
@@ -139,30 +140,30 @@
 
           <div class="d-block my-3">
             <div class="custom-control custom-radio">
-              <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+              <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required onpaste="return false;">
               <label class="custom-control-label" for="credit">Tarjeta de crédito</label>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="cc-number">Número de tarjeta</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required>
+              <input type="String" class="form-control" id="cc-number" name="tarjeta" required="number" maxlength="20" onpaste="return false;">
               <div class="invalid-feedback">
                 El necesario un número de tarjeta
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3 mb-3">
+            <div class="col-md-4 mb-3">
               <label for="cc-expiration">Expiración</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+              <input type="date" class="form-control" id="cc-expiration" name="expiracion">
               <div class="invalid-feedback">
                 Es necesaria la fecha de expiración
               </div>
             </div>
             <div class="col-md-3 mb-3">
               <label for="cc-cvv">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+              <input type="String" class="form-control" id="cc-cvv" name="cvv" required="number" maxlength="10" onpaste="return false;">
               <div class="invalid-feedback">
                 Es necesario el código de seguridad
               </div>

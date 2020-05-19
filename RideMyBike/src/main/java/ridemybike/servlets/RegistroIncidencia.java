@@ -38,6 +38,11 @@ public class RegistroIncidencia extends HttpServlet {
             if (descripcionIncidencia == null) {
                 descripcionIncidencia = "";
             }
+            boolean todoCorrecto = true;
+            if (descripcionIncidencia.isBlank()) {
+            request.setAttribute("errorDescripcion", "La descripcion de la incidencia no es correcta");
+            todoCorrecto = false;
+            }
             String grado = (String) request.getParameter("grado");
             switch (grado) {
                 case "leve":
@@ -52,8 +57,15 @@ public class RegistroIncidencia extends HttpServlet {
             int idAlquiler = Integer.parseInt((String) request.getParameter("idAlquiler"));
             incidencia.setCodigoPeticion(idAlquiler);
             incidencia.setDescripcion(descripcionIncidencia);
-            IncidenciaDB.insertarIncidencia(incidencia);
-            String url = "/incidenciaRegistroCorrecto.jsp";
+             String url;
+            if (todoCorrecto) {
+                IncidenciaDB.insertarIncidencia(incidencia);
+                url = "/incidenciaRegistroCorrecto.jsp";
+            } else {
+                request.setAttribute("incidenciaErronea", incidencia);
+                url = "/incidenciaRegistroIncorrecto.jsp";
+            }
+            
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
         } catch (Exception e) {
