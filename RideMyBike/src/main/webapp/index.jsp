@@ -28,11 +28,11 @@
 
     <body>
         <!---Cabecera -->
-            <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
-            <jsp:include page="header.jsp" >
-                <jsp:param name="paginaMostrada" value="Home" />
-                <jsp:param name="sesionIniciada" value="<%= s %>" />
-            </jsp:include>
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true";%>
+        <jsp:include page="header.jsp" >
+            <jsp:param name="paginaMostrada" value="Home" />
+            <jsp:param name="sesionIniciada" value="<%= s%>" />
+        </jsp:include>
 
         <!-- Contenido -->
         <div id="carouselAlquiler" class="carousel slide mt-4" data-ride="carousel" data-interval="false">
@@ -49,6 +49,20 @@
                                 <div class="col-lg-8 col-sm-12">
                                     <h5><b>1. Elige una bici libre </b>🚴</h5>
                                     <div id="mapaglobal" class="mt-3 mb-2" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black"></div>
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img id="imgBici" src="" class="card-img" alt="Sin imagen disponible">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Bicicleta seleccionada</h5>
+                                                    <p class="card-text">No ha seleccionado ninguna bicicleta.</p>
+                                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     Bicicleta seleccionada: <a id="bicicletaUbicacion">Ninguna  </a>
                                     <input type="hidden" name="bicicletaId" id="bicicletaId" value="">
                                 </div>
