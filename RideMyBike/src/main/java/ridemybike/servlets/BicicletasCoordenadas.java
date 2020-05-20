@@ -41,7 +41,7 @@ public class BicicletasCoordenadas extends HttpServlet {
            id = Integer.toString(bicicleta.getcodigoBici());
            lat = Double.toString(bicicleta.getLatitud());
            lon = Double.toString(bicicleta.getLongitud());
-           ubicacion = "{"+'"'+"id"+'"'+":"+id+','+'"'+"lat"+'"'+":"+lat+','+'"'+"lon"+'"'+":"+ lon+"},";
+           ubicacion = "{"+'"'+"id"+'"'+":"+id+','+'"'+"lat"+'"'+":"+lat+','+'"'+"lng"+'"'+":"+ lon+"},";
            ubicaciones += ubicacion;
         }
         if(ubicacion != null)
