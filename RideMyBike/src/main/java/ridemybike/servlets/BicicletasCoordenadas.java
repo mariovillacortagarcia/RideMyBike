@@ -33,15 +33,18 @@ public class BicicletasCoordenadas extends HttpServlet {
         ArrayList<Bicicleta> bicicletas = (ArrayList<Bicicleta>)BicicletaDB.selectAllBicicleta();
         String ubicaciones ="[";
         String ubicacion = null;
+        String nombre;
         String lat;
         String lon;
         String id;
         if(bicicletas != null)
         for(Bicicleta bicicleta : bicicletas){
+           nombre = bicicleta.getMarca();
+           nombre += " "+bicicleta.getModelo();
            id = Integer.toString(bicicleta.getcodigoBici());
            lat = Double.toString(bicicleta.getLatitud());
            lon = Double.toString(bicicleta.getLongitud());
-           ubicacion = "{"+'"'+"id"+'"'+":"+id+','+'"'+"lat"+'"'+":"+lat+','+'"'+"lng"+'"'+":"+ lon+"},";
+           ubicacion = "{"+'"'+"nombre"+'"'+":"+'"'+nombre+'"'+','+'"'+"id"+'"'+":"+id+','+'"'+"lat"+'"'+":"+lat+','+'"'+"lng"+'"'+":"+ lon+"},";
            ubicaciones += ubicacion;
         }
         if(ubicacion != null)
