@@ -57,7 +57,7 @@
                                             <div class="col-md-8">
                                                 <div class="card-body">
                                                     <h5 class="card-title">Bicicleta seleccionada</h5>
-                                                    <p class="card-text">No ha seleccionado ninguna bicicleta.</p>
+                                                    <p class="card-text" id="nombreBici">No ha seleccionado ninguna bicicleta.</p>
                                                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                                 </div>
                                             </div>
