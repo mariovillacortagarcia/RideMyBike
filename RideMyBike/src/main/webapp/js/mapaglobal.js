@@ -35,17 +35,20 @@ $.get('BicicletasCoordenadas', function (data) {
     console.log(data);
     var ubicaciones = JSON.parse(data);
     for (i = 0; i < ubicaciones.length; i++) {
+        var nombre = ubicaciones[i].nombre;
         var id = ubicaciones[i].id;
         var lat = ubicaciones[i].lat;
         var lon = ubicaciones[i].lng;
-        ids.push({lat: lat, lon: lon, id: id});
+        ids.push({nombre: nombre, lat: lat, lng: lon, id: id});
         var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
             $("#bicicletaUbicacion").text(e.latlng);
             for (j = 0; j < ids.length; j++) {
-                if (Math.abs(e.latlng.lat - ids[j].lat) < 0.00001 && Math.abs(e.latlng.lng - ids[j].lon) < 0.00001) {
+                if (Math.abs(e.latlng.lat - ids[j].lat) < 0.00001 && Math.abs(e.latlng.lng - ids[j].lng) < 0.00001) {
                     let id = ids[j].id;
+                    let nombre = ids[j].nombre;
                     let url = 'RecuperarImagenBicicleta?idBici=' + id;
                     console.log(url);
+                    //Muestra imagen bicicleta
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange = function () {
                         if (this.readyState == 4 && this.status == 200) {
@@ -59,16 +62,9 @@ $.get('BicicletasCoordenadas', function (data) {
                     xhr.open('GET',url);
                     xhr.responseType = 'blob';
                     xhr.send();
-                    /*$.get(url, function (data) {
-                     console.log(data);
-                     var blob = new Blob([data],{type:"image/png"});
-                     var reader = new FileReader();
-                     reader.onload = function (zFR_Event) {
-                     $("#imgBici").attr("src", zFR_Event.target.result);
-                     };
-                     
-                     reader.readAsDataURL(blob);
-                     });*/
+                    //Muestra nombre de bicicleta
+                    $("#nombreBici").text(nombre);
+                    //Anade id de la bici al formulario
                     $("#bicicletaId").val(id);
                     break;
                 }
