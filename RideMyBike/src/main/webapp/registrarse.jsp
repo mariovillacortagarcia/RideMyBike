@@ -46,6 +46,9 @@
               <div class="col-md-6 mb-3">
                    <label for="lastName">Apellidos</label>
                   <input type="String" class="form-control" id="lastName" name="apellidos" required="text" maxlength="30" onpaste="return false;">
+                  <% if (request.getAttribute("errorApellidos") != null) {%>
+                  <small style="color:red"><%=request.getAttribute("errorApellidos")%></small>
+                  <% }%>
               </div>
               
           </div>
@@ -149,7 +152,7 @@
               <label for="cc-number">Número de tarjeta</label>
               <input type="String" class="form-control" id="cc-number" name="tarjeta" required="number" maxlength="20" onpaste="return false;">
               <div class="invalid-feedback">
-                El necesario un número de tarjeta
+                Es necesario un número de tarjeta
               </div>
             </div>
           </div>
@@ -169,7 +172,7 @@
               </div>
             </div>
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="same-address">
+              <input type="checkbox" class="custom-control-input" id="same-address" name="checkbox" required>
               <label class="custom-control-label" for="same-address">He leído y acepto las <a href="garantias.jsp">Condiciones de Uso y la Política de Privacidad y Cookies</a> de RideMyBike</label>
             </div>
           </div>

@@ -25,20 +25,21 @@ public class IncidenciaDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps;
-        String query = "INSERT INTO Incidencia(codigoPeticion, descripcion, grado) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Incidencia(codigoPeticion, descripcion, grado, solucionada) VALUES (?, ?, ?, ?)";
         try {
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, incidencia.getCodigoPeticion()+"");
             ps.setString(2, incidencia.getDescripcion());
             ps.setString(3, incidencia.getGravedad()+"");
             ps.setString(4, 0+"");
+            int res = 0;
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            int res = 0;
+            
             if (rs.next()) {
                 res = rs.getInt(1);
             } 
-            incidencia.setCodigoIncidencia(res);
+            
             ps.close();
             pool.freeConnection(connection);
             return res;

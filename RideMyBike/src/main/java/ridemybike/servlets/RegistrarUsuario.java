@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.Part;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
+import ridemybike.security.PasswordEncoder;
 /**
  *
  * @author David
@@ -60,9 +61,9 @@ public class RegistrarUsuario extends HttpServlet {
         String tarjeta = request.getParameter("tarjeta");
         String password = request.getParameter("password");
         String passwordrepe = request.getParameter("passwordrepe"); 
-        
+       
         boolean todoCorrecto = true;
-        /**if (usuario.isBlank()) {
+        if (usuario.isBlank()) {
             request.setAttribute("errorUsuario", "Este usuario no es válido.");
             todoCorrecto = false;
         }
@@ -86,6 +87,10 @@ public class RegistrarUsuario extends HttpServlet {
             request.setAttribute("errorEmail", "Este e-mail no es válido.");
             todoCorrecto = false;
         }
+        if(UsuarioDB.existeEmail(email) && !UsuarioDB.selectUserByEmail(email).getNickName().equals(usuario)){
+            request.setAttribute("errorEmail", "Este e-mail ya está en uso.");
+            todoCorrecto = false;
+        }
         if (!cadenaNumerica(telefono)) {
             request.setAttribute("errorTlf", "Este teléfono no es válido.");
             todoCorrecto = false;
@@ -94,6 +99,7 @@ public class RegistrarUsuario extends HttpServlet {
             request.setAttribute("errorTarjeta", "Este número de tarjeta no es válido.");
             todoCorrecto = false;
         }    
+        PasswordEncoder enc = new PasswordEncoder();
         if (!password.isEmpty()) {
             if (!password.equals(passwordrepe)) {
                 request.setAttribute("errorPassword", "Las contraseñas no coinciden");
@@ -110,7 +116,7 @@ public class RegistrarUsuario extends HttpServlet {
                 }
             }
         } 
-            */
+            
             
             Usuario user = new Usuario();
             user.setNombreUsuario(usuario);
@@ -121,9 +127,10 @@ public class RegistrarUsuario extends HttpServlet {
             user.setTlf(telefono);
             user.setDireccion(direccion);
             user.setTarjetaCredito(tarjeta);
-            user.setHashPasswd(password);
+            
+            user.setHashPasswd(enc.hash(password.toCharArray()));
            
-            UsuarioDB.insertarUsuario(user);
+           
           
     
         String url;
@@ -134,6 +141,8 @@ public class RegistrarUsuario extends HttpServlet {
             request.setAttribute("usuarioErroneo", user);
             url = "/direccionRegistroIncorrecto.jsp";
         }
+        
+        
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
 

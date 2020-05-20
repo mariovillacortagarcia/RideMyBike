@@ -26,10 +26,10 @@ public class UsuarioDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps;
         String query;
-        query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword,  direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        query = "INSERT INTO Usuario(nombreUsuario, nombre, apellidos, dni, email, telefono, numeroTarjeta, hashPassword, fotoPerfil, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps = connection.prepareStatement(query);
             ps.setString(1, usuario.getNickName());
             ps.setString(2, usuario.getNombre());
             ps.setString(3, usuario.getApellidos());
@@ -38,8 +38,8 @@ public class UsuarioDB {
             ps.setString(6, usuario.getTlf()+"");
             ps.setString(7, usuario.getTarjetaCredito());
             ps.setString(8, usuario.getHashPasswd());
-            
-            ps.setString(9, usuario.getDireccion());
+            ps.setBlob(9, usuario.getFotoPerfil().getInputStream());
+            ps.setString(10, usuario.getDireccion());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();

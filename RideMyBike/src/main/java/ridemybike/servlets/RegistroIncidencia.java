@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import ridemybike.dominio.GradoIncidencia;
 import ridemybike.dominio.Incidencia;
 import ridemybike.dominio.db.IncidenciaDB;
@@ -34,15 +35,12 @@ public class RegistroIncidencia extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             Incidencia incidencia = new Incidencia();
-            String descripcionIncidencia = (String) request.getParameter("descripcionIncidencia");
-            if (descripcionIncidencia == null) {
-                descripcionIncidencia = "";
-            }
-            boolean todoCorrecto = true;
+            String descripcionIncidencia =  request.getParameter("descripcionIncidencia");
+            
             if (descripcionIncidencia.isBlank()) {
-            request.setAttribute("errorDescripcion", "La descripcion de la incidencia no es correcta");
-            todoCorrecto = false;
-            }
+                request.setAttribute("errorDescripcion", "Este descripcion no es válido.");
+          
+        }
             String grado = (String) request.getParameter("grado");
             switch (grado) {
                 case "leve":
@@ -57,15 +55,12 @@ public class RegistroIncidencia extends HttpServlet {
             int idAlquiler = Integer.parseInt((String) request.getParameter("idAlquiler"));
             incidencia.setCodigoPeticion(idAlquiler);
             incidencia.setDescripcion(descripcionIncidencia);
-             String url;
-            if (todoCorrecto) {
-                IncidenciaDB.insertarIncidencia(incidencia);
-                url = "/incidenciaRegistroCorrecto.jsp";
-            } else {
-                request.setAttribute("incidenciaErronea", incidencia);
-                url = "/incidenciaRegistroIncorrecto.jsp";
-            }
             
+            int codigoIncidencia= IncidenciaDB.insertarIncidencia(incidencia);
+            incidencia.setCodigoIncidencia(codigoIncidencia);
+            String url = "/incidenciaRegistroCorrecto.jsp";
+            HttpSession session= request.getSession();
+            session.getAttribute("usuario").toString();
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
         } catch (Exception e) {
