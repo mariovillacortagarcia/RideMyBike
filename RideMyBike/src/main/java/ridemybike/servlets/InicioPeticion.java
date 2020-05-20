@@ -42,6 +42,11 @@ public class InicioPeticion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session= request.getSession();
+        if(session.getAttribute("usuario") == null){
+        String url = "/iniciar_sesion.jsp";
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+        dispatcher.forward(request, response);
+        }
         String nombreArrendatario = session.getAttribute("usuario").toString();
         String codigoBici = request.getParameter("bicicletaId");
         String horaInicio = request.getParameter("horaInicioPrestamo");
