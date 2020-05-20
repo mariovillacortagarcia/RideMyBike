@@ -362,8 +362,7 @@ public class AlquilerDB {
             return null;
         }
     }
-    
-    
+
     public static ArrayList<Alquiler> getAlquileresBicicleta(String codigoBici) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -418,10 +417,11 @@ public class AlquilerDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT codigoBici FROM Alquiler, Peticion WHERE Alquiler.codigoPeticion = Peticion.codigoPeticion AND Alquiler.codigoAlquiler = codigoAlquiler";
+        String query = "SELECT codigoBici FROM Alquiler, Peticion WHERE Alquiler.codigoPeticion = Peticion.codigoPeticion AND Alquiler.codigoAlquiler = ?";
         try {
             // Obtenemos el codigo de la bici
             ps = connection.prepareStatement(query);
+            ps.setString(1, codigoAlquiler + "");
             rs = ps.executeQuery();
             String codigoBici = "";
             if (rs.next()) {
