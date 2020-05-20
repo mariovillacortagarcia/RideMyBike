@@ -37,13 +37,39 @@ $.get('BicicletasCoordenadas', function (data) {
     for (i = 0; i < ubicaciones.length; i++) {
         var id = ubicaciones[i].id;
         var lat = ubicaciones[i].lat;
-        var lon = ubicaciones[i].lon;
+        var lon = ubicaciones[i].lng;
         ids.push({lat: lat, lon: lon, id: id});
         var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
             $("#bicicletaUbicacion").text(e.latlng);
             for (j = 0; j < ids.length; j++) {
                 if (Math.abs(e.latlng.lat - ids[j].lat) < 0.00001 && Math.abs(e.latlng.lng - ids[j].lon) < 0.00001) {
-                    $("#bicicletaId").val(ids[j].id);
+                    let id = ids[j].id;
+                    let url = 'RecuperarImagenBicicleta?idBici=' + id;
+                    console.log(url);
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            //this.response is what you're looking for
+                            console.log(this.response, typeof this.response);
+                            var img = document.getElementById('imgBici');
+                            var url2 = window.URL || window.webkitURL;
+                            img.src = url2.createObjectURL(this.response);
+                        }
+                    }
+                    xhr.open('GET',url);
+                    xhr.responseType = 'blob';
+                    xhr.send();
+                    /*$.get(url, function (data) {
+                     console.log(data);
+                     var blob = new Blob([data],{type:"image/png"});
+                     var reader = new FileReader();
+                     reader.onload = function (zFR_Event) {
+                     $("#imgBici").attr("src", zFR_Event.target.result);
+                     };
+                     
+                     reader.readAsDataURL(blob);
+                     });*/
+                    $("#bicicletaId").val(id);
                     break;
                 }
             }
