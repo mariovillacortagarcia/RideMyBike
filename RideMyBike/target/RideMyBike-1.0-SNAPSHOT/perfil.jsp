@@ -228,6 +228,9 @@
                                                                         <input class="form-control" type="password" maxlength="128" name="passwordActual" placeholder="••••••">
                                                                         <% if (request.getAttribute("errorPasswordActual") != null) {%>
                                                                         <small style="color:red"><%=request.getAttribute("errorPasswordActual")%></small>
+                                                                        <% }
+                                                                            if (request.getAttribute("passwordCambiadaConExito") != null) {%>
+                                                                        <small style="color:green"><%=request.getAttribute("passwordCambiadaConExito")%></small>
                                                                         <% }%>
                                                                     </div>
                                                                 </div>

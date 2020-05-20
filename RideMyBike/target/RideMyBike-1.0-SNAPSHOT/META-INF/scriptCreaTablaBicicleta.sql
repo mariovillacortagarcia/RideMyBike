@@ -115,10 +115,10 @@ CREATE TABLE PeticionRevision(
 
 -- Usuario
 INSERT INTO Usuario
-      VALUES ('juan.pperez', 'Juan Pedro', 'Perez Sanchez', '71245360y', 'juanpperez@gmail.com', 634772244, '1234567898765432', 'hashpassword', CAST (X'FFFF' AS BLOB) , 'Calle Molina nº 13');
+      VALUES ('juan.pperez', 'Juan Pedro', 'Perez Sanchez', '71245360y', 'davidmelendezdiez99@gmail.com', 634772244, '1234567898765432', '$31$16$_x8nYbYThjNKZ5x4jHSKHxwK9XBT3c7GcQJhzDzg1xw', CAST (X'FFFF' AS BLOB) , 'Calle Molina nº 13');
 
 INSERT INTO Usuario
-      VALUES ('martaND9', 'Marta', 'Nadal Dalmau', '71941363h', 'martand89@gmail.com', 622114455, '98765432346789', 'hashpassword', CAST (X'FFFF' AS BLOB) , 'Calle Bierzo nº 7');
+      VALUES ('martaND9', 'Marta', 'Nadal Dalmau', '71941363h', 'martand89@gmail.com', 622114455, '98765432346789', '$31$16$_x8nYbYThjNKZ5x4jHSKHxwK9XBT3c7GcQJhzDzg1xw', CAST (X'FFFF' AS BLOB) , 'Calle Bierzo nº 7');
 
 -- Bicicletas
 INSERT INTO Bicicleta

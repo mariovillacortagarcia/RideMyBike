@@ -12,6 +12,7 @@ import javax.servlet.http.Part;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
 import ridemybike.dominio.db.ValoracionUsuarioDB;
+import ridemybike.security.PasswordEncoder;
 
 /**
  * Implementacion del servlet para la actualizacion de los datos del perfil dado
@@ -32,6 +33,7 @@ public class ActualizarPerfil extends HttpServlet {
     private final String ERROR_PASSWORD_NUEVA = "La contraseña debe contener almenos 8 caracteres válidos";
     private final String ERROR_PASSWORD_NUEVA_BLANCO = "La contraseña no puede contener espacios en blanco";
     private final String ERROR_PASSWORD_CONFIRMADA = "Las nuevas contraseñas no coinciden";
+    private final String MENSAJE_EXITO_CAMBIO_PASSWORD = "Contraseña cambiada con éxito.";
 
     private boolean cadenaNumerica(String tlf) {
         try {
@@ -51,8 +53,8 @@ public class ActualizarPerfil extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String direccion = request.getParameter("direccion");
         String tarjeta = request.getParameter("tarjeta");
-        String passwordAntigua = UsuarioDB.selectUser(usuario).getHashPasswd();
-        String passwordActual = request.getParameter("passwordActual");
+        String passwordActualReal = UsuarioDB.selectUser(usuario).getHashPasswd();
+        String passwordActualIntroducida = request.getParameter("passwordActual");
         String passwordNueva = request.getParameter("passwordNueva");
         String passwordNuevaConfirmacion = request.getParameter("passwordNuevaConfirmacion");
 
@@ -73,7 +75,7 @@ public class ActualizarPerfil extends HttpServlet {
             request.setAttribute("errorEmail", ERROR_EMAIL_NO_VALIDO);
             todoCorrecto = false;
         }
-        if(UsuarioDB.existeEmail(email)){
+        if(UsuarioDB.existeEmail(email) && !UsuarioDB.selectUserByEmail(email).getNickName().equals(usuario)){
             request.setAttribute("errorEmail", ERROR_EMAIL_YA_EN_USO);
             todoCorrecto = false;
         }
@@ -85,8 +87,9 @@ public class ActualizarPerfil extends HttpServlet {
             request.setAttribute("errorTarjeta", ERROR_TARJETA);
             todoCorrecto = false;
         }
+        PasswordEncoder enc = new PasswordEncoder();
         if (!passwordNueva.isEmpty()) {
-            if (!passwordAntigua.equals(passwordActual)) {
+            if (!enc.authenticate(passwordActualIntroducida.toCharArray(), passwordActualReal)) {
                 request.setAttribute("errorPasswordActual", ERROR_PASSWORD_ACTUAL);
                 todoCorrecto = false;
             } else {
@@ -101,6 +104,8 @@ public class ActualizarPerfil extends HttpServlet {
                         if (!passwordNueva.equals(passwordNuevaConfirmacion)) {
                             request.setAttribute("errorPasswordConfirmada", ERROR_PASSWORD_CONFIRMADA);
                             todoCorrecto = false;
+                        } else{
+                            request.setAttribute("passwordCambiadaConExito", MENSAJE_EXITO_CAMBIO_PASSWORD);
                         }
                     }
                 }
@@ -115,7 +120,7 @@ public class ActualizarPerfil extends HttpServlet {
         user.setTlf(telefono);
         user.setDireccion(direccion);
         user.setTarjetaCredito(tarjeta);
-        user.setHashPasswd(passwordNueva.isEmpty() ? passwordAntigua : passwordNueva);
+        user.setHashPasswd(passwordNueva.isEmpty() ? passwordActualReal : enc.hash(passwordNueva.toCharArray()));
         
         int valoracionMedia = ValoracionUsuarioDB.selectValoracionMedia(usuario);
         user.setValoracionMedia(valoracionMedia);
