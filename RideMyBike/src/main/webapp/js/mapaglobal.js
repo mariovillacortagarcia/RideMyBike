@@ -44,8 +44,11 @@ $.get('BicicletasCoordenadas', function (data) {
             $("#bicicletaUbicacion").text(e.latlng);
             for (j = 0; j < ids.length; j++) {
                 if (Math.abs(e.latlng.lat - ids[j].lat) < 0.00001 && Math.abs(e.latlng.lng - ids[j].lng) < 0.00001) {
-                    let id = ids[j].id;
                     let nombre = ids[j].nombre;
+                    let id = ids[j].id;
+                    let lat = ids[j].lat;
+                    let lng = ids[j].lng;
+
                     let url = 'RecuperarImagenBicicleta?idBici=' + id;
                     console.log(url);
                     //Muestra imagen bicicleta
@@ -59,11 +62,18 @@ $.get('BicicletasCoordenadas', function (data) {
                             img.src = url2.createObjectURL(this.response);
                         }
                     }
-                    xhr.open('GET',url);
+                    xhr.open('GET', url);
                     xhr.responseType = 'blob';
                     xhr.send();
                     //Muestra nombre de bicicleta
                     $("#nombreBici").text(nombre);
+                    //Muestra ubicacion de bicicleta
+                    var ubicacion = convertToAddress([lat, lng]);
+                    $.when(ubicacion).done(function (r) {
+                        ubicacion = r;
+                        console.log(ubicacion);
+                        $("#ubicacionBici").text(ubicacion);
+                    })
                     //Anade id de la bici al formulario
                     $("#bicicletaId").val(id);
                     break;
