@@ -58,12 +58,11 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">Bicicleta seleccionada</h5>
                                                     <p class="card-text" id="nombreBici">No ha seleccionado ninguna bicicleta.</p>
-                                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                    <p class="card-text"><small class="text-muted">En: <a id="ubicacionBici">Ningún sitio :(</a></small></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    Bicicleta seleccionada: <a id="bicicletaUbicacion">Ninguna  </a>
                                     <input type="hidden" name="bicicletaId" id="bicicletaId" value="">
                                 </div>
 
@@ -195,5 +194,14 @@
 
         <!-- Index JS -->
         <script src="js/index.js"></script>
+
+        <!-- Load Esri Leaflet from CDN -->
+        <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js" integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g==" crossorigin=""></script>
+
+
+        <!-- Load Esri Leaflet Geocoder from CDN -->
+        <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.css" integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ==" crossorigin="">
+        <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js" integrity="sha512-zdT4Pc2tIrc6uoYly2Wp8jh6EPEWaveqqD3sT0lf5yei19BC1WulGuh5CesB0ldBKZieKGD7Qyf/G0jdSe016A==" crossorigin=""></script>
+        <script src="js/traduccionDirecciones.js"></script>
     </body>
 </html>
