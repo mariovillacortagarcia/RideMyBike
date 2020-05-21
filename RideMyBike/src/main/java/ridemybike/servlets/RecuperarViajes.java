@@ -35,6 +35,14 @@ public class RecuperarViajes extends HttpServlet {
         
         String nombreUsuario = request.getSession().getAttribute("usuario").toString();
         ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresRealizados(nombreUsuario); 
+        for(int i = 0; i < alquileres.size(); i++){
+            if(AlquilerDB.isUsuarioPropietarioValorado(alquileres.get(i).getCodigoAlquiler()+"")){
+                alquileres.get(i).marcarUsuarioValorado();
+            }
+            if(AlquilerDB.isBicicletaValorada(alquileres.get(i).getCodigoAlquiler()+"")){
+                alquileres.get(i).marcarBiciValorada();
+            }
+        }
         ArrayList<Peticion> peticiones = PeticionDB.selectPeticionesAlquileres(alquileres, nombreUsuario);
         ArrayList<Bicicleta> bicicletas = BicicletaDB.selectBicicletasPeticiones(peticiones);
         request.setAttribute("alquileres", alquileres);

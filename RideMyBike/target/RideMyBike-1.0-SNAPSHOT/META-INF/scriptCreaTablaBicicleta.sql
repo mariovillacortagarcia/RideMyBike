@@ -172,10 +172,8 @@ INSERT INTO Incidencia
 
 -- Valoraciones
 INSERT INTO ValoracionUsuario
-      VALUES ('', 4, 3, 'juan.pperez');
+      VALUES ('Un tio majo', 4, 3, 'juan.pperez');
 
-INSERT INTO ValoracionBicicleta
-      VALUES ('Una mierda', 0, 2, 3);
 
 INSERT INTO ValoracionBicicleta
       VALUES ('Una bicicleta wenisima es la mejor', 4, 1, 1);

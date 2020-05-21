@@ -118,11 +118,17 @@
                                                 Opciones
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <%if (tipo.equals(TipoAlquiler.enMano)) {
+                                                <%if (tipo.equals(TipoAlquiler.enMano) && !alquiler.isUsuarioValorado()) {
                                                         String usuarioPropietario = bicicletas.get(i).getUsuarioPropietario();
                                                         String codigoAlquiler = Integer.toString(alquiler.getCodigoAlquiler());
                                                 %>
                                                 <a class="dropdown-item" href="MuestraValorarUsuario?usuarioPropietario=<%=usuarioPropietario%>&codigoAlquiler=<%=codigoAlquiler%>">Valorar propietario</a>
+                                                <%}
+                                                if (!alquiler.isBiciValorada()) {
+                                                        int codigoBici = bicicletas.get(i).getcodigoBici();
+                                                        String codigoAlquiler = Integer.toString(alquiler.getCodigoAlquiler());
+                                                %>
+                                                <a class="dropdown-item" href="MuestraValorarBici?codigoBici=<%=codigoBici%>&codigoAlquiler=<%=codigoAlquiler%>">Valorar bicicleta</a>
                                                 <%}%>
                                                 <a class="dropdown-item" href="ArchivarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Archivar viaje</a>
                                                 <a class="dropdown-item" href="EliminarViaje?codigoAlquiler=<%= alquiler.getCodigoAlquiler()%>">Eliminar viaje</a>

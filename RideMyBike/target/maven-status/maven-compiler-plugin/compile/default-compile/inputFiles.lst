@@ -26,6 +26,7 @@
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/HistorialAlquileresBicicleta.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RegistrarUsuario.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/TerminarViaje.java
+/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/MuestraValorarBici.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperaAlquiler.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/db/IncidenciaDB.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/Incidencia.java
@@ -44,6 +45,7 @@
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/ValoracionBicicleta.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/EliminarViaje.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/ValoracionesBicicleta.java
+/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/ValorarBicicleta.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarImagenPerfil.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarBicicletasDesactivadas.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RegistrarPeticionRevision.java

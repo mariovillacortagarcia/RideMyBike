@@ -7,6 +7,7 @@ ridemybike/dominio/Bicicleta.class
 ridemybike/dominio/db/PeticionDB.class
 ridemybike/servlets/RecuperarPassword.class
 ridemybike/servlets/ArchivarViaje.class
+ridemybike/servlets/MuestraValorarBici.class
 ridemybike/servlets/EliminarBiciNoActivada.class
 ridemybike/dominio/db/ConnectionPool.class
 ridemybike/dominio/TipoAlquiler.class
@@ -14,6 +15,7 @@ ridemybike/dominio/Freno.class
 ridemybike/dominio/Incidencia.class
 ridemybike/dominio/Peticion.class
 ridemybike/servlets/RecuperarBicicletasDesactivadas.class
+ridemybike/servlets/ValorarBicicleta.class
 ridemybike/servlets/RecuperarViajesArchivados.class
 ridemybike/servlets/EliminarIncidencia.class
 ridemybike/servlets/RegistrarPeticionRevision.class

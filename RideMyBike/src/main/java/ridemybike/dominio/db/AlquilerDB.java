@@ -153,6 +153,66 @@ public class AlquilerDB {
             return null;
         }
     }
+    
+    /**
+     * Informa sobre si el usuario propietario de la bici alquilada en el viaje
+     * dado ha sido valorado
+     *
+     * @param codigoAlquiler el codigo del alquiler
+     * @return true si lo ha sido; false en caso contrario
+     */
+    public static boolean isUsuarioPropietarioValorado(String codigoAlquiler) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM ValoracionUsuario WHERE ValoracionUsuario.codigoAlquiler = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoAlquiler);
+            rs = ps.executeQuery();
+            boolean valorado = rs.next();
+
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+
+            return valorado;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    /**
+     * Informa sobre si la bicicleta alquilada en el viaje
+     * dado ha sido valorado
+     *
+     * @param codigoAlquiler el codigo del alquiler
+     * @return true si lo ha sido; false en caso contrario
+     */
+    public static boolean isBicicletaValorada(String codigoAlquiler) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM ValoracionBicicleta WHERE ValoracionBicicleta.codigoAlquiler = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, codigoAlquiler);
+            rs = ps.executeQuery();
+            boolean valorado = rs.next();
+
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+
+            return valorado;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     /**
      * Obtiene todos los alquileres realizados de un usuario. En esta lista no

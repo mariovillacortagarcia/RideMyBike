@@ -16,6 +16,8 @@ public class Alquiler implements Serializable {
     private boolean archivado;
     private String inicio;
     private String fin;
+    private boolean usuarioValorado;
+    private boolean biciValorada;
 
     /**
      * Inicializador de un alquiler vacio.
@@ -29,6 +31,8 @@ public class Alquiler implements Serializable {
         archivado = false;
         inicio = null;
         fin = null;
+        usuarioValorado = false;
+        biciValorada = false;
     }
 
     /**
@@ -38,6 +42,38 @@ public class Alquiler implements Serializable {
      */
     public void setInicio(String inicio) {
         this.inicio = inicio;
+    }
+    
+    /**
+     * Marca que el usuario propietario de la bici alquilada en el viaje ha sido valorado
+     */
+    public void marcarUsuarioValorado(){
+        usuarioValorado = true;
+    }
+    
+    /**
+     * Marca que la bici alquilada en el viaje ha sido valorada
+     */
+    public void marcarBiciValorada(){
+        biciValorada = true;
+    }
+    
+    /**
+     * Informa sobre si el usuario propietario de la bici alquilada en el viaje ha sido valorado
+     * 
+     * @return true si lo ha sido; false en caso contrario
+     */
+    public boolean isUsuarioValorado(){
+        return usuarioValorado;
+    }
+    
+    /**
+     * Informa sobre si la bici alquilada en el viaje ha sido valorada
+     * 
+     * @return true si lo ha sido; false en caso contrario
+     */
+    public boolean isBiciValorada(){
+        return biciValorada;
     }
 
     /**
