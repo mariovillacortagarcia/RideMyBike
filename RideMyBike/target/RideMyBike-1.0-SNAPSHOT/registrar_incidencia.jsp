@@ -33,6 +33,9 @@
       <div class="form-group mb-2">
         <label for="descripcionIncidencia">Descripción</label>
         <textarea type="String" class="form-control" id="descripcionIncindencia" name="descripcionIncidencia" rows="4" maxlength="500" required="text" onpaste="return false;"></textarea>
+        <% if (request.getAttribute("errorDescripcion") != null) {%>
+        <small style="color:red"><%=request.getAttribute("errorDescripcion")%></small>
+        <% }%>
       </div>
       <div class="form-group mb-2">
         <label for="gradoIncidencia">Grado</label>

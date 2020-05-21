@@ -178,4 +178,4 @@ INSERT INTO ValoracionBicicleta
       VALUES ('Una mierda', 0, 2, 3);
 
 INSERT INTO ValoracionBicicleta
-      VALUES ('Una bicicleta wenisima es la mejor', 5, 1, 1);
+      VALUES ('Una bicicleta wenisima es la mejor', 4, 1, 1);

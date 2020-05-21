@@ -37,6 +37,7 @@
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarPerfil.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/TipoAlquiler.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/BicicletasEstados.java
+/home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarImagenBicicleta.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/VerIncidenciasBicicleta.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/dominio/db/PeticionDB.java
 /home/davidmd/Universidad/3/SSW/Tercera entrega (prototipo)/RideMyBikeGit/RideMyBike/RideMyBike/src/main/java/ridemybike/servlets/RecuperarBicicletas.java

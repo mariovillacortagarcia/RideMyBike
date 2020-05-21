@@ -18,10 +18,16 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
               crossorigin=""/>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <style>
             #mapaglobal{
                 width:40rem; 
                 height:25rem;
+            }
+        </style>
+        <style>
+            .checked {
+                color: orange;
             }
         </style>
     </head>
@@ -57,7 +63,14 @@
                                             <div class="col-md-8">
                                                 <div class="card-body">
                                                     <h5 class="card-title">Bicicleta seleccionada</h5>
-                                                    <p class="card-text" id="nombreBici">No ha seleccionado ninguna bicicleta.</p>
+                                                    <a class="card-text" id="nombreBici">No ha seleccionado ninguna bicicleta.</a><br>
+                                                    
+                                                    <span id="estrella1" class="fa fa-star"></span>
+                                                    <span id="estrella2" class="fa fa-star"></span>
+                                                    <span id="estrella3" class="fa fa-star"></span>
+                                                    <span id="estrella4" class="fa fa-star"></span>
+                                                    <span id="estrella5" class="fa fa-star"></span>
+
                                                     <p class="card-text"><small class="text-muted">En: <a id="ubicacionBici">Ningún sitio :(</a></small></p>
                                                 </div>
                                             </div>

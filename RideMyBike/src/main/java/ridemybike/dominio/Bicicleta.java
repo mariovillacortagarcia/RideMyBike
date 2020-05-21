@@ -32,8 +32,8 @@ public class Bicicleta implements Serializable{
       imagen = null;
       marca = "";
       freno = null;
-      latitud = 0;
-      longitud = 0;
+      latitud = 41.652740; 
+      longitud = -4.762530;
       usuarioPropietario = "";
       estado = null;
       codigoActivacion = "";

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Bicicleta;
+import ridemybike.dominio.EstadoBicicleta;
 import ridemybike.dominio.db.BicicletaDB;
+import ridemybike.dominio.db.ValoracionBicicletaDB;
 
 
 /**
@@ -30,13 +32,15 @@ public class BicicletasCoordenadas extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Bicicleta> bicicletas = (ArrayList<Bicicleta>)BicicletaDB.selectAllBicicleta();
+        ArrayList<Bicicleta> bicicletas = BicicletaDB.selectAllBicicleta();
+        bicicletas = BicicletaDB.seleccionaBicicletas(bicicletas, EstadoBicicleta.Activado);
         String ubicaciones ="[";
         String ubicacion = null;
         String nombre;
         String lat;
         String lon;
         String id;
+        int valoracionMedia;
         if(bicicletas != null)
         for(Bicicleta bicicleta : bicicletas){
            nombre = bicicleta.getMarca();
@@ -44,7 +48,8 @@ public class BicicletasCoordenadas extends HttpServlet {
            id = Integer.toString(bicicleta.getcodigoBici());
            lat = Double.toString(bicicleta.getLatitud());
            lon = Double.toString(bicicleta.getLongitud());
-           ubicacion = "{"+'"'+"nombre"+'"'+":"+'"'+nombre+'"'+','+'"'+"id"+'"'+":"+id+','+'"'+"lat"+'"'+":"+lat+','+'"'+"lng"+'"'+":"+ lon+"},";
+           valoracionMedia = ValoracionBicicletaDB.getValoracionMediaBicicleta(bicicleta.getcodigoBici()+"");
+           ubicacion = "{"+'"'+"nombre"+'"'+":"+'"'+nombre+'"'+','+'"'+"valoracion"+'"'+":"+'"'+valoracionMedia+'"'+','+'"'+"id"+'"'+":"+id+','+'"'+"lat"+'"'+":"+lat+','+'"'+"lng"+'"'+":"+ lon+"},";
            ubicaciones += ubicacion;
         }
         if(ubicacion != null)

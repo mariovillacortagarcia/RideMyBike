@@ -18,21 +18,27 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
               crossorigin=""/>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <style>
             #mapaglobal{
                 width:40rem; 
                 height:25rem;
             }
         </style>
+        <style>
+            .checked {
+                color: orange;
+            }
+        </style>
     </head>
 
     <body>
         <!---Cabecera -->
-            <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
-            <jsp:include page="header.jsp" >
-                <jsp:param name="paginaMostrada" value="Home" />
-                <jsp:param name="sesionIniciada" value="<%= s %>" />
-            </jsp:include>
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true";%>
+        <jsp:include page="header.jsp" >
+            <jsp:param name="paginaMostrada" value="Home" />
+            <jsp:param name="sesionIniciada" value="<%= s%>" />
+        </jsp:include>
 
         <!-- Contenido -->
         <div id="carouselAlquiler" class="carousel slide mt-4" data-ride="carousel" data-interval="false">
@@ -49,7 +55,27 @@
                                 <div class="col-lg-8 col-sm-12">
                                     <h5><b>1. Elige una bici libre </b>🚴</h5>
                                     <div id="mapaglobal" class="mt-3 mb-2" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black"></div>
-                                    Bicicleta seleccionada: <a id="bicicletaUbicacion">Ninguna  </a>
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img id="imgBici" src="" class="card-img" alt="Sin imagen disponible">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Bicicleta seleccionada</h5>
+                                                    <a class="card-text" id="nombreBici">No ha seleccionado ninguna bicicleta.</a><br>
+                                                    
+                                                    <span id="estrella1" class="fa fa-star"></span>
+                                                    <span id="estrella2" class="fa fa-star"></span>
+                                                    <span id="estrella3" class="fa fa-star"></span>
+                                                    <span id="estrella4" class="fa fa-star"></span>
+                                                    <span id="estrella5" class="fa fa-star"></span>
+
+                                                    <p class="card-text"><small class="text-muted">En: <a id="ubicacionBici">Ningún sitio :(</a></small></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <input type="hidden" name="bicicletaId" id="bicicletaId" value="">
                                 </div>
 
@@ -181,5 +207,14 @@
 
         <!-- Index JS -->
         <script src="js/index.js"></script>
+
+        <!-- Load Esri Leaflet from CDN -->
+        <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js" integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g==" crossorigin=""></script>
+
+
+        <!-- Load Esri Leaflet Geocoder from CDN -->
+        <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.css" integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ==" crossorigin="">
+        <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js" integrity="sha512-zdT4Pc2tIrc6uoYly2Wp8jh6EPEWaveqqD3sT0lf5yei19BC1WulGuh5CesB0ldBKZieKGD7Qyf/G0jdSe016A==" crossorigin=""></script>
+        <script src="js/traduccionDirecciones.js"></script>
     </body>
 </html>

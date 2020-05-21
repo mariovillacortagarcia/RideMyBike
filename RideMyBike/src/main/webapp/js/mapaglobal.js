@@ -39,7 +39,8 @@ $.get('BicicletasCoordenadas', function (data) {
         var id = ubicaciones[i].id;
         var lat = ubicaciones[i].lat;
         var lon = ubicaciones[i].lng;
-        ids.push({nombre: nombre, lat: lat, lng: lon, id: id});
+        var valoracion = ubicaciones[i].valoracion;
+        ids.push({nombre: nombre, lat: lat, lng: lon, id: id, valoracion: valoracion});
         var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
             $("#bicicletaUbicacion").text(e.latlng);
             for (j = 0; j < ids.length; j++) {
@@ -48,7 +49,16 @@ $.get('BicicletasCoordenadas', function (data) {
                     let id = ids[j].id;
                     let lat = ids[j].lat;
                     let lng = ids[j].lng;
-
+                    let valoracion = ids[j].valoracion;
+                    var idEstrella;
+                    for (k = 1; k <= 5; k++) {
+                        idEstrella = "estrella" + k;
+                        if (k <= valoracion) {
+                            document.getElementById(idEstrella).className += " checked";
+                        } else{
+                            document.getElementById(idEstrella).className = "fa fa-star";
+                        }
+                    }
                     let url = 'RecuperarImagenBicicleta?idBici=' + id;
                     console.log(url);
                     //Muestra imagen bicicleta

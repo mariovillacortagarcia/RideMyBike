@@ -50,6 +50,7 @@ ridemybike/servlets/VerIncidenciasAlquiler.class
 ridemybike/servlets/ActivacionBicicletasDesactivadas.class
 ridemybike/servlets/RecuperaBicicletaValoraciones.class
 ridemybike/dominio/Valoracion.class
+ridemybike/servlets/RecuperarImagenBicicleta.class
 ridemybike/dominio/db/AlquilerDB.class
 ridemybike/dominio/EstadoBicicleta.class
 ridemybike/servlets/SolucionarIncidenciaDesdeBici.class

@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import ridemybike.dominio.Bicicleta;
 import ridemybike.dominio.ValoracionBicicleta;
 
+public class ValoracionBicicletaDB {
 
-
-public class ValoracionBicicletaDB{
-
-    public static int insertarValoracionBicicleta(ValoracionBicicleta valoracionBici) throws SQLException{
-        if(valoracionBici == null){
+    public static int insertarValoracionBicicleta(ValoracionBicicleta valoracionBici) throws SQLException {
+        if (valoracionBici == null) {
             throw new IllegalArgumentException("Valoracion igual a null");
         }
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -22,7 +20,7 @@ public class ValoracionBicicletaDB{
             ps.setString(1, Integer.toString(valoracionBici.getCodigo()));
             ps.setString(2, valoracionBici.getDescripcion());
             ps.setString(3, Integer.toString(valoracionBici.getPuntuacion()));
-            ps.setString(4, valoracionBici.getCodigoBicicleta()+"");
+            ps.setString(4, valoracionBici.getCodigoBicicleta() + "");
             int res = ps.executeUpdate();
             ps.close();
             pool.freeConnection(connection);
@@ -32,23 +30,23 @@ public class ValoracionBicicletaDB{
             return 0;
         }
     }
-    
+
     public static ValoracionBicicleta selectValoracionBicicleta(String codigoAlquiler) {
-        if(codigoAlquiler == null){
+        if (codigoAlquiler == null) {
             throw new IllegalArgumentException("El codigo de la valoracion es igual a null");
         }
 
         ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection= pool.getConnection();
-        PreparedStatement ps= null;
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
         ResultSet rs = null;
-        String query= "SELECT * FROM ValoracionBicicleta WHERE codigoAlquiler = ?";
+        String query = "SELECT * FROM ValoracionBicicleta WHERE codigoAlquiler = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, codigoAlquiler);
             rs = ps.executeQuery();
             ValoracionBicicleta valoracionBici = null;
-            if  (rs.next()) {
+            if (rs.next()) {
                 valoracionBici = new ValoracionBicicleta();
                 valoracionBici.setCodigo(Integer.parseInt(rs.getString("codigoAlquiler")));
                 valoracionBici.setDescripcion(rs.getString("descripcion"));
@@ -59,23 +57,21 @@ public class ValoracionBicicletaDB{
             ps.close();
             pool.freeConnection(connection);
             return valoracionBici;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
-  
-    
-    
-    public static ArrayList<ValoracionBicicleta> getValoraciones(String codigoBicicleta){
-        if(codigoBicicleta == null || codigoBicicleta.equals("")){
+
+    public static ArrayList<ValoracionBicicleta> getValoraciones(String codigoBicicleta) {
+        if (codigoBicicleta == null || codigoBicicleta.equals("")) {
             throw new IllegalArgumentException("El codigo de la bicicleta no puede ser no valida");
         }
         ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection= pool.getConnection();
-        PreparedStatement ps= null;
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
         ResultSet rs = null;
-        String query= "SELECT * FROM ValoracionBicicleta WHERE codigoBicicleta = ?";
+        String query = "SELECT * FROM ValoracionBicicleta WHERE codigoBicicleta = ?";
         ArrayList<ValoracionBicicleta> lista = new ArrayList<ValoracionBicicleta>();
         try {
             ps = connection.prepareStatement(query);
@@ -94,28 +90,36 @@ public class ValoracionBicicletaDB{
             ps.close();
             pool.freeConnection(connection);
             return lista;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
     
-        public static void eliminaUnaBicicleta(Bicicleta bici) throws SQLException{
-        if(bici == null){
+    public static int getValoracionMediaBicicleta(String codigoBici){
+        ArrayList<ValoracionBicicleta> valoraciones = getValoraciones(codigoBici);
+        int valoracionTotal = 0;
+        for(int i = 0; i < valoraciones.size(); i++){
+            valoracionTotal += valoraciones.get(i).getPuntuacion();
+        }
+        return valoraciones.size() == 0 ? 0 : valoracionTotal/valoraciones.size();
+    }
+
+    public static void eliminaUnaBicicleta(Bicicleta bici) throws SQLException {
+        if (bici == null) {
             throw new IllegalArgumentException("La bicicleta a eliminar es nula");
         }
         ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection= pool.getConnection();
-        PreparedStatement ps= null;
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
         ResultSet rs = null;
         int codigoBici = bici.getcodigoBici();
-        String query= "DELETE FROM ValoracionBicicleta“+“WHERE codigoBici= ‘”+codigoBici+ “’”;";
+        String query = "DELETE FROM ValoracionBicicleta“+“WHERE codigoBici= ‘”+codigoBici+ “’”;";
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);
         rs.close();
         ps.close();
         pool.freeConnection(connection);
     }
-        
-        
+
 }
