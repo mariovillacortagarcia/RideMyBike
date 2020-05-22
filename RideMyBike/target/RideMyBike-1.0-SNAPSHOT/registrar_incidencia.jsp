@@ -58,9 +58,8 @@
           </label>
         </div>
       </div>
-      <div class="pt-4">
-        
-        <button type="submit" onclick="location.href='viajes_en_proceso.jsp'" class="btn btn-success">Registrar incidencia</button>
+      <div class="pt-4">       
+        <button type="submit" class="btn btn-success">Registrar incidencia</button>
       </div>
     </form>
   </div>

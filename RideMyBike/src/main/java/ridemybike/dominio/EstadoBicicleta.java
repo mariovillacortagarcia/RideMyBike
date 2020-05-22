@@ -6,6 +6,7 @@ package ridemybike.dominio;
 public enum EstadoBicicleta{
     Activado,
     Desactivado,
-    Pendiente
+    Pendiente,
+    EnUso
 }
 

@@ -288,7 +288,7 @@
                                 <div class="card-body">
                                     <h6 class="card-title font-weight-bold">Soporte</h6>
                                     <p class="card-text">Si necesitas ayuda con algo, no dudes en contactarnos.</p>
-                                    <button type="button" class="btn btn-primary">Contáctanos</button>
+                                    <button type="button" onclick="location.href = 'Contactanos.jsp'" class="btn btn-primary">Contáctanos</button>
                                 </div>
                             </div>
                         </div>

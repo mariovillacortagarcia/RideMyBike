@@ -37,7 +37,7 @@ CREATE TABLE Bicicleta(
   codigoActivacion varchar(150),
   eliminada int not null,
   CHECK (freno IN ('Disco','Hidraulicos','Zapatas','Holandeses')),
-  CHECK (estado IN ('Pendiente','Activado','Desactivado')),
+  CHECK (estado IN ('Pendiente','Activado','Desactivado','EnUso')),
   PRIMARY KEY (codigoBici),
   FOREIGN KEY (usuarioPropietario) REFERENCES Usuario(nombreUsuario)
 );

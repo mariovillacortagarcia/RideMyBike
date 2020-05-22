@@ -21,7 +21,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <style>
             #mapaglobal{
-                width:40rem; 
+                width:40rem;
                 height:25rem;
             }
         </style>
@@ -30,6 +30,36 @@
                 color: orange;
             }
         </style>
+        <!-- Scripts controladores fechas y horas introducidas -->
+        <script>
+        window.onload = function(){
+            var d = new Date();
+        
+            var fecha = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+            var hora = ('0' + d.getHours()).slice(-2)+ ':' + ('0' + d.getMinutes()).slice(-2);
+        
+            document.getElementById('fechaInicioPrestamo').setAttribute('min', fecha);
+            document.getElementById('fechaInicioPrestamo').setAttribute('value', fecha);
+            document.getElementById('fechaFinPrestamo').setAttribute('min', fecha);
+            document.getElementById('horaInicioPrestamo').setAttribute('min', hora);
+            document.getElementById('horaInicioPrestamo').setAttribute('value', hora);
+            document.getElementById('horaFinPrestamo').setAttribute('min', hora);
+        };
+        function manageSubmit(input) {
+            var bt = document.getElementById('BtSubmit');
+            var ele = document.getElementsByTagName('input');
+
+            for (i = 0; i < ele.length; i++) {
+                if ((ele[i].type === 'date' && ele[i].value === '') || (ele[i].type === 'time' && ele[i].value === '') || 
+                        (ele[i].type === 'hidden' && ele[i].value === '')) {
+                    bt.disabled = true;
+                    return false;
+                } else {
+                    bt.disabled = false;
+                }
+            }
+        }
+        </script>
     </head>
 
     <body>
@@ -64,7 +94,7 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">Bicicleta seleccionada</h5>
                                                     <a class="card-text" id="nombreBici">No ha seleccionado ninguna bicicleta.</a><br>
-                                                    
+
                                                     <span id="estrella1" class="fa fa-star"></span>
                                                     <span id="estrella2" class="fa fa-star"></span>
                                                     <span id="estrella3" class="fa fa-star"></span>
@@ -76,7 +106,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="bicicletaId" id="bicicletaId" value="">
+                                    <input type="hidden" name="bicicletaId" id="bicicletaId" value="" onchange="manageSubmit(this)">
                                 </div>
 
                                 <!-- Formulario de fecha -->
@@ -90,16 +120,16 @@
 
                                     <div class="row">
                                         <div class="col">
-                                            <input type="date" class="form-control" name="fechaInicioPrestamo" id="fechaInicioPrestamo">
+                                            <input type="date" class="form-control" name="fechaInicioPrestamo" id="fechaInicioPrestamo" min="" onchange="manageSubmit(this)">
                                         </div>
                                         <div class="col">
-                                            <input type="time" class="form-control" name="horaInicioPrestamo" id="horaInicioPrestamo">
+                                            <input type="time" class="form-control" name="horaInicioPrestamo" id="horaInicioPrestamo" min="" onchange="manageSubmit(this)">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <small id="fechaInicioHelp" class="form-text text-muted ml-3">La fecha y hora aproximada de inicio del préstamo.</small>
-                                    </div> 
+                                    </div>
 
                                     <!-- Fin de la peticion -->
                                     <div class="form-group">
@@ -109,19 +139,20 @@
 
                                         <div class="row">
                                             <div class="col">
-                                                <input type="date" class="form-control" name="fechaFinPrestamo" id="fechaFinPrestamo">
+                                                <input type="date" class="form-control" name="fechaFinPrestamo" id="fechaFinPrestamo" min="" onchange="manageSubmit(this)">
                                             </div>
                                             <div class="col">
-                                                <input type="time" class="form-control" name="horaFinPrestamo" id="horaFinPrestamo">
+                                                <input type="time" class="form-control" name="horaFinPrestamo" id="horaFinPrestamo" min="" onchange="manageSubmit(this)">
                                             </div>
                                         </div>
 
                                         <div class="row mb-4">
                                             <small id="fechaFinHelp" class="form-text text-muted ml-3">La fecha y hora estimada de finalización del préstamo.</small>
-                                        </div> 
+                                        </div>
                                     </div>
+
                                     <a href="#carouselAlquiler" role="button" data-slide="next">
-                                        <button class="btn btn-outline-success">Siguiente</button>
+                                        <button class="btn btn-outline-success" id="BtNext">Siguiente</button>
                                     </a>
                                 </div>
                             </div>
@@ -140,7 +171,7 @@
 
                                         <!-- Seguro de viaje -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" name="seguroViaje" id="seguroViaje">
+                                            <input class="form-check-input" type="checkbox" value="" name="seguroViaje" id="seguroViaje" onkeyup="manageSubmit(this)">
                                             <label class="form-check-label" for="seguroViaje">
                                                 Seguro de viaje +1€
                                             </label>
@@ -148,7 +179,7 @@
 
                                         <!-- Llegaré tarde -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" name="llegareTarde" id="llegareTarde">
+                                            <input class="form-check-input" type="checkbox" value="" name="llegareTarde" id="llegareTarde" onkeyup="manageSubmit(this)">
                                             <label class="form-check-label" for="llegareTarde">
                                                 Llegaré tarde (media hora extra de espera) +1€
                                             </label>
@@ -156,7 +187,7 @@
 
                                         <!-- Alquiler en mano o estandar -->
                                         <div class="form-check mb-5">
-                                            <input class="form-check-input" type="checkbox" value="" name="alquilerEnMano" id="alquilerEnMano">
+                                            <input class="form-check-input" type="checkbox" value="" name="alquilerEnMano" id="alquilerEnMano" onkeyup="manageSubmit(this)">
                                             <label class="form-check-label" for="alquilerEnMano">
                                                 Alquiler en mano (bicicleta entregada presencialmente)
                                             </label>
@@ -182,7 +213,7 @@
                                         <li class="list-group-item"><b>Total: </b> <label name="textoPrecioTotal" id="textoPrecioTotal"></label>€</li>
                                     </ul>
                                     <div class="container p-3">
-                                        <button class="btn btn-outline-success" type="submit">RideMyBike!</button>
+                                        <button class="btn btn-outline-success" type="submit" id="BtSubmit" disabled>RideMyBike!</button>
                                         <a href="index.jsp" role="button">
                                             <button type="button" class="btn btn-outline-danger" href="index.jsp" name="cancelarPeticion" id="cancelarPeticion">Cancelar</button>
                                         </a>
