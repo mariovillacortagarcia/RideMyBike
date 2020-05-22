@@ -30,21 +30,35 @@
                 color: orange;
             }
         </style>
-        <!-- Script controlador fechas y horas completadas -->
+        <!-- Scripts controladores fechas y horas introducidas -->
         <script>
-            function manageSubmit(input) {
-                var bt = document.getElementById('BtSubmit');
-                var ele = document.getElementsByTagName('input');
+        window.onload = function(){
+            var d = new Date();
+        
+            var fecha = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+            var hora = ('0' + d.getHours()).slice(-2)+ ':' + ('0' + d.getMinutes()).slice(-2);
+        
+            document.getElementById('fechaInicioPrestamo').setAttribute('min', fecha);
+            document.getElementById('fechaInicioPrestamo').setAttribute('value', fecha);
+            document.getElementById('fechaFinPrestamo').setAttribute('min', fecha);
+            document.getElementById('horaInicioPrestamo').setAttribute('min', hora);
+            document.getElementById('horaInicioPrestamo').setAttribute('value', hora);
+            document.getElementById('horaFinPrestamo').setAttribute('min', hora);
+        };
+        function manageSubmit(input) {
+            var bt = document.getElementById('BtSubmit');
+            var ele = document.getElementsByTagName('input');
 
-                for (i = 0; i < ele.length; i++) {
-                    if ((ele[i].type === 'date' && ele[i].value === '') || (ele[i].type === 'time' && ele[i].value === '')) {
-                        bt.disabled = true;
-                        return false;
-                    } else {
-                        bt.disabled = false;
-                    }
+            for (i = 0; i < ele.length; i++) {
+                if ((ele[i].type === 'date' && ele[i].value === '') || (ele[i].type === 'time' && ele[i].value === '') || 
+                        (ele[i].type === 'hidden' && ele[i].value === '')) {
+                    bt.disabled = true;
+                    return false;
+                } else {
+                    bt.disabled = false;
                 }
             }
+        }
         </script>
     </head>
 
@@ -92,23 +106,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="bicicletaId" id="bicicletaId" value="">
+                                    <input type="hidden" name="bicicletaId" id="bicicletaId" value="" onchange="manageSubmit(this)">
                                 </div>
 
                                 <!-- Formulario de fecha -->
-                                <script>
-                                    let date = new Date();
-
-                                    let day = date.getDate();
-                                    let month = date.getMonth() + 1;
-                                    let year = date.getFullYear();
-
-                                    if(month < 10){
-                                        console.log(`${day}-0${month}-${year}`);
-                                    }else{
-                                        console.log(`${day}-${month}-${year}`);
-                                    }
-                                </script>
                                 <div class="col-lg-4 col-sm-12 mt-4">
                                     <h5><b>2. Indica el tiempo de uso </b>🕒</h5>
 
@@ -119,10 +120,10 @@
 
                                     <div class="row">
                                         <div class="col">
-                                            <input type="date" class="form-control" name="fechaInicioPrestamo" id="fechaInicioPrestamo" onchange="manageSubmit(this)">
+                                            <input type="date" class="form-control" name="fechaInicioPrestamo" id="fechaInicioPrestamo" min="" onchange="manageSubmit(this)">
                                         </div>
                                         <div class="col">
-                                            <input type="time" class="form-control" name="horaInicioPrestamo" id="horaInicioPrestamo" onchange="manageSubmit(this)">
+                                            <input type="time" class="form-control" name="horaInicioPrestamo" id="horaInicioPrestamo" min="" onchange="manageSubmit(this)">
                                         </div>
                                     </div>
 
@@ -138,10 +139,10 @@
 
                                         <div class="row">
                                             <div class="col">
-                                                <input type="date" class="form-control" name="fechaFinPrestamo" id="fechaFinPrestamo" onchange="manageSubmit(this)">
+                                                <input type="date" class="form-control" name="fechaFinPrestamo" id="fechaFinPrestamo" min="" onchange="manageSubmit(this)">
                                             </div>
                                             <div class="col">
-                                                <input type="time" class="form-control" name="horaFinPrestamo" id="horaFinPrestamo" onchange="manageSubmit(this)" oninput="">
+                                                <input type="time" class="form-control" name="horaFinPrestamo" id="horaFinPrestamo" min="" onchange="manageSubmit(this)">
                                             </div>
                                         </div>
 
