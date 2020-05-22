@@ -171,7 +171,7 @@
 
                                         <!-- Seguro de viaje -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" name="seguroViaje" id="seguroViaje" onkeyup="manageSubmit(this)">
+                                            <input class="form-check-input" type="checkbox" value="" name="seguroViaje" id="seguroViaje">
                                             <label class="form-check-label" for="seguroViaje">
                                                 Seguro de viaje +1€
                                             </label>
@@ -179,7 +179,7 @@
 
                                         <!-- Llegaré tarde -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" name="llegareTarde" id="llegareTarde" onkeyup="manageSubmit(this)">
+                                            <input class="form-check-input" type="checkbox" value="" name="llegareTarde" id="llegareTarde">
                                             <label class="form-check-label" for="llegareTarde">
                                                 Llegaré tarde (media hora extra de espera) +1€
                                             </label>
@@ -187,7 +187,7 @@
 
                                         <!-- Alquiler en mano o estandar -->
                                         <div class="form-check mb-5">
-                                            <input class="form-check-input" type="checkbox" value="" name="alquilerEnMano" id="alquilerEnMano" onkeyup="manageSubmit(this)">
+                                            <input class="form-check-input" type="checkbox" value="" name="alquilerEnMano" id="alquilerEnMano">
                                             <label class="form-check-label" for="alquilerEnMano">
                                                 Alquiler en mano (bicicleta entregada presencialmente)
                                             </label>
