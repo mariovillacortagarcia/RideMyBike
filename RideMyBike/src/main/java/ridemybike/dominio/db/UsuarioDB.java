@@ -38,18 +38,13 @@ public class UsuarioDB {
             ps.setString(6, usuario.getTlf()+"");
             ps.setString(7, usuario.getTarjetaCredito());
             ps.setString(8, usuario.getHashPasswd());
-            ps.setBlob(9, usuario.getFotoPerfil().getInputStream());
+            ps.setBlob(9, usuario.getFotoPerfil() == null ? null : usuario.getFotoPerfil().getInputStream());
             ps.setString(10, usuario.getDireccion());
             
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            int res = 0;
-            if (rs.next()) {
-                res = rs.getInt(1);
-            }
             ps.close();
             pool.freeConnection(connection);
-            return res;
+            return 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
