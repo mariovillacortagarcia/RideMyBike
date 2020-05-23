@@ -28,7 +28,7 @@
             <div class="col-4">
                 <div>
                     <%
-                if (request.getParameter("sesionIniciada").equals("true")) { %>
+                        if (request.getParameter("sesionIniciada").equals("true")) { %>
                     <button type="button" onclick="location.href = 'RecuperarPerfil'" class="btn btn-success">Mi perfil</button>
                     <button type="button" onclick="location.href = 'CerrarSesion'" class="btn btn-light">Cerrar Sesión</button>
                     <% } else { %>
@@ -40,6 +40,11 @@
 
             </div>
         </div>
+
+        <%
+            if (request.getParameter("esAdmin").toString().equals("false")) {
+
+        %>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <!-- Menu de navegacion -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle	navigation">
@@ -52,16 +57,16 @@
                     </li>
                     <li class="nav-item <% s = pagina.equals("MisBicis") ? "active" : "";%> <%= s%>">
                         <% if (request.getParameter("sesionIniciada").equals("true")) { %>
-                            <a class="nav-link" href="RecuperarBicicletas">Mis Bicis 🚴‍</a>
+                        <a class="nav-link" href="RecuperarBicicletas">Mis Bicis 🚴‍</a>
                         <% } else { %>
-                            <a class="nav-link" href="iniciar_sesion.jsp">Mis Bicis 🚴‍</a>
+                        <a class="nav-link" href="iniciar_sesion.jsp">Mis Bicis 🚴‍</a>
                         <% } %>
                     </li>
                     <li class="nav-item <% s = pagina.equals("Viajes") ? "active" : "";%> <%= s%> ">
                         <% if (request.getParameter("sesionIniciada").equals("true")) { %>
                         <a class="nav-link" href="RecuperarViajes">Viajes 🚵‍</a>
                         <% } else { %>
-                            <a class="nav-link" href="iniciar_sesion.jsp">Viajes 🚵‍</a>
+                        <a class="nav-link" href="iniciar_sesion.jsp">Viajes 🚵‍</a>
                         <% } %>
                     </li>
                     <li class="nav-item <% s = pagina.equals("Garantias") ? "active" : "";%> <%= s%>">
@@ -76,5 +81,25 @@
                 </ul>
             </div>
         </nav>
+        <% } else {
+        %>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <!-- Menu de navegacion -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle	navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item <% String s = pagina.equals("Problemas") ? "active" : "";%> <%= s%>">
+                        <a class="nav-link" href="RecuperarProblemas">Problemas y errores‍</a>
+                    </li>
+                    <li class="nav-item <% s = pagina.equals("DudasSugerencias") ? "active" : "";%> <%= s%> ">
+                        <a class="nav-link" href="RecuperarDudasSugerencias">Dudas y sugerencias‍</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <% }
+        %>
     </div>
 </html>

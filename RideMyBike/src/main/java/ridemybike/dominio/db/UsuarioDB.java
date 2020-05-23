@@ -97,6 +97,34 @@ public class UsuarioDB {
     }
     
     /**
+     * Informa sobre si el usuario con el nombre de usuario especificado es un administrador
+     * 
+     * @param nombreUsuario el nick del usuario
+     * @return true si lo es; false en caso contrario
+     * @throws IllegalArgumentException si el nombre de usuario dado es igual a null
+     */
+    public static boolean esAdministrador(String nombreUsuario) {
+        if(nombreUsuario == null){
+            throw new IllegalArgumentException("Nombre de usuario igual a null");
+        }
+    
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection= pool.getConnection();
+        PreparedStatement ps;
+        ResultSet rs;
+        String query= "SELECT * FROM Administrador WHERE nombreUsuario = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, nombreUsuario);
+            rs = ps.executeQuery();
+            return rs.next();
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    /**
      * Devuelve el usuario con el email especificado
      * 
      * @param email el email del usuario

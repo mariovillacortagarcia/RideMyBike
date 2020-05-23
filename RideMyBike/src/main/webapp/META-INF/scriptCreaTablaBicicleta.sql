@@ -5,6 +5,9 @@ DROP TABLE Incidencia;
 DROP TABLE Alquiler;
 DROP TABLE Peticion;
 DROP TABLE Bicicleta;
+DROP TABLE Problema;
+DROP TABLE DudaSugerencia;
+DROP TABLE Administrador;
 DROP TABLE Usuario;
 
 
@@ -21,6 +24,33 @@ CREATE TABLE Usuario(
   direccion varchar(150) not null,
   PRIMARY KEY (nombreUsuario)
 );
+
+CREATE TABLE Administrador(
+  nombreUsuario varchar(30) not null,
+  PRIMARY KEY (nombreUsuario),
+  FOREIGN KEY (nombreUsuario) REFERENCES Usuario(nombreUsuario)
+);
+
+CREATE TABLE Problema(
+  nombreUsuario varchar(30) not null,
+  asunto varchar(50) not null,
+  descripcion varchar(2000) not null,
+  fechaInsercion Timestamp not null,
+  fechaAtencion Timestamp,
+  PRIMARY KEY (nombreUsuario),
+  FOREIGN KEY (nombreUsuario) REFERENCES Usuario(nombreUsuario)
+);
+
+CREATE TABLE DudaSugerencia(
+  nombreUsuario varchar(30) not null,
+  asunto varchar(50) not null,
+  descripcion varchar(2000) not null,
+  fechaInsercion Timestamp not null,
+  fechaAtencion Timestamp,
+  PRIMARY KEY (nombreUsuario),
+  FOREIGN KEY (nombreUsuario) REFERENCES Usuario(nombreUsuario)
+);
+
 
 CREATE TABLE Bicicleta(
   codigoBici INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
@@ -119,6 +149,14 @@ INSERT INTO Usuario
 
 INSERT INTO Usuario
       VALUES ('martaND9', 'Marta', 'Nadal Dalmau', '71941363h', 'martand89@gmail.com', 622114455, '98765432346789', '$31$16$_x8nYbYThjNKZ5x4jHSKHxwK9XBT3c7GcQJhzDzg1xw', CAST (X'FFFF' AS BLOB) , 'Calle Bierzo nº 7');
+
+INSERT INTO Usuario
+      VALUES ('admin', 'Fernando', 'Simon', '72222222a', 'admin@gmail.com', 622223344, '98765432346789', '$31$16$_x8nYbYThjNKZ5x4jHSKHxwK9XBT3c7GcQJhzDzg1xw', CAST (X'FFFF' AS BLOB) , 'Calle de los admin nº 20');
+
+-- Administradores
+
+INSERT INTO Administrador
+      VALUES ('admin');
 
 -- Bicicletas
 INSERT INTO Bicicleta

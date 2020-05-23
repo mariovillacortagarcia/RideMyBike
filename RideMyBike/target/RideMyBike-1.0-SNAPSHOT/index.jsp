@@ -64,10 +64,14 @@
 
     <body>
         <!---Cabecera -->
-        <% String s = session.getAttribute("usuario") == null ? "false" : "true";%>
+        <% 
+            String s = session.getAttribute("usuario") == null ? "false" : "true";
+            boolean esAdmin = session.getAttribute("admin") != null;
+        %>
         <jsp:include page="header.jsp" >
             <jsp:param name="paginaMostrada" value="Home" />
             <jsp:param name="sesionIniciada" value="<%= s%>" />
+            <jsp:param name="usuarioAdmin" value="<%= esAdmin%>" />
         </jsp:include>
 
         <!-- Contenido -->
