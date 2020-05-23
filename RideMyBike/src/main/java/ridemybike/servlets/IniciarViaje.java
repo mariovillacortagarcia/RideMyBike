@@ -1,14 +1,22 @@
 package ridemybike.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ridemybike.dominio.Alquiler;
 import ridemybike.dominio.Bicicleta;
+import ridemybike.dominio.EstadoBicicleta;
+import ridemybike.dominio.Peticion;
 import ridemybike.dominio.db.AlquilerDB;
+import ridemybike.dominio.db.BicicletaDB;
+import ridemybike.dominio.db.PeticionDB;
 
 /**
  *
@@ -27,13 +35,21 @@ public class IniciarViaje extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-
-        Bicicleta bici = AlquilerDB.getBicicletaDelAlquiler(Integer.parseInt(request.getParameter("codigoAlquiler")));
-        String ubicacionInicial = "{"+'"'+"lat"+'"'+":"+bici.getLatitud()+", "+'"'+"lng"+'"'+":"+bici.getLongitud()+"}";
-        AlquilerDB.iniciarViaje(Integer.parseInt(request.getParameter("codigoAlquiler")), ubicacionInicial);
+        int codigoAlquiler = Integer.parseInt(request.getParameter("codigoAlquiler"));
+        Alquiler alquiler = AlquilerDB.selectAlquiler(codigoAlquiler);
+        Peticion peticion = PeticionDB.selectPeticion(alquiler.getPeticion());
+        Timestamp horaLimite = peticion.getHoraLimite();
+        Bicicleta bici = AlquilerDB.getBicicletaDelAlquiler(codigoAlquiler);
+        String ubicacionInicial = "{" + '"' + "lat" + '"' + ":" + bici.getLatitud() + ", " + '"' + "lng" + '"' + ":" + bici.getLongitud() + "}";
+        AlquilerDB.iniciarViaje(codigoAlquiler, ubicacionInicial);
         
+        if (horaLimite.compareTo(new Timestamp(System.currentTimeMillis())) < 0) {
+            BicicletaDB.cambiaEstadoBicicleta(bici, EstadoBicicleta.Activado);
+            String ubicacionFinal = "{"+'"'+"lat"+'"'+":"+bici.getLatitud()+", "+'"'+"lng"+'"'+":"+bici.getLongitud()+"}";
+            AlquilerDB.terminarViaje(Integer.parseInt(request.getParameter("codigoAlquiler")), ubicacionFinal);
+        }
         String url = "/RecuperarViajesEnProceso";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
