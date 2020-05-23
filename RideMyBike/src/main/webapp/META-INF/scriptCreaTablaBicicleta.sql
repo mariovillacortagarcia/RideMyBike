@@ -188,16 +188,16 @@ INSERT INTO Peticion
 
 -- Alquileres
 INSERT INTO Alquiler
-      VALUES (3.8, '2020-01-01 14:03:20', '2020-01-01 12:33:07', default, 1, 1, 'Calle de Santa Clara nº 12', 'Calle Cardenal Cisneros nº 24');
+      VALUES (3.8, '2020-01-01 14:03:20', '2020-01-01 12:33:07', default, 1, 1, '{"lat":41.6581588, "lng":-4.7230008}', '{"lat":41.6623755, "lng":-4.7257268}');
 
 INSERT INTO Alquiler
-      VALUES (5.2, '2020-01-03 17:33:21', '2020-01-03 16:42:28', default, 3, 0, 'Plaza de Poniente', 'Covaresa');
+      VALUES (5.2, '2020-01-03 17:33:21', '2020-01-03 16:42:28', default, 3, 0, '{"lat": 41.6527188, "lng": -4.7336219}', '{"lat":41.6137986, "lng":-4.7531087}');
 
 INSERT INTO Alquiler
-      VALUES (2.5, NULL, '2020-01-02 11:42:28', default, 2, 0, 'Plaza de la Universidad', 'La Flecha');
+      VALUES (2.5, NULL, '2020-01-02 11:42:28', default, 2, 0, '{"lat":41.6528315, "lng":-4.724229}', '{"lat":41.6244458, "lng":-4.7854849}');
 
 INSERT INTO Alquiler
-      VALUES (4.1, '2020-02-05 21:00:21', '2020-02-05 20:42:28', default, 4, 0, 'Plaza de la Mazorca', 'Calle la Chancla nº 4');
+      VALUES (4.1, '2020-02-05 21:00:21', '2020-02-05 20:42:28', default, 4, 0, '{"lat":41.6244458, "lng":-4.7854849}', '{"lat":41.6244458, "lng":-4.7854849}');
  
 -- Incidencias
 INSERT INTO Incidencia
