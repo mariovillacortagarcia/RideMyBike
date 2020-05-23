@@ -83,10 +83,18 @@ public class AlquilerDB {
                 alquiler.setPrecio(Double.parseDouble(rs.getString("precio")));
                 alquiler.setInicio(rs.getString("inicio"));
                 alquiler.setFin(rs.getString("fin"));
-                alquiler.setHoraInicial(new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime()));
-                alquiler.setHoraFinal(new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime()));
+                Timestamp horaInicial = null;
+                if(rs.getString("horaInicial") != null){
+                    horaInicial = new Timestamp(dateFormat.parse(rs.getString("horaInicial")).getTime());
+                }
+                alquiler.setHoraInicial(horaInicial);
+                Timestamp horaFinal = null;
+                if(rs.getString("horaFinal") != null){
+                    horaFinal = new Timestamp(dateFormat.parse(rs.getString("horaFinal")).getTime());
+                }
+                alquiler.setHoraFinal(horaFinal);
                 alquiler.setCodigoAlquiler(Integer.parseInt(rs.getString("codigoAlquiler")));
-                alquiler.setPeticion(Integer.parseInt(rs.getString("peticion")));
+                alquiler.setPeticion(Integer.parseInt(rs.getString("codigoPeticion")));
                 String archivado = rs.getString("archivado");
                 if (archivado.equals("1")) {
                     alquiler.setArchivado(true);
