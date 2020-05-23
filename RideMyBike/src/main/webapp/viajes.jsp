@@ -89,7 +89,7 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <!--Mapa con ruta realizada-->
-                                        <div class="mapa img-thumbnail" id="mapa<%=alquiler.getCodigoAlquiler()%>">[<%=inicio%>, <%=fin%>]</div>
+                                        <div class="mapa img-thubnail" style="height:200px" id="mapa<%=alquiler.getCodigoAlquiler()%>">[<%=inicio%>, <%=fin%>]</div>
                                     </div>
                                     <div class="col-6">
                                         <!--Informacion del viaje-->
