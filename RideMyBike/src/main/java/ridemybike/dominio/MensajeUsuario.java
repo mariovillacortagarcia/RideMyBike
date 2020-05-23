@@ -7,6 +7,7 @@ import java.sql.Timestamp;
  */
 public class MensajeUsuario {
     private String nombreUsuario;
+    private String codigo;
     private String asunto;
     private String descripcion;
     private Timestamp fechaCreacion;
@@ -21,6 +22,7 @@ public class MensajeUsuario {
         descripcion = null;
         fechaCreacion = null;
         fechaAtencion = null;
+        codigo = null;
     }
     
     /**
@@ -30,6 +32,15 @@ public class MensajeUsuario {
      */
     public void setNombreUsuario(String usuario){
         nombreUsuario = usuario;
+    }
+    
+    /**
+     * Establece el codigo del mensaje
+     * 
+     * @param codigo el codigo
+     */
+    public void setCodigo(String codigo){
+        this.codigo = codigo;
     }
     
     /**
@@ -111,5 +122,14 @@ public class MensajeUsuario {
      */
     public Timestamp getFechaAtencion(){
         return fechaAtencion;
+    }
+    
+    /**
+     * Devuelve el codigo del mensaje
+     * 
+     * @return un String con el codigo
+     */
+    public String getCodigo(){
+        return codigo;
     }
 }

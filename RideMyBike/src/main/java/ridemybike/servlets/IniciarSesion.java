@@ -50,9 +50,11 @@ public class IniciarSesion extends HttpServlet {
             if (encoder.authenticate(passwordIntroducida.toCharArray(), presuntoUser.getHashPasswd())) {
                 request.getSession().setAttribute("usuario", usuarioIntroducido);
                 if(UsuarioDB.esAdministrador(usuarioIntroducido)){
-                    request.getSession().setAttribute("admin", "El usuario de la sesion es un administrador del sistema.");
+                    url = "/RecuperarProblemas";
+                    request.getSession().setAttribute("admin", "El usuario de esta sesion es un administrador del sistema.");
+                } else{
+                    url = "/index.jsp";
                 }
-                url = "/index.jsp";
             } else {
                 request.setAttribute("errorPassword", PASSWORD_INCORRECTA);
                 request.setAttribute("usuario", usuarioIntroducido);
