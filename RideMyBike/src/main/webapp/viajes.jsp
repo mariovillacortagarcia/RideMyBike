@@ -75,7 +75,7 @@
                                     LocalDateTime fechaFin = alquiler.getHoraFinal().toLocalDateTime();
                                     String mesFin = Integer.toString(fechaFin.getMonthValue());
                                     String anoFin = Integer.toString(fechaFin.getYear());
-                                    String horaFin = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());
+                                    String horaFin = Integer.toString(fechaFin.getHour()) + ":" + Integer.toString(fechaFin.getMinute());
                                     String diaFin = Integer.toString(fechaFin.getDayOfMonth());
                                     String diaInicio = Integer.toString(fechaInicio.getDayOfMonth());
                                     String mesInicio = Integer.toString(fechaInicio.getMonthValue());
