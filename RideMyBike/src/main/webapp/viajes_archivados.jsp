@@ -78,7 +78,7 @@
                                     String diaFin = Integer.toString(fechaFin.getDayOfMonth());
                                     String mesFin = Integer.toString(fechaFin.getMonthValue());
                                     String anoFin = Integer.toString(fechaFin.getYear());
-                                    String horaFin = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());;
+                                    String horaFin = Integer.toString(fechaFin.getHour()) + ":" + Integer.toString(fechaFin.getMinute());;
                         %>
                         <li class="list-group-item">
                             <!--Viaje 1-->
