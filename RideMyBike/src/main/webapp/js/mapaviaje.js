@@ -17,7 +17,6 @@ const VALLADOLID = [41.6520, -4.7286];
 const ZOOM = 10;
 $(document).ready(function () {
     $(".mapa").each(function (index) {
-        console.log("Hola")
         var texto = this;
         var coordenadas = JSON.parse($(texto).text());
         var inicio = coordenadas[0];
