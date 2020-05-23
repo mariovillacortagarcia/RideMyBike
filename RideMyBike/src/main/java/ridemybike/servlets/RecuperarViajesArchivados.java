@@ -31,7 +31,11 @@ public class RecuperarViajesArchivados extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        if (request.getSession().getAttribute("usuario") == null) {
+            String url = "/iniciar_sesion.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
         String nombreUsuario = request.getSession().getAttribute("usuario").toString();
         ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresArchivados(nombreUsuario);
         ArrayList<Peticion> peticiones = PeticionDB.selectPeticionesAlquileres(alquileres, nombreUsuario);
@@ -39,7 +43,6 @@ public class RecuperarViajesArchivados extends HttpServlet {
         request.setAttribute("alquileres", alquileres);
         request.setAttribute("peticiones", peticiones);
         request.setAttribute("bicicletas", bicicletas);
-
 
         String url = "/viajes_archivados.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
