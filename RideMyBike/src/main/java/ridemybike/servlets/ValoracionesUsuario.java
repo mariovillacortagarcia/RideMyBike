@@ -1,33 +1,29 @@
 package ridemybike.servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ridemybike.dominio.ValoracionBicicleta;
+import javax.servlet.http.HttpSession;
 import ridemybike.dominio.ValoracionUsuario;
-import ridemybike.dominio.db.ValoracionBicicletaDB;
 import ridemybike.dominio.db.ValoracionUsuarioDB;
 
+/**
+ *
+ * @author David
+ */
+/**
+ * Servlet para obtener el historial de valoraciones de una bicicleta especificada en 
+ * request.codigoBicicleta.
+ * Devuelve el control a ValoracionBicicleta.jsp
+ */
+@WebServlet(name = "ValoracionesUsuario", urlPatterns = {"/ValoracionesUsuario"})
+public class ValoracionesUsuario extends HttpServlet {
 
-@WebServlet(name = "ValorarBicicleta", urlPatterns = {"/ValorarBicicleta"})
-public class ValorarBicicleta extends HttpServlet {
-/** 
-     * @param cadena
-     * @return TRUE SI CONTIENE UN CARACTER ILEGAL FALSE SI TODO BIEN
-     */
-    public boolean compruebaCaracteresEspeciales(String cadena){
-        if(cadena.contains("\\") || cadena.contains("\"") || cadena.contains("\'") || cadena.contains("\\x00") || cadena.contains("\\x1") || cadena.contains("-") || cadena.contains("_") || cadena.contains("&") || cadena.contains(" or ") || cadena.contains(" and ") ){
-            return true;
-        }
-        return false;
-    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,25 +36,16 @@ public class ValorarBicicleta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ValoracionBicicleta val = new ValoracionBicicleta();
-        String descripcionValoracionBici = (String) request.getParameter("descripcion");
-        if (descripcionValoracionBici.isBlank()|| compruebaCaracteresEspeciales(descripcionValoracionBici)) {
-            request.setAttribute("errorDescripcion", "La descripcion de la valoración no es correcta.");
-            
-            }
-        val.setCodigo(Integer.parseInt(request.getParameter("codigoAlquiler")));
-        val.setDescripcion(request.getParameter("descripcion"));
-        val.setPuntuacion(Integer.parseInt((String)request.getParameter("valoracion")));
-        val.setCodigoBicicleta(Integer.parseInt(request.getParameter("codigoBici")));
-        try {
-            ValoracionBicicletaDB.insertarValoracionBicicleta(val);
-        } catch (SQLException ex) {
-            Logger.getLogger(ValorarBicicleta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String url = "/RecuperarViajes";
+        
+        String nombreUsuario = request.getParameter("usuarioPropietario");
+        ArrayList<ValoracionUsuario> valoraciones = ValoracionUsuarioDB.getValoraciones(nombreUsuario);     
+        request.setAttribute("valoraciones", valoraciones);
+
+        
+        
+        String url = "/ValoracionesUsuario.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -101,3 +88,4 @@ public class ValorarBicicleta extends HttpServlet {
     }// </editor-fold>
 
 }
+

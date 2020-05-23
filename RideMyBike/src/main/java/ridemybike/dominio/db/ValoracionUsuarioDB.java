@@ -1,6 +1,7 @@
 package ridemybike.dominio.db;
 
 import java.sql.*;
+import java.util.ArrayList;
 import ridemybike.dominio.ValoracionUsuario;
 
 
@@ -95,4 +96,36 @@ public class ValoracionUsuarioDB{
               return -1;
           }
   }
+  public static ArrayList<ValoracionUsuario> getValoraciones(String usuarioValorado) {
+        if (usuarioValorado == null || usuarioValorado.equals("")) {
+            throw new IllegalArgumentException("El usuario no es no valida");
+        }
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM ValoracionUsuario WHERE usuarioValorado = ?";
+        ArrayList<ValoracionUsuario> lista = new ArrayList<ValoracionUsuario>();
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, usuarioValorado);
+            rs = ps.executeQuery();
+            ValoracionUsuario valoracion = null;
+            while (rs.next()) {
+                valoracion = new ValoracionUsuario();
+                valoracion.setCodigo(Integer.parseInt(rs.getString("codigoAlquiler")));
+                valoracion.setDescripcion(rs.getString("descripcion"));
+                valoracion.setPuntuacion(Integer.parseInt(rs.getString("puntuacion")));
+                valoracion.setUsuarioValorado(rs.getString("usuarioValorado"));
+                lista.add(valoracion);
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return lista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

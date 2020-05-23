@@ -50,7 +50,9 @@
                     <form action="ValorarBicicleta?codigoBici=<%= biciAValorar.getcodigoBici() %>" method="POST">
                         <label for="descripcionValoracion">Descripción</label>
                         <textarea type="String" class="form-control" id="descripcionValoracion" name="descripcion" rows="4" maxlength="350" required="text" onpaste="return false;"></textarea>
-                       
+                        <% if (request.getAttribute("errorDescripcion") != null) {%>
+                        <small style="color:red"><%=request.getAttribute("errorDescripcion")%></small>
+                        <% }%>
                         <input name="codigoAlquiler" type="number" value="<%=codigoAlquiler%>" style="display:none">
                         <input id="valoracion" name="valoracion" type="number" min="0" max="5" style="display:none">
                         <button type="submit" class="btn btn-success mt-2">Enviar valoración</button>

@@ -39,6 +39,7 @@
             ArrayList<Bicicleta> lista = null;
             lista = (ArrayList<Bicicleta>) request.getAttribute("lista");
             
+            
         %>
         <div class="container pt-4 mt-3">
             <div class="row">
@@ -78,7 +79,9 @@
                                     String descripcion = lista.get(i).getDescripcion();
                                     int codigoBici = lista.get(i).getcodigoBici();
                                     EstadoBicicleta estado = lista.get(i).getEstado();
+                                    String nombreUsuario = lista.get(i).getUsuarioPropietario();
                             %>
+                                   
                             <div class="carousel-item <% String s = (i == 0) ? "active" : "";%> <%= s%> ">
                                 <div class="row">
                                     <div class="col-1"></div>
@@ -117,7 +120,8 @@
                                                         Opciones
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="ValoracionesBicicleta?codigoBicicleta=<%=codigoBici%>">Opiniones</a>
+                                                        <a class="dropdown-item" href="ValoracionesBicicleta?codigoBicicleta=<%=codigoBici%>">Ver Valoraciones Bicicleta</a>
+                                                        <a class="dropdown-item" href="ValoracionesUsuario?usuarioPropietario=<%=nombreUsuario%>">Ver Valoraciones Propietario</a>
                                                         <a class="dropdown-item" href="ActivacionBicicleta?codigoBicicleta=<%=codigoBici%>">Activar/Desactivar Bicicleta</a>
                                                         <a class="dropdown-item" href="HistorialAlquileresBicicleta?codigoBicicleta=<%=codigoBici%>">Historial de Alquileres</a>
                                                         <a class="dropdown-item" href="VerIncidenciasBicicleta?codigoBicicleta=<%=codigoBici%>">Ver incidencias</a>

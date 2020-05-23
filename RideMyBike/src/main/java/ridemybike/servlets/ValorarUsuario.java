@@ -19,7 +19,16 @@ import ridemybike.dominio.db.ValoracionUsuarioDB;
  */
 @WebServlet(name = "ValorarUsuario", urlPatterns = {"/ValorarUsuario"})
 public class ValorarUsuario extends HttpServlet {
-
+/** 
+     * @param cadena
+     * @return TRUE SI CONTIENE UN CARACTER ILEGAL FALSE SI TODO BIEN
+     */
+    public boolean compruebaCaracteresEspeciales(String cadena){
+        if(cadena.contains("\\") || cadena.contains("\"") || cadena.contains("\'") || cadena.contains("\\x00") || cadena.contains("\\x1") || cadena.contains("-") || cadena.contains("_") || cadena.contains("&") || cadena.contains(" or ") || cadena.contains(" and ") ){
+            return true;
+        }
+        return false;
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,6 +42,11 @@ public class ValorarUsuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ValoracionUsuario val = new ValoracionUsuario();
+        String descripcionValoracionUsuario = (String) request.getParameter("descripcion");
+        if (descripcionValoracionUsuario.isBlank()|| compruebaCaracteresEspeciales(descripcionValoracionUsuario)) {
+            request.setAttribute("errorDescripcion", "La descripcion de la valoración no es correcta.");
+            
+            }
         val.setCodigo(Integer.parseInt(request.getParameter("codigoAlquiler")));
         val.setDescripcion(request.getParameter("descripcion"));
         val.setPuntuacion(Integer.parseInt((String)request.getParameter("valoracion")));

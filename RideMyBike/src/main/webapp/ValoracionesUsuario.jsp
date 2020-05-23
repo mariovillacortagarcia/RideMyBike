@@ -1,3 +1,9 @@
+<%-- 
+    Document   : ValoracionesUsuario
+    Created on : 23 may. 2020, 22:49:31
+    Author     : David
+--%>
+
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -7,7 +13,7 @@
 <html lang="es">
 
     <head>
-        <title> Valoración Bicicleta - RideMyBike </title>
+        <title> Valoración Usuario - RideMyBike </title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,13 +33,13 @@
     <body>
         <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
         <jsp:include page="header.jsp" >
-            <jsp:param name="paginaMostrada" value="ValoracionesBicicleta" />
+            <jsp:param name="paginaMostrada" value="ValoracionesUsuario" />
             <jsp:param name="sesionIniciada" value="<%= s %>" />
         </jsp:include>  
         <!----- --->
         <%
             String nombreUsuario = session.getAttribute("usuario") == null ? "value='false'" : "value='true'";  
-            ArrayList<ValoracionBicicleta> valoraciones = (ArrayList<ValoracionBicicleta>) request.getAttribute("valoraciones");           
+            ArrayList<ValoracionUsuario> valoraciones = (ArrayList<ValoracionUsuario>) request.getAttribute("valoraciones");           
         %>
         <div class="container pt-4 my-3">
             <!-- Navegacion por los viajes -->
@@ -58,9 +64,9 @@
                                     <div class="col-1"></div>
                                     <div class="col-5">
                                         <!--Informacion-->
-                                        <p>
+                                        <h5>
                                             <b>Descripcion: </b><%= descripcion%>
-                                        </p>
+                                        </h5>
                                     </div>
                                     <div class="col-6" >
                                         <!--Precio y valoracion-->
@@ -101,3 +107,4 @@
             </div>
         </div>
 </html>
+
