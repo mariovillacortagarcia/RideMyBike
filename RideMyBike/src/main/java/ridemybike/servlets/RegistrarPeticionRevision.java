@@ -32,7 +32,7 @@ import ridemybike.dominio.db.PeticionRevisionDB;
 @WebServlet(name = "RegistrarPeticionRevision", urlPatterns = {"/RegistrarPeticionRevision"})
 @MultipartConfig
 public class RegistrarPeticionRevision extends HttpServlet {
-    private final String TAMANO_CUADRO_INCORRECTO = "Este campo debe ser una cifra de 3 numeros (cm)";
+    private final String TAMANO_CUADRO_INCORRECTO = "Este campo debe ser una cifra de 3 números (cm)";
     private final String TAMANO_DESCRIPCION_NOVALIDO = "Este campo es demasiado pequeño o contiene caracteres ilegales(\\,\",\',\\x00,\\x1,-,_), recuerda que tu descripción de la bici debe ser la mejor posible para que los usuarios quieran alquilarla";
   
     /** 

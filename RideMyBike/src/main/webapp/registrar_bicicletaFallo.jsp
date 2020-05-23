@@ -42,11 +42,7 @@
             <jsp:param name="paginaMostrada" value="RegistrarBicicleta" />
             <jsp:param name="sesionIniciada" value="<%= s %>" />
         </jsp:include>  
-        <div class="container pt-4 mt-3 mb-5">
-            <% if (request.getAttribute("erroTamano") != null) {%>
-                        <small style="color:red">Holaaa<%=request.getAttribute("errorTamano")%></small>
-            <% }%> 
-        </div>
+
         <div class="container pt-4 mt-3 mb-5">
             <!--Formulario de Registro de una Nueva Bicicleta-->
             <form action="RegistrarPeticionRevision" method="POST"  class="form-group mb-2" enctype="multipart/form-data">
@@ -66,11 +62,11 @@
                     <label for="modeloBiciRegistro">Modelo</label>
                     <input type="String" class="form-control" id="modeloNuevaBici" name="modelo" required="text" maxlength="20" onpaste="return false;">
                 </div>
-                <div class="form-group mb-2">
+                <div class="form-label-group mb-2">
                     <label for="tamanoBiciRegistro">Tamaño de Cuadro (cm)</label>
                     <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro" required="number" maxlength="3" onpaste="return false;">
-                    <% if (request.getAttribute("erroTamano") != null) {%>
-                    <small style="color:red">Holaaa<%=request.getAttribute("errorTamano")%></small>
+                    <% if (request.getAttribute("errorTamano") != null) {%>
+                    <small style="color:red"><%=request.getAttribute("errorTamano")%></small>
                     <% }%>
                 </div>
                 <label class="my-1 mr-2" for="tipoFreno">Tipo de freno</label>
@@ -84,8 +80,8 @@
                 <div class="form-group mb-2">
                     <label for="descripcionBiciRegistro">Descripción</label>
                     <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion" required="text" maxlength="500" onpaste="return false;"> </textarea>
-                    <% if (request.getAttribute("erroDescripcion") != null) {%>
-                    <label> <small style="color:red"><%=request.getAttribute("errorDescripcion")%></small> </label>
+                    <% if (request.getAttribute("errorDescripcion") != null) {%>
+                    <small style="color:red"><%=request.getAttribute("errorDescripcion")%></small>
                     <% }%>
 
                 </div>
