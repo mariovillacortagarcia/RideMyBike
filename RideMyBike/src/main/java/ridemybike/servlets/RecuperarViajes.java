@@ -16,7 +16,6 @@ import ridemybike.dominio.db.AlquilerDB;
 import ridemybike.dominio.db.BicicletaDB;
 import ridemybike.dominio.db.PeticionDB;
 
-
 @WebServlet(name = "RecuperarViajes", urlPatterns = {"/RecuperarViajes"})
 public class RecuperarViajes extends HttpServlet {
 
@@ -32,14 +31,18 @@ public class RecuperarViajes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        if (request.getSession().getAttribute("usuario") == null) {
+            String url = "/iniciar_sesion.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
         String nombreUsuario = request.getSession().getAttribute("usuario").toString();
-        ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresRealizados(nombreUsuario); 
-        for(int i = 0; i < alquileres.size(); i++){
-            if(AlquilerDB.isUsuarioPropietarioValorado(alquileres.get(i).getCodigoAlquiler()+"")){
+        ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresRealizados(nombreUsuario);
+        for (int i = 0; i < alquileres.size(); i++) {
+            if (AlquilerDB.isUsuarioPropietarioValorado(alquileres.get(i).getCodigoAlquiler() + "")) {
                 alquileres.get(i).marcarUsuarioValorado();
             }
-            if(AlquilerDB.isBicicletaValorada(alquileres.get(i).getCodigoAlquiler()+"")){
+            if (AlquilerDB.isBicicletaValorada(alquileres.get(i).getCodigoAlquiler() + "")) {
                 alquileres.get(i).marcarBiciValorada();
             }
         }
@@ -48,7 +51,7 @@ public class RecuperarViajes extends HttpServlet {
         request.setAttribute("alquileres", alquileres);
         request.setAttribute("peticiones", peticiones);
         request.setAttribute("bicicletas", bicicletas);
-        
+
         String url = "/viajes.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
