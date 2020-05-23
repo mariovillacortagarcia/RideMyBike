@@ -3,13 +3,13 @@ var iconoInicio = L.icon({
     iconUrl: 'img/mapa/inicio.png',
 
     iconSize: [24, 36], // size of the icon
-    
+
 });
 var iconoFin = L.icon({
     iconUrl: 'img/mapa/fin.png',
 
     iconSize: [24, 36], // size of the icon
-    
+
 });
 
 const PROVEEDOR = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -28,8 +28,10 @@ $(document).ready(function () {
         mapa.zoomControl.remove();
         var marcadores = [];
         marcadores.push(L.marker(inicio, {icon: iconoInicio}).addTo(mapa));
-        marcadores.push(L.marker(fin, {icon: iconoFin}).addTo(mapa));
+        if (!fin.contains(null)) {
+            marcadores.push(L.marker(fin, {icon: iconoFin}).addTo(mapa));
+        }
         var grupo = new L.featureGroup(marcadores);
-        mapa.fitBounds(grupo    .getBounds());
+        mapa.fitBounds(grupo.getBounds());
     });
 });
