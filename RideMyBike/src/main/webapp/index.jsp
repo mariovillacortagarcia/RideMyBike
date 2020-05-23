@@ -34,7 +34,6 @@
         <script>
         window.onload = function(){
             var d = new Date();
-        
             var fecha = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
             var hora = ('0' + d.getHours()).slice(-2)+ ':' + ('0' + d.getMinutes()).slice(-2);
         
@@ -45,21 +44,34 @@
             document.getElementById('horaInicioPrestamo').setAttribute('value', hora);
             document.getElementById('horaFinPrestamo').setAttribute('min', hora);
         };
-        function manageSubmit(input) {
-            var bt = document.getElementById('BtSubmit');
-            var ele = document.getElementsByTagName('input');
-
-            for (i = 0; i < ele.length; i++) {
-                if ((ele[i].type === 'date' && ele[i].value === '') || (ele[i].type === 'time' && ele[i].value === '') || 
-                        (ele[i].type === 'hidden' && ele[i].value === '')) {
-                    bt.disabled = true;
-                    return false;
-                } else {
-                    bt.disabled = false;
-                }
+        function dateLim() {
+            var fInicio = document.getElementById('fechaInicioPrestamo');
+            var hInicio = document.getElementById('horaInicioPrestamo');
+            var fFin = document.getElementById('fechaInicioPrestamo');
+            var hFin = document.getElementById('horaFinPrestamo');
+            var d1 = new Date();
+            var fecha1 = d1.getFullYear() + '-' + ('0' + (d1.getMonth()+1)).slice(-2) + '-' + ('0' + d1.getDate()).slice(-2);
+            var hora1 = ('0' + d1.getHours()).slice(-2)+ ':' + ('0' + d1.getMinutes()).slice(-2);
+            
+            fInicio.setAttribute('min', fecha1);
+            /*
+            if (fInicio.value === fecha1) {
+                hInicio.setAttribute('min', hora1);
+                console.log('Fecha de Inicio igual al minimo');
+            } else {
+                hInicio.setAttribute('min', '');
+                console.log('fecha de inicio distinta del minimo');
             }
-        }
-        
+            fFin.setAttribute('min', fInicio.value);
+            if (fInicio.value === fFin.value) {
+                hFin.setAttribute('min', hInicio.value);
+                console.log('fecha inicio igual a la fecha final');
+            } else {
+                hFin.setAttribute('min', '');
+                console.log('fecha inicio distinta a la fecha final');
+            }
+            */
+        };
         </script>
     </head>
 
@@ -107,7 +119,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="bicicletaId" id="bicicletaId" value="" onchange="manageSubmit(this)">
+                                    <input type="hidden" name="bicicletaId" id="bicicletaId" value="">
                                 </div>
 
                                 <!-- Formulario de fecha -->
@@ -121,10 +133,10 @@
 
                                     <div class="row">
                                         <div class="col">
-                                            <input type="date" class="form-control" name="fechaInicioPrestamo" id="fechaInicioPrestamo" min="" onchange="manageSubmit(this)">
+                                            <input type="date" class="form-control" name="fechaInicioPrestamo" id="fechaInicioPrestamo" min="" onchange="dateLim();">
                                         </div>
                                         <div class="col">
-                                            <input type="time" class="form-control" name="horaInicioPrestamo" id="horaInicioPrestamo" min="" onchange="manageSubmit(this)">
+                                            <input type="time" class="form-control" name="horaInicioPrestamo" id="horaInicioPrestamo" min="" onchange="dateLim();">
                                         </div>
                                     </div>
 
@@ -140,10 +152,10 @@
 
                                         <div class="row">
                                             <div class="col">
-                                                <input type="date" class="form-control" name="fechaFinPrestamo" id="fechaFinPrestamo" min="" onchange="manageSubmit(this)">
+                                                <input type="date" class="form-control" name="fechaFinPrestamo" id="fechaFinPrestamo" min="" onchange="dateLim();">
                                             </div>
                                             <div class="col">
-                                                <input type="time" class="form-control" name="horaFinPrestamo" id="horaFinPrestamo" min="" onchange="manageSubmit(this)">
+                                                <input type="time" class="form-control" name="horaFinPrestamo" id="horaFinPrestamo" min="" onchange="dateLim();">
                                             </div>
                                         </div>
 
@@ -214,7 +226,7 @@
                                         <li class="list-group-item"><b>Total: </b> <label name="textoPrecioTotal" id="textoPrecioTotal"></label>€</li>
                                     </ul>
                                     <div class="container p-3">
-                                        <button class="btn btn-outline-success" type="submit" id="BtSubmit" disabled>RideMyBike!</button>
+                                        <button class="btn btn-outline-success" type="submit" id="BtSubmit" disabled="true">RideMyBike!</button>
                                         <a href="index.jsp" role="button">
                                             <button type="button" class="btn btn-outline-danger" href="index.jsp" name="cancelarPeticion" id="cancelarPeticion">Cancelar</button>
                                         </a>
