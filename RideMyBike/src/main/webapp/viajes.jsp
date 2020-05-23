@@ -89,7 +89,7 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <!--Mapa con ruta realizada-->
-                                        <img class="img-thumbnail" src="img/test/viaje1.png">
+                                        <div class="mapa img-thumbnail" id="mapa<%=alquiler.getCodigoAlquiler()%>">[<%=inicio%>, <%=fin%>]</div>
                                     </div>
                                     <div class="col-6">
                                         <!--Informacion del viaje-->
@@ -124,7 +124,7 @@
                                                 %>
                                                 <a class="dropdown-item" href="MuestraValorarUsuario?usuarioPropietario=<%=usuarioPropietario%>&codigoAlquiler=<%=codigoAlquiler%>">Valorar propietario</a>
                                                 <%}
-                                                if (!alquiler.isBiciValorada()) {
+                                                    if (!alquiler.isBiciValorada()) {
                                                         int codigoBici = bicicletas.get(i).getcodigoBici();
                                                         String codigoAlquiler = Integer.toString(alquiler.getCodigoAlquiler());
                                                 %>
@@ -166,7 +166,7 @@
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
-
+        <script src="js/mapaviaje.js"></script>
 
         <!-- Load Esri Leaflet from CDN -->
         <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js" integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g==" crossorigin=""></script>
