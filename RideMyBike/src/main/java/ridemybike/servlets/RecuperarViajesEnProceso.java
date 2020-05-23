@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Alquiler;
 import ridemybike.dominio.db.AlquilerDB;
 
-
 @WebServlet(name = "RecuperarViajesEnProceso", urlPatterns = {"/RecuperarViajesEnProceso"})
 public class RecuperarViajesEnProceso extends HttpServlet {
 
@@ -27,11 +26,15 @@ public class RecuperarViajesEnProceso extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        if (request.getSession().getAttribute("usuario") == null) {
+            String url = "/iniciar_sesion.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
         String nombreUsuario = request.getSession().getAttribute("usuario").toString();
-        ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresEnProceso(nombreUsuario);        
+        ArrayList<Alquiler> alquileres = AlquilerDB.selectAlquileresEnProceso(nombreUsuario);
         request.setAttribute("alquileres", alquileres);
-        
+
         String url = "/viajes_en_proceso.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
