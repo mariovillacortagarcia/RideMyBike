@@ -27,8 +27,10 @@ $(document).ready(function () {
         }).addTo(mapa);
         mapa.zoomControl.remove();
         var marcadores = [];
-        marcadores.push(L.marker(inicio, {icon: iconoInicio}).addTo(mapa));
-        if (!fin.contains(null)) {
+        if (inicio.lat != null && inicio.lng != null) {
+            marcadores.push(L.marker(inicio, {icon: iconoInicio}).addTo(mapa));
+        }
+        if (fin.lat != null && fin.lng != null) {
             marcadores.push(L.marker(fin, {icon: iconoFin}).addTo(mapa));
         }
         var grupo = new L.featureGroup(marcadores);
