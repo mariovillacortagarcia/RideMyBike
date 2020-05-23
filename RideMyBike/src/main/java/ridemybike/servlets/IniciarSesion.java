@@ -44,7 +44,9 @@ public class IniciarSesion extends HttpServlet {
             url = "/iniciar_sesion.jsp";
         } else {
             Usuario presuntoUser = UsuarioDB.selectUser(usuarioIntroducido);
-
+            char[] lista = passwordIntroducida.toCharArray();
+            String coso = presuntoUser.getHashPasswd();
+            
             if (encoder.authenticate(passwordIntroducida.toCharArray(), presuntoUser.getHashPasswd())) {
                 request.getSession().setAttribute("usuario", usuarioIntroducido);
                 url = "/index.jsp";

@@ -43,10 +43,17 @@
             <jsp:param name="sesionIniciada" value="<%= s %>" />
         </jsp:include>  
         <div class="container pt-4 mt-3 mb-5">
+            <% if (request.getAttribute("erroTamano") != null) {%>
+                        <small style="color:red">Holaaa<%=request.getAttribute("errorTamano")%></small>
+            <% }%> 
+        </div>
+        <div class="container pt-4 mt-3 mb-5">
             <!--Formulario de Registro de una Nueva Bicicleta-->
             <form action="RegistrarPeticionRevision" method="POST"  class="form-group mb-2" enctype="multipart/form-data">
                 <h5><b>Anota la información de la bicicleta que quieras añadir </b>🚴</h5>
-                
+                <% if (request.getAttribute("erroTamano") != null) {%>
+                        <small style="color:red">Holaaa<%=request.getAttribute("errorTamano")%></small>
+                <% }%>
                 <div class="form-label-group pb-3 mt-3">
                     Selecciona una imagen para subir: <br>
                     <input type="file" name="foto" id="fileToUpload" class="mt-1" required="file" accept="image/x-png,image/gif,image/jpeg">
@@ -62,6 +69,9 @@
                 <div class="form-group mb-2">
                     <label for="tamanoBiciRegistro">Tamaño de Cuadro (cm)</label>
                     <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro" required="number" maxlength="3" onpaste="return false;">
+                    <% if (request.getAttribute("erroTamano") != null) {%>
+                    <small style="color:red">Holaaa<%=request.getAttribute("errorTamano")%></small>
+                    <% }%>
                 </div>
                 <label class="my-1 mr-2" for="tipoFreno">Tipo de freno</label>
                 <select class="custom-select my-1 mr-sm-2" id="tipoFreno" name="tipoFreno" required="text" >
@@ -74,6 +84,10 @@
                 <div class="form-group mb-2">
                     <label for="descripcionBiciRegistro">Descripción</label>
                     <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion" required="text" maxlength="500" onpaste="return false;"> </textarea>
+                    <% if (request.getAttribute("erroDescripcion") != null) {%>
+                    <label> <small style="color:red"><%=request.getAttribute("errorDescripcion")%></small> </label>
+                    <% }%>
+
                 </div>
                 <label for="informacionRevisionBici" class="pt-4">Para poder dar de alta la nueva bicicleta, necesitamos revisarla en un taller cercano a la ciudad que nos indiques</label>
 

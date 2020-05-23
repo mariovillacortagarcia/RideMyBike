@@ -32,7 +32,22 @@ import ridemybike.dominio.db.PeticionRevisionDB;
 @WebServlet(name = "RegistrarPeticionRevision", urlPatterns = {"/RegistrarPeticionRevision"})
 @MultipartConfig
 public class RegistrarPeticionRevision extends HttpServlet {
-
+    private final String TAMANO_CUADRO_INCORRECTO = "Este campo debe ser una cifra de 3 numeros (cm)";
+    private final String TAMANO_DESCRIPCION_NOVALIDO = "Este campo es demasiado pequeño o contiene caracteres ilegales(\\,\",\',\\x00,\\x1,-,_), recuerda que tu descripción de la bici debe ser la mejor posible para que los usuarios quieran alquilarla";
+  
+    /** 
+     * @param cadena
+     * @return TRUE SI CONTIENE UN CARACTER ILEGAL FALSE SI TODO BIEN
+     */
+    public boolean compruebaCaracteresEspeciales(String cadena){
+        if(cadena.contains("\\") || cadena.contains("\"") || cadena.contains("\'") || cadena.contains("\\x00") || cadena.contains("\\x1") || cadena.contains("-") || cadena.contains("_") || cadena.contains("&") || cadena.contains(" or ") || cadena.contains(" and ") ){
+            return true;
+        }
+        return false;
+    }
+    
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,65 +60,87 @@ public class RegistrarPeticionRevision extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = "";
         String Modelo = "";
-            String marca = "";
-            String TamanoCuadro = "";
-            String Descripcion = "";
-            String TipoFreno = "";
-            String Ciudad = "";
-            String fecha1 = "";
-            String hora1 = "";
-            String nombreUsuario = "";
+        String marca = "";
+        String TamanoCuadro = "";
+        String Descripcion = "";
+        String TipoFreno = "";
+        String Ciudad = "";
+        String fecha1 = "";
+        String hora1 = "";
+        String nombreUsuario = "";
         try {
-             Modelo = request.getParameter("modelo");
-             marca = request.getParameter("marca");
-             TamanoCuadro = request.getParameter("tamanoCuadro");
-             Descripcion = request.getParameter("descripcion");
-             TipoFreno = request.getParameter("tipoFreno");
-             Ciudad = request.getParameter("ciudad");
-             fecha1 = request.getParameter("fecha1");
-             hora1 = request.getParameter("hora1");
+            Modelo = request.getParameter("modelo");
+            marca = request.getParameter("marca");
+            TamanoCuadro = request.getParameter("tamanoCuadro");
+            Descripcion = request.getParameter("descripcion");
+            TipoFreno = request.getParameter("tipoFreno");
+            Ciudad = request.getParameter("ciudad");
+            fecha1 = request.getParameter("fecha1");
+            hora1 = request.getParameter("hora1");
             HttpSession session= request.getSession();
             nombreUsuario = session.getAttribute("usuario").toString();
             Part foto = request.getPart("foto");
             
-            Bicicleta bici = new Bicicleta();
-            bici.setDescripcion(Descripcion);
-            bici.setMarca(marca);
-            bici.setModelo(Modelo);
-            bici.setTamCuadro(Double.parseDouble(TamanoCuadro));
-            Freno freno = Freno.valueOf(TipoFreno);
-            bici.setFreno(freno);
-            EstadoBicicleta estado = EstadoBicicleta.Pendiente;
-            bici.setEstado(estado);
-            bici.setUsuarioPropietario(nombreUsuario);
-            UUID idUno = UUID.randomUUID();
-            bici.setCodigoActivacion(idUno.toString());
-            bici.setImagen(foto);
-            int codigoBici = BicicletaDB.insertarBicicleta(bici);
+            if(compruebaCaracteresEspeciales(Descripcion)){
+                url = "/registrar_bicicletaFallo.jsp";
+                request.setAttribute("errorDescripcion", TAMANO_DESCRIPCION_NOVALIDO);
+                try{
+                    Double variable = Double.parseDouble(TamanoCuadro);
+                }catch(Exception e){
+                    request.setAttribute("errorTamano", TAMANO_CUADRO_INCORRECTO);
+                }
+            }else{
+                boolean var = false;
+                try{
+                    Double variable = Double.parseDouble(TamanoCuadro);
+                }catch(Exception e){
+                    var = true;
+                    url = "/registrar_bicicletaFallo.jsp";
+                    request.setAttribute("errorTamano", TAMANO_CUADRO_INCORRECTO);
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-            Date parsedDate = dateFormat.parse(fecha1+" "+hora1+":00.000");
-            Timestamp fechaPeticion = new java.sql.Timestamp(parsedDate.getTime());
-            
-            
-            PeticionRevision peticion = new PeticionRevision();
-            peticion.setCiudad(Ciudad);
-            peticion.setCodigoUsuario(nombreUsuario);
+                }
+                if(!var){
+                    Bicicleta bici = new Bicicleta();
+                    bici.setDescripcion(Descripcion);
+                    bici.setMarca(marca);
+                    bici.setModelo(Modelo);
+                    bici.setTamCuadro(Double.parseDouble(TamanoCuadro));
+                    Freno freno = Freno.valueOf(TipoFreno);
+                    bici.setFreno(freno);
+                    EstadoBicicleta estado = EstadoBicicleta.Pendiente;
+                    bici.setEstado(estado);
+                    bici.setUsuarioPropietario(nombreUsuario);
+                    UUID idUno = UUID.randomUUID();
+                    bici.setCodigoActivacion(idUno.toString());
+                    bici.setImagen(foto);
+                    int codigoBici = BicicletaDB.insertarBicicleta(bici);
 
-            peticion.setFecha(fechaPeticion);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+                    Date parsedDate = dateFormat.parse(fecha1+" "+hora1+":00.000");
+                    Timestamp fechaPeticion = new java.sql.Timestamp(parsedDate.getTime());
 
-            peticion.setCodigoBicicleta(codigoBici);
-            PeticionRevisionDB.insertarPeticionRevision(peticion);
-            
-            String url = "/direccionRegistroCorrecto.jsp";
+
+                    PeticionRevision peticion = new PeticionRevision();
+                    peticion.setCiudad(Ciudad);
+                    peticion.setCodigoUsuario(nombreUsuario);
+
+                    peticion.setFecha(fechaPeticion);
+
+                    peticion.setCodigoBicicleta(codigoBici);
+                    PeticionRevisionDB.insertarPeticionRevision(peticion);
+
+                    url = "/direccionRegistroCorrecto.jsp";
+
+                }               
+            }
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
-
         } catch (Exception e) {
             e.printStackTrace();
             //response.getWriter().println(e.toString()+" Marca: "+marca+" Modelo: "+Modelo+" TamCuadro: "+TamanoCuadro+" TipoFreno: "+TipoFreno+" Ciudad: "+Ciudad+" Hora1: "+hora1 );
-            String url = "/direccionRegistroIncorrecto.jsp";
+            url = "/direccionRegistroIncorrecto.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
         }
