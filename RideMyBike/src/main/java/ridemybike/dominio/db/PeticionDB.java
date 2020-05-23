@@ -70,7 +70,7 @@ public class PeticionDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM Peticion WHERE codigoPetición = ?";
+        String query = "SELECT * FROM Peticion WHERE codigoPeticion = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, codigoPeticion + "");
@@ -82,7 +82,7 @@ public class PeticionDB {
                 peticion.setHoraInicio(new Timestamp(dateFormat.parse(rs.getString("hora")).getTime()));
                 peticion.setHoraLimite(new Timestamp(dateFormat.parse(rs.getString("tiempoLimite")).getTime()));
                 peticion.setCodigoBici(Integer.parseInt(rs.getString("codigoBici")));
-                peticion.setNombreArrendatario(rs.getString("nombreArrendatario"));
+                peticion.setNombreArrendatario(rs.getString("usuarioArrendatario"));
                 peticion.setTipo(TipoAlquiler.valueOf(rs.getString("tipo")));
             }
             rs.close();

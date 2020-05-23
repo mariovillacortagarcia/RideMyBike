@@ -18,6 +18,22 @@
         <link rel="icon" type="image/png" href="img/RideMyBike_icon_green.png">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
+        
+        <script>
+            window.onload = function(){
+                var d = new Date();
+
+                var fecha = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+                var hora = ('0' + d.getHours()).slice(-2)+ ':' + ('0' + d.getMinutes()).slice(-2);
+
+                document.getElementById('fecha1').setAttribute('min', fecha);
+                document.getElementById('fecha1').setAttribute('value', fecha);
+                document.getElementById('hora1').setAttribute('min', hora);
+                document.getElementById('hora1').setAttribute('value', hora);
+            };
+
+        </script>
+      
     </head>
 
     <body>
