@@ -141,7 +141,7 @@ public class UsuarioDB {
         Connection connection= pool.getConnection();
         PreparedStatement ps= null;
         ResultSet rs = null;
-        String query= "SELECT * FROM Usuario WHERE email =  + email.replace(“\\\\”, “\\\\\\\\”).replace(“‘”, “\\\\'”) + “‘;";
+        String query= "SELECT * FROM Usuario WHERE email =  ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, email);
@@ -171,7 +171,7 @@ public class UsuarioDB {
     /**
      * Devuelve el usuario con el dni especificado
      * 
-     * @param email el email del usuario
+     * @param DNI el DNI del usuario
      * @return un Usuario con los datos del usuario; null si no existe ningun usuario con 
      * el email especificado
      * @throws IllegalArgumentException si el email de usuario dado es igual a null
@@ -185,7 +185,7 @@ public class UsuarioDB {
         Connection connection= pool.getConnection();
         PreparedStatement ps= null;
         ResultSet rs = null;
-        String query= "SELECT * FROM Usuario WHERE dni =  + dni.replace(“\\\\”, “\\\\\\\\”).replace(“‘”, “\\\\'”) + “‘;";
+        String query= "SELECT * FROM Usuario WHERE dni =  ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, dni);
