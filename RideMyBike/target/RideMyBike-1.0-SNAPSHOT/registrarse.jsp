@@ -13,6 +13,37 @@
         <link rel="stylesheet" href="css/style.css">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
+
+        <script type="text/javascript">
+            function mostrarPassword() {
+                var cambio = document.getElementById("password");
+                if (cambio.type === "password") {
+                    cambio.type = "text";
+
+                } else {
+                    cambio.type = "password";
+
+                }
+            }
+
+            function mostrarPasswordRepe() {
+                var cambio = document.getElementById("passwordrepe");
+                if (cambio.type === "password") {
+                    cambio.type = "text";
+
+                } else {
+                    cambio.type = "password";
+
+                }
+            }
+
+            $(document).ready(function () {
+                //mostrar contraseña
+                $('#ShowPassword').click(function () {
+                    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+                });
+            });
+        </script>
     </head>
 
     <body>
@@ -105,24 +136,40 @@
                         <% }%>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="address2">Contraseña</label>
-                        <input type="password" class="form-control" id="address2" name="password" required minleght="8" maxlength="128" onpaste="return false;">
-                        <% if (request.getAttribute("errorPasswordNoValida") != null) {%>
-                        <small style="color:red"><%=request.getAttribute("errorPasswordNoValida")%></small>
-                        <% }%>
+                    <label for="address2">Contraseña</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" name="password" required minleght="8" maxlength="128" onpaste="return false;">
+                        <div class="input-group-append">
+                            <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <svg class="bi bi-eye-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg></button>
+                        </div>                    
                     </div>
+                    <% if (request.getAttribute("errorPasswordNoValida") != null) {%>
+                    <small style="color:red"><%=request.getAttribute("errorPasswordNoValida")%></small>
+                    <% }%>  
 
-                    <div class="mb-3">
+
+                    <div class="mt-3">
                         <label for="address2">Repetir contraseña</label>
-                        <input type="password" class="form-control" id="address2" name="passwordrepe" required minleght="8" maxlength="128" onpaste="return false;">
+                        <div class="input-group">
+
+                            <input type="password" class="form-control" id="passwordrepe" name="passwordrepe" required minleght="8" maxlength="128" onpaste="return false;">
+                            <div class="input-group-append">
+                                <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPasswordRepe()"> <svg class="bi bi-eye-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                    </svg></button>
+                            </div> 
+                        </div>
                         <% if (request.getAttribute("errorPasswordsNoCoinciden") != null) {%>
                         <small style="color:red"><%=request.getAttribute("errorPasswordsNoCoinciden")%></small>
                         <% }%>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-5 mb-3">
+                        <div class="col-md-5 my-3">
                             <label for="country">País</label>
                             <select class="custom-select d-block w-100" id="country" name="pais" required>
                                 <option selected disabled hidden>Elige un país...</option>
