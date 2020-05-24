@@ -32,46 +32,15 @@
         </style>
         <!-- Scripts controladores fechas y horas introducidas -->
         <script>
-        window.onload = function(){
-            var d = new Date();
-            var fecha = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
-            var hora = ('0' + d.getHours()).slice(-2)+ ':' + ('0' + d.getMinutes()).slice(-2);
-        
-            document.getElementById('fechaInicioPrestamo').setAttribute('min', fecha);
-            document.getElementById('fechaInicioPrestamo').setAttribute('value', fecha);
-            document.getElementById('fechaFinPrestamo').setAttribute('min', fecha);
-            document.getElementById('horaInicioPrestamo').setAttribute('min', hora);
-            document.getElementById('horaInicioPrestamo').setAttribute('value', hora);
-            document.getElementById('horaFinPrestamo').setAttribute('min', hora);
-        };
-        function dateLim() {
-            var fInicio = document.getElementById('fechaInicioPrestamo');
-            var hInicio = document.getElementById('horaInicioPrestamo');
-            var fFin = document.getElementById('fechaInicioPrestamo');
-            var hFin = document.getElementById('horaFinPrestamo');
-            var d1 = new Date();
-            var fecha1 = d1.getFullYear() + '-' + ('0' + (d1.getMonth()+1)).slice(-2) + '-' + ('0' + d1.getDate()).slice(-2);
-            var hora1 = ('0' + d1.getHours()).slice(-2)+ ':' + ('0' + d1.getMinutes()).slice(-2);
-            
-            fInicio.setAttribute('min', fecha1);
-            /*
-            if (fInicio.value === fecha1) {
-                hInicio.setAttribute('min', hora1);
-                console.log('Fecha de Inicio igual al minimo');
-            } else {
-                hInicio.setAttribute('min', '');
-                console.log('fecha de inicio distinta del minimo');
-            }
-            fFin.setAttribute('min', fInicio.value);
-            if (fInicio.value === fFin.value) {
-                hFin.setAttribute('min', hInicio.value);
-                console.log('fecha inicio igual a la fecha final');
-            } else {
-                hFin.setAttribute('min', '');
-                console.log('fecha inicio distinta a la fecha final');
-            }
-            */
-        };
+            window.onload = function () {
+                var d = new Date();
+                var fecha = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+                var hora = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+
+                document.getElementById('fechaInicioPrestamo').setAttribute('min', fecha);
+                document.getElementById('fechaFinPrestamo').setAttribute('min', fecha);
+                document.getElementById('horaInicioPrestamo').setAttribute('min', hora);
+            };
         </script>
     </head>
 
@@ -98,6 +67,9 @@
                                 <div class="col-lg-8 col-sm-12">
                                     <h5><b>1. Elige una bici libre </b>🚴</h5>
                                     <div id="mapaglobal" class="mt-3 mb-2" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border: 1px solid black"></div>
+                                    <% if (request.getAttribute("errorBici") != null) {%>
+                                    <small style="color:red"><%=request.getAttribute("errorBici")%></small>
+                                    <% }%>
                                     <div class="card mb-3" style="max-width: 540px;">
                                         <div class="row no-gutters">
                                             <div class="col-md-4">
@@ -161,6 +133,12 @@
 
                                         <div class="row mb-4">
                                             <small id="fechaFinHelp" class="form-text text-muted ml-3">La fecha y hora estimada de finalización del préstamo.</small>
+                                            <% if (request.getAttribute("errorFechaNoIndicada") != null) {%>
+                                            <small class="ml-3" style="color:red"><%=request.getAttribute("errorFechaNoIndicada")%></small>
+                                            <% }%>
+                                            <% if (request.getAttribute("errorHoraLimite") != null) {%>
+                                            <small class="ml-3" style="color:red"><%=request.getAttribute("errorHoraLimite")%></small>
+                                            <% }%>
                                         </div>
                                     </div>
 
@@ -226,7 +204,7 @@
                                         <li class="list-group-item"><b>Total: </b> <label name="textoPrecioTotal" id="textoPrecioTotal"></label>€</li>
                                     </ul>
                                     <div class="container p-3">
-                                        <button class="btn btn-outline-success" type="submit" id="BtSubmit" disabled="true">RideMyBike!</button>
+                                        <button class="btn btn-outline-success" type="submit" id="BtSubmit">RideMyBike!</button>
                                         <a href="index.jsp" role="button">
                                             <button type="button" class="btn btn-outline-danger" href="index.jsp" name="cancelarPeticion" id="cancelarPeticion">Cancelar</button>
                                         </a>

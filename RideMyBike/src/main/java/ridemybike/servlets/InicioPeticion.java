@@ -31,6 +31,10 @@ import ridemybike.dominio.db.PeticionDB;
 @WebServlet(name = "InicioPeticion", urlPatterns = {"/InicioPeticion"})
 public class InicioPeticion extends HttpServlet {
 
+    private final String HORA_FIN_ANTES_QUE_INICIO = "La hora de fin especificada era anterior a la hora de inicio.";
+    private final String CAMPO_OBLIGATORIO = "Asegúrese de completar correctamente todos estos campos antes de continuar.";
+    private final String BICI_NO_SELECCIONADA = "Es necesario seleccionar una bicicleta.";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,60 +49,78 @@ public class InicioPeticion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
+        String url = "/index.jsp";
+
         if (session.getAttribute("usuario") == null) {
-            String url = "/iniciar_sesion.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
+            url = "/iniciar_sesion.jsp";
+        } else {
+            String nombreArrendatario = session.getAttribute("usuario").toString();
+            String codigoBici = request.getParameter("bicicletaId");
+            String horaInicio = request.getParameter("horaInicioPrestamo");
+            String fechaInicio = request.getParameter("fechaInicioPrestamo");
+            String horaFin = request.getParameter("horaFinPrestamo");
+            String fechaFin = request.getParameter("fechaFinPrestamo");
+            String llegareTarde = request.getParameter("llegareTarde");
+            String seguroViaje = request.getParameter("seguroViaje");
+            String alquilerEnMano = request.getParameter("alquilerEnMano");
+
+            if (codigoBici.isEmpty()) {
+                request.setAttribute("errorBici", BICI_NO_SELECCIONADA);
+            } else {
+                Bicicleta biciAlquilada = BicicletaDB.selectBicicleta(Integer.parseInt(codigoBici));
+
+                if (fechaFin.isEmpty() || horaFin.isEmpty() || fechaInicio.isEmpty() || horaInicio.isEmpty()) {
+                    request.setAttribute("errorFechaNoIndicada", CAMPO_OBLIGATORIO);
+                } else {
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+                    Date parsedDate = dateFormat.parse(fechaInicio + " " + horaInicio + ":00.000");
+                    Timestamp horaInicioPeticion = new java.sql.Timestamp(parsedDate.getTime());
+                    
+                    parsedDate = dateFormat.parse(fechaFin + " " + horaFin + ":00.000");
+                    Timestamp horaFinPeticion = new java.sql.Timestamp(parsedDate.getTime());
+
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTimeInMillis(horaInicioPeticion.getTime());
+                    cal.add(Calendar.MINUTE, llegareTarde == null ? 15 : 15 + 30);
+                    Timestamp horaLimite = new Timestamp(cal.getTime().getTime());
+
+                    if (horaFinPeticion.before(horaInicioPeticion)) {
+                        request.setAttribute("errorHoraLimite", HORA_FIN_ANTES_QUE_INICIO);
+                    } else {
+
+                        BicicletaDB.cambiaEstadoBicicleta(biciAlquilada, EstadoBicicleta.EnUso);
+
+                        Peticion peticion = new Peticion();
+                        peticion.setCodigoBici(Integer.parseInt(codigoBici));
+                        peticion.setNombreArrendatario(nombreArrendatario);
+                        peticion.setHoraInicio(horaInicioPeticion);
+                        peticion.setHoraLimite(horaLimite);
+                        peticion.setTipo(alquilerEnMano == null ? TipoAlquiler.estandar : TipoAlquiler.enMano);
+
+                        int codigoPeticion = PeticionDB.insertarPeticion(peticion);
+
+                        Alquiler alquiler = new Alquiler();
+                        double precio = ((horaFinPeticion.getTime() - horaInicioPeticion.getTime()) / 60000) * 1.0 / 100;
+                        if (seguroViaje != null) {
+                            precio++;
+                        }
+                        if (llegareTarde != null) {
+                            precio++;
+                        }
+                        alquiler.setPrecio(precio);
+                        alquiler.setPeticion(codigoPeticion);
+                        alquiler.setArchivado(false);
+                        alquiler.setInicio("?");
+                        alquiler.setFin("?");
+
+                        AlquilerDB.insertarAlquiler(alquiler);
+
+                        url = "/RecuperarViajesEnProceso";
+                    }
+                }
+            }
         }
-        String nombreArrendatario = session.getAttribute("usuario").toString();
-        String codigoBici = request.getParameter("bicicletaId");
-        String horaInicio = request.getParameter("horaInicioPrestamo");
-        String fechaInicio = request.getParameter("fechaInicioPrestamo");
-        String horaFin = request.getParameter("horaFinPrestamo");
-        String fechaFin = request.getParameter("fechaFinPrestamo");
-        String llegareTarde = request.getParameter("llegareTarde");
-        String seguroViaje = request.getParameter("seguroViaje");
-        String alquilerEnMano = request.getParameter("alquilerEnMano");
-        Bicicleta biciAlquilada = BicicletaDB.selectBicicleta(Integer.parseInt(codigoBici));
-        BicicletaDB.cambiaEstadoBicicleta(biciAlquilada, EstadoBicicleta.EnUso);
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-        Date parsedDate = dateFormat.parse(fechaInicio + " " + horaInicio + ":00.000");
-        Timestamp horaInicioPeticion = new java.sql.Timestamp(parsedDate.getTime());
-        Timestamp horaLimite;
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(horaInicioPeticion.getTime());
-        cal.add(Calendar.MINUTE, llegareTarde == null ? 15 : 15 + 30);
-        horaLimite = new Timestamp(cal.getTime().getTime());
-
-        Peticion peticion = new Peticion();
-        peticion.setCodigoBici(Integer.parseInt(codigoBici));
-        peticion.setNombreArrendatario(nombreArrendatario);
-        peticion.setHoraInicio(horaInicioPeticion);
-        peticion.setHoraLimite(horaLimite);
-        peticion.setTipo(alquilerEnMano == null ? TipoAlquiler.estandar : TipoAlquiler.enMano);
-
-        int codigoPeticion = PeticionDB.insertarPeticion(peticion);
-
-        Alquiler alquiler = new Alquiler();
-        parsedDate = dateFormat.parse(fechaFin + " " + horaFin + ":00.000");
-        Timestamp horaFinPeticion = new java.sql.Timestamp(parsedDate.getTime());
-        double precio = ((horaFinPeticion.getTime() - horaInicioPeticion.getTime()) / 60000) * 1.0 / 100;
-        if (seguroViaje != null) {
-            precio++;
-        }
-        if (llegareTarde != null) {
-            precio++;
-        }
-        alquiler.setPrecio(precio);
-        alquiler.setPeticion(codigoPeticion);
-        alquiler.setArchivado(false);
-        alquiler.setInicio("?");
-        alquiler.setFin("?");
-
-        AlquilerDB.insertarAlquiler(alquiler);
-
-        String url = "/RecuperarViajesEnProceso";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
