@@ -12,6 +12,25 @@
         <link rel="stylesheet" href="css/style.css">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
+        <script type="text/javascript">
+        function mostrarPassword(){
+                var cambio = document.getElementById("password");
+                if(cambio.type === "password"){
+                        cambio.type = "text";
+                        
+                }else{
+                        cambio.type = "password";
+                        
+                }
+        } 
+	
+        $(document).ready(function () {
+        //mostrar contraseña
+                $('#ShowPassword').click(function () {
+                    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+                });
+            });
+        </script>
     </head>
 
     <body>
@@ -41,14 +60,25 @@
                     <% }%>
                 </div>
 
-                <div class="form-label-group pb-2">
-                    <label for="password">Contraseña</label>
-                    <input type="password" name="password" class="form-control" placeholder="Contraseña" <% if (passwordIncorrecta) {%>value="<%= request.getAttribute("passwordIncorrecta")%>" <% } %> required>
-                    <% if (request.getAttribute("errorPassword") != null) {%>
-                    <small style="color:red"><%=request.getAttribute("errorPassword")%></small>
-                    <% }%>
-                </div>
+                    <div class="form-label-group pb-2">
 
+                        <label>Contraseña</label>
+                        <div class="input-group">
+                            <input ID="password" type="password" name="password" Class="form-control" placeholder="Contraseña" <% if (passwordIncorrecta) {%>value="<%= request.getAttribute("passwordIncorrecta")%>" <% } %> required>
+                            <% if (request.getAttribute("errorPassword") != null) {%>
+                            <small style="color:red"><%=request.getAttribute("errorPassword")%></small>
+                            <% }%>
+                            <div class="input-group-append">
+                                <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <svg class="bi bi-eye-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                    </svg></button>
+                            </div>
+                        </div>
+                
+                
+                
+                
                 <div class="checkbox mb-3">
                     <label>
                         <input type="checkbox" value="remember-me"> Recuérdame
