@@ -319,6 +319,14 @@
                                     <button type="button" onclick="location.href = 'contactanos.jsp'" class="btn btn-primary">Contáctanos</button>
                                 </div>
                             </div>
+                            
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h6 class="card-title font-weight-bold">Valoraciones</h6>
+                                    <p class="card-text">La impresión causada al resto de usuarios es algo importante.</p>
+                                    <button type="button" onclick="location.href = 'ValoracionesUsuario?usuarioPropietario=<%= user.getNickName()%>'" class="btn btn-primary">Ver mis valoraciones</button>
+                                </div>
+                            </div>
                             <% } %>
                         </div>
                     </div>

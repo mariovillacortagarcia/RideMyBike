@@ -50,6 +50,7 @@ ridemybike/servlets/ValoracionesBicicleta.class
 ridemybike/servlets/IniciarViaje.class
 ridemybike/servlets/ValoracionesUsuario.class
 ridemybike/servlets/SolucionarIncidencia.class
+ridemybike/dominio/db/UtilitiesDB.class
 ridemybike/dominio/db/BicicletaDB.class
 ridemybike/dominio/db/UsuarioDB.class
 ridemybike/dominio/db/ValoracionBicicletaDB.class
