@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
+import ridemybike.dominio.db.UtilitiesDB;
 import ridemybike.dominio.db.ValoracionUsuarioDB;
 import ridemybike.security.PasswordEncoder;
 
@@ -59,15 +60,15 @@ public class ActualizarPerfil extends HttpServlet {
         String passwordNuevaConfirmacion = request.getParameter("passwordNuevaConfirmacion");
 
         boolean todoCorrecto = true;
-        if (nombre.isBlank()) {
+        if (nombre.isBlank() || UtilitiesDB.posibleInyeccionSQL(nombre)) {
             request.setAttribute("errorNombre", ERROR_NOMBRE);
             todoCorrecto = false;
         }
-        if (apellidos.isBlank()) {
+        if (apellidos.isBlank() || UtilitiesDB.posibleInyeccionSQL(apellidos)) {
             request.setAttribute("errorApellidos", ERROR_APELLIDOS);
             todoCorrecto = false;
         }
-        if (direccion.isBlank()) {
+        if (direccion.isBlank() || UtilitiesDB.posibleInyeccionSQL(direccion)) {
             request.setAttribute("errorDireccion", ERROR_DIRECCION);
             todoCorrecto = false;
         }

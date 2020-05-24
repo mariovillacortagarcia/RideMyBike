@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import ridemybike.dominio.GradoIncidencia;
 import ridemybike.dominio.Incidencia;
 import ridemybike.dominio.db.IncidenciaDB;
+import ridemybike.dominio.db.UtilitiesDB;
 
 /**
  *
@@ -35,12 +36,12 @@ public class RegistroIncidencia extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             Incidencia incidencia = new Incidencia();
-            String descripcionIncidencia =  request.getParameter("descripcionIncidencia");
-            
-            if (descripcionIncidencia.isBlank()) {
-                request.setAttribute("errorDescripcion", "Este descripcion no es válido.");
-          
-        }
+            String descripcionIncidencia = request.getParameter("descripcionIncidencia");
+
+            if (descripcionIncidencia.isBlank() || UtilitiesDB.posibleInyeccionSQL(descripcionIncidencia)) {
+                request.setAttribute("errorDescripcion", "Esta descripción no es válida.");
+
+            }
             String grado = (String) request.getParameter("grado");
             switch (grado) {
                 case "leve":
@@ -55,11 +56,11 @@ public class RegistroIncidencia extends HttpServlet {
             int idAlquiler = Integer.parseInt((String) request.getParameter("idAlquiler"));
             incidencia.setCodigoPeticion(idAlquiler);
             incidencia.setDescripcion(descripcionIncidencia);
-            
-            int codigoIncidencia= IncidenciaDB.insertarIncidencia(incidencia);
+
+            int codigoIncidencia = IncidenciaDB.insertarIncidencia(incidencia);
             incidencia.setCodigoIncidencia(codigoIncidencia);
             String url = "/incidenciaRegistroCorrecto.jsp";
-            HttpSession session= request.getSession();
+            HttpSession session = request.getSession();
             session.getAttribute("usuario").toString();
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);

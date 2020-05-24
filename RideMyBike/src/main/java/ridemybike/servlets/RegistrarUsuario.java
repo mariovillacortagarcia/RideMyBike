@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
+import ridemybike.dominio.db.UtilitiesDB;
 import ridemybike.security.PasswordEncoder;
 
 /**
@@ -57,7 +58,7 @@ public class RegistrarUsuario extends HttpServlet {
         String cvv = request.getParameter("cvv");
 
         boolean todoCorrecto = true;
-        if (usuario.isBlank() || usuario.contains(" ") || usuario.contains("\t")) {
+        if (usuario.isBlank() || usuario.contains(" ") || usuario.contains("\t") || UtilitiesDB.posibleInyeccionSQL(usuario)) {
             request.setAttribute("errorUsuario", "Este usuario no es válido.");
             todoCorrecto = false;
         }
@@ -65,15 +66,15 @@ public class RegistrarUsuario extends HttpServlet {
             request.setAttribute("errorUsuario", "Este usuario ya está en uso.");
             todoCorrecto = false;
         }
-        if (nombre.isBlank()) {
+        if (nombre.isBlank() || UtilitiesDB.posibleInyeccionSQL(nombre)) {
             request.setAttribute("errorNombre", "Este nombre no es válido.");
             todoCorrecto = false;
         }
-        if (apellidos.isBlank()) {
+        if (apellidos.isBlank() || UtilitiesDB.posibleInyeccionSQL(apellidos)) {
             request.setAttribute("errorApellidos", "Estos apellidos no son válidos.");
             todoCorrecto = false;
         }
-        if (direccion.isBlank()) {
+        if (direccion.isBlank() || UtilitiesDB.posibleInyeccionSQL(direccion)) {
             request.setAttribute("errorDireccion", "Esta direccion no es válida.");
             todoCorrecto = false;
         }
@@ -103,7 +104,7 @@ public class RegistrarUsuario extends HttpServlet {
             todoCorrecto = false;
         }
         PasswordEncoder enc = new PasswordEncoder();
-        if (password.isBlank() || password.contains(" ") || password.contains("\t")) {
+        if (password.isBlank() || password.contains(" ") || password.contains("\t") || UtilitiesDB.posibleInyeccionSQL(password)) {
             request.setAttribute("errorPasswordNoValida", "La contraseña no es válida.");
             todoCorrecto = false;
         } else {

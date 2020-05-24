@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.Usuario;
 import ridemybike.dominio.db.UsuarioDB;
+import ridemybike.dominio.db.UtilitiesDB;
 import ridemybike.security.PasswordEncoder;
 
 /**
@@ -38,7 +39,7 @@ public class IniciarSesion extends HttpServlet {
         String url;
         PasswordEncoder encoder = new PasswordEncoder();
 
-        if (!UsuarioDB.existeUsuario(usuarioIntroducido)) {
+        if (UtilitiesDB.posibleInyeccionSQL(usuarioIntroducido) || !UsuarioDB.existeUsuario(usuarioIntroducido)) {
             request.setAttribute("errorUsuario", ERROR_USUARIO_INCORRECTO);
             request.setAttribute("usuario", usuarioIntroducido);
             url = "/iniciar_sesion.jsp";

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.MensajeUsuario;
 import ridemybike.dominio.db.MensajeUsuarioDB;
+import ridemybike.dominio.db.UtilitiesDB;
 
 /**
  * Implementacion de un servlet que registra en la base de datos el problema o
@@ -41,12 +42,12 @@ public class RegistrarProblemaSugerencia extends HttpServlet {
 
         boolean todoCorrecto = true;
 
-        if (asunto.isBlank()) {
-            request.setAttribute("errorAsunto", "El asunto no puede estar vacío.");
+        if (asunto.isBlank() || UtilitiesDB.posibleInyeccionSQL(asunto)) {
+            request.setAttribute("errorAsunto", "Este asunto no es válido.");
             todoCorrecto = false;
         }
-        if (descripcion.isBlank()) {
-            request.setAttribute("errorMensaje", "El mensaje no puede estar vacío.");
+        if (descripcion.isBlank() || UtilitiesDB.posibleInyeccionSQL(descripcion)) {
+            request.setAttribute("errorMensaje", "El contenido del mensaje es válido.");
             todoCorrecto = false;
         }
 

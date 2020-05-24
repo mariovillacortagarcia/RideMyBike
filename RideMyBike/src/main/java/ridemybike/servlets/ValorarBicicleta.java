@@ -11,23 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ridemybike.dominio.ValoracionBicicleta;
-import ridemybike.dominio.ValoracionUsuario;
+import ridemybike.dominio.db.UtilitiesDB;
 import ridemybike.dominio.db.ValoracionBicicletaDB;
-import ridemybike.dominio.db.ValoracionUsuarioDB;
-
 
 @WebServlet(name = "ValorarBicicleta", urlPatterns = {"/ValorarBicicleta"})
 public class ValorarBicicleta extends HttpServlet {
-/** 
-     * @param cadena
-     * @return TRUE SI CONTIENE UN CARACTER ILEGAL FALSE SI TODO BIEN
-     */
-    public boolean compruebaCaracteresEspeciales(String cadena){
-        if(cadena.contains("\\") || cadena.contains("\"") || cadena.contains("\'") || cadena.contains("\\x00") || cadena.contains("\\x1") || cadena.contains("-") || cadena.contains("_") || cadena.contains("&") || cadena.contains(" or ") || cadena.contains(" and ") ){
-            return true;
-        }
-        return false;
-    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,13 +31,12 @@ public class ValorarBicicleta extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ValoracionBicicleta val = new ValoracionBicicleta();
         String descripcionValoracionBici = (String) request.getParameter("descripcion");
-        if (descripcionValoracionBici.isBlank()|| compruebaCaracteresEspeciales(descripcionValoracionBici)) {
+        if (descripcionValoracionBici.isBlank() || UtilitiesDB.posibleInyeccionSQL(descripcionValoracionBici)) {
             request.setAttribute("errorDescripcion", "La descripcion de la valoración no es correcta.");
-            
-            }
+        }
         val.setCodigo(Integer.parseInt(request.getParameter("codigoAlquiler")));
         val.setDescripcion(request.getParameter("descripcion"));
-        val.setPuntuacion(Integer.parseInt((String)request.getParameter("valoracion")));
+        val.setPuntuacion(Integer.parseInt((String) request.getParameter("valoracion")));
         val.setCodigoBicicleta(Integer.parseInt(request.getParameter("codigoBici")));
         try {
             ValoracionBicicletaDB.insertarValoracionBicicleta(val);

@@ -24,6 +24,7 @@ import ridemybike.dominio.Freno;
 import ridemybike.dominio.PeticionRevision;
 import ridemybike.dominio.db.BicicletaDB;
 import ridemybike.dominio.db.PeticionRevisionDB;
+import ridemybike.dominio.db.UtilitiesDB;
 
 /**
  * Insertar una bicicleta en la BD pendiente de aprovacion
@@ -36,19 +37,8 @@ public class RegistrarPeticionRevision extends HttpServlet {
 
     private final String TAMANO_CUADRO_INCORRECTO = "Este campo debe ser una cifra de 3 números (cm)";
     private final String TAMANO_DESCRIPCION_NOVALIDO = "Este campo es demasiado pequeño o contiene caracteres ilegales(\\,\",\',\\x00,\\x1,-,_), recuerda que tu descripción de la bici debe ser la mejor posible para que los usuarios quieran alquilarla";
-    private final String ERROR_MARCA = "La marca no puede estar vacía";
-    private final String ERROR_MODELO = "El modelo no puede estar vacío";
-
-    /**
-     * @param cadena
-     * @return TRUE SI CONTIENE UN CARACTER ILEGAL FALSE SI TODO BIEN
-     */
-    public boolean compruebaCaracteresEspeciales(String cadena) {
-        if (cadena.contains("\\") || cadena.contains("\"") || cadena.contains("\'") || cadena.contains("\\x00") || cadena.contains("\\x1") || cadena.contains("-") || cadena.contains("_") || cadena.contains("&") || cadena.contains(" or ") || cadena.contains(" and ")) {
-            return true;
-        }
-        return false;
-    }
+    private final String ERROR_MARCA = "Esta marca no es válida";
+    private final String ERROR_MODELO = "Este modelo no es válido";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,12 +53,12 @@ public class RegistrarPeticionRevision extends HttpServlet {
             throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String Modelo = request.getParameter("modelo");
+        String modelo = request.getParameter("modelo");
         String marca = request.getParameter("marca");
-        String TamanoCuadro = request.getParameter("tamanoCuadro");
-        String Descripcion = request.getParameter("descripcion");
-        String TipoFreno = request.getParameter("tipoFreno");
-        String Ciudad = request.getParameter("ciudad");
+        String tamanoCuadro = request.getParameter("tamanoCuadro");
+        String descripcion = request.getParameter("descripcion");
+        String tipoFreno = request.getParameter("tipoFreno");
+        String ciudad = request.getParameter("ciudad");
         String fecha1 = request.getParameter("fecha1");
         String hora1 = request.getParameter("hora1");
         HttpSession session = request.getSession();
@@ -78,35 +68,35 @@ public class RegistrarPeticionRevision extends HttpServlet {
         String url;
         
         request.setAttribute("marca", marca);
-        request.setAttribute("modelo", Modelo);
-        request.setAttribute("descripcion", Descripcion);
-        request.setAttribute("tamCuadro", TamanoCuadro);
+        request.setAttribute("modelo", modelo);
+        request.setAttribute("descripcion", descripcion);
+        request.setAttribute("tamCuadro", tamanoCuadro);
         
-        if (marca.isBlank()) {
+        if (marca.isBlank() || UtilitiesDB.posibleInyeccionSQL(marca)) {
             hayFallos = true;
             request.setAttribute("errorMarca", ERROR_MARCA);
         }
-        if (Modelo.isBlank()) {
+        if (modelo.isBlank() || UtilitiesDB.posibleInyeccionSQL(modelo)) {
             hayFallos = true;
             request.setAttribute("errorModelo", ERROR_MODELO);
         }
-        if (Descripcion.isBlank() || compruebaCaracteresEspeciales(Descripcion)) {
+        if (descripcion.isBlank() || UtilitiesDB.posibleInyeccionSQL(descripcion)) {
             hayFallos = true;
             request.setAttribute("errorDescripcion", TAMANO_DESCRIPCION_NOVALIDO);
         }
         try {
-            Double variable = Double.parseDouble(TamanoCuadro);
+            Double variable = Double.parseDouble(tamanoCuadro);
         } catch (Exception e) {
             hayFallos = true;
             request.setAttribute("errorTamano", TAMANO_CUADRO_INCORRECTO);
         }
         if (!hayFallos) {
             Bicicleta bici = new Bicicleta();
-            bici.setDescripcion(Descripcion);
+            bici.setDescripcion(descripcion);
             bici.setMarca(marca);
-            bici.setModelo(Modelo);
-            bici.setTamCuadro(Double.parseDouble(TamanoCuadro));
-            Freno freno = Freno.valueOf(TipoFreno);
+            bici.setModelo(modelo);
+            bici.setTamCuadro(Double.parseDouble(tamanoCuadro));
+            Freno freno = Freno.valueOf(tipoFreno);
             bici.setFreno(freno);
             EstadoBicicleta estado = EstadoBicicleta.Pendiente;
             bici.setEstado(estado);
@@ -121,7 +111,7 @@ public class RegistrarPeticionRevision extends HttpServlet {
             Timestamp fechaPeticion = new java.sql.Timestamp(parsedDate.getTime());
 
             PeticionRevision peticion = new PeticionRevision();
-            peticion.setCiudad(Ciudad);
+            peticion.setCiudad(ciudad);
             peticion.setCodigoUsuario(nombreUsuario);
 
             peticion.setFecha(fechaPeticion);
