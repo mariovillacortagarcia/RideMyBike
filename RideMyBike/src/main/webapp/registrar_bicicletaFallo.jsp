@@ -18,13 +18,13 @@
         <link rel="icon" type="image/png" href="img/RideMyBike_icon_green.png">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
-        
+
         <script>
-            window.onload = function(){
+            window.onload = function () {
                 var d = new Date();
 
-                var fecha = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
-                var hora = ('0' + d.getHours()).slice(-2)+ ':' + ('0' + d.getMinutes()).slice(-2);
+                var fecha = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+                var hora = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
 
                 document.getElementById('fecha1').setAttribute('min', fecha);
                 document.getElementById('fecha1').setAttribute('value', fecha);
@@ -33,38 +33,41 @@
             };
 
         </script>
-      
+
     </head>
 
     <body>
-        <% String s = session.getAttribute("usuario") == null ? "false" : "true"; %>
+        <% String s = session.getAttribute("usuario") == null ? "false" : "true";%>
         <jsp:include page="header.jsp" >
             <jsp:param name="paginaMostrada" value="RegistrarBicicleta" />
-            <jsp:param name="sesionIniciada" value="<%= s %>" />
+            <jsp:param name="sesionIniciada" value="<%= s%>" />
         </jsp:include>  
 
         <div class="container pt-4 mt-3 mb-5">
             <!--Formulario de Registro de una Nueva Bicicleta-->
             <form action="RegistrarPeticionRevision" method="POST"  class="form-group mb-2" enctype="multipart/form-data">
                 <h5><b>Anota la información de la bicicleta que quieras añadir </b>🚴</h5>
-                <% if (request.getAttribute("erroTamano") != null) {%>
-                        <small style="color:red">Holaaa<%=request.getAttribute("errorTamano")%></small>
-                <% }%>
                 <div class="form-label-group pb-3 mt-3">
                     Selecciona una imagen para subir: <br>
                     <input type="file" name="foto" id="fileToUpload" class="mt-1" required="file" accept="image/x-png,image/gif,image/jpeg">
                 </div>
                 <div class="form-group mb-2">
                     <label for="marcaBici">Marca</label>
-                    <input type="String" class="form-control" id="marcaBici" name="marca" required="text" maxlength="20" onpaste="return false;">
+                    <input type="String" class="form-control" id="marcaBici" name="marca" required="text" maxlength="20" onpaste="return false;" value="<%= request.getAttribute("marca") %>">
+                    <% if (request.getAttribute("errorMarca") != null) {%>
+                    <small style="color:red"><%=request.getAttribute("errorMarca")%></small>
+                    <% }%>
                 </div>
                 <div class="form-group mb-2">
                     <label for="modeloBiciRegistro">Modelo</label>
-                    <input type="String" class="form-control" id="modeloNuevaBici" name="modelo" required="text" maxlength="20" onpaste="return false;">
+                    <input type="String" class="form-control" id="modeloNuevaBici" name="modelo" required="text" maxlength="20" onpaste="return false;" value="<%= request.getAttribute("modelo") %>">
+                    <% if (request.getAttribute("errorModelo") != null) {%>
+                    <small style="color:red"><%=request.getAttribute("errorModelo")%></small>
+                    <% }%>
                 </div>
                 <div class="form-label-group mb-2">
                     <label for="tamanoBiciRegistro">Tamaño de Cuadro (cm)</label>
-                    <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro" required="number" maxlength="3" onpaste="return false;">
+                    <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro" required="number" maxlength="3" onpaste="return false;" value="<%= request.getAttribute("tamCuadro") %>">
                     <% if (request.getAttribute("errorTamano") != null) {%>
                     <small style="color:red"><%=request.getAttribute("errorTamano")%></small>
                     <% }%>
@@ -79,7 +82,7 @@
                 </select>
                 <div class="form-group mb-2">
                     <label for="descripcionBiciRegistro">Descripción</label>
-                    <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion" required="text" maxlength="500" onpaste="return false;"> </textarea>
+                    <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion" required="text" maxlength="500" onpaste="return false;"><%= request.getAttribute("descripcion") %> </textarea>
                     <% if (request.getAttribute("errorDescripcion") != null) {%>
                     <small style="color:red"><%=request.getAttribute("errorDescripcion")%></small>
                     <% }%>

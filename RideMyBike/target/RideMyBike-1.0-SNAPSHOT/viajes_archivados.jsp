@@ -78,7 +78,7 @@
                                     String diaFin = Integer.toString(fechaFin.getDayOfMonth());
                                     String mesFin = Integer.toString(fechaFin.getMonthValue());
                                     String anoFin = Integer.toString(fechaFin.getYear());
-                                    String horaFin = Integer.toString(fechaInicio.getHour()) + ":" + Integer.toString(fechaInicio.getMinute());;
+                                    String horaFin = Integer.toString(fechaFin.getHour()) + ":" + Integer.toString(fechaFin.getMinute());;
                         %>
                         <li class="list-group-item">
                             <!--Viaje 1-->
@@ -86,7 +86,7 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <!--Mapa con ruta realizada-->
-                                        <img class="img-thumbnail" src="img/test/viaje1.png">
+                                        <div class="mapa img-thubnail" style="height:200px" id="mapa<%=alquiler.getCodigoAlquiler()%>">[<%=inicio%>, <%=fin%>]</div>
                                     </div>
                                     <div class="col-6">
                                         <!--Informacion del viaje-->
@@ -154,6 +154,7 @@
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+        <script src="js/mapaviaje.js"></script>
 
 
         <!-- Load Esri Leaflet from CDN -->

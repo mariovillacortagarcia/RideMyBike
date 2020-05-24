@@ -37,8 +37,7 @@
             <jsp:param name="sesionIniciada" value="<%= s %>" />
         </jsp:include>  
         <!----- --->
-        <%
-            String nombreUsuario = session.getAttribute("usuario") == null ? "value='false'" : "value='true'";  
+        <%  
             ArrayList<ValoracionUsuario> valoraciones = (ArrayList<ValoracionUsuario>) request.getAttribute("valoraciones");           
         %>
         <div class="container pt-4 my-3">
@@ -96,7 +95,7 @@
                         %>
                         <li class="list-group-item">
                             <div class="alert alert-light" role="alert">
-                                No hay ninguna opinión para esta bicicleta
+                                No hay ninguna opinión para este usuario.
                             </div>
                         </li>
                         <%

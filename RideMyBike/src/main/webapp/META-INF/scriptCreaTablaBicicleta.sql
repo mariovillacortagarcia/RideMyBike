@@ -178,7 +178,7 @@ INSERT INTO Peticion
       VALUES (default, '2020-01-01 12:30:46', '2020-01-01 13:00:46', 1, 'juan.pperez', 'estandar');
 
 INSERT INTO Peticion
-      VALUES (default, '2020-01-02 11:30:40', '2020-01-02 12:00:40', 4, 'juan.pperez', 'estandar');
+      VALUES (default, '2020-01-02 11:30:40', '2020-01-02 12:00:40', 1, 'juan.pperez', 'estandar');
 
 INSERT INTO Peticion
       VALUES (default, '2020-01-03 16:12:30', '2020-01-03 16:42:30', 3, 'juan.pperez', 'enMano');
@@ -214,6 +214,15 @@ INSERT INTO Incidencia
 INSERT INTO ValoracionUsuario
       VALUES ('Un tio majo', 4, 3, 'juan.pperez');
 
+INSERT INTO ValoracionUsuario
+      VALUES ('Parece buena gente', 5, 1, 'juan.pperez');
+
+INSERT INTO ValoracionUsuario
+      VALUES ('Estaba un poco cabreado', 2, 2, 'juan.pperez');
+
 
 INSERT INTO ValoracionBicicleta
       VALUES ('Una bicicleta wenisima es la mejor', 4, 1, 1);
+
+INSERT INTO ValoracionBicicleta
+      VALUES ('Una bicicleta muy cómoda y manejable', 5, 2, 1);

@@ -120,8 +120,8 @@
                                                         Opciones
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="ValoracionesBicicleta?codigoBicicleta=<%=codigoBici%>">Ver Valoraciones Bicicleta</a>
-                                                        <a class="dropdown-item" href="ValoracionesUsuario?usuarioPropietario=<%=nombreUsuario%>">Ver Valoraciones Propietario</a>
+                                                        <a class="dropdown-item" href="ValoracionesBicicleta?codigoBicicleta=<%=codigoBici%>">Ver valoraciones bicicleta</a>
+                                                        <a class="dropdown-item" href="ValoracionesUsuario?usuarioPropietario=<%=nombreUsuario%>">Ver valoraciones propietario</a>
                                                         <a class="dropdown-item" href="ActivacionBicicleta?codigoBicicleta=<%=codigoBici%>">Activar/Desactivar Bicicleta</a>
                                                         <a class="dropdown-item" href="HistorialAlquileresBicicleta?codigoBicicleta=<%=codigoBici%>">Historial de Alquileres</a>
                                                         <a class="dropdown-item" href="VerIncidenciasBicicleta?codigoBicicleta=<%=codigoBici%>">Ver incidencias</a>
