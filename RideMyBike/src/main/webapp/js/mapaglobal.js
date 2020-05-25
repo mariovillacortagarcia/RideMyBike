@@ -8,20 +8,20 @@ var biciLibre = L.icon({
     iconUrl: 'img/mapa/bicicleta_libre.png',
 
     iconSize: [57, 33], // size of the icon
-    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    //iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    //      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var biciSeleccionada = L.icon({
     iconUrl: 'img/mapa/bicicleta_seleccionada.png',
 
     iconSize: [57, 33], // size of the icon
-    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    //iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    //popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 //Creacion del mapa
 const PROVEEDOR = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 const VALLADOLID = [41.6520, -4.7286];
-const ZOOM = 13;
+const ZOOM = 12;
 
 var mapa = L.map('mapaglobal').setView(VALLADOLID, ZOOM);
 L.tileLayer(PROVEEDOR, {
@@ -33,7 +33,9 @@ console.log("Mapa creado");
 if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(function(position){
         console.log("Ubicacion disponible "+position.coords.latitude+" "+ position.coords.longitude );
-        L.marker([position.coords.latitude, position.coords.longitude]).addTo(mapa);
+        var ubicacionActual = [position.coords.latitude, position.coords.longitude];
+        L.marker(ubicacionActual).addTo(mapa);
+        mapa.setView(ubicacionActual, ZOOM);
        
     },null,null);
 }
