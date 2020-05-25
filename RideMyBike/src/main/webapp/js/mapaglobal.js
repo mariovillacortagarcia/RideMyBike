@@ -29,6 +29,14 @@ L.tileLayer(PROVEEDOR, {
 }).addTo(mapa);
 
 console.log("Mapa creado");
+//Incluye posicion actual
+if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
+        console.log("Ubicacion disponible "+position.coords.latitude+" "+ position.coords.longitude );
+        L.marker([position.coords.latitude, position.coords.longitude]).addTo(mapa);
+       
+    },null,null);
+}
 //Obtencion de las coordenadas de las bicis a traves de peticion al servlet
 var ids = [];
 $.get('BicicletasCoordenadas', function (data) {
