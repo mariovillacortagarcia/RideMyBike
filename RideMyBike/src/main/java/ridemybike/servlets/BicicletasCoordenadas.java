@@ -13,7 +13,6 @@ import ridemybike.dominio.EstadoBicicleta;
 import ridemybike.dominio.db.BicicletaDB;
 import ridemybike.dominio.db.ValoracionBicicletaDB;
 
-
 /**
  *
  * @author Mario Villacorta
@@ -34,26 +33,41 @@ public class BicicletasCoordenadas extends HttpServlet {
             throws ServletException, IOException {
         ArrayList<Bicicleta> bicicletas = BicicletaDB.selectAllBicicleta();
         bicicletas = BicicletaDB.seleccionaBicicletas(bicicletas, EstadoBicicleta.Activado);
-        String ubicaciones ="[";
+        String ubicaciones = "[";
         String ubicacion = null;
         String nombre;
         String lat;
         String lon;
         String id;
         int valoracionMedia;
-        if(bicicletas != null)
-        for(Bicicleta bicicleta : bicicletas){
-           nombre = bicicleta.getMarca();
-           nombre += " "+bicicleta.getModelo();
-           id = Integer.toString(bicicleta.getcodigoBici());
-           lat = Double.toString(bicicleta.getLatitud());
-           lon = Double.toString(bicicleta.getLongitud());
-           valoracionMedia = ValoracionBicicletaDB.getValoracionMediaBicicleta(bicicleta.getcodigoBici()+"");
-           ubicacion = "{"+'"'+"nombre"+'"'+":"+'"'+nombre+'"'+','+'"'+"valoracion"+'"'+":"+'"'+valoracionMedia+'"'+','+'"'+"id"+'"'+":"+id+','+'"'+"lat"+'"'+":"+lat+','+'"'+"lng"+'"'+":"+ lon+"},";
-           ubicaciones += ubicacion;
+        String descripcion;
+        String tamanoCuadro;
+        String freno;
+        if (bicicletas != null) {
+            for (Bicicleta bicicleta : bicicletas) {
+                nombre = bicicleta.getMarca();
+                nombre += " " + bicicleta.getModelo();
+                id = Integer.toString(bicicleta.getcodigoBici());
+                lat = Double.toString(bicicleta.getLatitud());
+                lon = Double.toString(bicicleta.getLongitud());
+                valoracionMedia = ValoracionBicicletaDB.getValoracionMediaBicicleta(bicicleta.getcodigoBici() + "");
+                descripcion = bicicleta.getDescripcion();
+                tamanoCuadro = Double.toString(bicicleta.getTamCuadro());
+                freno = bicicleta.getFreno().toString();
+                ubicacion = "{" + '"' + "nombre" + '"' + ":" + '"' + nombre;
+                ubicacion += Character.toString('"') + "," + '"' + "valoracion" + '"' + ":" + '"' + valoracionMedia;
+                ubicacion += Character.toString('"') + ',' + '"' + "id" + '"' + ":" + id;
+                ubicacion += Character.toString(',') + '"' + "lat" + '"' + ":" + lat;
+                ubicacion += Character.toString(',') + '"' + "lng" + '"' + ":" + lon;
+                ubicacion += Character.toString(',') + '"' + "descripcion" + '"' + ":" + '"' + descripcion;
+                ubicacion += Character.toString('"') + ',' + '"' + "tamanoCuadro" + '"' + ":" + tamanoCuadro;
+                ubicacion += Character.toString(',') + '"' + "freno" + '"' + ":" + '"' + freno + '"' + "},";
+                ubicaciones += ubicacion;
+            }
         }
-        if(ubicacion != null)
-            ubicaciones = ubicaciones.substring(0, ubicaciones.length()-1);
+        if (ubicacion != null) {
+            ubicaciones = ubicaciones.substring(0, ubicaciones.length() - 1);
+        }
         ubicaciones += "]";
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
