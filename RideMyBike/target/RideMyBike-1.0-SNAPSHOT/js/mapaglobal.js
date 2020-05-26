@@ -8,20 +8,20 @@ var biciLibre = L.icon({
     iconUrl: 'img/mapa/bicicleta_libre.png',
 
     iconSize: [57, 33], // size of the icon
-    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    //iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    //      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 var biciSeleccionada = L.icon({
     iconUrl: 'img/mapa/bicicleta_seleccionada.png',
 
     iconSize: [57, 33], // size of the icon
-    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    //iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    //popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 //Creacion del mapa
 const PROVEEDOR = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 const VALLADOLID = [41.6520, -4.7286];
-const ZOOM = 13;
+const ZOOM = 12;
 
 var mapa = L.map('mapaglobal').setView(VALLADOLID, ZOOM);
 L.tileLayer(PROVEEDOR, {
@@ -29,6 +29,16 @@ L.tileLayer(PROVEEDOR, {
 }).addTo(mapa);
 
 console.log("Mapa creado");
+//Incluye posicion actual
+if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
+        console.log("Ubicacion disponible "+position.coords.latitude+" "+ position.coords.longitude );
+        var ubicacionActual = [position.coords.latitude, position.coords.longitude];
+        L.marker(ubicacionActual).addTo(mapa);
+        mapa.setView(ubicacionActual, ZOOM);
+       
+    },null,null);
+}
 //Obtencion de las coordenadas de las bicis a traves de peticion al servlet
 var ids = [];
 $.get('BicicletasCoordenadas', function (data) {
@@ -77,6 +87,7 @@ $.get('BicicletasCoordenadas', function (data) {
                     xhr.send();
                     //Muestra nombre de bicicleta
                     $("#nombreBici").text(nombre);
+                    $("#textoBiciSeleccionada").text(nombre);
                     //Muestra ubicacion de bicicleta
                     var ubicacion = convertToAddress([lat, lng]);
                     $.when(ubicacion).done(function (r) {

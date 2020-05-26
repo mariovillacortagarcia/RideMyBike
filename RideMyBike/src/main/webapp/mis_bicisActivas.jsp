@@ -14,6 +14,12 @@
         <link rel="icon" type="image/png" href="img/RideMyBike_icon_green.png">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
+        
+        <style>
+            .carousel-inner {
+                overflow: visible;
+            }
+        </style>
     </head>
 
     <body>

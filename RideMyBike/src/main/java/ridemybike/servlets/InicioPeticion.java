@@ -85,7 +85,7 @@ public class InicioPeticion extends HttpServlet {
                     cal.add(Calendar.MINUTE, llegareTarde == null ? 15 : 15 + 30);
                     Timestamp horaLimite = new Timestamp(cal.getTime().getTime());
 
-                    if (horaFinPeticion.before(horaInicioPeticion)) {
+                    if (horaInicioPeticion.before(new Timestamp(System.currentTimeMillis())) || horaFinPeticion.before(horaInicioPeticion)) {
                         request.setAttribute("errorHoraLimite", HORA_FIN_ANTES_QUE_INICIO);
                     } else {
 

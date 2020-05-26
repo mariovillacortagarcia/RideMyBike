@@ -11,7 +11,7 @@
 <!doctype html>
 <html lang="es">
 
-    
+
     <head>
         <title> Mis bicis - RideMyBike </title>
         <!-- Required meta tags -->
@@ -21,13 +21,19 @@
         <link rel="icon" type="image/png" href="img/RideMyBike_icon_green.png">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
+
+        <style>
+            .carousel-inner {
+                overflow: visible;
+            }
+        </style>
     </head>
 
     <body>
-        <% String sesion = session.getAttribute("usuario") == null ? "false" : "true"; %>
+        <% String sesion = session.getAttribute("usuario") == null ? "false" : "true";%>
         <jsp:include page="header.jsp" >
             <jsp:param name="paginaMostrada" value="MisBicis" />
-            <jsp:param name="sesionIniciada" value="<%= sesion %>" />
+            <jsp:param name="sesionIniciada" value="<%= sesion%>" />
         </jsp:include>    
 
 
@@ -38,8 +44,8 @@
         <%
             ArrayList<Bicicleta> lista = null;
             lista = (ArrayList<Bicicleta>) request.getAttribute("lista");
-            
-            
+
+
         %>
         <div class="container pt-4 mt-3">
             <div class="row">
@@ -63,9 +69,8 @@
                 <div class="col-12">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            <%
-                                    EstadoBicicleta estadoPendiente = EstadoBicicleta.Pendiente;
-                                    for (int i = 0; i < lista.size(); i++) {
+                            <%                                EstadoBicicleta estadoPendiente = EstadoBicicleta.Pendiente;
+                                for (int i = 0; i < lista.size(); i++) {
                             %>
                             <li data-target="#carouselExampleIndicators" data-slide-to="<%= i%>" class="active"></li>
                                 <%}%>
@@ -83,7 +88,7 @@
                                     String latitud = Double.toString(lista.get(i).getLatitud());
                                     String longitud = Double.toString(lista.get(i).getLongitud());
                             %>
-                                   
+
                             <div class="carousel-item <% String s = (i == 0) ? "active" : "";%> <%= s%> ">
                                 <div class="row">
                                     <div class="col-1"></div>
@@ -105,16 +110,16 @@
                                                 <% if (estado == estadoPendiente) {
                                                 %>
                                                 <form action="ActivarBiciCodigo?codigoBici=<%=codigoBici%>" method="post">
-                                                <input type="text" class="form-control mb-4" name ="codigoActivacion" id="codigoActivacion" placeholder="Introduzca el código de activación">
-                                                <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Opciones
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <button class="dropdown-item" type="submit" >Activar</button>
-                                                        <a class="dropdown-item" type = "button" href="EliminarBiciNoActivada?codigoBici=<%=codigoBici%>">Eliminar</a>
+                                                    <input type="text" class="form-control mb-4" name ="codigoActivacion" id="codigoActivacion" placeholder="Introduzca el código de activación">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Opciones
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <button class="dropdown-item" type="submit" >Activar</button>
+                                                            <a class="dropdown-item" type = "button" href="EliminarBiciNoActivada?codigoBici=<%=codigoBici%>">Eliminar</a>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 </form>
 
                                                 <% } else {%>

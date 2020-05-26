@@ -87,6 +87,7 @@ $.get('BicicletasCoordenadas', function (data) {
                     xhr.send();
                     //Muestra nombre de bicicleta
                     $("#nombreBici").text(nombre);
+                    $("#textoBiciSeleccionada").text(nombre);
                     //Muestra ubicacion de bicicleta
                     var ubicacion = convertToAddress([lat, lng]);
                     $.when(ubicacion).done(function (r) {

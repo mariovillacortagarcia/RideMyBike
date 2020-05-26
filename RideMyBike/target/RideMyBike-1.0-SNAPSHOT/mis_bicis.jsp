@@ -11,7 +11,7 @@
 <!doctype html>
 <html lang="es">
 
-    
+
     <head>
         <title> Mis bicis - RideMyBike </title>
         <!-- Required meta tags -->
@@ -21,13 +21,19 @@
         <link rel="icon" type="image/png" href="img/RideMyBike_icon_green.png">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
+
+        <style>
+            .carousel-inner {
+                overflow: visible;
+            }
+        </style>
     </head>
 
     <body>
-        <% String sesion = session.getAttribute("usuario") == null ? "false" : "true"; %>
+        <% String sesion = session.getAttribute("usuario") == null ? "false" : "true";%>
         <jsp:include page="header.jsp" >
             <jsp:param name="paginaMostrada" value="MisBicis" />
-            <jsp:param name="sesionIniciada" value="<%= sesion %>" />
+            <jsp:param name="sesionIniciada" value="<%= sesion%>" />
         </jsp:include>    
 
 
@@ -38,8 +44,8 @@
         <%
             ArrayList<Bicicleta> lista = null;
             lista = (ArrayList<Bicicleta>) request.getAttribute("lista");
-            
-            
+
+
         %>
         <div class="container pt-4 mt-3">
             <div class="row">
@@ -63,9 +69,8 @@
                 <div class="col-12">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            <%
-                                    EstadoBicicleta estadoPendiente = EstadoBicicleta.Pendiente;
-                                    for (int i = 0; i < lista.size(); i++) {
+                            <%                                EstadoBicicleta estadoPendiente = EstadoBicicleta.Pendiente;
+                                for (int i = 0; i < lista.size(); i++) {
                             %>
                             <li data-target="#carouselExampleIndicators" data-slide-to="<%= i%>" class="active"></li>
                                 <%}%>
@@ -80,8 +85,10 @@
                                     int codigoBici = lista.get(i).getcodigoBici();
                                     EstadoBicicleta estado = lista.get(i).getEstado();
                                     String nombreUsuario = lista.get(i).getUsuarioPropietario();
+                                    String latitud = Double.toString(lista.get(i).getLatitud());
+                                    String longitud = Double.toString(lista.get(i).getLongitud());
                             %>
-                                   
+
                             <div class="carousel-item <% String s = (i == 0) ? "active" : "";%> <%= s%> ">
                                 <div class="row">
                                     <div class="col-1"></div>
@@ -98,20 +105,21 @@
                                             <div class="col-12"><b>Tamaño de Cuadro: </b><%=tamano%>cm</div>
                                             <div class="col-12"><b>Tipo de Freno: </b><%=freno%></div>
                                             <div class="col-12"><b>Descripción: </b> <%=descripcion%></div>
+                                            <div class="col-12"><b>Ubicación: </b><a class="ubicacion">{"lat":<%=latitud%>, "lng": <%=longitud%>}</a></div>
                                             <div class="col-12 text-center pt-4">
                                                 <% if (estado == estadoPendiente) {
                                                 %>
                                                 <form action="ActivarBiciCodigo?codigoBici=<%=codigoBici%>" method="post">
-                                                <input type="text" class="form-control mb-4" name ="codigoActivacion" id="codigoActivacion" placeholder="Introduzca el código de activación">
-                                                <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Opciones
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <button class="dropdown-item" type="submit" >Activar</button>
-                                                        <a class="dropdown-item" type = "button" href="EliminarBiciNoActivada?codigoBici=<%=codigoBici%>">Eliminar</a>
+                                                    <input type="text" class="form-control mb-4" name ="codigoActivacion" id="codigoActivacion" placeholder="Introduzca el código de activación">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Opciones
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <button class="dropdown-item" type="submit" >Activar</button>
+                                                            <a class="dropdown-item" type = "button" href="EliminarBiciNoActivada?codigoBici=<%=codigoBici%>">Eliminar</a>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 </form>
 
                                                 <% } else {%>
@@ -163,9 +171,23 @@
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="js/bootstrap.js"></script>
+
+
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+
+        <!-- Load Esri Leaflet from CDN -->
+        <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js" integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g==" crossorigin=""></script>
+
+
+        <!-- Load Esri Leaflet Geocoder from CDN -->
+        <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.css" integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ==" crossorigin="">
+        <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js" integrity="sha512-zdT4Pc2tIrc6uoYly2Wp8jh6EPEWaveqqD3sT0lf5yei19BC1WulGuh5CesB0ldBKZieKGD7Qyf/G0jdSe016A==" crossorigin=""></script>
+        <script src="js/traduccionDirecciones.js"></script>
     </body>
 
 </html>

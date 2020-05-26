@@ -39,7 +39,6 @@
 
                 document.getElementById('fechaInicioPrestamo').setAttribute('min', fecha);
                 document.getElementById('fechaFinPrestamo').setAttribute('min', fecha);
-                document.getElementById('horaInicioPrestamo').setAttribute('min', hora);
             };
         </script>
     </head>
@@ -124,10 +123,10 @@
 
                                         <div class="row">
                                             <div class="col">
-                                                <input type="date" class="form-control" name="fechaFinPrestamo" id="fechaFinPrestamo" min="" onchange="dateLim();">
+                                                <input type="date" class="form-control" name="fechaFinPrestamo" id="fechaFinPrestamo" min="" onchange="">
                                             </div>
                                             <div class="col">
-                                                <input type="time" class="form-control" name="horaFinPrestamo" id="horaFinPrestamo" min="" onchange="dateLim();">
+                                                <input type="time" class="form-control" name="horaFinPrestamo" id="horaFinPrestamo" min="" onchange="">
                                             </div>
                                         </div>
 
