@@ -146,6 +146,7 @@ CREATE TABLE PeticionRevision(
 
 
 -- Usuario
+-- Las contraseñas de todos los usuarios son: hashpassword
 INSERT INTO Usuario
       VALUES ('juan.pperez', 'Juan Pedro', 'Perez Sanchez', '71245360y', 'juanpperez@gmail.com', 634772244, '1234567898765432', '$31$16$_x8nYbYThjNKZ5x4jHSKHxwK9XBT3c7GcQJhzDzg1xw', CAST (X'FFFF' AS BLOB) , 'Calle Molina nº 13');
 
@@ -204,7 +205,7 @@ INSERT INTO Incidencia
     VALUES (default, 3, 'La dirección anda algo torcida y me la pegué. La bici sufrió algun rayón', 'Leve', 0);
 
 INSERT INTO Incidencia
-    VALUES (default, 3, 'Se pinchó la rueda we', 'Moderado', 0);
+    VALUES (default, 3, 'Se pinchó la rueda', 'Moderado', 0);
 
 INSERT INTO Incidencia
     VALUES (default, 3, 'Pasé por un mal barrio y me robaron la bici', 'Grave', 0);
@@ -212,7 +213,7 @@ INSERT INTO Incidencia
 
 -- Valoraciones
 INSERT INTO ValoracionUsuario
-      VALUES ('Un tio majo', 4, 3, 'juan.pperez');
+      VALUES ('Una persona amable y agradable', 4, 3, 'juan.pperez');
 
 INSERT INTO ValoracionUsuario
       VALUES ('Parece buena gente', 5, 1, 'juan.pperez');
@@ -222,7 +223,7 @@ INSERT INTO ValoracionUsuario
 
 
 INSERT INTO ValoracionBicicleta
-      VALUES ('Una bicicleta wenisima es la mejor', 4, 1, 1);
+      VALUES ('Una bicicleta muy buena, de las mejores que he probado', 4, 1, 1);
 
 INSERT INTO ValoracionBicicleta
       VALUES ('Una bicicleta muy cómoda y manejable', 5, 2, 1);
