@@ -27,7 +27,6 @@
                 var hora = ('0' + d.getHours()).slice(-2)+ ':' + ('0' + d.getMinutes()).slice(-2);
 
                 document.getElementById('fecha1').setAttribute('min', fecha);
-                document.getElementById('hora1').setAttribute('min', hora);
             };
 
         </script>

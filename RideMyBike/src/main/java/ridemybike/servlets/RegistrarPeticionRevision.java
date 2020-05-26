@@ -39,6 +39,7 @@ public class RegistrarPeticionRevision extends HttpServlet {
     private final String TAMANO_DESCRIPCION_NOVALIDO = "Este campo es demasiado pequeño o contiene caracteres ilegales(\\,\",\',\\x00,\\x1,-,_), recuerda que tu descripción de la bici debe ser la mejor posible para que los usuarios quieran alquilarla";
     private final String ERROR_MARCA = "Esta marca no es válida";
     private final String ERROR_MODELO = "Este modelo no es válido";
+    private final String FECHA_REVISION_ANTERIOR = "La fecha de revisión no es correcta";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -66,12 +67,12 @@ public class RegistrarPeticionRevision extends HttpServlet {
         Part foto = request.getPart("foto");
         boolean hayFallos = false;
         String url;
-        
+
         request.setAttribute("marca", marca);
         request.setAttribute("modelo", modelo);
         request.setAttribute("descripcion", descripcion);
         request.setAttribute("tamCuadro", tamanoCuadro);
-        
+
         if (marca.isBlank() || UtilitiesDB.posibleInyeccionSQL(marca)) {
             hayFallos = true;
             request.setAttribute("errorMarca", ERROR_MARCA);
@@ -90,6 +91,15 @@ public class RegistrarPeticionRevision extends HttpServlet {
             hayFallos = true;
             request.setAttribute("errorTamano", TAMANO_CUADRO_INCORRECTO);
         }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+        Date parsedDate = dateFormat.parse(fecha1 + " " + hora1 + ":00.000");
+        Timestamp fechaPeticion = new java.sql.Timestamp(parsedDate.getTime());
+        if(fechaPeticion.before(new Timestamp(System.currentTimeMillis()))){
+            hayFallos = true;
+            request.setAttribute("errorFecha", FECHA_REVISION_ANTERIOR);
+        }
+        
         if (!hayFallos) {
             Bicicleta bici = new Bicicleta();
             bici.setDescripcion(descripcion);
@@ -105,10 +115,6 @@ public class RegistrarPeticionRevision extends HttpServlet {
             bici.setCodigoActivacion(idUno.toString());
             bici.setImagen(foto);
             int codigoBici = BicicletaDB.insertarBicicleta(bici);
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-            Date parsedDate = dateFormat.parse(fecha1 + " " + hora1 + ":00.000");
-            Timestamp fechaPeticion = new java.sql.Timestamp(parsedDate.getTime());
 
             PeticionRevision peticion = new PeticionRevision();
             peticion.setCiudad(ciudad);

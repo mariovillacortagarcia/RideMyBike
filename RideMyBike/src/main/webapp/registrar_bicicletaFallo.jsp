@@ -27,9 +27,6 @@
                 var hora = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
 
                 document.getElementById('fecha1').setAttribute('min', fecha);
-                document.getElementById('fecha1').setAttribute('value', fecha);
-                document.getElementById('hora1').setAttribute('min', hora);
-                document.getElementById('hora1').setAttribute('value', hora);
             };
 
         </script>
@@ -53,21 +50,21 @@
                 </div>
                 <div class="form-group mb-2">
                     <label for="marcaBici">Marca</label>
-                    <input type="String" class="form-control" id="marcaBici" name="marca" required="text" maxlength="20" onpaste="return false;" value="<%= request.getAttribute("marca") %>">
+                    <input type="String" class="form-control" id="marcaBici" name="marca" required="text" maxlength="20" onpaste="return false;" value="<%= request.getAttribute("marca")%>">
                     <% if (request.getAttribute("errorMarca") != null) {%>
                     <small style="color:red"><%=request.getAttribute("errorMarca")%></small>
                     <% }%>
                 </div>
                 <div class="form-group mb-2">
                     <label for="modeloBiciRegistro">Modelo</label>
-                    <input type="String" class="form-control" id="modeloNuevaBici" name="modelo" required="text" maxlength="20" onpaste="return false;" value="<%= request.getAttribute("modelo") %>">
+                    <input type="String" class="form-control" id="modeloNuevaBici" name="modelo" required="text" maxlength="20" onpaste="return false;" value="<%= request.getAttribute("modelo")%>">
                     <% if (request.getAttribute("errorModelo") != null) {%>
                     <small style="color:red"><%=request.getAttribute("errorModelo")%></small>
                     <% }%>
                 </div>
                 <div class="form-label-group mb-2">
                     <label for="tamanoBiciRegistro">Tamaño de Cuadro (cm)</label>
-                    <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro" required="number" maxlength="3" onpaste="return false;" value="<%= request.getAttribute("tamCuadro") %>">
+                    <input type="String" class="form-control" id="tamanoNuevaBici" name="tamanoCuadro" required="number" maxlength="3" onpaste="return false;" value="<%= request.getAttribute("tamCuadro")%>">
                     <% if (request.getAttribute("errorTamano") != null) {%>
                     <small style="color:red"><%=request.getAttribute("errorTamano")%></small>
                     <% }%>
@@ -82,7 +79,7 @@
                 </select>
                 <div class="form-group mb-2">
                     <label for="descripcionBiciRegistro">Descripción</label>
-                    <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion" required="text" maxlength="500" onpaste="return false;"><%= request.getAttribute("descripcion") %> </textarea>
+                    <textarea type="String" class="form-control" id="descripcionNuevaBici" rows="4" name="descripcion" required="text" maxlength="500" onpaste="return false;"><%= request.getAttribute("descripcion")%> </textarea>
                     <% if (request.getAttribute("errorDescripcion") != null) {%>
                     <small style="color:red"><%=request.getAttribute("errorDescripcion")%></small>
                     <% }%>
@@ -104,6 +101,9 @@
                         <div class="form-group mb-2">
                             <small id="textfecha" class="form-text text-muted">La fecha de revisión de la bicicleta (dd/mm/aaaa)</small>
                             <input type="date" class="form-control" name="fecha1" id="fecha1" placeholder="dd/mm/aa" required="date">
+                            <% if (request.getAttribute("errorFecha") != null) {%>
+                            <small style="color:red"><%=request.getAttribute("errorFecha")%></small>
+                            <% }%>
                         </div>
                     </div>
                     <div class="col-6">
