@@ -30,14 +30,14 @@ L.tileLayer(PROVEEDOR, {
 
 console.log("Mapa creado");
 //Incluye posicion actual
-if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function(position){
-        console.log("Ubicacion disponible "+position.coords.latitude+" "+ position.coords.longitude );
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        console.log("Ubicacion disponible " + position.coords.latitude + " " + position.coords.longitude);
         var ubicacionActual = [position.coords.latitude, position.coords.longitude];
         L.marker(ubicacionActual).addTo(mapa);
         mapa.setView(ubicacionActual, ZOOM);
-       
-    },null,null);
+
+    }, null, null);
 }
 //Obtencion de las coordenadas de las bicis a traves de peticion al servlet
 var ids = [];
@@ -53,7 +53,7 @@ $.get('BicicletasCoordenadas', function (data) {
         var cuadro = ubicaciones[i].tamanoCuadro;
         var freno = ubicaciones[i].freno;
         var descripcion = ubicaciones[i].descripcion;
-        ids.push({nombre: nombre, lat: lat, lng: lon, id: id, valoracion: valoracion});
+        ids.push({nombre: nombre, lat: lat, lng: lon, id: id, valoracion: valoracion, cuadro: cuadro, freno: freno, descripcion: descripcion});
         var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
             $("#bicicletaUbicacion").text(e.latlng);
             for (j = 0; j < ids.length; j++) {
@@ -63,12 +63,15 @@ $.get('BicicletasCoordenadas', function (data) {
                     let lat = ids[j].lat;
                     let lng = ids[j].lng;
                     let valoracion = ids[j].valoracion;
+                    let cuadro = ids[j].cuadro;
+                    let freno = ids[j].freno;
+                    let descripcion = ids[j].descripcion;
                     var idEstrella;
                     for (k = 1; k <= 5; k++) {
                         idEstrella = "estrella" + k;
                         if (k <= valoracion) {
                             document.getElementById(idEstrella).className += " checked";
-                        } else{
+                        } else {
                             document.getElementById(idEstrella).className = "fa fa-star";
                         }
                     }
@@ -94,7 +97,7 @@ $.get('BicicletasCoordenadas', function (data) {
                     $("#cuadroBici").text(cuadro);
                     $("#frenoBici").text(freno);
                     $("#descripcionBici").text(descripcion);
-                    
+
                     //Muestra ubicacion de bicicleta
                     var ubicacion = convertToAddress([lat, lng]);
                     $.when(ubicacion).done(function (r) {
