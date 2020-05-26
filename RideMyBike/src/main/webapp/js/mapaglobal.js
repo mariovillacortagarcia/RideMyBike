@@ -50,6 +50,9 @@ $.get('BicicletasCoordenadas', function (data) {
         var lat = ubicaciones[i].lat;
         var lon = ubicaciones[i].lng;
         var valoracion = ubicaciones[i].valoracion;
+        var cuadro = ubicaciones[i].tamanoCuadro;
+        var freno = ubicaciones[i].freno;
+        var descripcion = ubicaciones[i].descripcion;
         ids.push({nombre: nombre, lat: lat, lng: lon, id: id, valoracion: valoracion});
         var marcador = L.marker([lat, lon], {icon: biciLibre}).addTo(mapa).on('click', function (e) {
             $("#bicicletaUbicacion").text(e.latlng);
@@ -85,9 +88,13 @@ $.get('BicicletasCoordenadas', function (data) {
                     xhr.open('GET', url);
                     xhr.responseType = 'blob';
                     xhr.send();
-                    //Muestra nombre de bicicleta
+                    //Muestra datos de bicicleta
                     $("#nombreBici").text(nombre);
                     $("#textoBiciSeleccionada").text(nombre);
+                    $("#cuadroBici").text(cuadro);
+                    $("#frenoBici").text(freno);
+                    $("#descripcionBici").text(descripcion);
+                    
                     //Muestra ubicacion de bicicleta
                     var ubicacion = convertToAddress([lat, lng]);
                     $.when(ubicacion).done(function (r) {
