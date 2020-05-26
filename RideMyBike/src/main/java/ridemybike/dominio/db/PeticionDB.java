@@ -130,7 +130,8 @@ public class PeticionDB {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                 if (rs.next()) {
                     peticion = new Peticion();
-                    peticion.setCodigoBici(Integer.parseInt(rs.getString("codigoPeticion")));
+                    peticion.setCodigoPeticion(Integer.parseInt(rs.getString("codigoPeticion")));
+                    peticion.setCodigoBici(Integer.parseInt(rs.getString("codigoBici")));
                     peticion.setHoraInicio(new Timestamp(dateFormat.parse(rs.getString("hora")).getTime()));
                     peticion.setHoraLimite(new Timestamp(dateFormat.parse(rs.getString("tiempoLimite")).getTime()));
                     peticion.setNombreArrendatario(rs.getString("usuarioArrendatario"));
