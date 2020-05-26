@@ -86,7 +86,29 @@
                                                     <span id="estrella5" class="fa fa-star"></span>
 
                                                     <p class="card-text"><small class="text-muted">En: <a id="ubicacionBici">Ningún sitio :(</a></small></p>
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#infoAdicional">
+                                                        Ver especificaciones
+                                                    </button>
+                                                    <div class="modal fade" id="infoAdicional" tabindex="-1" role="dialog" aria-labelledby="myinfoAdicional" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+
+                                                                    <h4 class="modal-title" id="myinfoAdicional">Especificaciones técnicas</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="col-12"><b>Tamaño de Cuadro: </b><a id="cuadroBici"></a>cm</div>
+                                                                    <div class="col-12"><b>Tipo de Freno: </b><a id="frenoBici"></a></div>
+                                                                    <div class="col-12"><b>Descripción: </b> <a id="descripcionBici"></a></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
