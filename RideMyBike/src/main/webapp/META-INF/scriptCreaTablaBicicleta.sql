@@ -154,7 +154,7 @@ INSERT INTO Usuario
       VALUES ('martaND9', 'Marta', 'Nadal Dalmau', '71941363h', 'martand89@gmail.com', 622114455, '98765432346789', '$31$16$_x8nYbYThjNKZ5x4jHSKHxwK9XBT3c7GcQJhzDzg1xw', CAST (X'FFFF' AS BLOB) , 'Calle Bierzo nº 7');
 
 INSERT INTO Usuario
-      VALUES ('admin', 'Eduardo', 'Inda', '72222222a', 'admin@gmail.com', 622223344, '98765432346789', '$31$16$_x8nYbYThjNKZ5x4jHSKHxwK9XBT3c7GcQJhzDzg1xw', CAST (X'FFFF' AS BLOB) , 'Calle de los admin nº 20');
+      VALUES ('admin', 'Eduardo', 'García', '72222222a', 'admin@gmail.com', 622223344, '98765432346789', '$31$16$_x8nYbYThjNKZ5x4jHSKHxwK9XBT3c7GcQJhzDzg1xw', CAST (X'FFFF' AS BLOB) , 'Calle de los admin nº 20');
 
 -- Administradores
 
